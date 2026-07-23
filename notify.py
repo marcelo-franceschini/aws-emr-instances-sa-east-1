@@ -10,6 +10,7 @@ Lê PUSHOVER_TOKEN e PUSHOVER_USER do ambiente. Usa só a biblioteca padrão.
 import argparse
 import json
 import os
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -32,8 +33,14 @@ def send_pushover(title: str, message: str) -> None:
         {"token": token, "user": user, "title": title, "message": message}
     ).encode()
     request = urllib.request.Request(PUSHOVER_URL, data=payload)
-    with urllib.request.urlopen(request) as response:
-        response.read()  # levanta HTTPError se o Pushover recusar
+    try:
+        with urllib.request.urlopen(request) as response:
+            response.read()
+    except urllib.error.HTTPError as error:
+        body = error.read().decode(errors="replace")
+        # O corpo do Pushover indica qual campo está inválido (sem expor o valor).
+        print(f"Pushover recusou (HTTP {error.code}): {body}")
+        raise
 
 
 def main():
