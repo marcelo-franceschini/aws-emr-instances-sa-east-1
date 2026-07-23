@@ -1,7 +1,7 @@
 {
   "region": "sa-east-1",
   "release_label": "emr-7.13.0",
-  "generated_at": "2026-07-23T03:24:43.560700+00:00",
+  "generated_at": "2026-07-23T03:27:35.818276+00:00",
   "instance_count": 465,
   "instances": [
     {
