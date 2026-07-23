@@ -5,7 +5,8 @@ on:
   push:
     branches: [master]
 
-permissions: {}
+permissions:
+  contents: read           # necessário para o checkout clonar o repo privado
 
 concurrency:
   group: ci
