@@ -1,3 +1,4 @@
+# Coleta diária de instâncias EMR (sa-east-1) + notificação Pushover
 name: EMR instances (sa-east-1)
 
 on:
