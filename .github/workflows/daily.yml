@@ -1,0 +1,72 @@
+name: EMR instances (sa-east-1)
+
+on:
+  schedule:
+    - cron: "0 9 * * *"   # todo dia às 09:00 UTC (06:00 em São Paulo)
+  workflow_dispatch: {}    # permite rodar manualmente pela aba Actions
+
+permissions:
+  contents: write          # necessário para publicar na branch "data"
+
+concurrency:
+  group: emr-instances
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Baixar o JSON anterior (branch data)
+        run: |
+          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
+            git fetch origin data --depth 1
+            git show origin/data:instances_sa-east-1.json > previous.json
+            echo "Baseline anterior baixado."
+          else
+            echo "Branch data ainda não existe — primeira execução, tudo será novo."
+          fi
+
+      - name: Configurar credenciais AWS
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: sa-east-1
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Gerar o JSON
+        run: uv run main.py
+
+      - name: Comparar e notificar (Pushover)
+        env:
+          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
+          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
+        run: uv run notify.py --new instances_sa-east-1.json --old previous.json
+
+      - name: Publicar o JSON na branch data
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # tira o JSON gerado do working tree para poder trocar de branch sem conflito
+          mv instances_sa-east-1.json /tmp/instances.json
+          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
+            git fetch origin data --depth 1
+            git checkout -B data origin/data
+          else
+            git checkout --orphan data
+            git rm -rf . >/dev/null 2>&1 || true
+          fi
+          mv /tmp/instances.json instances_sa-east-1.json
+          git add instances_sa-east-1.json
+          if git diff --cached --quiet; then
+            echo "JSON sem alteração — nada a commitar."
+          else
+            git commit -m "data: atualiza instances_sa-east-1.json ($(date -u +%FT%TZ))"
+            git push origin data
+          fi
