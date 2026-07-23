@@ -10,6 +10,7 @@ com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
   - `emr:ListSupportedInstanceTypes` (lista de instâncias, release mais recente)
   - `pricing:GetProducts` (preço on-demand + network performance — Price List API, endpoint `us-east-1`)
   - `ec2:DescribeSpotPriceHistory` (spot, menor preço entre as AZs)
+  - Spot Bid Advisor (S3 público) (frequência de interrupção + economia esperada)
 - [`notify.py`](notify.py) — compara o JSON novo com o anterior e, se houver
   instâncias novas, notifica a quantidade via Pushover.
 - [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — roda tudo via
@@ -26,6 +27,7 @@ Cada instância contém:
 - `network_performance` — ex: `"Up to 10 Gigabit"`, `"25 Gigabit"`, `"Moderate"` (importante para shuffles em MapReduce)
 - `on_demand_usd_hour` — preço on-demand (USD/hora)
 - `spot` — `{"usd_hour": ..., "az": ...}` (menor preço entre as AZs)
+- `spot_interruption` — `{"savings_percent": ..., "interruption_rate": ...}` (do Spot Bid Advisor, onde `interruption_rate` é 1-5: <5%, 5-10%, 10-15%, 15-20%, >20%)
 
 ## Rodar localmente
 
