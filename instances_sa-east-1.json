@@ -1,0 +1,5123 @@
+{
+  "region": "sa-east-1",
+  "release_label": "emr-7.13.0",
+  "generated_at": "2026-07-23T03:24:43.560700+00:00",
+  "instance_count": 465,
+  "instances": [
+    {
+      "instance_type": "c1.medium",
+      "vcpu": 2,
+      "memory_gb": 1.7,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.179,
+      "spot": {
+        "usd_hour": 0.0191,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c1.xlarge",
+      "vcpu": 8,
+      "memory_gb": 7.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.718,
+      "spot": {
+        "usd_hour": 0.0863,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c3.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.65,
+      "spot": {
+        "usd_hour": 0.1489,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c3.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.3,
+      "spot": {
+        "usd_hour": 0.2025,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c3.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 60.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.6,
+      "spot": {
+        "usd_hour": 0.3742,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c3.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.325,
+      "spot": {
+        "usd_hour": 0.0715,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c4.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.618,
+      "spot": {
+        "usd_hour": 0.1084,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c4.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.235,
+      "spot": {
+        "usd_hour": 0.3618,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c4.8xlarge",
+      "vcpu": 36,
+      "memory_gb": 60.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.47,
+      "spot": {
+        "usd_hour": 0.3467,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c4.large",
+      "vcpu": 2,
+      "memory_gb": 3.75,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.155,
+      "spot": {
+        "usd_hour": 0.0305,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c4.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.309,
+      "spot": {
+        "usd_hour": 0.0596,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 96.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.144,
+      "spot": {
+        "usd_hour": 0.3144,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5.18xlarge",
+      "vcpu": 72,
+      "memory_gb": 144.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.716,
+      "spot": {
+        "usd_hour": 1.154,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c5.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.288,
+      "spot": {
+        "usd_hour": 0.6288,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 16.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.524,
+      "spot": {
+        "usd_hour": 0.0814,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.048,
+      "spot": {
+        "usd_hour": 0.1048,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5.9xlarge",
+      "vcpu": 36,
+      "memory_gb": 72.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.358,
+      "spot": {
+        "usd_hour": 0.2358,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5.xlarge",
+      "vcpu": 4,
+      "memory_gb": 8.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.262,
+      "spot": {
+        "usd_hour": 0.0427,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c5a.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 96.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.832,
+      "spot": {
+        "usd_hour": 0.8959,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5a.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.776,
+      "spot": {
+        "usd_hour": 0.5862,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c5a.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.664,
+      "spot": {
+        "usd_hour": 0.5664,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5a.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.472,
+      "spot": {
+        "usd_hour": 0.1409,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5a.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.944,
+      "spot": {
+        "usd_hour": 0.2774,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5a.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.888,
+      "spot": {
+        "usd_hour": 0.2969,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5a.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.236,
+      "spot": {
+        "usd_hour": 0.0718,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5ad.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.216,
+      "spot": {
+        "usd_hour": 1.5341,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5ad.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.288,
+      "spot": {
+        "usd_hour": 1.5079,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5ad.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.432,
+      "spot": {
+        "usd_hour": 2.3292,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5ad.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.536,
+      "spot": {
+        "usd_hour": 0.1762,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5ad.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.072,
+      "spot": {
+        "usd_hour": 0.5737,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5ad.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.144,
+      "spot": {
+        "usd_hour": 1.182,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5ad.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.268,
+      "spot": {
+        "usd_hour": 0.0818,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5d.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 96.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.576,
+      "spot": {
+        "usd_hour": 1.082,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5d.18xlarge",
+      "vcpu": 72,
+      "memory_gb": 144.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.364,
+      "spot": {
+        "usd_hour": 1.5484,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5d.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.152,
+      "spot": {
+        "usd_hour": 2.1201,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5d.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 16.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.596,
+      "spot": {
+        "usd_hour": 0.1563,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c5d.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.192,
+      "spot": {
+        "usd_hour": 0.2778,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c5d.9xlarge",
+      "vcpu": 36,
+      "memory_gb": 72.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.682,
+      "spot": {
+        "usd_hour": 0.6678,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c5d.xlarge",
+      "vcpu": 4,
+      "memory_gb": 8.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.298,
+      "spot": {
+        "usd_hour": 0.0678,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5n.18xlarge",
+      "vcpu": 72,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.976,
+      "spot": {
+        "usd_hour": 1.1157,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5n.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 21.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.664,
+      "spot": {
+        "usd_hour": 0.2245,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c5n.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 42.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.328,
+      "spot": {
+        "usd_hour": 0.2954,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c5n.9xlarge",
+      "vcpu": 36,
+      "memory_gb": 96.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.988,
+      "spot": {
+        "usd_hour": 0.4015,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c5n.xlarge",
+      "vcpu": 4,
+      "memory_gb": 10.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.332,
+      "spot": {
+        "usd_hour": 0.0673,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6a.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.8296,
+      "spot": {
+        "usd_hour": 0.6578,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6a.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.7728,
+      "spot": {
+        "usd_hour": 0.5497,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6a.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.6592,
+      "spot": {
+        "usd_hour": 0.5662,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6a.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.4716,
+      "spot": {
+        "usd_hour": 0.1428,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6a.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.5456,
+      "spot": {
+        "usd_hour": 0.7715,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6a.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 11.3184,
+      "spot": {
+        "usd_hour": 1.1318,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6a.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.9432,
+      "spot": {
+        "usd_hour": 0.3219,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6a.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.8864,
+      "spot": {
+        "usd_hour": 0.2007,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6a.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.2358,
+      "spot": {
+        "usd_hour": 0.066,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.5152,
+      "spot": {
+        "usd_hour": 0.2515,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.3536,
+      "spot": {
+        "usd_hour": 0.3354,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.4192,
+      "spot": {
+        "usd_hour": 0.0701,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.8384,
+      "spot": {
+        "usd_hour": 0.0991,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.6768,
+      "spot": {
+        "usd_hour": 0.1677,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.2096,
+      "spot": {
+        "usd_hour": 0.0451,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6gd.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.856,
+      "spot": {
+        "usd_hour": 0.3309,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6gd.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.808,
+      "spot": {
+        "usd_hour": 0.4054,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6gd.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.476,
+      "spot": {
+        "usd_hour": 0.0476,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6gd.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.952,
+      "spot": {
+        "usd_hour": 0.1314,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6gd.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.904,
+      "spot": {
+        "usd_hour": 0.389,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6gd.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.238,
+      "spot": {
+        "usd_hour": 0.0409,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6gn.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.192,
+      "spot": {
+        "usd_hour": 0.7085,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6gn.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.256,
+      "spot": {
+        "usd_hour": 1.0105,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6gn.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.532,
+      "spot": {
+        "usd_hour": 0.1247,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6gn.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.064,
+      "spot": {
+        "usd_hour": 0.3012,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6gn.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.128,
+      "spot": {
+        "usd_hour": 0.2462,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6gn.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.266,
+      "spot": {
+        "usd_hour": 0.0626,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.144,
+      "spot": {
+        "usd_hour": 0.4242,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.192,
+      "spot": {
+        "usd_hour": 0.8023,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.288,
+      "spot": {
+        "usd_hour": 0.6288,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.524,
+      "spot": {
+        "usd_hour": 0.1275,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6i.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.384,
+      "spot": {
+        "usd_hour": 0.8384,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.048,
+      "spot": {
+        "usd_hour": 0.1048,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.096,
+      "spot": {
+        "usd_hour": 0.2096,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.262,
+      "spot": {
+        "usd_hour": 0.0685,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6id.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.7548,
+      "spot": {
+        "usd_hour": 1.284,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6id.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.0064,
+      "spot": {
+        "usd_hour": 0.8953,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6id.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.5096,
+      "spot": {
+        "usd_hour": 1.9009,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6id.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.6258,
+      "spot": {
+        "usd_hour": 0.1221,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6id.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 10.0128,
+      "spot": {
+        "usd_hour": 1.0013,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6id.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.2516,
+      "spot": {
+        "usd_hour": 0.3688,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6id.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.5032,
+      "spot": {
+        "usd_hour": 0.4686,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6id.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.3129,
+      "spot": {
+        "usd_hour": 0.0732,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6in.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.1832,
+      "spot": {
+        "usd_hour": 0.7263,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6in.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.5776,
+      "spot": {
+        "usd_hour": 0.7298,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6in.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.3664,
+      "spot": {
+        "usd_hour": 0.895,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c6in.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.6972,
+      "spot": {
+        "usd_hour": 0.1843,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6in.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 11.1552,
+      "spot": {
+        "usd_hour": 2.5985,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6in.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.3944,
+      "spot": {
+        "usd_hour": 0.3911,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c6in.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.7888,
+      "spot": {
+        "usd_hour": 0.4908,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c6in.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.3486,
+      "spot": {
+        "usd_hour": 0.0739,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.6659,
+      "spot": {
+        "usd_hour": 0.476,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.5546,
+      "spot": {
+        "usd_hour": 0.3995,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.4443,
+      "spot": {
+        "usd_hour": 0.1191,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.8886,
+      "spot": {
+        "usd_hour": 0.1101,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.7773,
+      "spot": {
+        "usd_hour": 0.2044,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c7g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.2222,
+      "spot": {
+        "usd_hour": 0.0508,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7gd.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.3792,
+      "spot": {
+        "usd_hour": 2.3373,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7gd.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.5056,
+      "spot": {
+        "usd_hour": 2.7876,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7gd.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.5632,
+      "spot": {
+        "usd_hour": 0.1276,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7gd.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.1264,
+      "spot": {
+        "usd_hour": 0.5326,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7gd.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.2528,
+      "spot": {
+        "usd_hour": 1.1939,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7gd.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.2816,
+      "spot": {
+        "usd_hour": 0.0662,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7i-flex.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.13614,
+      "spot": {
+        "usd_hour": 0.4291,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c7i-flex.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.18152,
+      "spot": {
+        "usd_hour": 0.4182,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c7i-flex.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.52269,
+      "spot": {
+        "usd_hour": 0.1628,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7i-flex.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.04538,
+      "spot": {
+        "usd_hour": 0.1998,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c7i-flex.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.09076,
+      "spot": {
+        "usd_hour": 0.3326,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c7i-flex.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.26135,
+      "spot": {
+        "usd_hour": 0.0712,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.3012,
+      "spot": {
+        "usd_hour": 0.3357,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.4016,
+      "spot": {
+        "usd_hour": 0.7559,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.6024,
+      "spot": {
+        "usd_hour": 0.6602,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.5502,
+      "spot": {
+        "usd_hour": 0.1184,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c7i.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.2048,
+      "spot": {
+        "usd_hour": 1.3205,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.1004,
+      "spot": {
+        "usd_hour": 0.2346,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c7i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.2008,
+      "spot": {
+        "usd_hour": 0.2212,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c7i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.2751,
+      "spot": {
+        "usd_hour": 0.077,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c8g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 91.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.93232,
+      "spot": {
+        "usd_hour": 0.9147,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c8g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.90976,
+      "spot": {
+        "usd_hour": 1.3521,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c8g.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 183.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.86464,
+      "spot": {
+        "usd_hour": 1.4397,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c8g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.48872,
+      "spot": {
+        "usd_hour": 0.073,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c8g.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 11.72928,
+      "spot": {
+        "usd_hour": 1.1928,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "c8g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.97744,
+      "spot": {
+        "usd_hour": 0.1589,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "c8g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.95488,
+      "spot": {
+        "usd_hour": 0.4226,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "c8g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 7.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.24436,
+      "spot": {
+        "usd_hour": 0.0554,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g4dn.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.649,
+      "spot": {
+        "usd_hour": 1.6528,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "g4dn.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.397,
+      "spot": {
+        "usd_hour": 0.7397,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "g4dn.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.278,
+      "spot": {
+        "usd_hour": 0.1378,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g4dn.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.046,
+      "spot": {
+        "usd_hour": 0.2847,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g4dn.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 128.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.698,
+      "spot": {
+        "usd_hour": 0.3698,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g4dn.xlarge",
+      "vcpu": 4,
+      "memory_gb": 16.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.894,
+      "spot": {
+        "usd_hour": 0.1608,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g5.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.64127,
+      "spot": {
+        "usd_hour": 7.8992,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g5.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.96239,
+      "spot": {
+        "usd_hour": 5.7044,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g5.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.84318,
+      "spot": {
+        "usd_hour": 11.3419,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g5.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.06016,
+      "spot": {
+        "usd_hour": 0.2675,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g5.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 27.68636,
+      "spot": {
+        "usd_hour": 22.6839,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g5.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.76048,
+      "spot": {
+        "usd_hour": 2.2617,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g5.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.16111,
+      "spot": {
+        "usd_hour": 1.0077,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g5.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.71,
+      "spot": {
+        "usd_hour": 0.3495,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g6.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 181.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.82181,
+      "spot": {
+        "usd_hour": 0.7822,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g6.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 242.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.77388,
+      "spot": {
+        "usd_hour": 1.478,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g6.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 364.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 11.34651,
+      "spot": {
+        "usd_hour": 2.7385,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g6.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.66173,
+      "spot": {
+        "usd_hour": 0.2302,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g6.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 728.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 22.69303,
+      "spot": {
+        "usd_hour": 18.5927,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g6.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 60.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.24918,
+      "spot": {
+        "usd_hour": 0.5426,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "g6.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 121.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.42408,
+      "spot": {
+        "usd_hour": 0.3424,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "g6.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.368,
+      "spot": {
+        "usd_hour": 0.1927,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "gr6.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 121.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.6164,
+      "spot": {
+        "usd_hour": 0.316,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "gr6.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 242.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.1585,
+      "spot": {
+        "usd_hour": 0.8028,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i3.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.968,
+      "spot": {
+        "usd_hour": 0.7968,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i3.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.996,
+      "spot": {
+        "usd_hour": 0.2716,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i3.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.992,
+      "spot": {
+        "usd_hour": 0.3498,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "i3.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.984,
+      "spot": {
+        "usd_hour": 0.3984,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i3.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.498,
+      "spot": {
+        "usd_hour": 0.1026,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i3en.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 384.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.64,
+      "spot": {
+        "usd_hour": 0.864,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i3en.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 768.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 17.28,
+      "spot": {
+        "usd_hour": 1.728,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "i3en.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.44,
+      "spot": {
+        "usd_hour": 0.2625,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "i3en.3xlarge",
+      "vcpu": 12,
+      "memory_gb": 96.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.16,
+      "spot": {
+        "usd_hour": 0.2805,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i3en.6xlarge",
+      "vcpu": 24,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.32,
+      "spot": {
+        "usd_hour": 0.5769,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i3en.xlarge",
+      "vcpu": 4,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.72,
+      "spot": {
+        "usd_hour": 0.1194,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i4g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 7.8912,
+      "spot": {
+        "usd_hour": 0.7891,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.9864,
+      "spot": {
+        "usd_hour": 0.1102,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i4g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.9728,
+      "spot": {
+        "usd_hour": 0.3301,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.9456,
+      "spot": {
+        "usd_hour": 0.3946,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.4932,
+      "spot": {
+        "usd_hour": 0.0522,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.574,
+      "spot": {
+        "usd_hour": 0.6574,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.765,
+      "spot": {
+        "usd_hour": 0.8765,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i4i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.1472,
+      "spot": {
+        "usd_hour": 1.3147,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i4i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.096,
+      "spot": {
+        "usd_hour": 0.2152,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i4i.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 976.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 17.5296,
+      "spot": {
+        "usd_hour": 1.753,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.191,
+      "spot": {
+        "usd_hour": 0.4409,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.382,
+      "spot": {
+        "usd_hour": 0.4382,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i4i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.548,
+      "spot": {
+        "usd_hour": 0.0883,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.231,
+      "spot": {
+        "usd_hour": 1.3648,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "i7i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.6413,
+      "spot": {
+        "usd_hour": 1.4766,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i7i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 14.4619,
+      "spot": {
+        "usd_hour": 4.1056,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i7i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.2052,
+      "spot": {
+        "usd_hour": 0.2415,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i7i.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1464.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 28.9238,
+      "spot": {
+        "usd_hour": 2.8924,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.4103,
+      "spot": {
+        "usd_hour": 0.5619,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.8206,
+      "spot": {
+        "usd_hour": 1.4443,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i7i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.6026,
+      "spot": {
+        "usd_hour": 0.0992,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i7ie.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.936,
+      "spot": {
+        "usd_hour": 1.7705,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7ie.18xlarge",
+      "vcpu": 72,
+      "memory_gb": 549.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 14.904,
+      "spot": {
+        "usd_hour": 2.3212,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7ie.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 19.872,
+      "spot": {
+        "usd_hour": 1.9872,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7ie.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.656,
+      "spot": {
+        "usd_hour": 0.2462,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7ie.3xlarge",
+      "vcpu": 12,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.484,
+      "spot": {
+        "usd_hour": 0.3814,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7ie.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1464.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 39.744,
+      "spot": {
+        "usd_hour": 3.9744,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7ie.6xlarge",
+      "vcpu": 24,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.968,
+      "spot": {
+        "usd_hour": 0.752,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i7ie.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.828,
+      "spot": {
+        "usd_hour": 0.1318,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i8g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 6.576,
+      "spot": {
+        "usd_hour": 0.6576,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i8g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 8.768,
+      "spot": {
+        "usd_hour": 2.9785,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i8g.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 13.152,
+      "spot": {
+        "usd_hour": 3.8237,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "i8g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.096,
+      "spot": {
+        "usd_hour": 0.1248,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i8g.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1464.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 26.304,
+      "spot": {
+        "usd_hour": 2.6304,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i8g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.192,
+      "spot": {
+        "usd_hour": 0.3613,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i8g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.384,
+      "spot": {
+        "usd_hour": 0.4408,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "i8g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.548,
+      "spot": {
+        "usd_hour": 0.0674,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m1.large",
+      "vcpu": 2,
+      "memory_gb": 7.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.233,
+      "spot": {
+        "usd_hour": 0.1909,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m1.medium",
+      "vcpu": 1,
+      "memory_gb": 3.75,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.117,
+      "spot": {
+        "usd_hour": 0.0959,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m1.small",
+      "vcpu": 1,
+      "memory_gb": 1.7,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.058,
+      "spot": {
+        "usd_hour": 0.0475,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m1.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.467,
+      "spot": {
+        "usd_hour": 0.3826,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m2.2xlarge",
+      "vcpu": 4,
+      "memory_gb": 34.2,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.645,
+      "spot": {
+        "usd_hour": 0.0832,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m2.4xlarge",
+      "vcpu": 8,
+      "memory_gb": 68.4,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.291,
+      "spot": {
+        "usd_hour": 1.0577,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m2.xlarge",
+      "vcpu": 2,
+      "memory_gb": 17.1,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.323,
+      "spot": {
+        "usd_hour": 0.0428,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m3.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.761,
+      "spot": {
+        "usd_hour": 0.1593,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m3.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.381,
+      "spot": {
+        "usd_hour": 0.0736,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m4.10xlarge",
+      "vcpu": 80,
+      "memory_gb": 160.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.18,
+      "spot": {
+        "usd_hour": 0.4977,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m4.16xlarge",
+      "vcpu": 128,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.088,
+      "spot": {
+        "usd_hour": 0.5088,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m4.2xlarge",
+      "vcpu": 16,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.636,
+      "spot": {
+        "usd_hour": 0.1644,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m4.4xlarge",
+      "vcpu": 32,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.272,
+      "spot": {
+        "usd_hour": 0.3856,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m4.large",
+      "vcpu": 4,
+      "memory_gb": 8.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.159,
+      "spot": {
+        "usd_hour": 0.0337,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m4.xlarge",
+      "vcpu": 8,
+      "memory_gb": 16.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.318,
+      "spot": {
+        "usd_hour": 0.0871,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m5.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.672,
+      "spot": {
+        "usd_hour": 0.3672,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m5.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.896,
+      "spot": {
+        "usd_hour": 0.7475,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 384.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.344,
+      "spot": {
+        "usd_hour": 0.7344,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.612,
+      "spot": {
+        "usd_hour": 0.0625,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.224,
+      "spot": {
+        "usd_hour": 0.1328,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 128.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.448,
+      "spot": {
+        "usd_hour": 0.3272,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5.xlarge",
+      "vcpu": 4,
+      "memory_gb": 16.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.306,
+      "spot": {
+        "usd_hour": 0.0306,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5a.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.312,
+      "spot": {
+        "usd_hour": 0.4309,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5a.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.416,
+      "spot": {
+        "usd_hour": 0.6549,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5a.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 384.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.624,
+      "spot": {
+        "usd_hour": 0.856,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5a.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.552,
+      "spot": {
+        "usd_hour": 0.1758,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5a.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.104,
+      "spot": {
+        "usd_hour": 0.3639,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5a.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 128.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.208,
+      "spot": {
+        "usd_hour": 0.6465,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5a.xlarge",
+      "vcpu": 4,
+      "memory_gb": 16.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.276,
+      "spot": {
+        "usd_hour": 0.0884,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5ad.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.96,
+      "spot": {
+        "usd_hour": 1.1705,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5ad.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.28,
+      "spot": {
+        "usd_hour": 1.2157,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m5ad.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.92,
+      "spot": {
+        "usd_hour": 1.3957,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m5ad.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.66,
+      "spot": {
+        "usd_hour": 0.2481,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m5ad.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.32,
+      "spot": {
+        "usd_hour": 0.4936,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m5ad.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.64,
+      "spot": {
+        "usd_hour": 0.9431,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5ad.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.33,
+      "spot": {
+        "usd_hour": 0.1242,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5d.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 192.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.32,
+      "spot": {
+        "usd_hour": 2.3328,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5d.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.76,
+      "spot": {
+        "usd_hour": 3.2325,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m5d.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 384.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.64,
+      "spot": {
+        "usd_hour": 3.7035,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5d.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.72,
+      "spot": {
+        "usd_hour": 0.1363,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5d.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.44,
+      "spot": {
+        "usd_hour": 0.3397,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5d.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 128.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.88,
+      "spot": {
+        "usd_hour": 1.0405,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5d.xlarge",
+      "vcpu": 4,
+      "memory_gb": 16.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.36,
+      "spot": {
+        "usd_hour": 0.0652,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5zn.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.3178,
+      "spot": {
+        "usd_hour": 0.7769,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5zn.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.053,
+      "spot": {
+        "usd_hour": 0.2993,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m5zn.3xlarge",
+      "vcpu": 12,
+      "memory_gb": 45.75,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.5794,
+      "spot": {
+        "usd_hour": 0.2859,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5zn.6xlarge",
+      "vcpu": 24,
+      "memory_gb": 91.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.1589,
+      "spot": {
+        "usd_hour": 0.3159,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m5zn.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.5265,
+      "spot": {
+        "usd_hour": 0.1741,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6a.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.3048,
+      "spot": {
+        "usd_hour": 0.9994,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6a.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.4064,
+      "spot": {
+        "usd_hour": 0.8841,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6a.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.6096,
+      "spot": {
+        "usd_hour": 1.1094,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6a.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.5508,
+      "spot": {
+        "usd_hour": 0.1345,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6a.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.8128,
+      "spot": {
+        "usd_hour": 1.3441,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6a.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.2192,
+      "spot": {
+        "usd_hour": 1.3219,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6a.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.1016,
+      "spot": {
+        "usd_hour": 0.2562,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6a.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.2032,
+      "spot": {
+        "usd_hour": 0.6059,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6a.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.2754,
+      "spot": {
+        "usd_hour": 0.076,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 185.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.9376,
+      "spot": {
+        "usd_hour": 0.6403,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.9168,
+      "spot": {
+        "usd_hour": 0.5357,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.4896,
+      "spot": {
+        "usd_hour": 0.0906,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.9792,
+      "spot": {
+        "usd_hour": 0.1361,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.9584,
+      "spot": {
+        "usd_hour": 0.2621,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.2448,
+      "spot": {
+        "usd_hour": 0.0269,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6gd.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 185.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.456,
+      "spot": {
+        "usd_hour": 0.3456,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6gd.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.608,
+      "spot": {
+        "usd_hour": 0.4608,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6gd.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.576,
+      "spot": {
+        "usd_hour": 0.0776,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6gd.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.152,
+      "spot": {
+        "usd_hour": 0.1288,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6gd.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.304,
+      "spot": {
+        "usd_hour": 0.2304,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6gd.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.288,
+      "spot": {
+        "usd_hour": 0.045,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 185.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.672,
+      "spot": {
+        "usd_hour": 1.2362,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.896,
+      "spot": {
+        "usd_hour": 1.7354,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.344,
+      "spot": {
+        "usd_hour": 2.1369,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.612,
+      "spot": {
+        "usd_hour": 0.1312,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6i.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.792,
+      "spot": {
+        "usd_hour": 0.9792,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.224,
+      "spot": {
+        "usd_hour": 0.3241,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m6i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.448,
+      "spot": {
+        "usd_hour": 0.8745,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.306,
+      "spot": {
+        "usd_hour": 0.0824,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6id.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.536,
+      "spot": {
+        "usd_hour": 3.4427,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6id.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.048,
+      "spot": {
+        "usd_hour": 3.9987,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6id.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.072,
+      "spot": {
+        "usd_hour": 5.322,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6id.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.756,
+      "spot": {
+        "usd_hour": 0.1572,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m6id.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 12.096,
+      "spot": {
+        "usd_hour": 1.2096,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6id.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.512,
+      "spot": {
+        "usd_hour": 0.5479,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6id.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.024,
+      "spot": {
+        "usd_hour": 2.0706,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m6id.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.378,
+      "spot": {
+        "usd_hour": 0.0857,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m7g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.1212,
+      "spot": {
+        "usd_hour": 1.2458,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.1616,
+      "spot": {
+        "usd_hour": 1.5551,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.5202,
+      "spot": {
+        "usd_hour": 0.1094,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.0404,
+      "spot": {
+        "usd_hour": 0.4782,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.0808,
+      "spot": {
+        "usd_hour": 0.9858,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.2601,
+      "spot": {
+        "usd_hour": 0.0632,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7gd.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.0824,
+      "spot": {
+        "usd_hour": 2.5058,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m7gd.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.4432,
+      "spot": {
+        "usd_hour": 1.9324,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m7gd.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.6804,
+      "spot": {
+        "usd_hour": 0.1202,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7gd.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.3608,
+      "spot": {
+        "usd_hour": 0.6461,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m7gd.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.7216,
+      "spot": {
+        "usd_hour": 1.7831,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m7gd.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.3402,
+      "spot": {
+        "usd_hour": 0.0667,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7i-flex.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.66288,
+      "spot": {
+        "usd_hour": 0.7888,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m7i-flex.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.88384,
+      "spot": {
+        "usd_hour": 0.5797,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7i-flex.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.61048,
+      "spot": {
+        "usd_hour": 0.1363,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7i-flex.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.22096,
+      "spot": {
+        "usd_hour": 0.3116,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7i-flex.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.44192,
+      "spot": {
+        "usd_hour": 0.6729,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7i-flex.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.30524,
+      "spot": {
+        "usd_hour": 0.0692,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m7i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 185.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.8556,
+      "spot": {
+        "usd_hour": 1.8808,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m7i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.1408,
+      "spot": {
+        "usd_hour": 2.7121,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m7i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.7112,
+      "spot": {
+        "usd_hour": 4.3235,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m7i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.6426,
+      "spot": {
+        "usd_hour": 0.1412,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m7i.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 15.4224,
+      "spot": {
+        "usd_hour": 2.2842,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m7i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.2852,
+      "spot": {
+        "usd_hour": 0.4173,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m7i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.5704,
+      "spot": {
+        "usd_hour": 0.8217,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m7i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.3213,
+      "spot": {
+        "usd_hour": 0.0674,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m8g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 185.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.43344,
+      "spot": {
+        "usd_hour": 1.122,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m8g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.57792,
+      "spot": {
+        "usd_hour": 1.5187,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m8g.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 6.86688,
+      "spot": {
+        "usd_hour": 1.8718,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m8g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.57224,
+      "spot": {
+        "usd_hour": 0.1109,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m8g.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 732.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 13.73376,
+      "spot": {
+        "usd_hour": 1.3734,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m8g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.14448,
+      "spot": {
+        "usd_hour": 0.3321,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m8g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.28896,
+      "spot": {
+        "usd_hour": 1.1842,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m8g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.28612,
+      "spot": {
+        "usd_hour": 0.0675,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m8gd.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 183.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.4088,
+      "spot": {
+        "usd_hour": 1.5975,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m8gd.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.8784,
+      "spot": {
+        "usd_hour": 1.9814,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m8gd.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 8.8176,
+      "spot": {
+        "usd_hour": 3.6966,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m8gd.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.7348,
+      "spot": {
+        "usd_hour": 0.0816,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "m8gd.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 732.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 17.6352,
+      "spot": {
+        "usd_hour": 1.7635,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "m8gd.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.4696,
+      "spot": {
+        "usd_hour": 0.4481,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m8gd.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.9392,
+      "spot": {
+        "usd_hour": 1.2837,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "m8gd.xlarge",
+      "vcpu": 4,
+      "memory_gb": 15.25,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.3674,
+      "spot": {
+        "usd_hour": 0.0903,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "p4d.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 1098.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 35.5569,
+      "spot": {
+        "usd_hour": 29.1323,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "p5.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1952.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 92.4672,
+      "spot": {
+        "usd_hour": 75.7598,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r3.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.399,
+      "spot": {
+        "usd_hour": 0.1399,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r3.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.799,
+      "spot": {
+        "usd_hour": 0.327,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r3.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.597,
+      "spot": {
+        "usd_hour": 0.5597,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r3.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.7,
+      "spot": {
+        "usd_hour": 0.0754,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r4.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.96,
+      "spot": {
+        "usd_hour": 0.896,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r4.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.12,
+      "spot": {
+        "usd_hour": 0.1942,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r4.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.24,
+      "spot": {
+        "usd_hour": 0.4029,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r4.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.48,
+      "spot": {
+        "usd_hour": 0.7103,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r4.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.56,
+      "spot": {
+        "usd_hour": 0.1074,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 384.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.824,
+      "spot": {
+        "usd_hour": 0.4824,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 512.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.432,
+      "spot": {
+        "usd_hour": 0.9032,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 768.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.648,
+      "spot": {
+        "usd_hour": 0.9648,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.804,
+      "spot": {
+        "usd_hour": 0.1216,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 128.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.608,
+      "spot": {
+        "usd_hour": 0.3027,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.216,
+      "spot": {
+        "usd_hour": 0.4022,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5.xlarge",
+      "vcpu": 4,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.402,
+      "spot": {
+        "usd_hour": 0.06,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5a.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 384.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.344,
+      "spot": {
+        "usd_hour": 1.0157,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5a.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 512.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.792,
+      "spot": {
+        "usd_hour": 1.726,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5a.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 768.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 8.688,
+      "spot": {
+        "usd_hour": 1.6186,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5a.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.724,
+      "spot": {
+        "usd_hour": 0.18,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5a.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 128.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.448,
+      "spot": {
+        "usd_hour": 0.4121,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5a.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 2.896,
+      "spot": {
+        "usd_hour": 0.8894,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5a.xlarge",
+      "vcpu": 4,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.362,
+      "spot": {
+        "usd_hour": 0.0947,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5ad.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.992,
+      "spot": {
+        "usd_hour": 1.0107,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5ad.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 496.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.656,
+      "spot": {
+        "usd_hour": 1.1138,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5ad.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.984,
+      "spot": {
+        "usd_hour": 1.7366,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5ad.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.832,
+      "spot": {
+        "usd_hour": 0.2237,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5ad.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.664,
+      "spot": {
+        "usd_hour": 0.4541,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5ad.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.328,
+      "spot": {
+        "usd_hour": 1.0162,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5ad.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.416,
+      "spot": {
+        "usd_hour": 0.1076,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5b.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.688,
+      "spot": {
+        "usd_hour": 2.6604,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5b.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.584,
+      "spot": {
+        "usd_hour": 3.6014,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5b.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 11.376,
+      "spot": {
+        "usd_hour": 5.6295,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5b.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.948,
+      "spot": {
+        "usd_hour": 0.3273,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5b.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.896,
+      "spot": {
+        "usd_hour": 0.8582,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5b.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.792,
+      "spot": {
+        "usd_hour": 1.8051,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5b.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.474,
+      "spot": {
+        "usd_hour": 0.1341,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5d.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 384.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.472,
+      "spot": {
+        "usd_hour": 3.6105,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5d.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 512.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.296,
+      "spot": {
+        "usd_hour": 3.9681,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5d.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 768.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 10.944,
+      "spot": {
+        "usd_hour": 3.8796,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5d.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 64.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.912,
+      "spot": {
+        "usd_hour": 0.1505,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5d.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 128.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.824,
+      "spot": {
+        "usd_hour": 0.6245,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5d.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 256.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.648,
+      "spot": {
+        "usd_hour": 2.0567,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r5d.xlarge",
+      "vcpu": 4,
+      "memory_gb": 32.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.456,
+      "spot": {
+        "usd_hour": 0.0737,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5n.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.664,
+      "spot": {
+        "usd_hour": 1.9776,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5n.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.552,
+      "spot": {
+        "usd_hour": 2.9038,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5n.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 11.328,
+      "spot": {
+        "usd_hour": 1.5397,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5n.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.944,
+      "spot": {
+        "usd_hour": 0.2874,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r5n.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.888,
+      "spot": {
+        "usd_hour": 0.622,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5n.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.776,
+      "spot": {
+        "usd_hour": 1.717,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r5n.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.472,
+      "spot": {
+        "usd_hour": 0.0912,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r6g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.8592,
+      "spot": {
+        "usd_hour": 0.3859,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r6g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.1456,
+      "spot": {
+        "usd_hour": 0.5146,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r6g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.6432,
+      "spot": {
+        "usd_hour": 0.1123,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r6g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.2864,
+      "spot": {
+        "usd_hour": 0.2127,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r6g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.5728,
+      "spot": {
+        "usd_hour": 0.3273,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r6g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.3216,
+      "spot": {
+        "usd_hour": 0.0684,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r6gd.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.3776,
+      "spot": {
+        "usd_hour": 1.4866,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6gd.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.8368,
+      "spot": {
+        "usd_hour": 2.1179,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6gd.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.7296,
+      "spot": {
+        "usd_hour": 0.1233,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r6gd.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.4592,
+      "spot": {
+        "usd_hour": 0.3696,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6gd.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.9184,
+      "spot": {
+        "usd_hour": 0.9678,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6gd.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.3648,
+      "spot": {
+        "usd_hour": 0.0782,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r6i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 4.824,
+      "spot": {
+        "usd_hour": 1.3117,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.432,
+      "spot": {
+        "usd_hour": 1.4915,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r6i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 9.648,
+      "spot": {
+        "usd_hour": 1.506,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.804,
+      "spot": {
+        "usd_hour": 0.1789,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r6i.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 950.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 12.864,
+      "spot": {
+        "usd_hour": 1.2864,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.608,
+      "spot": {
+        "usd_hour": 0.3619,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.216,
+      "spot": {
+        "usd_hour": 0.5117,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r6i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.402,
+      "spot": {
+        "usd_hour": 0.0947,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r7g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.0906,
+      "spot": {
+        "usd_hour": 1.174,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r7g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.4541,
+      "spot": {
+        "usd_hour": 1.0552,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r7g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.6818,
+      "spot": {
+        "usd_hour": 0.1296,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r7g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.3635,
+      "spot": {
+        "usd_hour": 0.3012,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r7g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.727,
+      "spot": {
+        "usd_hour": 0.8174,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r7g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.3409,
+      "spot": {
+        "usd_hour": 0.0545,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r7i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.0652,
+      "spot": {
+        "usd_hour": 1.7904,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r7i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.7536,
+      "spot": {
+        "usd_hour": 3.1373,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r7i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 10.1304,
+      "spot": {
+        "usd_hour": 5.3341,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r7i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.8442,
+      "spot": {
+        "usd_hour": 0.1137,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r7i.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1464.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 20.2608,
+      "spot": {
+        "usd_hour": 2.0718,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r7i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.6884,
+      "spot": {
+        "usd_hour": 0.5164,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r7i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.3768,
+      "spot": {
+        "usd_hour": 1.0853,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r7i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.4221,
+      "spot": {
+        "usd_hour": 0.0624,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8g.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 4.49952,
+      "spot": {
+        "usd_hour": 0.9975,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8g.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.99936,
+      "spot": {
+        "usd_hour": 1.7454,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r8g.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 8.99904,
+      "spot": {
+        "usd_hour": 0.8999,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8g.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.74992,
+      "spot": {
+        "usd_hour": 0.075,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8g.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1464.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 17.99808,
+      "spot": {
+        "usd_hour": 5.2937,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8g.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.49984,
+      "spot": {
+        "usd_hour": 0.263,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8g.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 2.99968,
+      "spot": {
+        "usd_hour": 0.8811,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8g.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.37496,
+      "spot": {
+        "usd_hour": 0.104,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8gd.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 5.5848,
+      "spot": {
+        "usd_hour": 3.9526,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8gd.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 7.4464,
+      "spot": {
+        "usd_hour": 3.7161,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8gd.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 11.1696,
+      "spot": {
+        "usd_hour": 5.1653,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8gd.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.9308,
+      "spot": {
+        "usd_hour": 0.1483,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8gd.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1464.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 22.3392,
+      "spot": {
+        "usd_hour": 2.3804,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8gd.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 1.8616,
+      "spot": {
+        "usd_hour": 1.1572,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8gd.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 3.7232,
+      "spot": {
+        "usd_hour": 2.243,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8gd.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "AARCH64",
+      "on_demand_usd_hour": 0.4654,
+      "spot": {
+        "usd_hour": 0.0819,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8i-flex.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.05248,
+      "spot": {
+        "usd_hour": 2.1238,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r8i-flex.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.73664,
+      "spot": {
+        "usd_hour": 2.3418,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r8i-flex.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.84208,
+      "spot": {
+        "usd_hour": 0.1829,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r8i-flex.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.68416,
+      "spot": {
+        "usd_hour": 0.3847,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8i-flex.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.36832,
+      "spot": {
+        "usd_hour": 0.8633,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8i-flex.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.42104,
+      "spot": {
+        "usd_hour": 0.0834,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r8i.12xlarge",
+      "vcpu": 48,
+      "memory_gb": 366.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 5.3184,
+      "spot": {
+        "usd_hour": 2.3237,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8i.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 7.0912,
+      "spot": {
+        "usd_hour": 2.2656,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8i.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 732.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 10.6368,
+      "spot": {
+        "usd_hour": 3.7983,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8i.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 61.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.8864,
+      "spot": {
+        "usd_hour": 0.2672,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8i.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 976.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 14.1824,
+      "spot": {
+        "usd_hour": 1.6762,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8i.48xlarge",
+      "vcpu": 192,
+      "memory_gb": 1464.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 21.2736,
+      "spot": {
+        "usd_hour": 2.1274,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8i.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.7728,
+      "spot": {
+        "usd_hour": 0.8827,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "r8i.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.5456,
+      "spot": {
+        "usd_hour": 2.5526,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "r8i.96xlarge",
+      "vcpu": 384,
+      "memory_gb": 2928.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 42.5472,
+      "spot": {
+        "usd_hour": 4.2547,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "r8i.xlarge",
+      "vcpu": 4,
+      "memory_gb": 30.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 0.4432,
+      "spot": {
+        "usd_hour": 0.1126,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x1.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 950.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.005,
+      "spot": {
+        "usd_hour": 1.51,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "x1.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 1900.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 26.01,
+      "spot": {
+        "usd_hour": 2.601,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x1e.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 1900.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 26.01,
+      "spot": {
+        "usd_hour": 2.601,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x1e.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 237.5,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.251,
+      "spot": {
+        "usd_hour": 0.3251,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x1e.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 3800.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 52.019,
+      "spot": {
+        "usd_hour": 5.2019,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x1e.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 475.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.502,
+      "spot": {
+        "usd_hour": 0.9761,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x1e.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 950.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.005,
+      "spot": {
+        "usd_hour": 3.0622,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x1e.xlarge",
+      "vcpu": 4,
+      "memory_gb": 118.75,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.626,
+      "spot": {
+        "usd_hour": 0.1699,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x2idn.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 976.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.005,
+      "spot": {
+        "usd_hour": 1.3236,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x2idn.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 1464.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 19.5075,
+      "spot": {
+        "usd_hour": 1.9508,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "x2idn.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 1952.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 26.01,
+      "spot": {
+        "usd_hour": 2.601,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x2iedn.16xlarge",
+      "vcpu": 64,
+      "memory_gb": 1952.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 26.01,
+      "spot": {
+        "usd_hour": 2.601,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "x2iedn.24xlarge",
+      "vcpu": 96,
+      "memory_gb": 2928.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 39.015,
+      "spot": {
+        "usd_hour": 3.9015,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "x2iedn.2xlarge",
+      "vcpu": 8,
+      "memory_gb": 244.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 3.25125,
+      "spot": {
+        "usd_hour": 0.3251,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "x2iedn.32xlarge",
+      "vcpu": 128,
+      "memory_gb": 3904.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 52.02,
+      "spot": {
+        "usd_hour": 5.202,
+        "az": "sa-east-1c"
+      }
+    },
+    {
+      "instance_type": "x2iedn.4xlarge",
+      "vcpu": 16,
+      "memory_gb": 488.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 6.5025,
+      "spot": {
+        "usd_hour": 0.6503,
+        "az": "sa-east-1a"
+      }
+    },
+    {
+      "instance_type": "x2iedn.8xlarge",
+      "vcpu": 32,
+      "memory_gb": 976.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 13.005,
+      "spot": {
+        "usd_hour": 1.3005,
+        "az": "sa-east-1b"
+      }
+    },
+    {
+      "instance_type": "x2iedn.xlarge",
+      "vcpu": 4,
+      "memory_gb": 122.0,
+      "architecture": "X86_64",
+      "on_demand_usd_hour": 1.62563,
+      "spot": {
+        "usd_hour": 0.1626,
+        "az": "sa-east-1b"
+      }
+    }
+  ]
+}
