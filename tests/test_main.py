@@ -62,8 +62,12 @@ def test_build_records() -> None:
         "m5.large": {"usd_hour": 0.048, "az": "sa-east-1a"},
         "m5.xlarge": {"usd_hour": 0.096, "az": "sa-east-1b"},
     }
+    interruption = {
+        "m5.large": {"savings_percent": 50, "interruption_rate": 2},
+        "m5.xlarge": {"savings_percent": 50, "interruption_rate": 2},
+    }
 
-    records = main.build_records(instances, on_demand, spot)
+    records = main.build_records(instances, on_demand, spot, interruption)
     assert len(records) == 2
     assert records[0]["instance_type"] == "m5.large"
     assert records[0]["vcpu"] == 2
@@ -71,6 +75,7 @@ def test_build_records() -> None:
     assert records[0]["on_demand_usd_hour"] == 0.096
     assert records[0]["network_performance"] == "Up to 10 Gigabit"
     assert records[0]["spot"]["usd_hour"] == 0.048
+    assert records[0]["spot_interruption"]["interruption_rate"] == 2
 
 
 def test_build_records_missing_price() -> None:
@@ -80,12 +85,14 @@ def test_build_records_missing_price() -> None:
     ]
     on_demand: dict[str, dict[str, object]] = {}
     spot: dict[str, dict[str, object]] = {}
+    interruption: dict[str, dict[str, object]] = {}
 
-    records = main.build_records(instances, on_demand, spot)
+    records = main.build_records(instances, on_demand, spot, interruption)
     assert len(records) == 1
     assert records[0]["on_demand_usd_hour"] is None
     assert records[0]["network_performance"] is None
     assert records[0]["spot"] is None
+    assert records[0]["spot_interruption"] is None
 
 
 def test_latest_release_label() -> None:
@@ -301,3 +308,43 @@ def test_price_ratio_exceeds_limit() -> None:
     assert missing_spot == 7
     assert ratio_spot == 0.07
     assert ratio_spot > main.MAX_MISSING_PRICE_RATIO  # 7% > 5%
+
+
+def test_interruption_frequency_success() -> None:
+    """Test obtenção de frequência de interrupção do Spot Bid Advisor."""
+    from unittest.mock import patch, MagicMock
+
+    advisor_data = {
+        "spot_advisor": {
+            "sa-east-1": {
+                "Linux": {
+                    "m5.large": {"s": 50, "r": 2},
+                    "m5.xlarge": {"s": 50, "r": 3},
+                }
+            }
+        }
+    }
+
+    with patch("main.requests.get") as mock_get:
+        mock_response = MagicMock()
+        mock_response.json.return_value = advisor_data
+        mock_response.raise_for_status.return_value = None
+        mock_get.return_value = mock_response
+
+        result = main.interruption_frequency("sa-east-1")
+        assert len(result) == 2
+        assert result["m5.large"]["interruption_rate"] == 2
+        assert result["m5.large"]["savings_percent"] == 50
+        assert result["m5.xlarge"]["interruption_rate"] == 3
+
+
+def test_interruption_frequency_error() -> None:
+    """Test quando Spot Bid Advisor fica indisponível."""
+    from unittest.mock import patch
+    import requests
+
+    with patch("main.requests.get") as mock_get:
+        mock_get.side_effect = requests.RequestException("Connection error")
+
+        result = main.interruption_frequency("sa-east-1")
+        assert result == {}  # Retorna vazio em caso de erro

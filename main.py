@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 import boto3
+import requests
 from botocore.config import Config
 from botocore.exceptions import BotoCoreError, ClientError
 
@@ -140,16 +141,46 @@ def spot_prices(ec2: Any) -> dict[str, dict[str, Any]]:
 
 
 # --------------------------------------------------------------------------- #
+# Frequência de interrupção spot (Spot Bid Advisor)
+# --------------------------------------------------------------------------- #
+def interruption_frequency(region: str) -> dict[str, dict[str, Any]]:
+    """Mapeia {instance_type: {"savings": %, "interruption_rate": 1-5}}.
+
+    Busca dados do Spot Bid Advisor (S3 público) que inclui taxa de interrupção
+    (1 = <5%, 2 = 5-10%, 3 = 10-15%, 4 = 15-20%, 5 = >20%) e economia esperada.
+    """
+    data: dict[str, dict[str, Any]] = {}
+    try:
+        response = requests.get(
+            "https://spot-bid-advisor.s3.amazonaws.com/spot-advisor-data.json",
+            timeout=10,
+        )
+        response.raise_for_status()
+        advisor = response.json()
+        advisor_data = advisor.get("spot_advisor", {}).get(region, {}).get("Linux", {})
+        for instance_type, metrics in advisor_data.items():
+            data[instance_type] = {
+                "savings_percent": metrics.get("s"),
+                "interruption_rate": metrics.get("r"),
+            }
+    except (requests.RequestException, ValueError) as e:
+        logger.warning(f"Erro ao buscar dados de interrupção do Spot Bid Advisor: {e}")
+    return data
+
+
+# --------------------------------------------------------------------------- #
 def build_records(
     instances: list[dict[str, Any]],
     on_demand: dict[str, dict[str, Any]],
     spot: dict[str, dict[str, Any]],
+    interruption: dict[str, dict[str, Any]],
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for instance in sorted(instances, key=lambda i: i["Type"]):
         instance_type = instance["Type"]
         memory = instance.get("MemoryGB")
         od = on_demand.get(instance_type)
+        irrupt = interruption.get(instance_type)
         records.append(
             {
                 "instance_type": instance_type,
@@ -159,6 +190,7 @@ def build_records(
                 "network_performance": od.get("network_performance") if od else None,
                 "on_demand_usd_hour": od.get("usd_hour") if od else None,
                 "spot": spot.get(instance_type),
+                "spot_interruption": irrupt,
             }
         )
     return records
@@ -205,7 +237,11 @@ def main() -> None:
         spot = spot_prices(ec2)
         logger.info(f"  {len(spot)} preços spot")
 
-        records = build_records(instances, on_demand, spot)
+        logger.info("Coletando frequência de interrupção spot (Spot Bid Advisor)...")
+        interruption = interruption_frequency(REGION)
+        logger.info(f"  {len(interruption)} taxas de interrupção")
+
+        records = build_records(instances, on_demand, spot, interruption)
         payload: dict[str, Any] = {
             "region": REGION,
             "release_label": release_label,
