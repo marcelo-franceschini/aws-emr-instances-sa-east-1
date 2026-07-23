@@ -9,10 +9,13 @@ Lê PUSHOVER_TOKEN e PUSHOVER_USER do ambiente. Usa só a biblioteca padrão.
 
 import argparse
 import json
+import logging
 import os
 import urllib.error
 import urllib.parse
 import urllib.request
+
+logger = logging.getLogger(__name__)
 
 PUSHOVER_URL = "https://api.pushover.net/1/messages.json"
 
@@ -38,12 +41,15 @@ def send_pushover(title: str, message: str) -> None:
             response.read()
     except urllib.error.HTTPError as error:
         body = error.read().decode(errors="replace")
-        # O corpo do Pushover indica qual campo está inválido (sem expor o valor).
-        print(f"Pushover recusou (HTTP {error.code}): {body}")
+        logger.error(f"Pushover recusou (HTTP {error.code}): {body}")
         raise
 
 
-def main():
+def main() -> None:
+    logging.basicConfig(
+        level=logging.INFO, format="%(levelname)s: %(message)s"
+    )
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--new", default="instances_sa-east-1.json")
     parser.add_argument("--old", default="previous.json")
@@ -53,17 +59,17 @@ def main():
     old_types = load_instance_types(args.old)
 
     added = sorted(new_types - old_types)
-    print(f"Instâncias novas: {len(added)}")
+    logger.info(f"Instâncias novas: {len(added)}")
 
     if not added:
-        print("Nada novo — nenhuma notificação enviada.")
+        logger.info("Nada novo — nenhuma notificação enviada.")
         return
 
     send_pushover(
         title="EMR sa-east-1",
         message=f"{len(added)} nova(s) instância(s) EMR disponível(is) em São Paulo.",
     )
-    print("Notificação enviada via Pushover.")
+    logger.info("Notificação enviada via Pushover.")
 
 
 if __name__ == "__main__":

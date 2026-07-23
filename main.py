@@ -9,25 +9,32 @@ Fontes:
 
 import argparse
 import json
+import logging
+import sys
 from datetime import datetime, timezone
+from typing import Any
 
 import boto3
+from botocore.config import Config
+from botocore.exceptions import BotoCoreError, ClientError
+
+logger = logging.getLogger(__name__)
 
 REGION = "sa-east-1"
-# A Price List API só existe em alguns endpoints; us-east-1 é o mais comum.
 PRICING_ENDPOINT_REGION = "us-east-1"
 OUTPUT_FILE = "instances_sa-east-1.json"
+MAX_MISSING_PRICE_RATIO = 0.05  # 5% de preços faltando é limite de alerta/erro
 
 
 # --------------------------------------------------------------------------- #
 # Instâncias suportadas pelo EMR
 # --------------------------------------------------------------------------- #
-def latest_release_label(emr) -> str:
+def latest_release_label(emr: Any) -> str:
     """Retorna o release label mais recente do EMR disponível na região."""
     labels: list[str] = []
     marker = None
     while True:
-        kwargs = {"Marker": marker} if marker else {}
+        kwargs: dict[str, Any] = {"Marker": marker} if marker else {}
         response = emr.list_release_labels(**kwargs)
         labels.extend(response.get("ReleaseLabels", []))
         marker = response.get("Marker")
@@ -41,9 +48,9 @@ def _version_key(label: str) -> tuple[int, ...]:
     return tuple(int(part) for part in version.split(".") if part.isdigit())
 
 
-def supported_instance_types(emr, release_label: str) -> list[dict]:
+def supported_instance_types(emr: Any, release_label: str) -> list[dict[str, Any]]:
     """Retorna todos os tipos de instância suportados para um release label."""
-    instance_types: list[dict] = []
+    instance_types: list[dict[str, Any]] = []
     marker = None
     while True:
         kwargs = {"ReleaseLabel": release_label}
@@ -60,7 +67,7 @@ def supported_instance_types(emr, release_label: str) -> list[dict]:
 # --------------------------------------------------------------------------- #
 # Preço on-demand (Price List API)
 # --------------------------------------------------------------------------- #
-def on_demand_prices(pricing) -> dict[str, float]:
+def on_demand_prices(pricing: Any) -> dict[str, float]:
     """Mapeia {instance_type: preço USD/hora on-demand} para a região inteira.
 
     Faz uma única varredura paginada em vez de uma chamada por instância.
@@ -87,7 +94,7 @@ def on_demand_prices(pricing) -> dict[str, float]:
     return prices
 
 
-def _extract_on_demand_usd(product: dict) -> float | None:
+def _extract_on_demand_usd(product: dict[str, Any]) -> float | None:
     """Extrai o preço USD/hora dos termos OnDemand de um produto."""
     on_demand = product.get("terms", {}).get("OnDemand", {})
     for term in on_demand.values():
@@ -101,13 +108,13 @@ def _extract_on_demand_usd(product: dict) -> float | None:
 # --------------------------------------------------------------------------- #
 # Preço spot (menor entre as AZs)
 # --------------------------------------------------------------------------- #
-def spot_prices(ec2) -> dict[str, dict]:
+def spot_prices(ec2: Any) -> dict[str, dict[str, Any]]:
     """Mapeia {instance_type: {"usd_hour": menor preço, "az": AZ}}.
 
     Uma única varredura pega o preço spot atual de todas as instâncias/AZs;
     fica com o menor preço entre as AZs e registra em qual AZ estava.
     """
-    cheapest: dict[str, dict] = {}
+    cheapest: dict[str, dict[str, Any]] = {}
     paginator = ec2.get_paginator("describe_spot_price_history")
     pages = paginator.paginate(
         StartTime=datetime.now(timezone.utc),  # só o preço atualmente vigente
@@ -127,8 +134,12 @@ def spot_prices(ec2) -> dict[str, dict]:
 
 
 # --------------------------------------------------------------------------- #
-def build_records(instances: list[dict], on_demand: dict, spot: dict) -> list[dict]:
-    records = []
+def build_records(
+    instances: list[dict[str, Any]],
+    on_demand: dict[str, float],
+    spot: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    records: list[dict[str, Any]] = []
     for instance in sorted(instances, key=lambda i: i["Type"]):
         instance_type = instance["Type"]
         memory = instance.get("MemoryGB")
@@ -145,7 +156,11 @@ def build_records(instances: list[dict], on_demand: dict, spot: dict) -> list[di
     return records
 
 
-def main():
+def main() -> None:
+    logging.basicConfig(
+        level=logging.INFO, format="%(levelname)s: %(message)s"
+    )
+
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--release-label",
@@ -159,41 +174,75 @@ def main():
     )
     args = parser.parse_args()
 
-    emr = boto3.client("emr", region_name=REGION)
-    ec2 = boto3.client("ec2", region_name=REGION)
-    pricing = boto3.client("pricing", region_name=PRICING_ENDPOINT_REGION)
+    try:
+        retry_config = Config(
+            retries={"max_attempts": 5, "mode": "adaptive"}
+        )
+        emr = boto3.client("emr", region_name=REGION, config=retry_config)
+        ec2 = boto3.client("ec2", region_name=REGION, config=retry_config)
+        pricing = boto3.client(
+            "pricing", region_name=PRICING_ENDPOINT_REGION, config=retry_config
+        )
 
-    release_label = args.release_label or latest_release_label(emr)
-    print(f"Coletando instâncias EMR ({release_label}) em {REGION}...")
-    instances = supported_instance_types(emr, release_label)
-    print(f"  {len(instances)} tipos de instância")
+        release_label = args.release_label or latest_release_label(emr)
+        logger.info(f"Coletando instâncias EMR ({release_label}) em {REGION}...")
+        instances = supported_instance_types(emr, release_label)
+        logger.info(f"  {len(instances)} tipos de instância")
 
-    print("Coletando preços on-demand (Price List API)...")
-    on_demand = on_demand_prices(pricing)
-    print(f"  {len(on_demand)} preços on-demand")
+        logger.info("Coletando preços on-demand (Price List API)...")
+        on_demand = on_demand_prices(pricing)
+        logger.info(f"  {len(on_demand)} preços on-demand")
 
-    print("Coletando preços spot (menor entre as AZs)...")
-    spot = spot_prices(ec2)
-    print(f"  {len(spot)} preços spot")
+        logger.info("Coletando preços spot (menor entre as AZs)...")
+        spot = spot_prices(ec2)
+        logger.info(f"  {len(spot)} preços spot")
 
-    records = build_records(instances, on_demand, spot)
-    payload = {
-        "region": REGION,
-        "release_label": release_label,
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "instance_count": len(records),
-        "instances": records,
-    }
+        records = build_records(instances, on_demand, spot)
+        payload: dict[str, Any] = {
+            "region": REGION,
+            "release_label": release_label,
+            "generated_at": datetime.now(timezone.utc).isoformat(),
+            "instance_count": len(records),
+            "instances": records,
+        }
 
-    with open(args.output, "w", encoding="utf-8") as f:
-        json.dump(payload, f, indent=2, ensure_ascii=False)
-        f.write("\n")
+        try:
+            with open(args.output, "w", encoding="utf-8") as f:
+                json.dump(payload, f, indent=2, ensure_ascii=False)
+                f.write("\n")
+            logger.info(f"Salvo em {args.output}")
+        except OSError as e:
+            logger.error(f"Erro ao escrever {args.output}: {e}")
+            sys.exit(1)
 
-    missing_od = sum(1 for r in records if r["on_demand_usd_hour"] is None)
-    missing_spot = sum(1 for r in records if r["spot"] is None)
-    print(f"\nSalvo em {args.output}")
-    print(f"  sem preço on-demand: {missing_od}")
-    print(f"  sem preço spot:      {missing_spot}")
+        missing_od = sum(1 for r in records if r["on_demand_usd_hour"] is None)
+        missing_spot = sum(1 for r in records if r["spot"] is None)
+        ratio_od = missing_od / len(records) if records else 0
+        ratio_spot = missing_spot / len(records) if records else 0
+
+        logger.info(f"  sem preço on-demand: {missing_od} ({ratio_od*100:.1f}%)")
+        logger.info(f"  sem preço spot:      {missing_spot} ({ratio_spot*100:.1f}%)")
+
+        if ratio_od > MAX_MISSING_PRICE_RATIO:
+            logger.error(
+                f"Proporção de on-demand sem preço ({ratio_od*100:.1f}%) "
+                f"excede o limite ({MAX_MISSING_PRICE_RATIO*100}%)"
+            )
+            sys.exit(1)
+
+        if ratio_spot > MAX_MISSING_PRICE_RATIO:
+            logger.error(
+                f"Proporção de spot sem preço ({ratio_spot*100:.1f}%) "
+                f"excede o limite ({MAX_MISSING_PRICE_RATIO*100}%)"
+            )
+            sys.exit(1)
+
+    except (ClientError, BotoCoreError) as e:
+        logger.error(f"Erro ao chamar API AWS: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.error(f"Erro inesperado: {e}", exc_info=True)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

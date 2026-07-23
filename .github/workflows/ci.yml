@@ -1,0 +1,28 @@
+# CI — type checking e testes
+name: CI
+
+on:
+  push:
+    branches: [master]
+
+permissions: {}
+
+concurrency:
+  group: ci
+  cancel-in-progress: false
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+
+      - name: Type checking com mypy
+        run: uv run mypy .
+
+      - name: Testes com pytest
+        run: uv run pytest
