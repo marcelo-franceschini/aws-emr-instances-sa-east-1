@@ -67,12 +67,13 @@ def supported_instance_types(emr: Any, release_label: str) -> list[dict[str, Any
 # --------------------------------------------------------------------------- #
 # Preço on-demand (Price List API)
 # --------------------------------------------------------------------------- #
-def on_demand_prices(pricing: Any) -> dict[str, float]:
-    """Mapeia {instance_type: preço USD/hora on-demand} para a região inteira.
+def on_demand_prices(pricing: Any) -> dict[str, dict[str, Any]]:
+    """Mapeia {instance_type: {preço, network_performance}} para a região inteira.
 
     Faz uma única varredura paginada em vez de uma chamada por instância.
+    Extrai preço on-demand e network performance (ex: "Up to 10 Gigabit").
     """
-    prices: dict[str, float] = {}
+    prices: dict[str, dict[str, Any]] = {}
     paginator = pricing.get_paginator("get_products")
     pages = paginator.paginate(
         ServiceCode="AmazonEC2",
@@ -87,10 +88,15 @@ def on_demand_prices(pricing: Any) -> dict[str, float]:
     for page in pages:
         for raw in page["PriceList"]:
             product = json.loads(raw)
-            instance_type = product["product"]["attributes"].get("instanceType")
+            attrs = product["product"]["attributes"]
+            instance_type = attrs.get("instanceType")
             price = _extract_on_demand_usd(product)
+            network_perf = attrs.get("networkPerformance")
             if instance_type and price is not None:
-                prices[instance_type] = price
+                prices[instance_type] = {
+                    "usd_hour": price,
+                    "network_performance": network_perf,
+                }
     return prices
 
 
@@ -136,20 +142,22 @@ def spot_prices(ec2: Any) -> dict[str, dict[str, Any]]:
 # --------------------------------------------------------------------------- #
 def build_records(
     instances: list[dict[str, Any]],
-    on_demand: dict[str, float],
+    on_demand: dict[str, dict[str, Any]],
     spot: dict[str, dict[str, Any]],
 ) -> list[dict[str, Any]]:
     records: list[dict[str, Any]] = []
     for instance in sorted(instances, key=lambda i: i["Type"]):
         instance_type = instance["Type"]
         memory = instance.get("MemoryGB")
+        od = on_demand.get(instance_type)
         records.append(
             {
                 "instance_type": instance_type,
                 "vcpu": instance.get("VCPU"),
                 "memory_gb": round(memory, 2) if isinstance(memory, (int, float)) else None,
                 "architecture": instance.get("Architecture"),
-                "on_demand_usd_hour": on_demand.get(instance_type),
+                "network_performance": od.get("network_performance") if od else None,
+                "on_demand_usd_hour": od.get("usd_hour") if od else None,
                 "spot": spot.get(instance_type),
             }
         )
@@ -217,11 +225,13 @@ def main() -> None:
 
         missing_od = sum(1 for r in records if r["on_demand_usd_hour"] is None)
         missing_spot = sum(1 for r in records if r["spot"] is None)
+        missing_net = sum(1 for r in records if r["network_performance"] is None)
         ratio_od = missing_od / len(records) if records else 0
         ratio_spot = missing_spot / len(records) if records else 0
 
-        logger.info(f"  sem preço on-demand: {missing_od} ({ratio_od*100:.1f}%)")
-        logger.info(f"  sem preço spot:      {missing_spot} ({ratio_spot*100:.1f}%)")
+        logger.info(f"  sem preço on-demand:     {missing_od} ({ratio_od*100:.1f}%)")
+        logger.info(f"  sem preço spot:          {missing_spot} ({ratio_spot*100:.1f}%)")
+        logger.info(f"  sem network performance: {missing_net} ({missing_net/len(records)*100:.1f}%)")
 
         if ratio_od > MAX_MISSING_PRICE_RATIO:
             logger.error(

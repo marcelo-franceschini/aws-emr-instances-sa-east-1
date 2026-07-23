@@ -8,7 +8,7 @@ com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
 
 - [`main.py`](main.py) — gera `instances_sa-east-1.json` a partir de:
   - `emr:ListSupportedInstanceTypes` (lista de instâncias, release mais recente)
-  - `pricing:GetProducts` (preço on-demand — Price List API, endpoint `us-east-1`)
+  - `pricing:GetProducts` (preço on-demand + network performance — Price List API, endpoint `us-east-1`)
   - `ec2:DescribeSpotPriceHistory` (spot, menor preço entre as AZs)
 - [`notify.py`](notify.py) — compara o JSON novo com o anterior e, se houver
   instâncias novas, notifica a quantidade via Pushover.
@@ -17,6 +17,15 @@ com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
   notificação.
 
 O JSON gerado **não** fica na branch de código — ele vive apenas na branch `data`.
+
+### Estrutura do JSON
+
+Cada instância contém:
+- `instance_type` — ex: `m5.large`
+- `vcpu`, `memory_gb`, `architecture` — especificações
+- `network_performance` — ex: `"Up to 10 Gigabit"`, `"25 Gigabit"`, `"Moderate"` (importante para shuffles em MapReduce)
+- `on_demand_usd_hour` — preço on-demand (USD/hora)
+- `spot` — `{"usd_hour": ..., "az": ...}` (menor preço entre as AZs)
 
 ## Rodar localmente
 

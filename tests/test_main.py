@@ -54,9 +54,9 @@ def test_build_records() -> None:
         {"Type": "m5.large", "VCPU": 2, "MemoryGB": 8.0, "Architecture": "x86_64"},
         {"Type": "m5.xlarge", "VCPU": 4, "MemoryGB": 16.0, "Architecture": "x86_64"},
     ]
-    on_demand = {
-        "m5.large": 0.096,
-        "m5.xlarge": 0.192,
+    on_demand: dict[str, dict[str, object]] = {
+        "m5.large": {"usd_hour": 0.096, "network_performance": "Up to 10 Gigabit"},
+        "m5.xlarge": {"usd_hour": 0.192, "network_performance": "Up to 10 Gigabit"},
     }
     spot = {
         "m5.large": {"usd_hour": 0.048, "az": "sa-east-1a"},
@@ -69,6 +69,7 @@ def test_build_records() -> None:
     assert records[0]["vcpu"] == 2
     assert records[0]["memory_gb"] == 8.0
     assert records[0]["on_demand_usd_hour"] == 0.096
+    assert records[0]["network_performance"] == "Up to 10 Gigabit"
     assert records[0]["spot"]["usd_hour"] == 0.048
 
 
@@ -77,12 +78,13 @@ def test_build_records_missing_price() -> None:
     instances = [
         {"Type": "m5.large", "VCPU": 2, "MemoryGB": 8.0, "Architecture": "x86_64"},
     ]
-    on_demand: dict[str, float] = {}
+    on_demand: dict[str, dict[str, object]] = {}
     spot: dict[str, dict[str, object]] = {}
 
     records = main.build_records(instances, on_demand, spot)
     assert len(records) == 1
     assert records[0]["on_demand_usd_hour"] is None
+    assert records[0]["network_performance"] is None
     assert records[0]["spot"] is None
 
 
@@ -141,7 +143,10 @@ def test_on_demand_prices() -> None:
 
     product1: dict[str, object] = {
         "product": {
-            "attributes": {"instanceType": "m5.large"}
+            "attributes": {
+                "instanceType": "m5.large",
+                "networkPerformance": "Up to 10 Gigabit"
+            }
         },
         "terms": {
             "OnDemand": {
@@ -157,7 +162,10 @@ def test_on_demand_prices() -> None:
     }
     product2: dict[str, object] = {
         "product": {
-            "attributes": {"instanceType": "m5.xlarge"}
+            "attributes": {
+                "instanceType": "m5.xlarge",
+                "networkPerformance": "Up to 10 Gigabit"
+            }
         },
         "terms": {
             "OnDemand": {
@@ -178,8 +186,10 @@ def test_on_demand_prices() -> None:
     ]
 
     result = main.on_demand_prices(mock_pricing)
-    assert result["m5.large"] == 0.096
-    assert result["m5.xlarge"] == 0.192
+    assert result["m5.large"]["usd_hour"] == 0.096
+    assert result["m5.large"]["network_performance"] == "Up to 10 Gigabit"
+    assert result["m5.xlarge"]["usd_hour"] == 0.192
+    assert result["m5.xlarge"]["network_performance"] == "Up to 10 Gigabit"
 
 
 def test_spot_prices() -> None:
@@ -223,6 +233,7 @@ def test_price_ratio_calculation() -> None:
         {
             "instance_type": f"m5.type{i}",
             "on_demand_usd_hour": 0.1 if i < 97 else None,
+            "network_performance": "Up to 10 Gigabit",
             "spot": {"usd_hour": 0.05, "az": "sa-east-1a"},
         }
         for i in range(100)
@@ -236,6 +247,41 @@ def test_price_ratio_calculation() -> None:
     assert ratio_od < main.MAX_MISSING_PRICE_RATIO  # 3% < 5%
 
 
+def test_network_performance_extraction() -> None:
+    """Test extração de network performance."""
+    mock_pricing = MagicMock()
+    mock_paginator = MagicMock()
+    mock_pricing.get_paginator.return_value = mock_paginator
+
+    product_low = {
+        "product": {
+            "attributes": {
+                "instanceType": "t3.micro",
+                "networkPerformance": "Up to 5 Gigabit"
+            }
+        },
+        "terms": {"OnDemand": {"sku.TERM1": {"priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.01"}}}}}}
+    }
+    product_high = {
+        "product": {
+            "attributes": {
+                "instanceType": "m5.24xlarge",
+                "networkPerformance": "25 Gigabit"
+            }
+        },
+        "terms": {"OnDemand": {"sku.TERM1": {"priceDimensions": {"dim1": {"pricePerUnit": {"USD": "5.0"}}}}}}
+    }
+
+    import json
+    mock_paginator.paginate.return_value = [
+        {"PriceList": [json.dumps(product_low), json.dumps(product_high)]}
+    ]
+
+    result = main.on_demand_prices(mock_pricing)
+    assert result["t3.micro"]["network_performance"] == "Up to 5 Gigabit"
+    assert result["m5.24xlarge"]["network_performance"] == "25 Gigabit"
+
+
 def test_price_ratio_exceeds_limit() -> None:
     """Test quando proporção de preços exceeds limite."""
     # Simula 100 records, 7 sem spot (7%)
@@ -243,6 +289,7 @@ def test_price_ratio_exceeds_limit() -> None:
         {
             "instance_type": f"m5.type{i}",
             "on_demand_usd_hour": 0.1,
+            "network_performance": "Up to 10 Gigabit",
             "spot": {"usd_hour": 0.05, "az": "sa-east-1a"} if i < 93 else None,
         }
         for i in range(100)
