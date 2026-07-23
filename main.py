@@ -1,23 +1,34 @@
 """Gera um JSON com as instâncias EMR suportadas em São Paulo (sa-east-1),
-incluindo preço on-demand e preço spot (Linux/UNIX).
+incluindo preço on-demand, preço spot (Linux/UNIX) e taxa de interrupção.
 
 Fontes:
 - Instâncias:  emr:ListSupportedInstanceTypes
 - On-demand:   pricing:GetProducts (Price List API — endpoint em us-east-1)
 - Spot:        ec2:DescribeSpotPriceHistory
+- Interrupção: Spot Bid Advisor (S3 público)
 """
+
+from __future__ import annotations
 
 import argparse
 import json
 import logging
+import re
 import sys
-from datetime import datetime, timezone
-from typing import Any
+from collections.abc import Callable, Iterable, Mapping
+from datetime import UTC, datetime
+from typing import TYPE_CHECKING, Any, TypedDict
 
 import boto3
 import requests
 from botocore.config import Config
 from botocore.exceptions import BotoCoreError, ClientError
+
+if TYPE_CHECKING:
+    from mypy_boto3_ec2 import EC2Client
+    from mypy_boto3_emr import EMRClient
+    from mypy_boto3_emr.type_defs import SupportedInstanceTypeTypeDef
+    from mypy_boto3_pricing import PricingClient
 
 logger = logging.getLogger(__name__)
 
@@ -28,9 +39,47 @@ MAX_MISSING_PRICE_RATIO = 0.05  # 5% de preços faltando é limite de alerta/err
 
 
 # --------------------------------------------------------------------------- #
+# Modelo de domínio (serializado diretamente para JSON)
+# --------------------------------------------------------------------------- #
+class SpotInfo(TypedDict):
+    usd_hour: float
+    az: str
+
+
+class SpotInterruption(TypedDict):
+    savings_percent: int | None
+    interruption_rate: int | None
+
+
+class OnDemandInfo(TypedDict):
+    usd_hour: float
+    network_performance: str | None
+
+
+class InstanceRecord(TypedDict):
+    instance_type: str
+    vcpu: int | None
+    memory_gb: float | None
+    architecture: str | None
+    network_performance: str | None
+    network_gbps: float | None
+    on_demand_usd_hour: float | None
+    spot: SpotInfo | None
+    spot_interruption: SpotInterruption | None
+
+
+class Payload(TypedDict):
+    region: str
+    release_label: str
+    generated_at: str
+    instance_count: int
+    instances: list[InstanceRecord]
+
+
+# --------------------------------------------------------------------------- #
 # Instâncias suportadas pelo EMR
 # --------------------------------------------------------------------------- #
-def latest_release_label(emr: Any) -> str:
+def latest_release_label(emr: EMRClient) -> str:
     """Retorna o release label mais recente do EMR disponível na região."""
     labels: list[str] = []
     marker = None
@@ -49,12 +98,14 @@ def _version_key(label: str) -> tuple[int, ...]:
     return tuple(int(part) for part in version.split(".") if part.isdigit())
 
 
-def supported_instance_types(emr: Any, release_label: str) -> list[dict[str, Any]]:
+def supported_instance_types(
+    emr: EMRClient, release_label: str
+) -> list[SupportedInstanceTypeTypeDef]:
     """Retorna todos os tipos de instância suportados para um release label."""
-    instance_types: list[dict[str, Any]] = []
+    instance_types: list[SupportedInstanceTypeTypeDef] = []
     marker = None
     while True:
-        kwargs = {"ReleaseLabel": release_label}
+        kwargs: dict[str, Any] = {"ReleaseLabel": release_label}
         if marker:
             kwargs["Marker"] = marker
         response = emr.list_supported_instance_types(**kwargs)
@@ -68,13 +119,13 @@ def supported_instance_types(emr: Any, release_label: str) -> list[dict[str, Any
 # --------------------------------------------------------------------------- #
 # Preço on-demand (Price List API)
 # --------------------------------------------------------------------------- #
-def on_demand_prices(pricing: Any) -> dict[str, dict[str, Any]]:
-    """Mapeia {instance_type: {preço, network_performance}} para a região inteira.
+def on_demand_prices(pricing: PricingClient) -> dict[str, OnDemandInfo]:
+    """Mapeia {instance_type: OnDemandInfo} para a região inteira.
 
     Faz uma única varredura paginada em vez de uma chamada por instância.
-    Extrai preço on-demand e network performance (ex: "Up to 10 Gigabit").
+    Extrai preço on-demand e network performance (ex.: "Up to 10 Gigabit").
     """
-    prices: dict[str, dict[str, Any]] = {}
+    prices: dict[str, OnDemandInfo] = {}
     paginator = pricing.get_paginator("get_products")
     pages = paginator.paginate(
         ServiceCode="AmazonEC2",
@@ -92,11 +143,10 @@ def on_demand_prices(pricing: Any) -> dict[str, dict[str, Any]]:
             attrs = product["product"]["attributes"]
             instance_type = attrs.get("instanceType")
             price = _extract_on_demand_usd(product)
-            network_perf = attrs.get("networkPerformance")
             if instance_type and price is not None:
                 prices[instance_type] = {
                     "usd_hour": price,
-                    "network_performance": network_perf,
+                    "network_performance": attrs.get("networkPerformance"),
                 }
     return prices
 
@@ -112,19 +162,34 @@ def _extract_on_demand_usd(product: dict[str, Any]) -> float | None:
     return None
 
 
+_NETWORK_GBPS_RE = re.compile(r"(\d+(?:\.\d+)?)\s*Gigabit", re.IGNORECASE)
+
+
+def _parse_network_gbps(network_performance: str | None) -> float | None:
+    """Extrai o valor numérico em Gbps de strings como "Up to 10 Gigabit" → 10.0.
+
+    Retorna None para valores qualitativos ("Low", "Moderate", "High") ou ausentes.
+    O prefixo "Up to" é ignorado — guardamos apenas o teto numérico.
+    """
+    if not network_performance:
+        return None
+    match = _NETWORK_GBPS_RE.search(network_performance)
+    return float(match.group(1)) if match else None
+
+
 # --------------------------------------------------------------------------- #
 # Preço spot (menor entre as AZs)
 # --------------------------------------------------------------------------- #
-def spot_prices(ec2: Any) -> dict[str, dict[str, Any]]:
-    """Mapeia {instance_type: {"usd_hour": menor preço, "az": AZ}}.
+def spot_prices(ec2: EC2Client) -> dict[str, SpotInfo]:
+    """Mapeia {instance_type: SpotInfo} com o menor preço spot entre as AZs.
 
     Uma única varredura pega o preço spot atual de todas as instâncias/AZs;
     fica com o menor preço entre as AZs e registra em qual AZ estava.
     """
-    cheapest: dict[str, dict[str, Any]] = {}
+    cheapest: dict[str, SpotInfo] = {}
     paginator = ec2.get_paginator("describe_spot_price_history")
     pages = paginator.paginate(
-        StartTime=datetime.now(timezone.utc),  # só o preço atualmente vigente
+        StartTime=datetime.now(UTC),  # só o preço atualmente vigente
         ProductDescriptions=["Linux/UNIX"],
     )
     for page in pages:
@@ -143,13 +208,13 @@ def spot_prices(ec2: Any) -> dict[str, dict[str, Any]]:
 # --------------------------------------------------------------------------- #
 # Frequência de interrupção spot (Spot Bid Advisor)
 # --------------------------------------------------------------------------- #
-def interruption_frequency(region: str) -> dict[str, dict[str, Any]]:
-    """Mapeia {instance_type: {"savings": %, "interruption_rate": 1-5}}.
+def interruption_frequency(region: str) -> dict[str, SpotInterruption]:
+    """Mapeia {instance_type: SpotInterruption} com savings e taxa de interrupção.
 
     Busca dados do Spot Bid Advisor (S3 público) que inclui taxa de interrupção
     (1 = <5%, 2 = 5-10%, 3 = 10-15%, 4 = 15-20%, 5 = >20%) e economia esperada.
     """
-    data: dict[str, dict[str, Any]] = {}
+    data: dict[str, SpotInterruption] = {}
     try:
         response = requests.get(
             "https://spot-bid-advisor.s3.amazonaws.com/spot-advisor-data.json",
@@ -169,37 +234,125 @@ def interruption_frequency(region: str) -> dict[str, dict[str, Any]]:
 
 
 # --------------------------------------------------------------------------- #
+# Montagem dos registros
+# --------------------------------------------------------------------------- #
 def build_records(
-    instances: list[dict[str, Any]],
-    on_demand: dict[str, dict[str, Any]],
-    spot: dict[str, dict[str, Any]],
-    interruption: dict[str, dict[str, Any]],
-) -> list[dict[str, Any]]:
-    records: list[dict[str, Any]] = []
+    instances: Iterable[Mapping[str, Any]],
+    on_demand: dict[str, OnDemandInfo],
+    spot: dict[str, SpotInfo],
+    interruption: dict[str, SpotInterruption],
+) -> list[InstanceRecord]:
+    """Combina as quatro fontes num registro por instância, ordenado por tipo."""
+    records: list[InstanceRecord] = []
     for instance in sorted(instances, key=lambda i: i["Type"]):
         instance_type = instance["Type"]
         memory = instance.get("MemoryGB")
+        memory_gb = round(memory, 2) if isinstance(memory, (int, float)) else None
         od = on_demand.get(instance_type)
-        irrupt = interruption.get(instance_type)
+        network_performance = od["network_performance"] if od else None
         records.append(
             {
                 "instance_type": instance_type,
                 "vcpu": instance.get("VCPU"),
-                "memory_gb": round(memory, 2) if isinstance(memory, (int, float)) else None,
+                "memory_gb": memory_gb,
                 "architecture": instance.get("Architecture"),
-                "network_performance": od.get("network_performance") if od else None,
-                "on_demand_usd_hour": od.get("usd_hour") if od else None,
+                "network_performance": network_performance,
+                "network_gbps": _parse_network_gbps(network_performance),
+                "on_demand_usd_hour": od["usd_hour"] if od else None,
                 "spot": spot.get(instance_type),
-                "spot_interruption": irrupt,
+                "spot_interruption": interruption.get(instance_type),
             }
         )
     return records
 
 
-def main() -> None:
-    logging.basicConfig(
-        level=logging.INFO, format="%(levelname)s: %(message)s"
+# --------------------------------------------------------------------------- #
+# Orquestração
+# --------------------------------------------------------------------------- #
+def build_clients() -> tuple[EMRClient, EC2Client, PricingClient]:
+    """Cria os clients boto3 com retry adaptativo compartilhado."""
+    retry_config = Config(retries={"max_attempts": 5, "mode": "adaptive"})
+    emr = boto3.client("emr", region_name=REGION, config=retry_config)
+    ec2 = boto3.client("ec2", region_name=REGION, config=retry_config)
+    pricing = boto3.client(
+        "pricing", region_name=PRICING_ENDPOINT_REGION, config=retry_config
     )
+    return emr, ec2, pricing
+
+
+def collect_records(
+    emr: EMRClient,
+    ec2: EC2Client,
+    pricing: PricingClient,
+    release_label: str,
+) -> list[InstanceRecord]:
+    """Coleta as quatro fontes e devolve os registros já combinados."""
+    logger.info(f"Coletando instâncias EMR ({release_label}) em {REGION}...")
+    instances = supported_instance_types(emr, release_label)
+    logger.info(f"  {len(instances)} tipos de instância")
+
+    logger.info("Coletando preços on-demand (Price List API)...")
+    on_demand = on_demand_prices(pricing)
+    logger.info(f"  {len(on_demand)} preços on-demand")
+
+    logger.info("Coletando preços spot (menor entre as AZs)...")
+    spot = spot_prices(ec2)
+    logger.info(f"  {len(spot)} preços spot")
+
+    logger.info("Coletando frequência de interrupção spot (Spot Bid Advisor)...")
+    interruption = interruption_frequency(REGION)
+    logger.info(f"  {len(interruption)} taxas de interrupção")
+
+    return build_records(instances, on_demand, spot, interruption)
+
+
+def build_payload(release_label: str, records: list[InstanceRecord]) -> Payload:
+    """Monta o envelope final com metadados e a lista de registros."""
+    return {
+        "region": REGION,
+        "release_label": release_label,
+        "generated_at": datetime.now(UTC).isoformat(),
+        "instance_count": len(records),
+        "instances": records,
+    }
+
+
+def write_output(payload: Payload, path: str) -> None:
+    """Escreve o payload como JSON UTF-8 indentado; aborta em erro de I/O."""
+    try:
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, indent=2, ensure_ascii=False)
+            f.write("\n")
+        logger.info(f"Salvo em {path}")
+    except OSError as e:
+        logger.error(f"Erro ao escrever {path}: {e}")
+        sys.exit(1)
+
+
+# (rótulo, predicado "está faltando?", se estoura o limite é erro fatal)
+_COVERAGE_CHECKS: list[tuple[str, Callable[[InstanceRecord], bool], bool]] = [
+    ("preço on-demand", lambda r: r["on_demand_usd_hour"] is None, True),
+    ("preço spot", lambda r: r["spot"] is None, True),
+    ("network performance", lambda r: r["network_performance"] is None, False),
+]
+
+
+def validate_coverage(records: list[InstanceRecord]) -> None:
+    """Loga a cobertura de cada campo e aborta se on-demand/spot excederem o limite."""
+    for label, is_missing, enforce in _COVERAGE_CHECKS:
+        missing = sum(1 for r in records if is_missing(r))
+        ratio = missing / len(records) if records else 0.0
+        logger.info(f"  sem {label}: {missing} ({ratio * 100:.1f}%)")
+        if enforce and ratio > MAX_MISSING_PRICE_RATIO:
+            logger.error(
+                f"Proporção sem {label} ({ratio * 100:.1f}%) excede o "
+                f"limite ({MAX_MISSING_PRICE_RATIO * 100}%)"
+            )
+            sys.exit(1)
+
+
+def main() -> None:
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -215,74 +368,11 @@ def main() -> None:
     args = parser.parse_args()
 
     try:
-        retry_config = Config(
-            retries={"max_attempts": 5, "mode": "adaptive"}
-        )
-        emr = boto3.client("emr", region_name=REGION, config=retry_config)
-        ec2 = boto3.client("ec2", region_name=REGION, config=retry_config)
-        pricing = boto3.client(
-            "pricing", region_name=PRICING_ENDPOINT_REGION, config=retry_config
-        )
-
+        emr, ec2, pricing = build_clients()
         release_label = args.release_label or latest_release_label(emr)
-        logger.info(f"Coletando instâncias EMR ({release_label}) em {REGION}...")
-        instances = supported_instance_types(emr, release_label)
-        logger.info(f"  {len(instances)} tipos de instância")
-
-        logger.info("Coletando preços on-demand (Price List API)...")
-        on_demand = on_demand_prices(pricing)
-        logger.info(f"  {len(on_demand)} preços on-demand")
-
-        logger.info("Coletando preços spot (menor entre as AZs)...")
-        spot = spot_prices(ec2)
-        logger.info(f"  {len(spot)} preços spot")
-
-        logger.info("Coletando frequência de interrupção spot (Spot Bid Advisor)...")
-        interruption = interruption_frequency(REGION)
-        logger.info(f"  {len(interruption)} taxas de interrupção")
-
-        records = build_records(instances, on_demand, spot, interruption)
-        payload: dict[str, Any] = {
-            "region": REGION,
-            "release_label": release_label,
-            "generated_at": datetime.now(timezone.utc).isoformat(),
-            "instance_count": len(records),
-            "instances": records,
-        }
-
-        try:
-            with open(args.output, "w", encoding="utf-8") as f:
-                json.dump(payload, f, indent=2, ensure_ascii=False)
-                f.write("\n")
-            logger.info(f"Salvo em {args.output}")
-        except OSError as e:
-            logger.error(f"Erro ao escrever {args.output}: {e}")
-            sys.exit(1)
-
-        missing_od = sum(1 for r in records if r["on_demand_usd_hour"] is None)
-        missing_spot = sum(1 for r in records if r["spot"] is None)
-        missing_net = sum(1 for r in records if r["network_performance"] is None)
-        ratio_od = missing_od / len(records) if records else 0
-        ratio_spot = missing_spot / len(records) if records else 0
-
-        logger.info(f"  sem preço on-demand:     {missing_od} ({ratio_od*100:.1f}%)")
-        logger.info(f"  sem preço spot:          {missing_spot} ({ratio_spot*100:.1f}%)")
-        logger.info(f"  sem network performance: {missing_net} ({missing_net/len(records)*100:.1f}%)")
-
-        if ratio_od > MAX_MISSING_PRICE_RATIO:
-            logger.error(
-                f"Proporção de on-demand sem preço ({ratio_od*100:.1f}%) "
-                f"excede o limite ({MAX_MISSING_PRICE_RATIO*100}%)"
-            )
-            sys.exit(1)
-
-        if ratio_spot > MAX_MISSING_PRICE_RATIO:
-            logger.error(
-                f"Proporção de spot sem preço ({ratio_spot*100:.1f}%) "
-                f"excede o limite ({MAX_MISSING_PRICE_RATIO*100}%)"
-            )
-            sys.exit(1)
-
+        records = collect_records(emr, ec2, pricing, release_label)
+        write_output(build_payload(release_label, records), args.output)
+        validate_coverage(records)
     except (ClientError, BotoCoreError) as e:
         logger.error(f"Erro ao chamar API AWS: {e}")
         sys.exit(1)

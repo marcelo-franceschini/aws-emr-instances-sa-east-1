@@ -29,6 +29,11 @@ def load_instance_types(path: str) -> set[str]:
     return {inst["instance_type"] for inst in data.get("instances", [])}
 
 
+def diff_new(new_types: set[str], old_types: set[str]) -> list[str]:
+    """Instance types presentes em `new_types` e ausentes em `old_types`, ordenados."""
+    return sorted(new_types - old_types)
+
+
 def send_pushover(title: str, message: str) -> None:
     token = os.environ["PUSHOVER_TOKEN"]
     user = os.environ["PUSHOVER_USER"]
@@ -46,9 +51,7 @@ def send_pushover(title: str, message: str) -> None:
 
 
 def main() -> None:
-    logging.basicConfig(
-        level=logging.INFO, format="%(levelname)s: %(message)s"
-    )
+    logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--new", default="instances_sa-east-1.json")
@@ -58,7 +61,7 @@ def main() -> None:
     new_types = load_instance_types(args.new)
     old_types = load_instance_types(args.old)
 
-    added = sorted(new_types - old_types)
+    added = diff_new(new_types, old_types)
     logger.info(f"Instâncias novas: {len(added)}")
 
     if not added:

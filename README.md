@@ -25,6 +25,7 @@ Cada instância contém:
 - `instance_type` — ex: `m5.large`
 - `vcpu`, `memory_gb`, `architecture` — especificações
 - `network_performance` — ex: `"Up to 10 Gigabit"`, `"25 Gigabit"`, `"Moderate"` (importante para shuffles em MapReduce)
+- `network_gbps` — valor numérico em Gbps extraído de `network_performance` (ex: `10.0`), ou `null` para valores qualitativos (`"Moderate"`, `"High"`); facilita ordenar/comparar por rede
 - `on_demand_usd_hour` — preço on-demand (USD/hora)
 - `spot` — `{"usd_hour": ..., "az": ...}` (menor preço entre as AZs)
 - `spot_interruption` — `{"savings_percent": ..., "interruption_rate": ...}` (do Spot Bid Advisor, onde `interruption_rate` é 1-5: <5%, 5-10%, 10-15%, 15-20%, >20%)

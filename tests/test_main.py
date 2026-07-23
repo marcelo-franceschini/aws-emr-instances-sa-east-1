@@ -1,8 +1,10 @@
 """Testes para main.py"""
 
+import json
 from unittest.mock import MagicMock, patch
 
 import pytest
+import requests
 
 import main
 
@@ -22,13 +24,7 @@ def test_extract_on_demand_usd_success() -> None:
         "terms": {
             "OnDemand": {
                 "sku.TERM1": {
-                    "priceDimensions": {
-                        "dim1": {
-                            "pricePerUnit": {
-                                "USD": "0.123456"
-                            }
-                        }
-                    }
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.123456"}}}
                 }
             }
         }
@@ -48,21 +44,31 @@ def test_extract_on_demand_usd_missing() -> None:
     assert price2 is None
 
 
+def test_parse_network_gbps() -> None:
+    """Test parse de network performance para Gbps numérico."""
+    assert main._parse_network_gbps("Up to 10 Gigabit") == 10.0
+    assert main._parse_network_gbps("25 Gigabit") == 25.0
+    assert main._parse_network_gbps("Up to 12.5 Gigabit") == 12.5
+    assert main._parse_network_gbps("Moderate") is None
+    assert main._parse_network_gbps("High") is None
+    assert main._parse_network_gbps(None) is None
+
+
 def test_build_records() -> None:
     """Test construção de records com dados fake."""
     instances = [
         {"Type": "m5.large", "VCPU": 2, "MemoryGB": 8.0, "Architecture": "x86_64"},
         {"Type": "m5.xlarge", "VCPU": 4, "MemoryGB": 16.0, "Architecture": "x86_64"},
     ]
-    on_demand: dict[str, dict[str, object]] = {
+    on_demand: dict[str, main.OnDemandInfo] = {
         "m5.large": {"usd_hour": 0.096, "network_performance": "Up to 10 Gigabit"},
         "m5.xlarge": {"usd_hour": 0.192, "network_performance": "Up to 10 Gigabit"},
     }
-    spot = {
+    spot: dict[str, main.SpotInfo] = {
         "m5.large": {"usd_hour": 0.048, "az": "sa-east-1a"},
         "m5.xlarge": {"usd_hour": 0.096, "az": "sa-east-1b"},
     }
-    interruption = {
+    interruption: dict[str, main.SpotInterruption] = {
         "m5.large": {"savings_percent": 50, "interruption_rate": 2},
         "m5.xlarge": {"savings_percent": 50, "interruption_rate": 2},
     }
@@ -74,7 +80,10 @@ def test_build_records() -> None:
     assert records[0]["memory_gb"] == 8.0
     assert records[0]["on_demand_usd_hour"] == 0.096
     assert records[0]["network_performance"] == "Up to 10 Gigabit"
+    assert records[0]["network_gbps"] == 10.0
+    assert records[0]["spot"] is not None
     assert records[0]["spot"]["usd_hour"] == 0.048
+    assert records[0]["spot_interruption"] is not None
     assert records[0]["spot_interruption"]["interruption_rate"] == 2
 
 
@@ -83,14 +92,15 @@ def test_build_records_missing_price() -> None:
     instances = [
         {"Type": "m5.large", "VCPU": 2, "MemoryGB": 8.0, "Architecture": "x86_64"},
     ]
-    on_demand: dict[str, dict[str, object]] = {}
-    spot: dict[str, dict[str, object]] = {}
-    interruption: dict[str, dict[str, object]] = {}
+    on_demand: dict[str, main.OnDemandInfo] = {}
+    spot: dict[str, main.SpotInfo] = {}
+    interruption: dict[str, main.SpotInterruption] = {}
 
     records = main.build_records(instances, on_demand, spot, interruption)
     assert len(records) == 1
     assert records[0]["on_demand_usd_hour"] is None
     assert records[0]["network_performance"] is None
+    assert records[0]["network_gbps"] is None
     assert records[0]["spot"] is None
     assert records[0]["spot_interruption"] is None
 
@@ -111,14 +121,8 @@ def test_latest_release_label_paginated() -> None:
     """Test obtenção de release labels com paginação."""
     mock_emr = MagicMock()
     mock_emr.list_release_labels.side_effect = [
-        {
-            "ReleaseLabels": ["emr-6.10.0", "emr-7.0.0"],
-            "Marker": "marker1",
-        },
-        {
-            "ReleaseLabels": ["emr-7.13.0"],
-            "Marker": None,
-        },
+        {"ReleaseLabels": ["emr-6.10.0", "emr-7.0.0"], "Marker": "marker1"},
+        {"ReleaseLabels": ["emr-7.13.0"], "Marker": None},
     ]
 
     result = main.latest_release_label(mock_emr)
@@ -152,42 +156,33 @@ def test_on_demand_prices() -> None:
         "product": {
             "attributes": {
                 "instanceType": "m5.large",
-                "networkPerformance": "Up to 10 Gigabit"
+                "networkPerformance": "Up to 10 Gigabit",
             }
         },
         "terms": {
             "OnDemand": {
                 "sku.TERM1": {
-                    "priceDimensions": {
-                        "dim1": {
-                            "pricePerUnit": {"USD": "0.096"}
-                        }
-                    }
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.096"}}}
                 }
             }
-        }
+        },
     }
     product2: dict[str, object] = {
         "product": {
             "attributes": {
                 "instanceType": "m5.xlarge",
-                "networkPerformance": "Up to 10 Gigabit"
+                "networkPerformance": "Up to 10 Gigabit",
             }
         },
         "terms": {
             "OnDemand": {
                 "sku.TERM1": {
-                    "priceDimensions": {
-                        "dim1": {
-                            "pricePerUnit": {"USD": "0.192"}
-                        }
-                    }
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.192"}}}
                 }
             }
-        }
+        },
     }
 
-    import json
     mock_paginator.paginate.return_value = [
         {"PriceList": [json.dumps(product1), json.dumps(product2)]}
     ]
@@ -233,27 +228,6 @@ def test_spot_prices() -> None:
     assert result["m5.xlarge"]["usd_hour"] == 0.096
 
 
-def test_price_ratio_calculation() -> None:
-    """Test cálculo de proporção de preços faltando."""
-    # Simula 100 records, 3 sem on-demand (3%)
-    records = [
-        {
-            "instance_type": f"m5.type{i}",
-            "on_demand_usd_hour": 0.1 if i < 97 else None,
-            "network_performance": "Up to 10 Gigabit",
-            "spot": {"usd_hour": 0.05, "az": "sa-east-1a"},
-        }
-        for i in range(100)
-    ]
-
-    missing_od = sum(1 for r in records if r["on_demand_usd_hour"] is None)
-    ratio_od = missing_od / len(records)
-
-    assert missing_od == 3
-    assert ratio_od == 0.03
-    assert ratio_od < main.MAX_MISSING_PRICE_RATIO  # 3% < 5%
-
-
 def test_network_performance_extraction() -> None:
     """Test extração de network performance."""
     mock_pricing = MagicMock()
@@ -264,22 +238,33 @@ def test_network_performance_extraction() -> None:
         "product": {
             "attributes": {
                 "instanceType": "t3.micro",
-                "networkPerformance": "Up to 5 Gigabit"
+                "networkPerformance": "Up to 5 Gigabit",
             }
         },
-        "terms": {"OnDemand": {"sku.TERM1": {"priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.01"}}}}}}
+        "terms": {
+            "OnDemand": {
+                "sku.TERM1": {
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.01"}}}
+                }
+            }
+        },
     }
     product_high = {
         "product": {
             "attributes": {
                 "instanceType": "m5.24xlarge",
-                "networkPerformance": "25 Gigabit"
+                "networkPerformance": "25 Gigabit",
             }
         },
-        "terms": {"OnDemand": {"sku.TERM1": {"priceDimensions": {"dim1": {"pricePerUnit": {"USD": "5.0"}}}}}}
+        "terms": {
+            "OnDemand": {
+                "sku.TERM1": {
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": "5.0"}}}
+                }
+            }
+        },
     }
 
-    import json
     mock_paginator.paginate.return_value = [
         {"PriceList": [json.dumps(product_low), json.dumps(product_high)]}
     ]
@@ -289,31 +274,49 @@ def test_network_performance_extraction() -> None:
     assert result["m5.24xlarge"]["network_performance"] == "25 Gigabit"
 
 
-def test_price_ratio_exceeds_limit() -> None:
-    """Test quando proporção de preços exceeds limite."""
-    # Simula 100 records, 7 sem spot (7%)
-    records = [
-        {
-            "instance_type": f"m5.type{i}",
-            "on_demand_usd_hour": 0.1,
-            "network_performance": "Up to 10 Gigabit",
-            "spot": {"usd_hour": 0.05, "az": "sa-east-1a"} if i < 93 else None,
-        }
-        for i in range(100)
-    ]
+def _record(
+    *, has_od: bool = True, has_spot: bool = True, has_net: bool = True
+) -> main.InstanceRecord:
+    """Constrói um InstanceRecord de teste, com/sem cada campo opcional."""
+    return {
+        "instance_type": "m5.large",
+        "vcpu": 2,
+        "memory_gb": 8.0,
+        "architecture": "x86_64",
+        "network_performance": "Up to 10 Gigabit" if has_net else None,
+        "network_gbps": 10.0 if has_net else None,
+        "on_demand_usd_hour": 0.1 if has_od else None,
+        "spot": {"usd_hour": 0.05, "az": "sa-east-1a"} if has_spot else None,
+        "spot_interruption": None,
+    }
 
-    missing_spot = sum(1 for r in records if r["spot"] is None)
-    ratio_spot = missing_spot / len(records)
 
-    assert missing_spot == 7
-    assert ratio_spot == 0.07
-    assert ratio_spot > main.MAX_MISSING_PRICE_RATIO  # 7% > 5%
+def test_validate_coverage_empty_records() -> None:
+    """Regressão: records vazio não deve levantar ZeroDivisionError nem abortar."""
+    main.validate_coverage([])
+
+
+def test_validate_coverage_within_limit() -> None:
+    """3% sem on-demand (< 5%) não aborta."""
+    records = [_record(has_od=i >= 3) for i in range(100)]
+    main.validate_coverage(records)
+
+
+def test_validate_coverage_exceeds_limit() -> None:
+    """7% sem spot (> 5%) aborta com SystemExit."""
+    records = [_record(has_spot=i >= 7) for i in range(100)]
+    with pytest.raises(SystemExit):
+        main.validate_coverage(records)
+
+
+def test_validate_coverage_missing_network_never_aborts() -> None:
+    """Network faltando é apenas logado — nunca é condição de falha."""
+    records = [_record(has_net=False) for _ in range(100)]
+    main.validate_coverage(records)
 
 
 def test_interruption_frequency_success() -> None:
     """Test obtenção de frequência de interrupção do Spot Bid Advisor."""
-    from unittest.mock import patch, MagicMock
-
     advisor_data = {
         "spot_advisor": {
             "sa-east-1": {
@@ -340,9 +343,6 @@ def test_interruption_frequency_success() -> None:
 
 def test_interruption_frequency_error() -> None:
     """Test quando Spot Bid Advisor fica indisponível."""
-    from unittest.mock import patch
-    import requests
-
     with patch("main.requests.get") as mock_get:
         mock_get.side_effect = requests.RequestException("Connection error")
 
