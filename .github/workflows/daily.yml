@@ -40,10 +40,14 @@ jobs:
       - name: Instalar uv
         uses: astral-sh/setup-uv@v5
 
+      - name: Sincronizar dependências (travadas no lockfile)
+        run: uv sync --frozen
+
       - name: Gerar o JSON
         run: uv run main.py
 
       - name: Comparar e notificar (Pushover)
+        continue-on-error: true   # notificação é best-effort; não bloqueia a publicação
         env:
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}

@@ -2,8 +2,10 @@
 
 import json
 import os
+import sys
 import tempfile
 import urllib.error
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -161,3 +163,49 @@ def test_diff_new() -> None:
     assert notify.diff_new(new, old) == ["m5.xlarge", "t3.micro"]
     assert notify.diff_new(old, old) == []
     assert notify.diff_new(set(), old) == []
+
+
+@patch("notify.send_pushover")
+def test_main_notifies_even_without_new(
+    mock_send: MagicMock, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Notifica em toda execução, inclusive sem instâncias novas (heartbeat)."""
+    data = {"instances": [{"instance_type": "m5.large"}]}
+    same = tmp_path / "instances.json"
+    same.write_text(json.dumps(data), encoding="utf-8")
+
+    monkeypatch.setattr(
+        sys, "argv", ["notify.py", "--new", str(same), "--old", str(same)]
+    )
+    notify.main()
+
+    mock_send.assert_called_once()
+
+
+@patch("notify.send_pushover")
+def test_main_notifies_with_new(
+    mock_send: MagicMock, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Com instâncias novas, a mensagem informa a quantidade."""
+    old = tmp_path / "old.json"
+    old.write_text(json.dumps({"instances": [{"instance_type": "m5.large"}]}), "utf-8")
+    new = tmp_path / "new.json"
+    new.write_text(
+        json.dumps(
+            {
+                "instances": [
+                    {"instance_type": "m5.large"},
+                    {"instance_type": "c6g.large"},
+                ]
+            }
+        ),
+        "utf-8",
+    )
+
+    monkeypatch.setattr(
+        sys, "argv", ["notify.py", "--new", str(new), "--old", str(old)]
+    )
+    notify.main()
+
+    mock_send.assert_called_once()
+    assert "1 nova" in mock_send.call_args.kwargs["message"]

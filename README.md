@@ -95,8 +95,10 @@ Para replicar este projeto do zero em sua própria conta AWS:
 
 5. **Disparar o workflow pela primeira vez**:
    - Vá a **Actions → EMR instances (sa-east-1) → Run workflow → Run workflow**.
-   - Ou faça um push para `master` (o workflow é acionado pelo `push`).
-   - ⚠️ Em repositórios novos, o primeiro push às vezes não registra o workflow na aba Actions — faça um segundo push ou disparo manual.
+   - A coleta diária roda por agendamento (cron) ou por esse disparo manual —
+     **não** por `push`. Um push para `master` aciona apenas o CI (lint/mypy/testes).
+   - ⚠️ Em repositórios novos, o workflow só aparece na aba Actions depois do
+     primeiro push do arquivo — se não aparecer, faça um push e recarregue a página.
 
 6. **Confirmar sucesso**:
    - Verifique que a branch **`data`** foi criada com o arquivo `instances_sa-east-1.json`.

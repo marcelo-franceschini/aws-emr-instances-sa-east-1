@@ -4,6 +4,7 @@ name: CI
 on:
   push:
     branches: [master]
+  pull_request:
 
 permissions:
   contents: read           # necessário para o checkout clonar o repo privado
@@ -21,6 +22,9 @@ jobs:
 
       - name: Instalar uv
         uses: astral-sh/setup-uv@v5
+
+      - name: Sincronizar dependências (travadas no lockfile)
+        run: uv sync --frozen --dev
 
       - name: Lint com ruff
         run: uv run ruff check .

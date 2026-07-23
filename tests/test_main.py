@@ -1,6 +1,8 @@
 """Testes para main.py"""
 
 import json
+import sys
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
@@ -348,3 +350,83 @@ def test_interruption_frequency_error() -> None:
 
         result = main.interruption_frequency("sa-east-1")
         assert result == {}  # Retorna vazio em caso de erro
+
+
+def test_main_smoke(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    """Smoke test do fio inteiro: main() com clients boto3 e HTTP mockados.
+
+    Cobre a orquestração (build_clients → collect → validate → write) que os
+    testes unitários não tocam, pegando regressões de encanamento.
+    """
+    mock_emr = MagicMock()
+    mock_emr.list_release_labels.return_value = {
+        "ReleaseLabels": ["emr-7.0.0", "emr-7.13.0"],
+        "Marker": None,
+    }
+    mock_emr.list_supported_instance_types.return_value = {
+        "SupportedInstanceTypes": [
+            {"Type": "m5.large", "VCPU": 2, "MemoryGB": 8.0, "Architecture": "x86_64"},
+        ],
+        "Marker": None,
+    }
+
+    mock_ec2 = MagicMock()
+    ec2_paginator = MagicMock()
+    mock_ec2.get_paginator.return_value = ec2_paginator
+    ec2_paginator.paginate.return_value = [
+        {
+            "SpotPriceHistory": [
+                {
+                    "InstanceType": "m5.large",
+                    "SpotPrice": "0.048",
+                    "AvailabilityZone": "sa-east-1a",
+                },
+            ]
+        }
+    ]
+
+    mock_pricing = MagicMock()
+    pricing_paginator = MagicMock()
+    mock_pricing.get_paginator.return_value = pricing_paginator
+    product = {
+        "product": {
+            "attributes": {
+                "instanceType": "m5.large",
+                "networkPerformance": "Up to 10 Gigabit",
+            }
+        },
+        "terms": {
+            "OnDemand": {
+                "sku.TERM1": {
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.096"}}}
+                }
+            }
+        },
+    }
+    pricing_paginator.paginate.return_value = [{"PriceList": [json.dumps(product)]}]
+
+    monkeypatch.setattr(
+        main, "build_clients", lambda: (mock_emr, mock_ec2, mock_pricing)
+    )
+
+    advisor = {
+        "spot_advisor": {"sa-east-1": {"Linux": {"m5.large": {"s": 50, "r": 2}}}}
+    }
+    output = tmp_path / "out.json"
+    with patch("main.requests.get") as mock_get:
+        mock_get.return_value.json.return_value = advisor
+        mock_get.return_value.raise_for_status.return_value = None
+        monkeypatch.setattr(sys, "argv", ["main.py", "--output", str(output)])
+        main.main()
+
+    payload = json.loads(output.read_text(encoding="utf-8"))
+    assert payload["region"] == "sa-east-1"
+    assert payload["release_label"] == "emr-7.13.0"
+    assert payload["instance_count"] == 1
+
+    record = payload["instances"][0]
+    assert record["instance_type"] == "m5.large"
+    assert record["on_demand_usd_hour"] == 0.096
+    assert record["network_gbps"] == 10.0
+    assert record["spot"]["usd_hour"] == 0.048
+    assert record["spot_interruption"]["interruption_rate"] == 2

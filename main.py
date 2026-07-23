@@ -371,8 +371,8 @@ def main() -> None:
         emr, ec2, pricing = build_clients()
         release_label = args.release_label or latest_release_label(emr)
         records = collect_records(emr, ec2, pricing, release_label)
-        write_output(build_payload(release_label, records), args.output)
         validate_coverage(records)
+        write_output(build_payload(release_label, records), args.output)
     except (ClientError, BotoCoreError) as e:
         logger.error(f"Erro ao chamar API AWS: {e}")
         sys.exit(1)

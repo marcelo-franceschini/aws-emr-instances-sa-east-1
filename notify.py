@@ -1,8 +1,9 @@
-"""Compara o JSON recém-gerado com o anterior e, se houver instâncias novas,
-notifica via Pushover apenas a QUANTIDADE de instâncias novas.
+"""Compara o JSON recém-gerado com o anterior e notifica via Pushover.
 
+Envia uma notificação em TODA execução (também serve de heartbeat diário):
+- Com instâncias novas: informa a QUANTIDADE de instâncias novas.
+- Sem instâncias novas: envia uma confirmação de que a coleta rodou.
 - Primeira execução (sem JSON anterior): tudo conta como novo.
-- Sem instâncias novas: não envia nada (silencioso).
 
 Lê PUSHOVER_TOKEN e PUSHOVER_USER do ambiente. Usa só a biblioteca padrão.
 """
@@ -11,6 +12,7 @@ import argparse
 import json
 import logging
 import os
+import sys
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -35,8 +37,12 @@ def diff_new(new_types: set[str], old_types: set[str]) -> list[str]:
 
 
 def send_pushover(title: str, message: str) -> None:
-    token = os.environ["PUSHOVER_TOKEN"]
-    user = os.environ["PUSHOVER_USER"]
+    try:
+        token = os.environ["PUSHOVER_TOKEN"]
+        user = os.environ["PUSHOVER_USER"]
+    except KeyError as missing:
+        logger.error(f"Variável de ambiente {missing} não definida.")
+        sys.exit(1)
     payload = urllib.parse.urlencode(
         {"token": token, "user": user, "title": title, "message": message}
     ).encode()
@@ -64,14 +70,12 @@ def main() -> None:
     added = diff_new(new_types, old_types)
     logger.info(f"Instâncias novas: {len(added)}")
 
-    if not added:
-        logger.info("Nada novo — nenhuma notificação enviada.")
-        return
+    if added:
+        message = f"{len(added)} nova(s) instância(s) EMR disponível(is) em São Paulo."
+    else:
+        message = f"Nenhuma instância nova. Total: {len(new_types)} tipos suportados."
 
-    send_pushover(
-        title="EMR sa-east-1",
-        message=f"{len(added)} nova(s) instância(s) EMR disponível(is) em São Paulo.",
-    )
+    send_pushover(title="EMR sa-east-1", message=message)
     logger.info("Notificação enviada via Pushover.")
 
 
