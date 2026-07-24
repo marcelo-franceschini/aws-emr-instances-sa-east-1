@@ -1,7 +1,7 @@
 {
   "region": "sa-east-1",
   "release_label": "emr-7.13.0",
-  "generated_at": "2026-07-23T11:04:15.797626+00:00",
+  "generated_at": "2026-07-24T10:57:09.932188+00:00",
   "instance_count": 465,
   "instances": [
     {
@@ -13,7 +13,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.179,
       "spot": {
-        "usd_hour": 0.0191,
+        "usd_hour": 0.0187,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -30,7 +30,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.718,
       "spot": {
-        "usd_hour": 0.0856,
+        "usd_hour": 0.0827,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -47,7 +47,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.65,
       "spot": {
-        "usd_hour": 0.1474,
+        "usd_hour": 0.142,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -64,7 +64,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.3,
       "spot": {
-        "usd_hour": 0.2033,
+        "usd_hour": 0.2044,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -81,8 +81,8 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.6,
       "spot": {
-        "usd_hour": 0.3831,
-        "az": "sa-east-1c"
+        "usd_hour": 0.3836,
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 84,
@@ -98,7 +98,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.325,
       "spot": {
-        "usd_hour": 0.0715,
+        "usd_hour": 0.0713,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -115,7 +115,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.618,
       "spot": {
-        "usd_hour": 0.1086,
+        "usd_hour": 0.1067,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -132,7 +132,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.235,
       "spot": {
-        "usd_hour": 0.3601,
+        "usd_hour": 0.3571,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -149,7 +149,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.47,
       "spot": {
-        "usd_hour": 0.3401,
+        "usd_hour": 0.3387,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -166,7 +166,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.155,
       "spot": {
-        "usd_hour": 0.0304,
+        "usd_hour": 0.03,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -183,7 +183,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.309,
       "spot": {
-        "usd_hour": 0.06,
+        "usd_hour": 0.0587,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -201,7 +201,7 @@
       "on_demand_usd_hour": 3.144,
       "spot": {
         "usd_hour": 0.3144,
-        "az": "sa-east-1c"
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 78,
@@ -217,7 +217,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 4.716,
       "spot": {
-        "usd_hour": 1.133,
+        "usd_hour": 1.1079,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -235,7 +235,7 @@
       "on_demand_usd_hour": 6.288,
       "spot": {
         "usd_hour": 0.6288,
-        "az": "sa-east-1a"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 74,
@@ -251,7 +251,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.524,
       "spot": {
-        "usd_hour": 0.0796,
+        "usd_hour": 0.0771,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -302,7 +302,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.262,
       "spot": {
-        "usd_hour": 0.0422,
+        "usd_hour": 0.0413,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -319,8 +319,8 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 2.832,
       "spot": {
-        "usd_hour": 0.8901,
-        "az": "sa-east-1a"
+        "usd_hour": 0.8815,
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 48,
@@ -336,7 +336,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 3.776,
       "spot": {
-        "usd_hour": 0.5756,
+        "usd_hour": 0.5512,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -370,7 +370,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.472,
       "spot": {
-        "usd_hour": 0.1404,
+        "usd_hour": 0.1393,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -387,7 +387,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.944,
       "spot": {
-        "usd_hour": 0.2784,
+        "usd_hour": 0.2759,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -404,7 +404,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.888,
       "spot": {
-        "usd_hour": 0.2947,
+        "usd_hour": 0.2898,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -421,7 +421,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.236,
       "spot": {
-        "usd_hour": 0.0723,
+        "usd_hour": 0.0706,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -438,7 +438,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 3.216,
       "spot": {
-        "usd_hour": 1.5238,
+        "usd_hour": 1.483,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -455,7 +455,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 4.288,
       "spot": {
-        "usd_hour": 1.5025,
+        "usd_hour": 1.4958,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -472,7 +472,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 6.432,
       "spot": {
-        "usd_hour": 2.33,
+        "usd_hour": 2.3017,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -489,7 +489,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.536,
       "spot": {
-        "usd_hour": 0.1762,
+        "usd_hour": 0.1736,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -506,7 +506,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.072,
       "spot": {
-        "usd_hour": 0.5657,
+        "usd_hour": 0.5534,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -523,7 +523,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.144,
       "spot": {
-        "usd_hour": 1.1865,
+        "usd_hour": 1.1891,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -540,7 +540,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.268,
       "spot": {
-        "usd_hour": 0.0827,
+        "usd_hour": 0.0813,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -557,7 +557,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 3.576,
       "spot": {
-        "usd_hour": 1.0831,
+        "usd_hour": 1.0807,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -574,7 +574,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 5.364,
       "spot": {
-        "usd_hour": 1.5533,
+        "usd_hour": 1.5407,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -591,7 +591,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 7.152,
       "spot": {
-        "usd_hour": 2.0845,
+        "usd_hour": 2.0785,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -608,7 +608,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.596,
       "spot": {
-        "usd_hour": 0.1547,
+        "usd_hour": 0.1521,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -625,7 +625,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.192,
       "spot": {
-        "usd_hour": 0.2761,
+        "usd_hour": 0.2695,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -642,7 +642,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.682,
       "spot": {
-        "usd_hour": 0.6694,
+        "usd_hour": 0.6696,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -659,7 +659,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.298,
       "spot": {
-        "usd_hour": 0.0684,
+        "usd_hour": 0.0711,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -676,7 +676,7 @@
       "network_gbps": 100.0,
       "on_demand_usd_hour": 5.976,
       "spot": {
-        "usd_hour": 1.0918,
+        "usd_hour": 1.0488,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -693,7 +693,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.664,
       "spot": {
-        "usd_hour": 0.2242,
+        "usd_hour": 0.2249,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -710,7 +710,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.328,
       "spot": {
-        "usd_hour": 0.2972,
+        "usd_hour": 0.2991,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -727,7 +727,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 2.988,
       "spot": {
-        "usd_hour": 0.3934,
+        "usd_hour": 0.3777,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -744,7 +744,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.332,
       "spot": {
-        "usd_hour": 0.0693,
+        "usd_hour": 0.0682,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -761,7 +761,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.8296,
       "spot": {
-        "usd_hour": 0.66,
+        "usd_hour": 0.6364,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -778,7 +778,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.7728,
       "spot": {
-        "usd_hour": 0.5465,
+        "usd_hour": 0.5207,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -796,7 +796,7 @@
       "on_demand_usd_hour": 5.6592,
       "spot": {
         "usd_hour": 0.5659,
-        "az": "sa-east-1c"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 45,
@@ -812,7 +812,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.4716,
       "spot": {
-        "usd_hour": 0.1427,
+        "usd_hour": 0.144,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -829,8 +829,8 @@
       "network_gbps": null,
       "on_demand_usd_hour": 7.5456,
       "spot": {
-        "usd_hour": 0.7622,
-        "az": "sa-east-1a"
+        "usd_hour": 0.7546,
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 56,
@@ -847,7 +847,7 @@
       "on_demand_usd_hour": 11.3184,
       "spot": {
         "usd_hour": 1.1318,
-        "az": "sa-east-1b"
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 87,
@@ -863,7 +863,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.9432,
       "spot": {
-        "usd_hour": 0.3173,
+        "usd_hour": 0.3124,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -880,7 +880,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.8864,
       "spot": {
-        "usd_hour": 0.2048,
+        "usd_hour": 0.2044,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -915,7 +915,7 @@
       "on_demand_usd_hour": 2.5152,
       "spot": {
         "usd_hour": 0.2515,
-        "az": "sa-east-1b"
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 76,
@@ -932,7 +932,7 @@
       "on_demand_usd_hour": 3.3536,
       "spot": {
         "usd_hour": 0.3354,
-        "az": "sa-east-1c"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 77,
@@ -948,7 +948,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.4192,
       "spot": {
-        "usd_hour": 0.0686,
+        "usd_hour": 0.0672,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -965,7 +965,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.8384,
       "spot": {
-        "usd_hour": 0.097,
+        "usd_hour": 0.0935,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -999,7 +999,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.2096,
       "spot": {
-        "usd_hour": 0.0452,
+        "usd_hour": 0.0445,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1016,7 +1016,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 2.856,
       "spot": {
-        "usd_hour": 0.3259,
+        "usd_hour": 0.3103,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1033,7 +1033,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 3.808,
       "spot": {
-        "usd_hour": 0.3982,
+        "usd_hour": 0.3834,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1067,7 +1067,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.952,
       "spot": {
-        "usd_hour": 0.1331,
+        "usd_hour": 0.1347,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1084,7 +1084,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 1.904,
       "spot": {
-        "usd_hour": 0.3812,
+        "usd_hour": 0.3726,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1101,7 +1101,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.238,
       "spot": {
-        "usd_hour": 0.0402,
+        "usd_hour": 0.0383,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1118,7 +1118,7 @@
       "network_gbps": 75.0,
       "on_demand_usd_hour": 3.192,
       "spot": {
-        "usd_hour": 0.704,
+        "usd_hour": 0.6853,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1135,7 +1135,7 @@
       "network_gbps": 100.0,
       "on_demand_usd_hour": 4.256,
       "spot": {
-        "usd_hour": 1.0064,
+        "usd_hour": 1.0074,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1152,7 +1152,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.532,
       "spot": {
-        "usd_hour": 0.1267,
+        "usd_hour": 0.1272,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1169,7 +1169,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.064,
       "spot": {
-        "usd_hour": 0.2974,
+        "usd_hour": 0.2901,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1186,7 +1186,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 2.128,
       "spot": {
-        "usd_hour": 0.2454,
+        "usd_hour": 0.2324,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1203,7 +1203,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.266,
       "spot": {
-        "usd_hour": 0.0617,
+        "usd_hour": 0.0593,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1220,7 +1220,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.144,
       "spot": {
-        "usd_hour": 0.4195,
+        "usd_hour": 0.4292,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1237,7 +1237,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.192,
       "spot": {
-        "usd_hour": 0.7959,
+        "usd_hour": 0.7678,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1271,7 +1271,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.524,
       "spot": {
-        "usd_hour": 0.1267,
+        "usd_hour": 0.1242,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1289,7 +1289,7 @@
       "on_demand_usd_hour": 8.384,
       "spot": {
         "usd_hour": 0.8384,
-        "az": "sa-east-1c"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 75,
@@ -1339,7 +1339,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.262,
       "spot": {
-        "usd_hour": 0.0685,
+        "usd_hour": 0.0693,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1356,7 +1356,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.7548,
       "spot": {
-        "usd_hour": 1.2863,
+        "usd_hour": 1.2813,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1373,7 +1373,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 5.0064,
       "spot": {
-        "usd_hour": 0.898,
+        "usd_hour": 0.8862,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1390,7 +1390,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 7.5096,
       "spot": {
-        "usd_hour": 1.8775,
+        "usd_hour": 1.7864,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1407,7 +1407,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.6258,
       "spot": {
-        "usd_hour": 0.1224,
+        "usd_hour": 0.1219,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1441,7 +1441,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.2516,
       "spot": {
-        "usd_hour": 0.368,
+        "usd_hour": 0.3545,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1458,7 +1458,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.5032,
       "spot": {
-        "usd_hour": 0.4701,
+        "usd_hour": 0.4653,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1475,8 +1475,8 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.3129,
       "spot": {
-        "usd_hour": 0.0728,
-        "az": "sa-east-1c"
+        "usd_hour": 0.0698,
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 80,
@@ -1492,7 +1492,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.1832,
       "spot": {
-        "usd_hour": 0.7167,
+        "usd_hour": 0.6805,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1509,7 +1509,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 5.5776,
       "spot": {
-        "usd_hour": 0.716,
+        "usd_hour": 0.6905,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1526,7 +1526,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 8.3664,
       "spot": {
-        "usd_hour": 0.8887,
+        "usd_hour": 0.8553,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1543,7 +1543,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.6972,
       "spot": {
-        "usd_hour": 0.183,
+        "usd_hour": 0.1762,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1560,7 +1560,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 11.1552,
       "spot": {
-        "usd_hour": 2.5935,
+        "usd_hour": 2.4724,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1577,7 +1577,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.3944,
       "spot": {
-        "usd_hour": 0.3848,
+        "usd_hour": 0.3727,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1594,7 +1594,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.7888,
       "spot": {
-        "usd_hour": 0.4859,
+        "usd_hour": 0.4736,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1611,7 +1611,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.3486,
       "spot": {
-        "usd_hour": 0.0729,
+        "usd_hour": 0.0766,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1628,7 +1628,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.6659,
       "spot": {
-        "usd_hour": 0.4678,
+        "usd_hour": 0.454,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1645,7 +1645,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 3.5546,
       "spot": {
-        "usd_hour": 0.3861,
+        "usd_hour": 0.3787,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1662,7 +1662,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.4443,
       "spot": {
-        "usd_hour": 0.1197,
+        "usd_hour": 0.1177,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1679,7 +1679,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.8886,
       "spot": {
-        "usd_hour": 0.1088,
+        "usd_hour": 0.1057,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1696,7 +1696,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.7773,
       "spot": {
-        "usd_hour": 0.2113,
+        "usd_hour": 0.2182,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1713,7 +1713,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.2222,
       "spot": {
-        "usd_hour": 0.0503,
+        "usd_hour": 0.0495,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1730,7 +1730,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.3792,
       "spot": {
-        "usd_hour": 2.3427,
+        "usd_hour": 2.3511,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1747,7 +1747,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 4.5056,
       "spot": {
-        "usd_hour": 2.7923,
+        "usd_hour": 2.8143,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1764,7 +1764,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.5632,
       "spot": {
-        "usd_hour": 0.1277,
+        "usd_hour": 0.1227,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1781,7 +1781,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.1264,
       "spot": {
-        "usd_hour": 0.5269,
+        "usd_hour": 0.5352,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1798,7 +1798,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 2.2528,
       "spot": {
-        "usd_hour": 1.2041,
+        "usd_hour": 1.2039,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1815,7 +1815,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.2816,
       "spot": {
-        "usd_hour": 0.067,
+        "usd_hour": 0.0669,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1832,7 +1832,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.13614,
       "spot": {
-        "usd_hour": 0.4246,
+        "usd_hour": 0.4134,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1866,7 +1866,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.52269,
       "spot": {
-        "usd_hour": 0.1636,
+        "usd_hour": 0.1633,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1883,7 +1883,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.04538,
       "spot": {
-        "usd_hour": 0.1992,
+        "usd_hour": 0.2,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1900,7 +1900,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.09076,
       "spot": {
-        "usd_hour": 0.3306,
+        "usd_hour": 0.319,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -1917,7 +1917,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.26135,
       "spot": {
-        "usd_hour": 0.0723,
+        "usd_hour": 0.0726,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1934,7 +1934,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.3012,
       "spot": {
-        "usd_hour": 0.3374,
+        "usd_hour": 0.345,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -1951,7 +1951,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.4016,
       "spot": {
-        "usd_hour": 0.7464,
+        "usd_hour": 0.7357,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -1985,7 +1985,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.5502,
       "spot": {
-        "usd_hour": 0.1165,
+        "usd_hour": 0.1151,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2003,7 +2003,7 @@
       "on_demand_usd_hour": 13.2048,
       "spot": {
         "usd_hour": 1.3205,
-        "az": "sa-east-1b"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 80,
@@ -2019,7 +2019,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.1004,
       "spot": {
-        "usd_hour": 0.2329,
+        "usd_hour": 0.2349,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -2036,7 +2036,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.2008,
       "spot": {
-        "usd_hour": 0.226,
+        "usd_hour": 0.2201,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2053,7 +2053,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.2751,
       "spot": {
-        "usd_hour": 0.0769,
+        "usd_hour": 0.0738,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2070,7 +2070,7 @@
       "network_gbps": 22.5,
       "on_demand_usd_hour": 2.93232,
       "spot": {
-        "usd_hour": 0.9191,
+        "usd_hour": 0.9803,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2087,7 +2087,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 3.90976,
       "spot": {
-        "usd_hour": 1.3521,
+        "usd_hour": 1.3553,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2104,7 +2104,7 @@
       "network_gbps": 40.0,
       "on_demand_usd_hour": 5.86464,
       "spot": {
-        "usd_hour": 1.4782,
+        "usd_hour": 1.4819,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2155,7 +2155,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.97744,
       "spot": {
-        "usd_hour": 0.1587,
+        "usd_hour": 0.1558,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2172,7 +2172,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.95488,
       "spot": {
-        "usd_hour": 0.4284,
+        "usd_hour": 0.4433,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -2189,7 +2189,7 @@
       "network_gbps": 12.5,
       "on_demand_usd_hour": 0.24436,
       "spot": {
-        "usd_hour": 0.0567,
+        "usd_hour": 0.0598,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2206,7 +2206,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 6.649,
       "spot": {
-        "usd_hour": 1.6663,
+        "usd_hour": 1.6729,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -2224,7 +2224,7 @@
       "on_demand_usd_hour": 7.397,
       "spot": {
         "usd_hour": 0.7397,
-        "az": "sa-east-1c"
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 88,
@@ -2240,7 +2240,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.278,
       "spot": {
-        "usd_hour": 0.1385,
+        "usd_hour": 0.1366,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2257,7 +2257,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.046,
       "spot": {
-        "usd_hour": 0.2811,
+        "usd_hour": 0.2668,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2291,7 +2291,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.894,
       "spot": {
-        "usd_hour": 0.1607,
+        "usd_hour": 0.1559,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2308,8 +2308,8 @@
       "network_gbps": 40.0,
       "on_demand_usd_hour": 9.64127,
       "spot": {
-        "usd_hour": 7.9049,
-        "az": "sa-east-1b"
+        "usd_hour": 7.8962,
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 44,
@@ -2325,7 +2325,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 6.96239,
       "spot": {
-        "usd_hour": 5.7085,
+        "usd_hour": 5.7022,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2342,7 +2342,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 13.84318,
       "spot": {
-        "usd_hour": 11.3501,
+        "usd_hour": 11.3375,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2359,7 +2359,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.06016,
       "spot": {
-        "usd_hour": 0.2689,
+        "usd_hour": 0.2709,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2376,7 +2376,7 @@
       "network_gbps": 100.0,
       "on_demand_usd_hour": 27.68636,
       "spot": {
-        "usd_hour": 22.6839,
+        "usd_hour": 22.6751,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2393,8 +2393,8 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.76048,
       "spot": {
-        "usd_hour": 2.2633,
-        "az": "sa-east-1b"
+        "usd_hour": 2.2608,
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 80,
@@ -2410,7 +2410,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 4.16111,
       "spot": {
-        "usd_hour": 1.0077,
+        "usd_hour": 1.0137,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2427,7 +2427,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.71,
       "spot": {
-        "usd_hour": 0.3449,
+        "usd_hour": 0.3345,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2461,7 +2461,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 5.77388,
       "spot": {
-        "usd_hour": 1.4999,
+        "usd_hour": 1.4809,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2478,7 +2478,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 11.34651,
       "spot": {
-        "usd_hour": 2.7045,
+        "usd_hour": 2.6253,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2495,7 +2495,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.66173,
       "spot": {
-        "usd_hour": 0.2269,
+        "usd_hour": 0.2195,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2512,8 +2512,8 @@
       "network_gbps": 100.0,
       "on_demand_usd_hour": 22.69303,
       "spot": {
-        "usd_hour": 18.6061,
-        "az": "sa-east-1b"
+        "usd_hour": 17.9429,
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 82,
@@ -2529,7 +2529,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.24918,
       "spot": {
-        "usd_hour": 0.538,
+        "usd_hour": 0.5186,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2563,7 +2563,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.368,
       "spot": {
-        "usd_hour": 0.193,
+        "usd_hour": 0.1946,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2580,7 +2580,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.6164,
       "spot": {
-        "usd_hour": 0.3106,
+        "usd_hour": 0.2955,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2597,7 +2597,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 4.1585,
       "spot": {
-        "usd_hour": 0.7896,
+        "usd_hour": 0.7696,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2631,7 +2631,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.996,
       "spot": {
-        "usd_hour": 0.2716,
+        "usd_hour": 0.2699,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -2648,7 +2648,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.992,
       "spot": {
-        "usd_hour": 0.3511,
+        "usd_hour": 0.3461,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -2682,7 +2682,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.498,
       "spot": {
-        "usd_hour": 0.1022,
+        "usd_hour": 0.0974,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2717,7 +2717,7 @@
       "on_demand_usd_hour": 17.28,
       "spot": {
         "usd_hour": 1.728,
-        "az": "sa-east-1b"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 85,
@@ -2733,8 +2733,8 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.44,
       "spot": {
-        "usd_hour": 0.2625,
-        "az": "sa-east-1a"
+        "usd_hour": 0.2585,
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 83,
@@ -2750,7 +2750,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.16,
       "spot": {
-        "usd_hour": 0.2757,
+        "usd_hour": 0.2682,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2767,7 +2767,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 4.32,
       "spot": {
-        "usd_hour": 0.5785,
+        "usd_hour": 0.5707,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2784,7 +2784,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.72,
       "spot": {
-        "usd_hour": 0.1194,
+        "usd_hour": 0.1198,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -2818,7 +2818,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 0.9864,
       "spot": {
-        "usd_hour": 0.1094,
+        "usd_hour": 0.111,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -2835,8 +2835,8 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.9728,
       "spot": {
-        "usd_hour": 0.3327,
-        "az": "sa-east-1b"
+        "usd_hour": 0.3389,
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 80,
@@ -2853,7 +2853,7 @@
       "on_demand_usd_hour": 3.9456,
       "spot": {
         "usd_hour": 0.3946,
-        "az": "sa-east-1b"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 84,
@@ -2869,7 +2869,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.4932,
       "spot": {
-        "usd_hour": 0.0527,
+        "usd_hour": 0.0531,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2886,7 +2886,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 6.574,
       "spot": {
-        "usd_hour": 0.6603,
+        "usd_hour": 0.7,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -2937,7 +2937,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 1.096,
       "spot": {
-        "usd_hour": 0.2159,
+        "usd_hour": 0.2207,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -2955,7 +2955,7 @@
       "on_demand_usd_hour": 17.5296,
       "spot": {
         "usd_hour": 1.753,
-        "az": "sa-east-1c"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 63,
@@ -2971,8 +2971,8 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.191,
       "spot": {
-        "usd_hour": 0.439,
-        "az": "sa-east-1b"
+        "usd_hour": 0.4386,
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 79,
@@ -3005,7 +3005,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.548,
       "spot": {
-        "usd_hour": 0.0887,
+        "usd_hour": 0.0896,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3022,7 +3022,7 @@
       "network_gbps": 28.125,
       "on_demand_usd_hour": 7.231,
       "spot": {
-        "usd_hour": 1.3446,
+        "usd_hour": 1.3045,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3039,7 +3039,7 @@
       "network_gbps": 37.5,
       "on_demand_usd_hour": 9.6413,
       "spot": {
-        "usd_hour": 1.4537,
+        "usd_hour": 1.3843,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3056,7 +3056,7 @@
       "network_gbps": 56.25,
       "on_demand_usd_hour": 14.4619,
       "spot": {
-        "usd_hour": 4.1056,
+        "usd_hour": 4.0617,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3073,7 +3073,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 1.2052,
       "spot": {
-        "usd_hour": 0.2418,
+        "usd_hour": 0.2457,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3091,7 +3091,7 @@
       "on_demand_usd_hour": 28.9238,
       "spot": {
         "usd_hour": 2.8924,
-        "az": "sa-east-1b"
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 52,
@@ -3107,7 +3107,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.4103,
       "spot": {
-        "usd_hour": 0.5676,
+        "usd_hour": 0.5748,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3124,7 +3124,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 4.8206,
       "spot": {
-        "usd_hour": 1.42,
+        "usd_hour": 1.3864,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3141,7 +3141,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.6026,
       "spot": {
-        "usd_hour": 0.0977,
+        "usd_hour": 0.095,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3158,7 +3158,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 9.936,
       "spot": {
-        "usd_hour": 1.766,
+        "usd_hour": 1.6967,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3175,7 +3175,7 @@
       "network_gbps": 75.0,
       "on_demand_usd_hour": 14.904,
       "spot": {
-        "usd_hour": 2.3331,
+        "usd_hour": 2.272,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3209,7 +3209,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.656,
       "spot": {
-        "usd_hour": 0.2426,
+        "usd_hour": 0.2284,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3226,7 +3226,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.484,
       "spot": {
-        "usd_hour": 0.3781,
+        "usd_hour": 0.3603,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3260,7 +3260,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 4.968,
       "spot": {
-        "usd_hour": 0.7564,
+        "usd_hour": 0.7852,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3277,7 +3277,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.828,
       "spot": {
-        "usd_hour": 0.1281,
+        "usd_hour": 0.1239,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3311,7 +3311,7 @@
       "network_gbps": 37.5,
       "on_demand_usd_hour": 8.768,
       "spot": {
-        "usd_hour": 2.9949,
+        "usd_hour": 2.9741,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3328,7 +3328,7 @@
       "network_gbps": 56.25,
       "on_demand_usd_hour": 13.152,
       "spot": {
-        "usd_hour": 3.7739,
+        "usd_hour": 3.7236,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3345,7 +3345,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 1.096,
       "spot": {
-        "usd_hour": 0.1233,
+        "usd_hour": 0.1152,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3379,7 +3379,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 2.192,
       "spot": {
-        "usd_hour": 0.3696,
+        "usd_hour": 0.3829,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3396,7 +3396,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 4.384,
       "spot": {
-        "usd_hour": 0.4434,
+        "usd_hour": 0.4395,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3413,7 +3413,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.548,
       "spot": {
-        "usd_hour": 0.068,
+        "usd_hour": 0.0676,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3430,7 +3430,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.233,
       "spot": {
-        "usd_hour": 0.191,
+        "usd_hour": 0.1885,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3447,7 +3447,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.117,
       "spot": {
-        "usd_hour": 0.0959,
+        "usd_hour": 0.0958,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3464,7 +3464,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.058,
       "spot": {
-        "usd_hour": 0.0476,
+        "usd_hour": 0.0475,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3481,7 +3481,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.467,
       "spot": {
-        "usd_hour": 0.3826,
+        "usd_hour": 0.3816,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3498,7 +3498,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.645,
       "spot": {
-        "usd_hour": 0.0825,
+        "usd_hour": 0.0807,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3515,7 +3515,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.291,
       "spot": {
-        "usd_hour": 1.0585,
+        "usd_hour": 1.0572,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3532,7 +3532,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.323,
       "spot": {
-        "usd_hour": 0.0437,
+        "usd_hour": 0.046,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3549,7 +3549,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.761,
       "spot": {
-        "usd_hour": 0.1595,
+        "usd_hour": 0.1566,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3566,7 +3566,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.381,
       "spot": {
-        "usd_hour": 0.073,
+        "usd_hour": 0.0698,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3583,7 +3583,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 3.18,
       "spot": {
-        "usd_hour": 0.5103,
+        "usd_hour": 0.514,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3617,7 +3617,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.636,
       "spot": {
-        "usd_hour": 0.163,
+        "usd_hour": 0.1605,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3634,7 +3634,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.272,
       "spot": {
-        "usd_hour": 0.3869,
+        "usd_hour": 0.3829,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3651,7 +3651,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.159,
       "spot": {
-        "usd_hour": 0.0336,
+        "usd_hour": 0.033,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3668,7 +3668,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.318,
       "spot": {
-        "usd_hour": 0.0876,
+        "usd_hour": 0.0889,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3702,7 +3702,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 4.896,
       "spot": {
-        "usd_hour": 0.7374,
+        "usd_hour": 0.7163,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3736,7 +3736,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.612,
       "spot": {
-        "usd_hour": 0.0625,
+        "usd_hour": 0.0612,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3753,7 +3753,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.224,
       "spot": {
-        "usd_hour": 0.1323,
+        "usd_hour": 0.1298,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3770,7 +3770,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.448,
       "spot": {
-        "usd_hour": 0.3261,
+        "usd_hour": 0.3182,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3804,7 +3804,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 3.312,
       "spot": {
-        "usd_hour": 0.4291,
+        "usd_hour": 0.4118,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3821,7 +3821,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 4.416,
       "spot": {
-        "usd_hour": 0.6601,
+        "usd_hour": 0.6771,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3838,7 +3838,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 6.624,
       "spot": {
-        "usd_hour": 0.8473,
+        "usd_hour": 0.8207,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3855,7 +3855,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.552,
       "spot": {
-        "usd_hour": 0.1736,
+        "usd_hour": 0.1737,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3872,7 +3872,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.104,
       "spot": {
-        "usd_hour": 0.36,
+        "usd_hour": 0.3542,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -3889,7 +3889,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.208,
       "spot": {
-        "usd_hour": 0.6466,
+        "usd_hour": 0.653,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3906,7 +3906,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.276,
       "spot": {
-        "usd_hour": 0.0885,
+        "usd_hour": 0.0867,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3923,7 +3923,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 3.96,
       "spot": {
-        "usd_hour": 1.1739,
+        "usd_hour": 1.1709,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -3940,7 +3940,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 5.28,
       "spot": {
-        "usd_hour": 1.2239,
+        "usd_hour": 1.2691,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3957,7 +3957,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 7.92,
       "spot": {
-        "usd_hour": 1.3801,
+        "usd_hour": 1.3186,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3974,7 +3974,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.66,
       "spot": {
-        "usd_hour": 0.2496,
+        "usd_hour": 0.2583,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -3991,7 +3991,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.32,
       "spot": {
-        "usd_hour": 0.4879,
+        "usd_hour": 0.4845,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4008,7 +4008,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.64,
       "spot": {
-        "usd_hour": 0.9413,
+        "usd_hour": 0.9383,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4025,7 +4025,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.33,
       "spot": {
-        "usd_hour": 0.125,
+        "usd_hour": 0.1264,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4042,7 +4042,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 4.32,
       "spot": {
-        "usd_hour": 2.2995,
+        "usd_hour": 2.2948,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4059,7 +4059,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 5.76,
       "spot": {
-        "usd_hour": 3.2326,
+        "usd_hour": 3.226,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4076,7 +4076,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 8.64,
       "spot": {
-        "usd_hour": 3.7035,
+        "usd_hour": 3.6989,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4093,7 +4093,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.72,
       "spot": {
-        "usd_hour": 0.1356,
+        "usd_hour": 0.1331,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4110,7 +4110,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.44,
       "spot": {
-        "usd_hour": 0.3385,
+        "usd_hour": 0.3283,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4127,7 +4127,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.88,
       "spot": {
-        "usd_hour": 1.0431,
+        "usd_hour": 1.0356,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4144,7 +4144,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.36,
       "spot": {
-        "usd_hour": 0.0657,
+        "usd_hour": 0.0699,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4161,7 +4161,7 @@
       "network_gbps": 100.0,
       "on_demand_usd_hour": 6.3178,
       "spot": {
-        "usd_hour": 0.7631,
+        "usd_hour": 0.7343,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4178,7 +4178,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.053,
       "spot": {
-        "usd_hour": 0.3066,
+        "usd_hour": 0.3145,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4195,7 +4195,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.5794,
       "spot": {
-        "usd_hour": 0.2912,
+        "usd_hour": 0.2827,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4229,7 +4229,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.5265,
       "spot": {
-        "usd_hour": 0.1753,
+        "usd_hour": 0.1818,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4246,7 +4246,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.3048,
       "spot": {
-        "usd_hour": 0.9913,
+        "usd_hour": 1.0003,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4263,7 +4263,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.4064,
       "spot": {
-        "usd_hour": 0.8841,
+        "usd_hour": 0.8821,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4280,7 +4280,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 6.6096,
       "spot": {
-        "usd_hour": 1.1139,
+        "usd_hour": 1.0828,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4297,7 +4297,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.5508,
       "spot": {
-        "usd_hour": 0.1335,
+        "usd_hour": 0.1333,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4314,8 +4314,8 @@
       "network_gbps": null,
       "on_demand_usd_hour": 8.8128,
       "spot": {
-        "usd_hour": 1.3367,
-        "az": "sa-east-1c"
+        "usd_hour": 1.2626,
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 37,
@@ -4348,7 +4348,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.1016,
       "spot": {
-        "usd_hour": 0.2566,
+        "usd_hour": 0.2553,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4382,7 +4382,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.2754,
       "spot": {
-        "usd_hour": 0.0761,
+        "usd_hour": 0.0759,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4399,8 +4399,8 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 2.9376,
       "spot": {
-        "usd_hour": 0.642,
-        "az": "sa-east-1c"
+        "usd_hour": 0.6379,
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 68,
@@ -4416,7 +4416,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 3.9168,
       "spot": {
-        "usd_hour": 0.5436,
+        "usd_hour": 0.5753,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4433,7 +4433,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.4896,
       "spot": {
-        "usd_hour": 0.0906,
+        "usd_hour": 0.0893,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4450,7 +4450,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.9792,
       "spot": {
-        "usd_hour": 0.1353,
+        "usd_hour": 0.1354,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4467,7 +4467,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 1.9584,
       "spot": {
-        "usd_hour": 0.2595,
+        "usd_hour": 0.2635,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4484,7 +4484,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.2448,
       "spot": {
-        "usd_hour": 0.0265,
+        "usd_hour": 0.0261,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4535,7 +4535,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.576,
       "spot": {
-        "usd_hour": 0.0799,
+        "usd_hour": 0.0811,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4552,7 +4552,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.152,
       "spot": {
-        "usd_hour": 0.1264,
+        "usd_hour": 0.1293,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4586,7 +4586,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.288,
       "spot": {
-        "usd_hour": 0.0453,
+        "usd_hour": 0.0454,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4603,7 +4603,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.672,
       "spot": {
-        "usd_hour": 1.2339,
+        "usd_hour": 1.2354,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4620,7 +4620,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.896,
       "spot": {
-        "usd_hour": 1.7165,
+        "usd_hour": 1.6488,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4637,8 +4637,8 @@
       "network_gbps": null,
       "on_demand_usd_hour": 7.344,
       "spot": {
-        "usd_hour": 2.138,
-        "az": "sa-east-1a"
+        "usd_hour": 2.1127,
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 66,
@@ -4654,7 +4654,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.612,
       "spot": {
-        "usd_hour": 0.131,
+        "usd_hour": 0.1293,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4688,7 +4688,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.224,
       "spot": {
-        "usd_hour": 0.3241,
+        "usd_hour": 0.321,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4705,7 +4705,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.448,
       "spot": {
-        "usd_hour": 0.8683,
+        "usd_hour": 0.8546,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4722,7 +4722,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.306,
       "spot": {
-        "usd_hour": 0.0826,
+        "usd_hour": 0.0823,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4739,7 +4739,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.536,
       "spot": {
-        "usd_hour": 3.4345,
+        "usd_hour": 3.4313,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4756,7 +4756,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 6.048,
       "spot": {
-        "usd_hour": 3.9861,
+        "usd_hour": 4.0088,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4773,7 +4773,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 9.072,
       "spot": {
-        "usd_hour": 5.3317,
+        "usd_hour": 5.3008,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4790,7 +4790,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.756,
       "spot": {
-        "usd_hour": 0.1587,
+        "usd_hour": 0.1646,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4808,7 +4808,7 @@
       "on_demand_usd_hour": 12.096,
       "spot": {
         "usd_hour": 1.2096,
-        "az": "sa-east-1a"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 68,
@@ -4824,7 +4824,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.512,
       "spot": {
-        "usd_hour": 0.5474,
+        "usd_hour": 0.5401,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4841,7 +4841,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.024,
       "spot": {
-        "usd_hour": 2.0708,
+        "usd_hour": 2.0521,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4858,7 +4858,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.378,
       "spot": {
-        "usd_hour": 0.0858,
+        "usd_hour": 0.0844,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -4875,7 +4875,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.1212,
       "spot": {
-        "usd_hour": 1.25,
+        "usd_hour": 1.3254,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4892,7 +4892,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 4.1616,
       "spot": {
-        "usd_hour": 1.5876,
+        "usd_hour": 1.6434,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4909,7 +4909,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.5202,
       "spot": {
-        "usd_hour": 0.108,
+        "usd_hour": 0.1077,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4926,7 +4926,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.0404,
       "spot": {
-        "usd_hour": 0.4746,
+        "usd_hour": 0.4883,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4943,7 +4943,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 2.0808,
       "spot": {
-        "usd_hour": 0.9905,
+        "usd_hour": 1.0427,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4960,7 +4960,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.2601,
       "spot": {
-        "usd_hour": 0.0624,
+        "usd_hour": 0.0611,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -4977,7 +4977,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.0824,
       "spot": {
-        "usd_hour": 2.5152,
+        "usd_hour": 2.4825,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -4994,7 +4994,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 5.4432,
       "spot": {
-        "usd_hour": 1.9347,
+        "usd_hour": 1.9176,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5011,7 +5011,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.6804,
       "spot": {
-        "usd_hour": 0.1206,
+        "usd_hour": 0.1215,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5028,7 +5028,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.3608,
       "spot": {
-        "usd_hour": 0.645,
+        "usd_hour": 0.6543,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5045,7 +5045,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 2.7216,
       "spot": {
-        "usd_hour": 1.7817,
+        "usd_hour": 1.7727,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5079,7 +5079,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.66288,
       "spot": {
-        "usd_hour": 0.8097,
+        "usd_hour": 0.8157,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5096,7 +5096,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.88384,
       "spot": {
-        "usd_hour": 0.58,
+        "usd_hour": 0.5611,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5113,7 +5113,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.61048,
       "spot": {
-        "usd_hour": 0.1331,
+        "usd_hour": 0.1284,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5130,7 +5130,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.22096,
       "spot": {
-        "usd_hour": 0.3106,
+        "usd_hour": 0.3012,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5147,7 +5147,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.44192,
       "spot": {
-        "usd_hour": 0.6822,
+        "usd_hour": 0.6804,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5164,7 +5164,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.30524,
       "spot": {
-        "usd_hour": 0.0691,
+        "usd_hour": 0.0657,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5181,7 +5181,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.8556,
       "spot": {
-        "usd_hour": 1.8706,
+        "usd_hour": 1.8461,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5198,7 +5198,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 5.1408,
       "spot": {
-        "usd_hour": 2.6647,
+        "usd_hour": 2.6572,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5215,7 +5215,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 7.7112,
       "spot": {
-        "usd_hour": 4.3235,
+        "usd_hour": 4.2621,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5232,7 +5232,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.6426,
       "spot": {
-        "usd_hour": 0.1408,
+        "usd_hour": 0.1417,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5249,7 +5249,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 15.4224,
       "spot": {
-        "usd_hour": 2.3789,
+        "usd_hour": 2.4354,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5266,7 +5266,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.2852,
       "spot": {
-        "usd_hour": 0.4187,
+        "usd_hour": 0.4199,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5283,7 +5283,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.5704,
       "spot": {
-        "usd_hour": 0.8193,
+        "usd_hour": 0.829,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5300,7 +5300,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.3213,
       "spot": {
-        "usd_hour": 0.0667,
+        "usd_hour": 0.065,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5317,7 +5317,7 @@
       "network_gbps": 22.5,
       "on_demand_usd_hour": 3.43344,
       "spot": {
-        "usd_hour": 1.162,
+        "usd_hour": 1.2083,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5334,7 +5334,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 4.57792,
       "spot": {
-        "usd_hour": 1.5194,
+        "usd_hour": 1.5151,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5351,7 +5351,7 @@
       "network_gbps": 40.0,
       "on_demand_usd_hour": 6.86688,
       "spot": {
-        "usd_hour": 1.8755,
+        "usd_hour": 1.9483,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5368,7 +5368,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.57224,
       "spot": {
-        "usd_hour": 0.1081,
+        "usd_hour": 0.1041,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5402,7 +5402,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.14448,
       "spot": {
-        "usd_hour": 0.3339,
+        "usd_hour": 0.3513,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5419,7 +5419,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 2.28896,
       "spot": {
-        "usd_hour": 1.2113,
+        "usd_hour": 1.2739,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5436,7 +5436,7 @@
       "network_gbps": 12.5,
       "on_demand_usd_hour": 0.28612,
       "spot": {
-        "usd_hour": 0.0678,
+        "usd_hour": 0.069,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5453,7 +5453,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.4088,
       "spot": {
-        "usd_hour": 1.5975,
+        "usd_hour": 1.5913,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5470,7 +5470,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 5.8784,
       "spot": {
-        "usd_hour": 1.9903,
+        "usd_hour": 1.9408,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5487,7 +5487,7 @@
       "network_gbps": 40.0,
       "on_demand_usd_hour": 8.8176,
       "spot": {
-        "usd_hour": 3.6348,
+        "usd_hour": 3.5524,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5504,7 +5504,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.7348,
       "spot": {
-        "usd_hour": 0.0826,
+        "usd_hour": 0.0819,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -5522,7 +5522,7 @@
       "on_demand_usd_hour": 17.6352,
       "spot": {
         "usd_hour": 1.7635,
-        "az": "sa-east-1c"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 75,
@@ -5538,7 +5538,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.4696,
       "spot": {
-        "usd_hour": 0.4457,
+        "usd_hour": 0.4369,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5555,7 +5555,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 2.9392,
       "spot": {
-        "usd_hour": 1.3018,
+        "usd_hour": 1.3068,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5573,7 +5573,7 @@
       "on_demand_usd_hour": 0.3674,
       "spot": {
         "usd_hour": 0.0902,
-        "az": "sa-east-1b"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 70,
@@ -5589,7 +5589,7 @@
       "network_gbps": 400.0,
       "on_demand_usd_hour": 35.5569,
       "spot": {
-        "usd_hour": 29.1323,
+        "usd_hour": 29.121,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5606,7 +5606,7 @@
       "network_gbps": 3200.0,
       "on_demand_usd_hour": 92.4672,
       "spot": {
-        "usd_hour": 75.8143,
+        "usd_hour": 75.7181,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5640,7 +5640,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 2.799,
       "spot": {
-        "usd_hour": 0.3299,
+        "usd_hour": 0.3412,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5674,7 +5674,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.7,
       "spot": {
-        "usd_hour": 0.0749,
+        "usd_hour": 0.0735,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5708,7 +5708,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.12,
       "spot": {
-        "usd_hour": 0.1914,
+        "usd_hour": 0.1874,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5725,7 +5725,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.24,
       "spot": {
-        "usd_hour": 0.4032,
+        "usd_hour": 0.3991,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5742,7 +5742,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 4.48,
       "spot": {
-        "usd_hour": 0.7153,
+        "usd_hour": 0.7055,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5759,7 +5759,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.56,
       "spot": {
-        "usd_hour": 0.1066,
+        "usd_hour": 0.1021,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5777,7 +5777,7 @@
       "on_demand_usd_hour": 4.824,
       "spot": {
         "usd_hour": 0.4824,
-        "az": "sa-east-1a"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 76,
@@ -5793,7 +5793,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 6.432,
       "spot": {
-        "usd_hour": 0.9045,
+        "usd_hour": 0.9049,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5827,7 +5827,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.804,
       "spot": {
-        "usd_hour": 0.1213,
+        "usd_hour": 0.1187,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5844,7 +5844,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.608,
       "spot": {
-        "usd_hour": 0.3018,
+        "usd_hour": 0.2989,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5861,7 +5861,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 3.216,
       "spot": {
-        "usd_hour": 0.4018,
+        "usd_hour": 0.396,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5878,7 +5878,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.402,
       "spot": {
-        "usd_hour": 0.06,
+        "usd_hour": 0.0593,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5895,7 +5895,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 4.344,
       "spot": {
-        "usd_hour": 1.0126,
+        "usd_hour": 0.9939,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5912,8 +5912,8 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 5.792,
       "spot": {
-        "usd_hour": 1.7172,
-        "az": "sa-east-1c"
+        "usd_hour": 1.6657,
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 68,
@@ -5929,7 +5929,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 8.688,
       "spot": {
-        "usd_hour": 1.5909,
+        "usd_hour": 1.5626,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5946,7 +5946,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.724,
       "spot": {
-        "usd_hour": 0.1782,
+        "usd_hour": 0.1758,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -5963,7 +5963,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.448,
       "spot": {
-        "usd_hour": 0.4121,
+        "usd_hour": 0.4159,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5980,7 +5980,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 2.896,
       "spot": {
-        "usd_hour": 0.8884,
+        "usd_hour": 0.8707,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -5997,7 +5997,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.362,
       "spot": {
-        "usd_hour": 0.0948,
+        "usd_hour": 0.0947,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6014,7 +6014,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 4.992,
       "spot": {
-        "usd_hour": 1.0222,
+        "usd_hour": 1.0444,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6031,7 +6031,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 6.656,
       "spot": {
-        "usd_hour": 1.1335,
+        "usd_hour": 1.1588,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6048,7 +6048,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 9.984,
       "spot": {
-        "usd_hour": 1.7136,
+        "usd_hour": 1.6747,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6065,7 +6065,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.832,
       "spot": {
-        "usd_hour": 0.2233,
+        "usd_hour": 0.223,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6082,7 +6082,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.664,
       "spot": {
-        "usd_hour": 0.4632,
+        "usd_hour": 0.4722,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6099,7 +6099,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 3.328,
       "spot": {
-        "usd_hour": 1.0119,
+        "usd_hour": 0.9959,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6116,7 +6116,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.416,
       "spot": {
-        "usd_hour": 0.1076,
+        "usd_hour": 0.1079,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6133,7 +6133,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 5.688,
       "spot": {
-        "usd_hour": 2.6858,
+        "usd_hour": 2.7122,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6150,7 +6150,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 7.584,
       "spot": {
-        "usd_hour": 3.6338,
+        "usd_hour": 3.7005,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6167,7 +6167,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 11.376,
       "spot": {
-        "usd_hour": 5.6168,
+        "usd_hour": 5.4528,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6184,7 +6184,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.948,
       "spot": {
-        "usd_hour": 0.3238,
+        "usd_hour": 0.3129,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6201,7 +6201,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.896,
       "spot": {
-        "usd_hour": 0.858,
+        "usd_hour": 0.8512,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6218,7 +6218,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 3.792,
       "spot": {
-        "usd_hour": 1.8051,
+        "usd_hour": 1.8008,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6235,7 +6235,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.474,
       "spot": {
-        "usd_hour": 0.1325,
+        "usd_hour": 0.1292,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6252,7 +6252,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 5.472,
       "spot": {
-        "usd_hour": 3.6107,
+        "usd_hour": 3.6538,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6269,7 +6269,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 7.296,
       "spot": {
-        "usd_hour": 3.96,
+        "usd_hour": 4.0326,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6286,7 +6286,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 10.944,
       "spot": {
-        "usd_hour": 3.8874,
+        "usd_hour": 3.8466,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6303,7 +6303,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.912,
       "spot": {
-        "usd_hour": 0.1508,
+        "usd_hour": 0.1472,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6320,7 +6320,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.824,
       "spot": {
-        "usd_hour": 0.6247,
+        "usd_hour": 0.6235,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6337,7 +6337,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 3.648,
       "spot": {
-        "usd_hour": 2.058,
+        "usd_hour": 2.0533,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6354,7 +6354,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.456,
       "spot": {
-        "usd_hour": 0.0734,
+        "usd_hour": 0.0722,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6371,7 +6371,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 5.664,
       "spot": {
-        "usd_hour": 1.9758,
+        "usd_hour": 1.9645,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6388,7 +6388,7 @@
       "network_gbps": 75.0,
       "on_demand_usd_hour": 7.552,
       "spot": {
-        "usd_hour": 2.9207,
+        "usd_hour": 2.8927,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6405,7 +6405,7 @@
       "network_gbps": 100.0,
       "on_demand_usd_hour": 11.328,
       "spot": {
-        "usd_hour": 1.5722,
+        "usd_hour": 1.6537,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6422,7 +6422,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.944,
       "spot": {
-        "usd_hour": 0.2863,
+        "usd_hour": 0.2793,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6439,7 +6439,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 1.888,
       "spot": {
-        "usd_hour": 0.6249,
+        "usd_hour": 0.6259,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6456,7 +6456,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 3.776,
       "spot": {
-        "usd_hour": 1.6979,
+        "usd_hour": 1.6699,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6473,7 +6473,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 0.472,
       "spot": {
-        "usd_hour": 0.0893,
+        "usd_hour": 0.0874,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6508,7 +6508,7 @@
       "on_demand_usd_hour": 5.1456,
       "spot": {
         "usd_hour": 0.5146,
-        "az": "sa-east-1b"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 69,
@@ -6524,7 +6524,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.6432,
       "spot": {
-        "usd_hour": 0.1123,
+        "usd_hour": 0.1086,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6541,7 +6541,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.2864,
       "spot": {
-        "usd_hour": 0.213,
+        "usd_hour": 0.2083,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6558,7 +6558,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 2.5728,
       "spot": {
-        "usd_hour": 0.3257,
+        "usd_hour": 0.3152,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6575,7 +6575,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.3216,
       "spot": {
-        "usd_hour": 0.0674,
+        "usd_hour": 0.0657,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6592,7 +6592,7 @@
       "network_gbps": 20.0,
       "on_demand_usd_hour": 4.3776,
       "spot": {
-        "usd_hour": 1.4804,
+        "usd_hour": 1.4683,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6609,7 +6609,7 @@
       "network_gbps": 25.0,
       "on_demand_usd_hour": 5.8368,
       "spot": {
-        "usd_hour": 2.119,
+        "usd_hour": 2.1026,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6626,8 +6626,8 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.7296,
       "spot": {
-        "usd_hour": 0.1226,
-        "az": "sa-east-1b"
+        "usd_hour": 0.1196,
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 71,
@@ -6643,7 +6643,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.4592,
       "spot": {
-        "usd_hour": 0.3712,
+        "usd_hour": 0.3704,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6660,7 +6660,7 @@
       "network_gbps": 12.0,
       "on_demand_usd_hour": 2.9184,
       "spot": {
-        "usd_hour": 0.9691,
+        "usd_hour": 0.9655,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6677,7 +6677,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 0.3648,
       "spot": {
-        "usd_hour": 0.0771,
+        "usd_hour": 0.0756,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6694,7 +6694,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.824,
       "spot": {
-        "usd_hour": 1.3136,
+        "usd_hour": 1.308,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6711,7 +6711,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 6.432,
       "spot": {
-        "usd_hour": 1.4864,
+        "usd_hour": 1.4874,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6728,7 +6728,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 9.648,
       "spot": {
-        "usd_hour": 1.5216,
+        "usd_hour": 1.5904,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6745,7 +6745,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.804,
       "spot": {
-        "usd_hour": 0.1809,
+        "usd_hour": 0.1821,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6763,7 +6763,7 @@
       "on_demand_usd_hour": 12.864,
       "spot": {
         "usd_hour": 1.2864,
-        "az": "sa-east-1a"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 77,
@@ -6779,7 +6779,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.608,
       "spot": {
-        "usd_hour": 0.3603,
+        "usd_hour": 0.3532,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6796,7 +6796,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.216,
       "spot": {
-        "usd_hour": 0.5027,
+        "usd_hour": 0.4932,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6813,7 +6813,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.402,
       "spot": {
-        "usd_hour": 0.0951,
+        "usd_hour": 0.0956,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6830,7 +6830,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 4.0906,
       "spot": {
-        "usd_hour": 1.1623,
+        "usd_hour": 1.1583,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6847,7 +6847,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 5.4541,
       "spot": {
-        "usd_hour": 1.0514,
+        "usd_hour": 1.0169,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6864,7 +6864,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.6818,
       "spot": {
-        "usd_hour": 0.1274,
+        "usd_hour": 0.1262,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6881,7 +6881,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.3635,
       "spot": {
-        "usd_hour": 0.3019,
+        "usd_hour": 0.2977,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6898,7 +6898,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 2.727,
       "spot": {
-        "usd_hour": 0.8132,
+        "usd_hour": 0.8058,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6915,7 +6915,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.3409,
       "spot": {
-        "usd_hour": 0.0545,
+        "usd_hour": 0.0536,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -6932,7 +6932,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 5.0652,
       "spot": {
-        "usd_hour": 1.7911,
+        "usd_hour": 1.7914,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -6949,7 +6949,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 6.7536,
       "spot": {
-        "usd_hour": 3.1185,
+        "usd_hour": 3.1263,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6966,7 +6966,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 10.1304,
       "spot": {
-        "usd_hour": 5.3361,
+        "usd_hour": 5.3194,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -6983,7 +6983,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.8442,
       "spot": {
-        "usd_hour": 0.1143,
+        "usd_hour": 0.1173,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7000,7 +7000,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 20.2608,
       "spot": {
-        "usd_hour": 2.086,
+        "usd_hour": 2.1628,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7017,7 +7017,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.6884,
       "spot": {
-        "usd_hour": 0.5128,
+        "usd_hour": 0.5093,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7034,7 +7034,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.3768,
       "spot": {
-        "usd_hour": 1.0861,
+        "usd_hour": 1.0777,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7051,7 +7051,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.4221,
       "spot": {
-        "usd_hour": 0.0628,
+        "usd_hour": 0.0636,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7068,7 +7068,7 @@
       "network_gbps": 22.5,
       "on_demand_usd_hour": 4.49952,
       "spot": {
-        "usd_hour": 0.9911,
+        "usd_hour": 0.9697,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7085,7 +7085,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 5.99936,
       "spot": {
-        "usd_hour": 1.7652,
+        "usd_hour": 1.876,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7102,7 +7102,7 @@
       "network_gbps": 40.0,
       "on_demand_usd_hour": 8.99904,
       "spot": {
-        "usd_hour": 0.9081,
+        "usd_hour": 0.9761,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7136,7 +7136,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 17.99808,
       "spot": {
-        "usd_hour": 5.357,
+        "usd_hour": 5.5923,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7153,7 +7153,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.49984,
       "spot": {
-        "usd_hour": 0.2622,
+        "usd_hour": 0.2534,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7170,7 +7170,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 2.99968,
       "spot": {
-        "usd_hour": 0.9032,
+        "usd_hour": 0.9466,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7187,7 +7187,7 @@
       "network_gbps": 12.5,
       "on_demand_usd_hour": 0.37496,
       "spot": {
-        "usd_hour": 0.1058,
+        "usd_hour": 0.1128,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7204,7 +7204,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 5.5848,
       "spot": {
-        "usd_hour": 3.9562,
+        "usd_hour": 3.9624,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7221,7 +7221,7 @@
       "network_gbps": 30.0,
       "on_demand_usd_hour": 7.4464,
       "spot": {
-        "usd_hour": 3.6905,
+        "usd_hour": 3.612,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7238,7 +7238,7 @@
       "network_gbps": 40.0,
       "on_demand_usd_hour": 11.1696,
       "spot": {
-        "usd_hour": 5.2279,
+        "usd_hour": 5.1839,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7255,7 +7255,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 0.9308,
       "spot": {
-        "usd_hour": 0.1482,
+        "usd_hour": 0.1457,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7272,7 +7272,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 22.3392,
       "spot": {
-        "usd_hour": 2.3487,
+        "usd_hour": 2.2339,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7289,7 +7289,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 1.8616,
       "spot": {
-        "usd_hour": 1.1528,
+        "usd_hour": 1.1654,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7306,7 +7306,7 @@
       "network_gbps": 15.0,
       "on_demand_usd_hour": 3.7232,
       "spot": {
-        "usd_hour": 2.2499,
+        "usd_hour": 2.2525,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7323,7 +7323,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.4654,
       "spot": {
-        "usd_hour": 0.0815,
+        "usd_hour": 0.0801,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7340,7 +7340,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 5.05248,
       "spot": {
-        "usd_hour": 2.1737,
+        "usd_hour": 2.2321,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7357,7 +7357,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 6.73664,
       "spot": {
-        "usd_hour": 2.4029,
+        "usd_hour": 2.4846,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7374,8 +7374,8 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.84208,
       "spot": {
-        "usd_hour": 0.1868,
-        "az": "sa-east-1a"
+        "usd_hour": 0.1941,
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 71,
@@ -7391,7 +7391,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.68416,
       "spot": {
-        "usd_hour": 0.3859,
+        "usd_hour": 0.3805,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7425,7 +7425,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.42104,
       "spot": {
-        "usd_hour": 0.084,
+        "usd_hour": 0.0837,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7442,7 +7442,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 5.3184,
       "spot": {
-        "usd_hour": 2.3289,
+        "usd_hour": 2.4645,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7459,7 +7459,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 7.0912,
       "spot": {
-        "usd_hour": 2.2844,
+        "usd_hour": 2.2325,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7476,7 +7476,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 10.6368,
       "spot": {
-        "usd_hour": 3.7941,
+        "usd_hour": 3.8321,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7493,7 +7493,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.8864,
       "spot": {
-        "usd_hour": 0.2721,
+        "usd_hour": 0.2732,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7510,7 +7510,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 14.1824,
       "spot": {
-        "usd_hour": 1.6731,
+        "usd_hour": 1.6158,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7528,7 +7528,7 @@
       "on_demand_usd_hour": 21.2736,
       "spot": {
         "usd_hour": 2.1274,
-        "az": "sa-east-1b"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 84,
@@ -7544,7 +7544,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 1.7728,
       "spot": {
-        "usd_hour": 0.8898,
+        "usd_hour": 0.8727,
         "az": "sa-east-1b"
       },
       "spot_interruption": {
@@ -7561,7 +7561,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 3.5456,
       "spot": {
-        "usd_hour": 2.5374,
+        "usd_hour": 2.5247,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7579,7 +7579,7 @@
       "on_demand_usd_hour": 42.5472,
       "spot": {
         "usd_hour": 4.2547,
-        "az": "sa-east-1c"
+        "az": "sa-east-1b"
       },
       "spot_interruption": {
         "savings_percent": 86,
@@ -7595,7 +7595,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 0.4432,
       "spot": {
-        "usd_hour": 0.1109,
+        "usd_hour": 0.1148,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7612,7 +7612,7 @@
       "network_gbps": null,
       "on_demand_usd_hour": 13.005,
       "spot": {
-        "usd_hour": 1.5115,
+        "usd_hour": 1.5175,
         "az": "sa-east-1a"
       },
       "spot_interruption": {
@@ -7697,7 +7697,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 6.502,
       "spot": {
-        "usd_hour": 0.9501,
+        "usd_hour": 0.9256,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7714,7 +7714,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 13.005,
       "spot": {
-        "usd_hour": 3.07,
+        "usd_hour": 3.0568,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7731,7 +7731,7 @@
       "network_gbps": 10.0,
       "on_demand_usd_hour": 1.626,
       "spot": {
-        "usd_hour": 0.1659,
+        "usd_hour": 0.1627,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7748,7 +7748,7 @@
       "network_gbps": 50.0,
       "on_demand_usd_hour": 13.005,
       "spot": {
-        "usd_hour": 1.3045,
+        "usd_hour": 1.3005,
         "az": "sa-east-1c"
       },
       "spot_interruption": {
@@ -7783,7 +7783,7 @@
       "on_demand_usd_hour": 26.01,
       "spot": {
         "usd_hour": 2.601,
-        "az": "sa-east-1c"
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 89,
@@ -7800,7 +7800,7 @@
       "on_demand_usd_hour": 26.01,
       "spot": {
         "usd_hour": 2.601,
-        "az": "sa-east-1a"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 79,
@@ -7851,7 +7851,7 @@
       "on_demand_usd_hour": 52.02,
       "spot": {
         "usd_hour": 5.202,
-        "az": "sa-east-1b"
+        "az": "sa-east-1c"
       },
       "spot_interruption": {
         "savings_percent": 80,
@@ -7868,7 +7868,7 @@
       "on_demand_usd_hour": 6.5025,
       "spot": {
         "usd_hour": 0.6503,
-        "az": "sa-east-1b"
+        "az": "sa-east-1a"
       },
       "spot_interruption": {
         "savings_percent": 80,
