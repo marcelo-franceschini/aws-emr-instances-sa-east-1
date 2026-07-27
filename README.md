@@ -2,7 +2,7 @@
 
 Coleta diariamente as instâncias EMR suportadas em **São Paulo (`sa-east-1`)**
 com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
-**Pushover** quando surgem instâncias novas.
+**Pushover** quando surgem instâncias novas ou um **release novo do EMR**.
 
 ## Como funciona
 
@@ -11,15 +11,40 @@ com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
   - `pricing:GetProducts` (preço on-demand + network performance — Price List API, endpoint `us-east-1`)
   - `ec2:DescribeSpotPriceHistory` (spot, menor preço entre as AZs)
   - Spot Bid Advisor (S3 público) (frequência de interrupção + economia esperada)
-- [`notify.py`](notify.py) — compara o JSON novo com o anterior e, se houver
-  instâncias novas, notifica a quantidade via Pushover.
+  - [RSS de release notes do EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/amazon-emr-release-notes.rss) (último release anunciado pela AWS)
+- [`notify.py`](notify.py) — compara o JSON novo com o anterior e notifica via
+  Pushover em toda execução (serve de heartbeat).
 - [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — roda tudo via
   cron diário (09:00 UTC), publica o JSON na branch órfã **`data`** e dispara a
   notificação.
 
+### Aviso de release novo
+
+O EMR é monitorado por duas fontes independentes, que costumam mudar em datas
+diferentes:
+
+| Origem | Campo comparado | Quando dispara |
+| --- | --- | --- |
+| `Anunciado pela AWS` | `latest_announced_release.version` | no dia do anúncio no RSS |
+| `Disponível em sa-east-1` | `release_label` | quando o release chega na região |
+
+Quando qualquer uma muda (ex.: `7.13.0` → `7.14.0`), a notificação vem com o
+título **"EMR sa-east-1 — release novo"** e o link das release notes clicável
+(ex.: `https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-7130-release.html`).
+
+Só entram releases do **EMR on EC2 padrão** — o RSS também anuncia linhas
+especiais como `emr-spark-8.0.0`, que são ignoradas. Um alerta só é emitido
+quando o valor existe nos **dois** snapshots e é diferente, de modo que a
+primeira execução e uma indisponibilidade do RSS não viram falso alarme.
+
 O JSON gerado **não** fica na branch de código — ele vive apenas na branch `data`.
 
 ### Estrutura do JSON
+
+No envelope:
+- `region`, `generated_at`, `instance_count`
+- `release_label` — release usado na coleta, o mais recente disponível em `sa-east-1` (ex: `"emr-7.13.0"`)
+- `latest_announced_release` — último release anunciado no RSS: `{"version": "7.13.0", "url": ..., "published_at": ...}`, ou `null` se o feed estiver indisponível
 
 Cada instância contém:
 - `instance_type` — ex: `m5.large`
@@ -102,7 +127,8 @@ Para replicar este projeto do zero em sua própria conta AWS:
 
 6. **Confirmar sucesso**:
    - Verifique que a branch **`data`** foi criada com o arquivo `instances_sa-east-1.json`.
-   - Se houver instâncias novas, receberá notificação no Pushover.
+   - A notificação no Pushover chega em toda execução; ela destaca instâncias
+     novas e releases novos do EMR quando houver.
 
 ## Secrets necessários (GitHub Actions)
 

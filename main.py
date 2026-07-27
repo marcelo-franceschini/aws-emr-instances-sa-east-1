@@ -6,6 +6,7 @@ Fontes:
 - On-demand:   pricing:GetProducts (Price List API — endpoint em us-east-1)
 - Spot:        ec2:DescribeSpotPriceHistory
 - Interrupção: Spot Bid Advisor (S3 público)
+- Release novo: RSS de release notes do EMR (docs.aws.amazon.com)
 """
 
 from __future__ import annotations
@@ -15,6 +16,7 @@ import json
 import logging
 import re
 import sys
+import xml.etree.ElementTree as ET
 from collections.abc import Callable, Iterable, Mapping
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any, TypedDict
@@ -36,6 +38,9 @@ REGION = "sa-east-1"
 PRICING_ENDPOINT_REGION = "us-east-1"
 OUTPUT_FILE = "instances_sa-east-1.json"
 MAX_MISSING_PRICE_RATIO = 0.05  # 5% de preços faltando é limite de alerta/erro
+RELEASE_NOTES_RSS = (
+    "https://docs.aws.amazon.com/emr/latest/ReleaseGuide/amazon-emr-release-notes.rss"
+)
 
 
 # --------------------------------------------------------------------------- #
@@ -68,9 +73,16 @@ class InstanceRecord(TypedDict):
     spot_interruption: SpotInterruption | None
 
 
+class AnnouncedRelease(TypedDict):
+    version: str
+    url: str
+    published_at: str
+
+
 class Payload(TypedDict):
     region: str
     release_label: str
+    latest_announced_release: AnnouncedRelease | None
     generated_at: str
     instance_count: int
     instances: list[InstanceRecord]
@@ -114,6 +126,65 @@ def supported_instance_types(
         if not marker:
             break
     return instance_types
+
+
+# --------------------------------------------------------------------------- #
+# Release mais recente anunciado pela AWS (RSS de release notes)
+# --------------------------------------------------------------------------- #
+_SEMVER_RE = re.compile(r"\d+\.\d+\.\d+")
+# rótulo textual de linha especial: "emr-spark-8.0.0". Um release padrão vem como
+# "7.14.0" ou "emr-7.14.0", onde o caractere após "emr-" é dígito, não letra.
+_LABELED_LINE_RE = re.compile(r"emr-[a-z]", re.IGNORECASE)
+
+
+def _announced_version(title: str) -> tuple[int, ...] | None:
+    """Extrai a versão de um título do RSS; None se não for EMR on EC2 padrão.
+
+    O feed mistura linhas especiais ("Release emr-spark-8.0.0 now available") e
+    itens que nem são release ("EMR notebooks run kernels..."). Só interessam os
+    títulos "Release(s) X.Y.Z ... now available"; quando um anúncio cobre vários
+    patches ("Releases 6.11.1, 6.10.1, ... now available"), fica com o maior.
+    """
+    if not title.startswith("Release") or _LABELED_LINE_RE.search(title):
+        return None
+    versions = [
+        tuple(int(part) for part in version.split("."))
+        for version in _SEMVER_RE.findall(title)
+    ]
+    return max(versions) if versions else None
+
+
+def latest_announced_release() -> AnnouncedRelease | None:
+    """Maior release do EMR on EC2 anunciado no RSS de release notes.
+
+    Percorre o feed inteiro em vez de pegar o primeiro item: o mais recente por
+    data pode ser de uma linha especial (hoje é o emr-spark-8.0.0).
+
+    Best-effort como o Spot Bid Advisor: falha de rede ou XML inválido devolve
+    None, sem derrubar a coleta de instâncias.
+    """
+    try:
+        response = requests.get(RELEASE_NOTES_RSS, timeout=10)
+        response.raise_for_status()
+        feed = ET.fromstring(response.content)
+    except (requests.RequestException, ET.ParseError) as e:
+        logger.warning(f"Erro ao buscar o RSS de release notes do EMR: {e}")
+        return None
+
+    latest: AnnouncedRelease | None = None
+    latest_version: tuple[int, ...] = ()
+    for item in feed.findall("./channel/item"):
+        version = _announced_version((item.findtext("title") or "").strip())
+        if version is None or version <= latest_version:
+            continue
+        latest_version = version
+        link = (item.findtext("link") or "").strip()
+        latest = {
+            "version": ".".join(str(part) for part in version),
+            "url": link.split("#")[0],  # o fragmento aponta pro mesmo documento
+            "published_at": (item.findtext("pubDate") or "").strip(),
+        }
+    return latest
 
 
 # --------------------------------------------------------------------------- #
@@ -306,11 +377,16 @@ def collect_records(
     return build_records(instances, on_demand, spot, interruption)
 
 
-def build_payload(release_label: str, records: list[InstanceRecord]) -> Payload:
+def build_payload(
+    release_label: str,
+    records: list[InstanceRecord],
+    announced: AnnouncedRelease | None,
+) -> Payload:
     """Monta o envelope final com metadados e a lista de registros."""
     return {
         "region": REGION,
         "release_label": release_label,
+        "latest_announced_release": announced,
         "generated_at": datetime.now(UTC).isoformat(),
         "instance_count": len(records),
         "instances": records,
@@ -372,7 +448,10 @@ def main() -> None:
         release_label = args.release_label or latest_release_label(emr)
         records = collect_records(emr, ec2, pricing, release_label)
         validate_coverage(records)
-        write_output(build_payload(release_label, records), args.output)
+        logger.info("Consultando o RSS de release notes do EMR...")
+        announced = latest_announced_release()
+        logger.info(f"  último release anunciado: {announced or 'indisponível'}")
+        write_output(build_payload(release_label, records, announced), args.output)
     except (ClientError, BotoCoreError) as e:
         logger.error(f"Erro ao chamar API AWS: {e}")
         sys.exit(1)

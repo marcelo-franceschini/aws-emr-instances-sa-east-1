@@ -352,6 +352,104 @@ def test_interruption_frequency_error() -> None:
         assert result == {}  # Retorna vazio em caso de erro
 
 
+RSS_FIXTURE = """<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>Amazon EMR Release Notes</title>
+  <item>
+    <title>Release emr-spark-8.0.0 now available</title>
+    <link>https://docs.aws.amazon.com/x/emr-spark800-release.html#relnotes</link>
+    <pubDate>Thu, 21 May 2026 19:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Release 7.13.0 now available</title>
+    <link>https://docs.aws.amazon.com/x/emr-7130-release.html#emr-7130-relnotes</link>
+    <pubDate>Tue, 28 Apr 2026 19:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Release 7.12.0 now available</title>
+    <link>https://docs.aws.amazon.com/x/emr-7120-release.html#emr-7120-relnotes</link>
+    <pubDate>Fri, 21 Nov 2025 19:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>EMR notebooks run kernels on cluster with 5.30.0 and later</title>
+    <link>https://docs.aws.amazon.com/x/emr-managed-notebooks.html</link>
+    <pubDate>Wed, 3 Jun 2020 19:00:00 GMT</pubDate>
+  </item>
+</channel></rss>
+"""
+
+
+def _rss_response() -> MagicMock:
+    """Resposta requests fake servindo o RSS de release notes."""
+    response = MagicMock()
+    response.content = RSS_FIXTURE.encode()
+    response.raise_for_status.return_value = None
+    return response
+
+
+def test_announced_version_release_padrao() -> None:
+    """Test títulos de release do EMR on EC2 padrão."""
+    assert main._announced_version("Release 7.13.0 now available") == (7, 13, 0)
+    assert main._announced_version("Release 7.9.0 now available") == (7, 9, 0)
+    assert main._announced_version("Release 6.15.0 now available") == (6, 15, 0)
+
+
+def test_announced_version_ignora_linha_especial() -> None:
+    """Linha especial (emr-spark) não conta como release novo do EMR on EC2."""
+    assert main._announced_version("Release emr-spark-8.0.0 now available") is None
+
+
+def test_announced_version_ignora_nao_release() -> None:
+    """Itens do feed que não anunciam release são ignorados."""
+    assert main._announced_version("EMR notebooks run kernels with 5.30.0") is None
+    assert main._announced_version("Release Guide updated") is None
+
+
+def test_announced_version_multiplos_patches() -> None:
+    """Anúncio com vários patches fica com o maior."""
+    title = "Releases 6.11.1, 6.10.1, 6.9.1, and 6.8.1 now available"
+    assert main._announced_version(title) == (6, 11, 1)
+
+
+def test_latest_announced_release() -> None:
+    """Pega o maior release padrão do feed, não o item mais recente por data."""
+    with patch("main.requests.get", return_value=_rss_response()):
+        announced = main.latest_announced_release()
+
+    assert announced is not None
+    assert announced["version"] == "7.13.0"
+    # o fragmento #... é removido
+    assert announced["url"] == "https://docs.aws.amazon.com/x/emr-7130-release.html"
+    assert announced["published_at"] == "Tue, 28 Apr 2026 19:00:00 GMT"
+
+
+def test_latest_announced_release_erro_de_rede() -> None:
+    """Feed fora do ar devolve None, sem derrubar a coleta."""
+    with patch("main.requests.get", side_effect=requests.RequestException("boom")):
+        assert main.latest_announced_release() is None
+
+
+def test_latest_announced_release_xml_invalido() -> None:
+    """XML corrompido devolve None, sem derrubar a coleta."""
+    response = MagicMock()
+    response.content = b"<rss><channel><item></rss>"
+    response.raise_for_status.return_value = None
+    with patch("main.requests.get", return_value=response):
+        assert main.latest_announced_release() is None
+
+
+def test_latest_announced_release_feed_sem_release() -> None:
+    """Feed só com linhas especiais devolve None."""
+    response = MagicMock()
+    response.content = (
+        b"<rss><channel><item><title>Release emr-spark-8.0.0 now available"
+        b"</title><link>https://x/y.html</link></item></channel></rss>"
+    )
+    response.raise_for_status.return_value = None
+    with patch("main.requests.get", return_value=response):
+        assert main.latest_announced_release() is None
+
+
 def test_main_smoke(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """Smoke test do fio inteiro: main() com clients boto3 e HTTP mockados.
 
@@ -412,10 +510,16 @@ def test_main_smoke(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     advisor = {
         "spot_advisor": {"sa-east-1": {"Linux": {"m5.large": {"s": 50, "r": 2}}}}
     }
+    advisor_response = MagicMock()
+    advisor_response.json.return_value = advisor
+    advisor_response.raise_for_status.return_value = None
+
+    def fake_get(url: str, **kwargs: object) -> MagicMock:
+        """Roteia por URL: o main faz duas chamadas HTTP distintas."""
+        return _rss_response() if url == main.RELEASE_NOTES_RSS else advisor_response
+
     output = tmp_path / "out.json"
-    with patch("main.requests.get") as mock_get:
-        mock_get.return_value.json.return_value = advisor
-        mock_get.return_value.raise_for_status.return_value = None
+    with patch("main.requests.get", side_effect=fake_get):
         monkeypatch.setattr(sys, "argv", ["main.py", "--output", str(output)])
         main.main()
 
@@ -423,6 +527,8 @@ def test_main_smoke(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     assert payload["region"] == "sa-east-1"
     assert payload["release_label"] == "emr-7.13.0"
     assert payload["instance_count"] == 1
+    assert payload["latest_announced_release"]["version"] == "7.13.0"
+    assert payload["latest_announced_release"]["url"].endswith("emr-7130-release.html")
 
     record = payload["instances"][0]
     assert record["instance_type"] == "m5.large"
