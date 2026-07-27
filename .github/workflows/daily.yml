@@ -44,14 +44,14 @@ jobs:
         run: uv sync --frozen
 
       - name: Gerar o JSON
-        run: uv run main.py
+        run: uv run emr-collect
 
       - name: Comparar e notificar (Pushover)
         continue-on-error: true   # notificação é best-effort; não bloqueia a publicação
         env:
           PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
           PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
-        run: uv run notify.py --new instances_sa-east-1.json --old previous.json
+        run: uv run emr-notify --new instances_sa-east-1.json --old previous.json
 
       - name: Publicar o JSON na branch data
         run: |

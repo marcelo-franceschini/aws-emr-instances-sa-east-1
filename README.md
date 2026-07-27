@@ -6,17 +6,45 @@ com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
 
 ## Como funciona
 
-- [`main.py`](main.py) — gera `instances_sa-east-1.json` a partir de:
+- `emr-collect` — gera `instances_sa-east-1.json` a partir de:
   - `emr:ListSupportedInstanceTypes` (lista de instâncias, release mais recente)
   - `pricing:GetProducts` (preço on-demand + network performance — Price List API, endpoint `us-east-1`)
   - `ec2:DescribeSpotPriceHistory` (spot, menor preço entre as AZs)
   - Spot Bid Advisor (S3 público) (frequência de interrupção + economia esperada)
   - [RSS de release notes do EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/amazon-emr-release-notes.rss) (último release anunciado pela AWS)
-- [`notify.py`](notify.py) — compara o JSON novo com o anterior e notifica via
+- `emr-notify` — compara o JSON novo com o anterior e notifica via
   Pushover em toda execução (serve de heartbeat).
 - [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — roda tudo via
   cron diário (09:00 UTC), publica o JSON na branch órfã **`data`** e dispara a
   notificação.
+
+### Estrutura do pacote
+
+Os dois comandos são console scripts declarados no [`pyproject.toml`](pyproject.toml),
+apontando para o pacote em [`src/emr_instances/`](src/emr_instances/):
+
+```
+src/emr_instances/
+├── config.py                    constantes (região, URLs, limites)
+├── models.py                    TypedDicts do domínio, serializados direto pro JSON
+├── aws.py                       clients boto3 com retry adaptativo
+├── storage.py                   leitura/escrita dos snapshots JSON
+├── collector.py                 junta as fontes, valida cobertura, monta o payload
+├── sources/                     uma fonte de dados externa por módulo
+│   ├── emr.py                   ListSupportedInstanceTypes / ListReleaseLabels
+│   ├── pricing.py               Price List API + parse de network_gbps
+│   ├── spot.py                  DescribeSpotPriceHistory + Spot Bid Advisor
+│   └── release_notes.py         RSS de release notes
+├── notify/
+│   ├── diff.py                  instâncias novas e mudanças de release
+│   ├── message.py               monta título, corpo e link da notificação
+│   └── pushover.py              envio (só biblioteca padrão)
+└── cli/
+    ├── collect.py               entrypoint do emr-collect
+    └── notify.py                entrypoint do emr-notify
+```
+
+Os testes em [`tests/`](tests/) espelham essa estrutura.
 
 ### Aviso de release novo
 
@@ -58,16 +86,26 @@ Cada instância contém:
 ## Rodar localmente
 
 ```bash
-uv run main.py            # gera instances_sa-east-1.json
+uv sync                   # instala o pacote (editable) e as dependências
+uv run emr-collect        # gera instances_sa-east-1.json
+uv run emr-collect --help # opções: --release-label, --output
 ```
 
 Requer credenciais AWS com permissão de leitura para EMR, Pricing e EC2 spot.
 
+Para testar a notificação, com `PUSHOVER_TOKEN` e `PUSHOVER_USER` no ambiente:
+
+```bash
+uv run emr-notify --new instances_sa-east-1.json --old previous.json
+```
+
 ### Testes e type checking
 
 ```bash
+uv sync --dev             # inclui pytest, mypy, ruff e os stubs do boto3
 uv run pytest             # executa testes
 uv run mypy .             # verifica tipos
+uv run ruff check .       # lint
 ```
 
 ## Deploy inicial (do zero)
@@ -96,7 +134,7 @@ Para replicar este projeto do zero em sua própria conta AWS:
      ```
    - Gerar **access key** (ID + Secret).
 
-2. **Configurar credenciais localmente** (para rodar `main.py` localmente):
+2. **Configurar credenciais localmente** (para rodar `emr-collect` localmente):
    ```bash
    aws configure --profile sa-east-1
    # Coloque Access Key ID e Secret
