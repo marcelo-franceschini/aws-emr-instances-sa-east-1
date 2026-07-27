@@ -33,23 +33,22 @@ def main() -> None:
     parser.add_argument("--old", default=PREVIOUS_FILE)
     args = parser.parse_args()
 
-    new_snapshot = load_snapshot(args.new)
-    old_snapshot = load_snapshot(args.old)
-
-    new_types = instance_types(new_snapshot)
-    added = diff_new(new_types, instance_types(old_snapshot))
-    logger.info(f"Instâncias novas: {len(added)}")
-
-    alerts = release_alerts(new_snapshot, old_snapshot)
-    for alert in alerts:
-        logger.info(
-            f"Release novo ({alert['origin']}): "
-            f"{alert['previous']} → {alert['current']}"
-        )
-
-    title, message, url = compose_notification(added, len(new_types), alerts)
-
     try:
+        new_snapshot = load_snapshot(args.new)
+        old_snapshot = load_snapshot(args.old)
+
+        new_types = instance_types(new_snapshot)
+        added = diff_new(new_types, instance_types(old_snapshot))
+        logger.info(f"Instâncias novas: {len(added)}")
+
+        alerts = release_alerts(new_snapshot, old_snapshot)
+        for alert in alerts:
+            logger.info(
+                f"Release novo ({alert['origin']}): "
+                f"{alert['previous']} → {alert['current']}"
+            )
+
+        title, message, url = compose_notification(added, len(new_types), alerts)
         send_pushover(title=title, message=message, url=url)
     except EmrInstancesError as e:
         logger.error(f"{e}")

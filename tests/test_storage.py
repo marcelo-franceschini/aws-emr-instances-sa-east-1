@@ -68,3 +68,21 @@ def test_write_output_io_error(tmp_path: Path) -> None:
     path = tmp_path / "sem-esse-diretorio" / "out.json"
     with pytest.raises(StorageError):
         write_output(_payload(), str(path))
+
+
+def test_load_snapshot_json_corrompido(tmp_path: Path) -> None:
+    """JSON truncado vira StorageError em vez de JSONDecodeError cru."""
+    path = tmp_path / "corrompido.json"
+    path.write_text('{"instances": [', encoding="utf-8")
+
+    with pytest.raises(StorageError):
+        load_snapshot(str(path))
+
+
+def test_load_snapshot_json_que_nao_e_objeto(tmp_path: Path) -> None:
+    """JSON válido mas que não é objeto vira StorageError, não AttributeError."""
+    path = tmp_path / "lista.json"
+    path.write_text("[1, 2, 3]", encoding="utf-8")
+
+    with pytest.raises(StorageError):
+        load_snapshot(str(path))

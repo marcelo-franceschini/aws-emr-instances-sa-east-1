@@ -47,6 +47,33 @@ class Payload(TypedDict):
     instances: list[InstanceRecord]
 
 
+class SnapshotInstance(TypedDict, total=False):
+    """Instância dentro de um snapshot lido de disco.
+
+    Declara só o campo que o caminho de leitura consome — o diff compara
+    conjuntos de instance_type e ignora o resto do registro.
+    """
+
+    instance_type: str
+
+
+class Snapshot(TypedDict, total=False):
+    """Payload lido de disco — todo campo é opcional.
+
+    O arquivo anterior pode ser de uma versão do schema que ainda não gravava
+    algum campo (foi o caso de `latest_announced_release`), ou não existir. Ler
+    como `Payload` seria mentira; `total=False` diz a verdade e ainda deixa o
+    mypy conferir os nomes das chaves no caminho de leitura.
+    """
+
+    region: str
+    release_label: str
+    latest_announced_release: AnnouncedRelease | None
+    generated_at: str
+    instance_count: int
+    instances: list[SnapshotInstance]
+
+
 class ReleaseAlert(TypedDict):
     origin: str
     previous: str

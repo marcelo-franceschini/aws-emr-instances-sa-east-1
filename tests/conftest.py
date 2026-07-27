@@ -3,10 +3,11 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any
 from unittest.mock import MagicMock
 
 import pytest
+
+from emr_instances.models import AnnouncedRelease, Snapshot
 
 RSS_FIXTURE = """<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
@@ -49,11 +50,11 @@ def rss_response() -> Callable[[], MagicMock]:
 
 
 @pytest.fixture
-def snapshot() -> Callable[[str, str | None], dict[str, Any]]:
+def snapshot() -> Callable[[str, str | None], Snapshot]:
     """Fábrica de snapshot mínimo com os dois campos de release comparados."""
 
-    def build(label: str, announced_version: str | None) -> dict[str, Any]:
-        announced = (
+    def build(label: str, announced_version: str | None) -> Snapshot:
+        announced: AnnouncedRelease | None = (
             {
                 "version": announced_version,
                 "url": f"https://docs.aws.amazon.com/x/emr-{announced_version}.html",

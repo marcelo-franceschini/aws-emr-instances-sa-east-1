@@ -6,15 +6,15 @@ import json
 import sys
 from collections.abc import Callable
 from pathlib import Path
-from typing import Any
 from unittest.mock import MagicMock, patch
 
 import pytest
 
 from emr_instances.cli import notify
 from emr_instances.errors import NotificationError
+from emr_instances.models import Snapshot
 
-Snapshot = Callable[[str, str | None], dict[str, Any]]
+SnapshotFactory = Callable[[str, str | None], Snapshot]
 PATCH_TARGET = "emr_instances.cli.notify.send_pushover"
 
 
@@ -31,7 +31,7 @@ def test_main_notifica_release_novo(
     mock_send: MagicMock,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
-    snapshot: Snapshot,
+    snapshot: SnapshotFactory,
 ) -> None:
     """Release novo: título destacado, as duas linhas de origem e link clicável."""
     old = tmp_path / "old.json"
@@ -54,7 +54,7 @@ def test_main_sem_release_novo_nao_manda_url(
     mock_send: MagicMock,
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
-    snapshot: Snapshot,
+    snapshot: SnapshotFactory,
 ) -> None:
     """Sem mudança de release, a notificação segue sendo o heartbeat sem link."""
     same = tmp_path / "instances.json"
@@ -122,3 +122,20 @@ def test_main_traduz_erro_de_dominio_em_exit_1(
         _run(monkeypatch, same, same)
 
     assert exit_info.value.code == 1
+
+
+@patch(PATCH_TARGET)
+def test_main_snapshot_corrompido_vira_exit_1(
+    mock_send: MagicMock, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Snapshot anterior corrompido vira exit(1), sem traceback e sem notificar."""
+    new = tmp_path / "instances.json"
+    new.write_text(json.dumps({"instances": []}), encoding="utf-8")
+    old = tmp_path / "previous.json"
+    old.write_text("{ nao e json", encoding="utf-8")
+
+    with pytest.raises(SystemExit) as exit_info:
+        _run(monkeypatch, new, old)
+
+    assert exit_info.value.code == 1
+    mock_send.assert_not_called()

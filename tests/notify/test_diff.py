@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any
 
+from emr_instances.models import Snapshot
 from emr_instances.notify.diff import (
     diff_new,
     instance_types,
@@ -12,12 +12,12 @@ from emr_instances.notify.diff import (
     release_notes_url,
 )
 
-Snapshot = Callable[[str, str | None], dict[str, Any]]
+SnapshotFactory = Callable[[str, str | None], Snapshot]
 
 
 def test_instance_types() -> None:
     """Test extração dos instance_type de um snapshot."""
-    snapshot: dict[str, Any] = {
+    snapshot: Snapshot = {
         "instances": [
             {"instance_type": "m5.large"},
             {"instance_type": "m5.xlarge"},
@@ -35,8 +35,8 @@ def test_instance_types_snapshot_vazio() -> None:
 
 def test_diff_new_instances() -> None:
     """Test detecção de instâncias novas entre dois snapshots."""
-    old: dict[str, Any] = {"instances": [{"instance_type": "m5.large"}]}
-    new: dict[str, Any] = {
+    old: Snapshot = {"instances": [{"instance_type": "m5.large"}]}
+    new: Snapshot = {
         "instances": [
             {"instance_type": "m5.large"},
             {"instance_type": "m5.xlarge"},
@@ -49,7 +49,7 @@ def test_diff_new_instances() -> None:
 
 def test_no_new_instances() -> None:
     """Test quando não há instâncias novas."""
-    snapshot: dict[str, Any] = {"instances": [{"instance_type": "m5.large"}]}
+    snapshot: Snapshot = {"instances": [{"instance_type": "m5.large"}]}
     types = instance_types(snapshot)
     assert diff_new(types, types) == []
 
@@ -72,24 +72,24 @@ def test_release_notes_url() -> None:
     assert release_notes_url("emr-8.0.0") == f"{base}/emr-800-release.html"
 
 
-def test_release_alerts_sem_baseline(snapshot: Snapshot) -> None:
+def test_release_alerts_sem_baseline(snapshot: SnapshotFactory) -> None:
     """Primeira execução (sem JSON anterior) não deve alertar release novo."""
     assert release_alerts(snapshot("emr-7.13.0", "7.13.0"), {}) == []
 
 
-def test_release_alerts_sem_mudanca(snapshot: Snapshot) -> None:
+def test_release_alerts_sem_mudanca(snapshot: SnapshotFactory) -> None:
     """Release igual nos dois lados não gera alerta."""
     same = snapshot("emr-7.13.0", "7.13.0")
     assert release_alerts(same, same) == []
 
 
-def test_release_alerts_campo_ausente_no_antigo(snapshot: Snapshot) -> None:
+def test_release_alerts_campo_ausente_no_antigo(snapshot: SnapshotFactory) -> None:
     """Baseline antiga sem latest_announced_release não vira falso alarme."""
-    old: dict[str, Any] = {"release_label": "emr-7.13.0"}
+    old: Snapshot = {"release_label": "emr-7.13.0"}
     assert release_alerts(snapshot("emr-7.13.0", "7.13.0"), old) == []
 
 
-def test_release_alerts_rss_indisponivel(snapshot: Snapshot) -> None:
+def test_release_alerts_rss_indisponivel(snapshot: SnapshotFactory) -> None:
     """RSS fora do ar (campo null) não vira falso alarme."""
     new = snapshot("emr-7.13.0", None)
     old = snapshot("emr-7.13.0", "7.13.0")
@@ -97,7 +97,7 @@ def test_release_alerts_rss_indisponivel(snapshot: Snapshot) -> None:
     assert release_alerts(old, new) == []
 
 
-def test_release_alerts_label_mudou(snapshot: Snapshot) -> None:
+def test_release_alerts_label_mudou(snapshot: SnapshotFactory) -> None:
     """Release novo disponível em sa-east-1: um alerta, com URL derivada."""
     alerts = release_alerts(
         snapshot("emr-7.14.0", "7.13.0"), snapshot("emr-7.13.0", "7.13.0")
@@ -110,7 +110,7 @@ def test_release_alerts_label_mudou(snapshot: Snapshot) -> None:
     assert alerts[0]["url"].endswith("/emr-7140-release.html")
 
 
-def test_release_alerts_anuncio_mudou(snapshot: Snapshot) -> None:
+def test_release_alerts_anuncio_mudou(snapshot: SnapshotFactory) -> None:
     """Anúncio novo no RSS: um alerta, com a URL vinda do próprio feed."""
     alerts = release_alerts(
         snapshot("emr-7.13.0", "7.14.0"), snapshot("emr-7.13.0", "7.13.0")
@@ -121,7 +121,7 @@ def test_release_alerts_anuncio_mudou(snapshot: Snapshot) -> None:
     assert alerts[0]["url"] == "https://docs.aws.amazon.com/x/emr-7.14.0.html"
 
 
-def test_release_alerts_ambos_mudaram(snapshot: Snapshot) -> None:
+def test_release_alerts_ambos_mudaram(snapshot: SnapshotFactory) -> None:
     """Quando as duas fontes mudam no mesmo dia, vêm os dois alertas."""
     alerts = release_alerts(
         snapshot("emr-7.14.0", "7.14.0"), snapshot("emr-7.13.0", "7.13.0")

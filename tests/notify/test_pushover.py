@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import io
 import os
 import urllib.error
 from unittest.mock import MagicMock, patch
@@ -30,19 +31,31 @@ def test_send_pushover_success(mock_urlopen: MagicMock) -> None:
 
 @patch("urllib.request.urlopen")
 def test_send_pushover_http_error(mock_urlopen: MagicMock) -> None:
-    """Test send_pushover com erro HTTP."""
+    """API recusando vira NotificationError, com o corpo da resposta na mensagem."""
     error = urllib.error.HTTPError(
         "https://api.pushover.net/1/messages.json",
         400,
         "Bad Request",
         {},  # type: ignore
-        None,
+        io.BytesIO(b'{"errors":["application token is invalid"]}'),
     )
     mock_urlopen.side_effect = error
 
     with (
         patch.dict(os.environ, CREDENTIALS),
-        pytest.raises(urllib.error.HTTPError),
+        pytest.raises(NotificationError, match="application token is invalid"),
+    ):
+        send_pushover("Test Title", "Test message")
+
+
+@patch("urllib.request.urlopen")
+def test_send_pushover_erro_de_rede(mock_urlopen: MagicMock) -> None:
+    """Rede fora vira NotificationError em vez de vazar URLError pro CLI."""
+    mock_urlopen.side_effect = urllib.error.URLError("Name or service not known")
+
+    with (
+        patch.dict(os.environ, CREDENTIALS),
+        pytest.raises(NotificationError, match="Name or service not known"),
     ):
         send_pushover("Test Title", "Test message")
 

@@ -2,14 +2,12 @@
 
 from __future__ import annotations
 
-from typing import Any
-
-from emr_instances.models import ReleaseAlert
+from emr_instances.models import ReleaseAlert, Snapshot
 
 RELEASE_NOTES_BASE = "https://docs.aws.amazon.com/emr/latest/ReleaseGuide"
 
 
-def instance_types(snapshot: dict[str, Any]) -> set[str]:
+def instance_types(snapshot: Snapshot) -> set[str]:
     """Extrai os instance_type de um snapshot já carregado."""
     return {inst["instance_type"] for inst in snapshot.get("instances", [])}
 
@@ -25,13 +23,8 @@ def release_notes_url(version: str) -> str:
     return f"{RELEASE_NOTES_BASE}/emr-{digits}-release.html"
 
 
-def _announced(snapshot: dict[str, Any]) -> dict[str, Any]:
-    """Bloco latest_announced_release do snapshot (vazio se ausente ou null)."""
-    return snapshot.get("latest_announced_release") or {}
-
-
 def release_alerts(
-    new_snapshot: dict[str, Any], old_snapshot: dict[str, Any]
+    new_snapshot: Snapshot, old_snapshot: Snapshot
 ) -> list[ReleaseAlert]:
     """Mudanças de release do EMR entre dois snapshots, de duas fontes distintas.
 
@@ -53,17 +46,19 @@ def release_alerts(
             }
         )
 
-    old_version = _announced(old_snapshot).get("version")
-    new_announced = _announced(new_snapshot)
-    new_version = new_announced.get("version")
-    if old_version and new_version and old_version != new_version:
-        alerts.append(
-            {
-                "origin": "Anunciado pela AWS",
-                "previous": old_version,
-                "current": new_version,
-                "url": new_announced.get("url") or release_notes_url(new_version),
-            }
-        )
+    old_announced = old_snapshot.get("latest_announced_release")
+    new_announced = new_snapshot.get("latest_announced_release")
+    if old_announced and new_announced:
+        old_version = old_announced.get("version")
+        new_version = new_announced.get("version")
+        if old_version and new_version and old_version != new_version:
+            alerts.append(
+                {
+                    "origin": "Anunciado pela AWS",
+                    "previous": old_version,
+                    "current": new_version,
+                    "url": new_announced.get("url") or release_notes_url(new_version),
+                }
+            )
 
     return alerts
