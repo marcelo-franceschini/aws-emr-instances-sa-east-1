@@ -13,8 +13,10 @@ from __future__ import annotations
 
 import argparse
 import logging
+import sys
 
 from emr_instances.config import OUTPUT_FILE, PREVIOUS_FILE
+from emr_instances.errors import EmrInstancesError
 from emr_instances.notify.diff import diff_new, instance_types, release_alerts
 from emr_instances.notify.message import compose_notification
 from emr_instances.notify.pushover import send_pushover
@@ -47,7 +49,11 @@ def main() -> None:
 
     title, message, url = compose_notification(added, len(new_types), alerts)
 
-    send_pushover(title=title, message=message, url=url)
+    try:
+        send_pushover(title=title, message=message, url=url)
+    except EmrInstancesError as e:
+        logger.error(f"{e}")
+        sys.exit(1)
     logger.info("Notificação enviada via Pushover.")
 
 

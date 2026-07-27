@@ -11,7 +11,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from emr_instances.cli import collect
-from emr_instances.config import RELEASE_NOTES_RSS
+from emr_instances.sources.release_notes import RELEASE_NOTES_RSS
 
 
 def test_main_smoke(

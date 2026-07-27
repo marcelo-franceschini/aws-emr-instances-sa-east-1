@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from typing import Any
 
-from emr_instances.config import RELEASE_NOTES_BASE
 from emr_instances.models import ReleaseAlert
+
+RELEASE_NOTES_BASE = "https://docs.aws.amazon.com/emr/latest/ReleaseGuide"
 
 
 def instance_types(snapshot: dict[str, Any]) -> set[str]:

@@ -25,7 +25,8 @@ apontando para o pacote em [`src/emr_instances/`](src/emr_instances/):
 
 ```
 src/emr_instances/
-├── config.py                    constantes (região, URLs, limites)
+├── config.py                    config compartilhada (região, arquivos, limites)
+├── errors.py                    exceções de domínio; só o cli/ vira código de saída
 ├── models.py                    TypedDicts do domínio, serializados direto pro JSON
 ├── aws.py                       clients boto3 com retry adaptativo
 ├── storage.py                   leitura/escrita dos snapshots JSON
@@ -45,6 +46,15 @@ src/emr_instances/
 ```
 
 Os testes em [`tests/`](tests/) espelham essa estrutura.
+
+O endpoint de cada serviço externo mora no módulo que fala com ele (o RSS em
+`sources/release_notes.py`, o Spot Advisor em `sources/spot.py`, a API do
+Pushover em `notify/pushover.py`) — `config.py` guarda só o que é transversal.
+
+As camadas internas levantam as exceções de [`errors.py`](src/emr_instances/errors.py)
+(`CoverageError`, `StorageError`, `NotificationError`); apenas os entrypoints em
+`cli/` as traduzem em `exit(1)`. Isso mantém os módulos reutilizáveis e testáveis
+sem precisar capturar `SystemExit`.
 
 ### Aviso de release novo
 

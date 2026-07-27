@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 import pytest
 
 from emr_instances import collector
+from emr_instances.errors import CoverageError
 from emr_instances.models import (
     AnnouncedRelease,
     InstanceRecord,
@@ -13,10 +16,13 @@ from emr_instances.models import (
     SpotInterruption,
 )
 
+if TYPE_CHECKING:
+    from mypy_boto3_emr.type_defs import SupportedInstanceTypeTypeDef
+
 
 def test_build_records() -> None:
     """Test construção de records com dados fake."""
-    instances = [
+    instances: list[SupportedInstanceTypeTypeDef] = [
         {"Type": "m5.large", "VCPU": 2, "MemoryGB": 8.0, "Architecture": "x86_64"},
         {"Type": "m5.xlarge", "VCPU": 4, "MemoryGB": 16.0, "Architecture": "x86_64"},
     ]
@@ -49,7 +55,7 @@ def test_build_records() -> None:
 
 def test_build_records_missing_price() -> None:
     """Test build_records quando falta preço."""
-    instances = [
+    instances: list[SupportedInstanceTypeTypeDef] = [
         {"Type": "m5.large", "VCPU": 2, "MemoryGB": 8.0, "Architecture": "x86_64"},
     ]
     on_demand: dict[str, OnDemandInfo] = {}
@@ -112,9 +118,9 @@ def test_validate_coverage_within_limit() -> None:
 
 
 def test_validate_coverage_exceeds_limit() -> None:
-    """7% sem spot (> 5%) aborta com SystemExit."""
+    """7% sem spot (> 5%) levanta CoverageError."""
     records = [_record(has_spot=i >= 7) for i in range(100)]
-    with pytest.raises(SystemExit):
+    with pytest.raises(CoverageError):
         collector.validate_coverage(records)
 
 

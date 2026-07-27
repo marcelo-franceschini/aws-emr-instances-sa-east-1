@@ -8,10 +8,13 @@ import xml.etree.ElementTree as ET
 
 import requests
 
-from emr_instances.config import RELEASE_NOTES_RSS
 from emr_instances.models import AnnouncedRelease
 
 logger = logging.getLogger(__name__)
+
+RELEASE_NOTES_RSS = (
+    "https://docs.aws.amazon.com/emr/latest/ReleaseGuide/amazon-emr-release-notes.rss"
+)
 
 _SEMVER_RE = re.compile(r"\d+\.\d+\.\d+")
 # rótulo textual de linha especial: "emr-spark-8.0.0". Um release padrão vem como

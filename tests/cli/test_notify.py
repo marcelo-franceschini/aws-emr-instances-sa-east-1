@@ -12,6 +12,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from emr_instances.cli import notify
+from emr_instances.errors import NotificationError
 
 Snapshot = Callable[[str, str | None], dict[str, Any]]
 PATCH_TARGET = "emr_instances.cli.notify.send_pushover"
@@ -106,3 +107,18 @@ def test_main_notifies_with_new(
 
     mock_send.assert_called_once()
     assert "1 nova" in mock_send.call_args.kwargs["message"]
+
+
+@patch(PATCH_TARGET)
+def test_main_traduz_erro_de_dominio_em_exit_1(
+    mock_send: MagicMock, tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Erro de domínio vira exit(1) no CLI, sem vazar traceback pro usuário."""
+    mock_send.side_effect = NotificationError("PUSHOVER_TOKEN não definida.")
+    same = tmp_path / "instances.json"
+    same.write_text(json.dumps({"instances": []}), encoding="utf-8")
+
+    with pytest.raises(SystemExit) as exit_info:
+        _run(monkeypatch, same, same)
+
+    assert exit_info.value.code == 1

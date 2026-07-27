@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+from emr_instances.errors import StorageError
 from emr_instances.models import Payload
 from emr_instances.storage import load_snapshot, write_output
 
@@ -63,7 +64,7 @@ def test_write_output_round_trip(tmp_path: Path) -> None:
 
 
 def test_write_output_io_error(tmp_path: Path) -> None:
-    """Erro de I/O aborta com SystemExit em vez de estourar OSError."""
+    """Erro de I/O vira StorageError em vez de estourar OSError cru."""
     path = tmp_path / "sem-esse-diretorio" / "out.json"
-    with pytest.raises(SystemExit):
+    with pytest.raises(StorageError):
         write_output(_payload(), str(path))

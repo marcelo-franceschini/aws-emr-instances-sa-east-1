@@ -8,13 +8,14 @@ from typing import TYPE_CHECKING
 
 import requests
 
-from emr_instances.config import SPOT_ADVISOR_URL
 from emr_instances.models import SpotInfo, SpotInterruption
 
 if TYPE_CHECKING:
     from mypy_boto3_ec2 import EC2Client
 
 logger = logging.getLogger(__name__)
+
+SPOT_ADVISOR_URL = "https://spot-bid-advisor.s3.amazonaws.com/spot-advisor-data.json"
 
 
 def spot_prices(ec2: EC2Client) -> dict[str, SpotInfo]:

@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
+from emr_instances.errors import NotificationError
 from emr_instances.notify.pushover import send_pushover
 
 CREDENTIALS = {"PUSHOVER_TOKEN": "atoken123", "PUSHOVER_USER": "ukey456"}
@@ -79,8 +80,8 @@ def test_send_pushover_sem_url(mock_urlopen: MagicMock) -> None:
 
 @patch("urllib.request.urlopen")
 def test_send_pushover_sem_credenciais(mock_urlopen: MagicMock) -> None:
-    """Sem PUSHOVER_TOKEN/PUSHOVER_USER no ambiente, aborta antes de chamar a API."""
-    with patch.dict(os.environ, {}, clear=True), pytest.raises(SystemExit):
+    """Sem PUSHOVER_TOKEN/PUSHOVER_USER, levanta NotificationError sem chamar a API."""
+    with patch.dict(os.environ, {}, clear=True), pytest.raises(NotificationError):
         send_pushover("Titulo", "Mensagem")
 
     mock_urlopen.assert_not_called()

@@ -3,12 +3,12 @@
 from __future__ import annotations
 
 import logging
-import sys
-from collections.abc import Callable, Iterable, Mapping
+from collections.abc import Callable, Iterable
 from datetime import UTC, datetime
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING
 
 from emr_instances.config import MAX_MISSING_PRICE_RATIO, REGION
+from emr_instances.errors import CoverageError
 from emr_instances.models import (
     AnnouncedRelease,
     InstanceRecord,
@@ -24,13 +24,14 @@ from emr_instances.sources.spot import interruption_frequency, spot_prices
 if TYPE_CHECKING:
     from mypy_boto3_ec2 import EC2Client
     from mypy_boto3_emr import EMRClient
+    from mypy_boto3_emr.type_defs import SupportedInstanceTypeTypeDef
     from mypy_boto3_pricing import PricingClient
 
 logger = logging.getLogger(__name__)
 
 
 def build_records(
-    instances: Iterable[Mapping[str, Any]],
+    instances: Iterable[SupportedInstanceTypeTypeDef],
     on_demand: dict[str, OnDemandInfo],
     spot: dict[str, SpotInfo],
     interruption: dict[str, SpotInterruption],
@@ -110,14 +111,17 @@ _COVERAGE_CHECKS: list[tuple[str, Callable[[InstanceRecord], bool], bool]] = [
 
 
 def validate_coverage(records: list[InstanceRecord]) -> None:
-    """Loga a cobertura de cada campo e aborta se on-demand/spot excederem o limite."""
+    """Loga a cobertura de cada campo.
+
+    Levanta CoverageError se on-demand/spot excederem o limite de ausências —
+    quem decide o código de saída é o CLI.
+    """
     for label, is_missing, enforce in _COVERAGE_CHECKS:
         missing = sum(1 for r in records if is_missing(r))
         ratio = missing / len(records) if records else 0.0
         logger.info(f"  sem {label}: {missing} ({ratio * 100:.1f}%)")
         if enforce and ratio > MAX_MISSING_PRICE_RATIO:
-            logger.error(
+            raise CoverageError(
                 f"Proporção sem {label} ({ratio * 100:.1f}%) excede o "
                 f"limite ({MAX_MISSING_PRICE_RATIO * 100}%)"
             )
-            sys.exit(1)

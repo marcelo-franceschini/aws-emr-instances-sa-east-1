@@ -20,6 +20,7 @@ from botocore.exceptions import BotoCoreError, ClientError
 from emr_instances.aws import build_clients
 from emr_instances.collector import build_payload, collect_records, validate_coverage
 from emr_instances.config import OUTPUT_FILE
+from emr_instances.errors import EmrInstancesError
 from emr_instances.sources.emr import latest_release_label
 from emr_instances.sources.release_notes import latest_announced_release
 from emr_instances.storage import write_output
@@ -52,6 +53,9 @@ def main() -> None:
         announced = latest_announced_release()
         logger.info(f"  último release anunciado: {announced or 'indisponível'}")
         write_output(build_payload(release_label, records, announced), args.output)
+    except EmrInstancesError as e:
+        logger.error(f"{e}")
+        sys.exit(1)
     except (ClientError, BotoCoreError) as e:
         logger.error(f"Erro ao chamar API AWS: {e}")
         sys.exit(1)
