@@ -1,8 +1,14 @@
 # aws-emr-instances-sa-east-1
 
-Coleta diariamente as instâncias EMR suportadas em **São Paulo (`sa-east-1`)**
-com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
+Catálogo diário das instâncias EMR suportadas em **São Paulo (`sa-east-1`)**:
+para cada uma das 465, o **hardware completo** (vCPU, cores, memória, disco,
+banda de EBS e de rede com baseline e pico, clock, GPU, AZs) e o **preço**
+on-demand e spot com taxa de interrupção. Salva tudo em JSON e avisa via
 **Pushover** quando surgem instâncias novas ou um **release novo do EMR**.
+
+O JSON é rico o bastante para responder "esta carga cabe nesta máquina?" e não
+só "quanto custa" — ver [Estrutura do JSON](#estrutura-do-json) para o formato e
+[Fora de escopo](#fora-de-escopo) para a peça que falta.
 
 ## Como funciona
 
