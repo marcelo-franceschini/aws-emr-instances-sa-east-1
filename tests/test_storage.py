@@ -7,8 +7,10 @@ from pathlib import Path
 
 import pytest
 
+from emr_instances.collector import _build_static
 from emr_instances.errors import StorageError
 from emr_instances.models import Payload
+from emr_instances.sources.ec2 import empty_hardware
 from emr_instances.storage import load_snapshot, write_output
 
 
@@ -17,20 +19,22 @@ def _payload() -> Payload:
     return {
         "region": "sa-east-1",
         "release_label": "emr-7.13.0",
+        "schema_version": 2,
         "latest_announced_release": None,
         "generated_at": "2026-07-27T09:00:00+00:00",
         "instance_count": 1,
         "instances": [
             {
                 "instance_type": "m5.large",
-                "vcpu": 2,
-                "memory_gb": 8.0,
-                "architecture": "x86_64",
-                "network_performance": "Up to 10 Gigabit",
-                "network_gbps": 10.0,
-                "on_demand_usd_hour": 0.1,
-                "spot": {"usd_hour": 0.05, "az": "sa-east-1a"},
-                "spot_interruption": None,
+                "static": _build_static(
+                    {"Type": "m5.large", "MemoryGB": 8.0}, empty_hardware(), [], None
+                ),
+                "pricing": {
+                    "as_of": "2026-07-27T09:00:00+00:00",
+                    "on_demand_usd_hour": 0.1,
+                    "spot": {"usd_hour": 0.05, "az": "sa-east-1a"},
+                    "spot_interruption": None,
+                },
             }
         ],
     }

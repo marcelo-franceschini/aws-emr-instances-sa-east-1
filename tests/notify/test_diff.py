@@ -2,8 +2,11 @@
 
 from __future__ import annotations
 
+import json
 from collections.abc import Callable
+from typing import TYPE_CHECKING, Any, cast
 
+from emr_instances.collector import build_payload, build_records
 from emr_instances.models import Snapshot
 from emr_instances.notify.diff import (
     diff_new,
@@ -11,6 +14,9 @@ from emr_instances.notify.diff import (
     release_alerts,
     release_notes_url,
 )
+
+if TYPE_CHECKING:
+    from mypy_boto3_emr.type_defs import SupportedInstanceTypeTypeDef
 
 SnapshotFactory = Callable[[str, str | None], Snapshot]
 
@@ -128,3 +134,75 @@ def test_release_alerts_ambos_mudaram(snapshot: SnapshotFactory) -> None:
     )
     origins = [alert["origin"] for alert in alerts]
     assert origins == ["Disponível em sa-east-1", "Anunciado pela AWS"]
+
+
+TIPOS = ("m5.large", "r8gd.4xlarge")
+
+
+def _snapshot_v1() -> Snapshot:
+    """Snapshot no schema v1 — o registro plano de 9 campos que está na branch data.
+
+    Vai por `cast` porque é isso que `load_snapshot` faz com o arquivo de disco:
+    o schema antigo tem chaves que o modelo atual não declara mais.
+    """
+    raw: dict[str, Any] = {
+        "region": "sa-east-1",
+        "release_label": "emr-7.13.0",
+        "latest_announced_release": None,
+        "generated_at": "2026-07-26T09:00:00+00:00",
+        "instance_count": len(TIPOS),
+        "instances": [
+            {
+                "instance_type": instance_type,
+                "vcpu": 2,
+                "memory_gb": 8.0,
+                "architecture": "X86_64",
+                "network_performance": "Up to 10 Gigabit",
+                "network_gbps": 10.0,
+                "on_demand_usd_hour": 0.096,
+                "spot": {"usd_hour": 0.048, "az": "sa-east-1a"},
+                "spot_interruption": {"savings_percent": 50, "interruption_rate": 2},
+            }
+            for instance_type in TIPOS
+        ],
+    }
+    return cast(Snapshot, raw)
+
+
+def _snapshot_v2() -> Snapshot:
+    """Snapshot no schema v2, montado pelo mesmo código que grava o arquivo.
+
+    Passa por json para simular a ida ao disco — e para que qualquer mudança
+    futura no formato gravado chegue aqui sozinha.
+    """
+    instances: list[SupportedInstanceTypeTypeDef] = [
+        {"Type": instance_type, "MemoryGB": 8.0} for instance_type in TIPOS
+    ]
+    records = build_records(instances, {}, {}, {}, {}, {}, "2026-07-27T09:00:00+00:00")
+    payload = build_payload("emr-7.13.0", records, None)
+    return cast(Snapshot, json.loads(json.dumps(payload)))
+
+
+def test_diff_v1_para_v2_nao_acusa_instancia_nova() -> None:
+    """Trocar o schema não pode virar alerta de "465 instâncias novas".
+
+    No primeiro run após o deploy, `previous.json` ainda está no v1 e o novo já
+    está no v2. O diff compara conjuntos de `instance_type`, que ficou no topo do
+    registro nas duas versões; se algum dia ele for parar dentro de `static`,
+    este teste quebra antes de a notificação mentir.
+    """
+    v1, v2 = _snapshot_v1(), _snapshot_v2()
+    assert instance_types(v1) == instance_types(v2) == set(TIPOS)
+
+    assert diff_new(instance_types(v2), instance_types(v1)) == []
+
+
+def test_release_alerts_v1_para_v2_nao_alerta() -> None:
+    """O envelope comparado pelo alerta de release é idêntico nas duas versões."""
+    assert release_alerts(_snapshot_v2(), _snapshot_v1()) == []
+
+
+def test_snapshot_v2_declara_a_versao_do_schema() -> None:
+    """O v2 se identifica; o v1 gravado em disco não tem o campo."""
+    assert _snapshot_v2().get("schema_version") == 2
+    assert _snapshot_v1().get("schema_version") is None

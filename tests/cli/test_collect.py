@@ -36,20 +36,51 @@ def test_main_smoke(
         "Marker": None,
     }
 
+    # o client EC2 é usado por três operações distintas; cada paginator precisa
+    # devolver as páginas da sua, senão uma lê a resposta da outra
+    ec2_pages: dict[str, list[dict[str, object]]] = {
+        "describe_spot_price_history": [
+            {
+                "SpotPriceHistory": [
+                    {
+                        "InstanceType": "m5.large",
+                        "SpotPrice": "0.048",
+                        "AvailabilityZone": "sa-east-1a",
+                    },
+                ]
+            }
+        ],
+        "describe_instance_types": [
+            {
+                "InstanceTypes": [
+                    {
+                        "InstanceType": "m5.large",
+                        "VCpuInfo": {"DefaultVCpus": 2},
+                        "MemoryInfo": {"SizeInMiB": 8192},
+                        "ProcessorInfo": {"SupportedArchitectures": ["x86_64"]},
+                        "SupportedUsageClasses": ["on-demand", "spot"],
+                        "InstanceStorageSupported": False,
+                    }
+                ]
+            }
+        ],
+        "describe_instance_type_offerings": [
+            {
+                "InstanceTypeOfferings": [
+                    {"InstanceType": "m5.large", "Location": "sa-east-1a"},
+                    {"InstanceType": "m5.large", "Location": "sa-east-1b"},
+                ]
+            }
+        ],
+    }
+
+    def ec2_paginator(operation: str) -> MagicMock:
+        paginator = MagicMock()
+        paginator.paginate.return_value = ec2_pages[operation]
+        return paginator
+
     mock_ec2 = MagicMock()
-    ec2_paginator = MagicMock()
-    mock_ec2.get_paginator.return_value = ec2_paginator
-    ec2_paginator.paginate.return_value = [
-        {
-            "SpotPriceHistory": [
-                {
-                    "InstanceType": "m5.large",
-                    "SpotPrice": "0.048",
-                    "AvailabilityZone": "sa-east-1a",
-                },
-            ]
-        }
-    ]
+    mock_ec2.get_paginator.side_effect = ec2_paginator
 
     mock_pricing = MagicMock()
     pricing_paginator = MagicMock()
@@ -58,7 +89,9 @@ def test_main_smoke(
         "product": {
             "attributes": {
                 "instanceType": "m5.large",
-                "networkPerformance": "Up to 10 Gigabit",
+                "physicalProcessor": "Intel Xeon Platinum 8175",
+                "instanceFamily": "General purpose",
+                "normalizationSizeFactor": "4",
             }
         },
         "terms": {
@@ -95,13 +128,19 @@ def test_main_smoke(
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert payload["region"] == "sa-east-1"
     assert payload["release_label"] == "emr-7.13.0"
+    assert payload["schema_version"] == 2
     assert payload["instance_count"] == 1
     assert payload["latest_announced_release"]["version"] == "7.13.0"
     assert payload["latest_announced_release"]["url"].endswith("emr-7130-release.html")
 
     record = payload["instances"][0]
     assert record["instance_type"] == "m5.large"
-    assert record["on_demand_usd_hour"] == 0.096
-    assert record["network_gbps"] == 10.0
-    assert record["spot"]["usd_hour"] == 0.048
-    assert record["spot_interruption"]["interruption_rate"] == 2
+    # cada campo abaixo vem de uma fonte diferente: se o encanamento de alguma
+    # quebrar, o smoke test acusa
+    assert record["static"]["memory_gb_emr"] == 8.0  # EMR
+    assert record["static"]["vcpu"] == 2  # EC2
+    assert record["static"]["availability_zones"] == ["sa-east-1a", "sa-east-1b"]
+    assert record["static"]["family_category"] == "General purpose"  # Price List
+    assert record["pricing"]["on_demand_usd_hour"] == 0.096
+    assert record["pricing"]["spot"]["usd_hour"] == 0.048
+    assert record["pricing"]["spot_interruption"]["interruption_rate"] == 2

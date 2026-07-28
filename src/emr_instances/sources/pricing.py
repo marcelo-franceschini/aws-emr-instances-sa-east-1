@@ -3,23 +3,25 @@
 from __future__ import annotations
 
 import json
-import re
 from typing import TYPE_CHECKING, Any
 
 from emr_instances.config import REGION
-from emr_instances.models import OnDemandInfo
+from emr_instances.models import PricingProduct
 
 if TYPE_CHECKING:
     from mypy_boto3_pricing import PricingClient
 
 
-def on_demand_prices(pricing: PricingClient) -> dict[str, OnDemandInfo]:
-    """Mapeia {instance_type: OnDemandInfo} para a região inteira.
+def on_demand_prices(pricing: PricingClient) -> dict[str, PricingProduct]:
+    """Mapeia {instance_type: PricingProduct} para a região inteira.
 
-    Faz uma única varredura paginada em vez de uma chamada por instância.
-    Extrai preço on-demand e network performance (ex.: "Up to 10 Gigabit").
+    Faz uma única varredura paginada em vez de uma chamada por instância. Além do
+    preço, extrai os três atributos de catálogo que não existem em nenhuma outra
+    fonte: nome comercial do processador, categoria de família e fator de
+    normalização. Todo o resto do catálogo vem do EC2, que é numérico em vez de
+    string.
     """
-    prices: dict[str, OnDemandInfo] = {}
+    prices: dict[str, PricingProduct] = {}
     paginator = pricing.get_paginator("get_products")
     pages = paginator.paginate(
         ServiceCode="AmazonEC2",
@@ -40,7 +42,11 @@ def on_demand_prices(pricing: PricingClient) -> dict[str, OnDemandInfo]:
             if instance_type and price is not None:
                 prices[instance_type] = {
                     "usd_hour": price,
-                    "network_performance": attrs.get("networkPerformance"),
+                    "processor_name": attrs.get("physicalProcessor"),
+                    "family_category": attrs.get("instanceFamily"),
+                    "normalization_factor": _parse_normalization_factor(
+                        attrs.get("normalizationSizeFactor")
+                    ),
                 }
     return prices
 
@@ -56,16 +62,17 @@ def _extract_on_demand_usd(product: dict[str, Any]) -> float | None:
     return None
 
 
-_NETWORK_GBPS_RE = re.compile(r"(\d+(?:\.\d+)?)\s*Gigabit", re.IGNORECASE)
+def _parse_normalization_factor(value: str | None) -> float | None:
+    """Converte o fator de normalização, que a API entrega como string.
 
-
-def parse_network_gbps(network_performance: str | None) -> float | None:
-    """Extrai o valor numérico em Gbps de strings como "Up to 10 Gigabit" → 10.0.
-
-    Retorna None para valores qualitativos ("Low", "Moderate", "High") ou ausentes.
-    O prefixo "Up to" é ignorado — guardamos apenas o teto numérico.
+    Devolve int quando o valor é inteiro para o JSON sair `32` em vez de `32.0`;
+    os tamanhos menores são fracionários (`0.25`, `0.5`) e continuam float.
+    Valores não numéricos (a API usa "NA" em alguns produtos) viram None.
     """
-    if not network_performance:
+    if value is None:
         return None
-    match = _NETWORK_GBPS_RE.search(network_performance)
-    return float(match.group(1)) if match else None
+    try:
+        factor = float(value)
+    except ValueError:
+        return None
+    return int(factor) if factor.is_integer() else factor

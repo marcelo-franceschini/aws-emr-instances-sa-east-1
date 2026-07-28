@@ -8,7 +8,9 @@ com preço **on-demand** e **spot**, salva o resultado em JSON e avisa via
 
 - `emr-collect` — gera `instances_sa-east-1.json` a partir de:
   - `emr:ListSupportedInstanceTypes` (lista de instâncias, release mais recente)
-  - `pricing:GetProducts` (preço on-demand + network performance — Price List API, endpoint `us-east-1`)
+  - `ec2:DescribeInstanceTypes` (catálogo de hardware: vCPU, memória, disco, EBS, rede, clock, GPU)
+  - `ec2:DescribeInstanceTypeOfferings` (em quais AZs cada tipo é ofertado)
+  - `pricing:GetProducts` (preço on-demand + nome do processador, categoria de família e fator de normalização — Price List API, endpoint `us-east-1`)
   - `ec2:DescribeSpotPriceHistory` (spot, menor preço entre as AZs)
   - Spot Bid Advisor (S3 público) (frequência de interrupção + economia esperada)
   - [RSS de release notes do EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/amazon-emr-release-notes.rss) (último release anunciado pela AWS)
@@ -33,7 +35,8 @@ src/emr_instances/
 ├── collector.py                 junta as fontes, valida cobertura, monta o payload
 ├── sources/                     uma fonte de dados externa por módulo
 │   ├── emr.py                   ListSupportedInstanceTypes / ListReleaseLabels
-│   ├── pricing.py               Price List API + parse de network_gbps
+│   ├── ec2.py                   DescribeInstanceTypes / DescribeInstanceTypeOfferings
+│   ├── pricing.py               Price List API (preço + 3 campos de catálogo)
 │   ├── spot.py                  DescribeSpotPriceHistory + Spot Bid Advisor
 │   └── release_notes.py         RSS de release notes
 ├── notify/
@@ -82,16 +85,85 @@ O JSON gerado **não** fica na branch de código — ele vive apenas na branch `
 No envelope:
 - `region`, `generated_at`, `instance_count`
 - `release_label` — release usado na coleta, o mais recente disponível em `sa-east-1` (ex: `"emr-7.13.0"`)
+- `schema_version` — versão do formato (atual: `2`)
 - `latest_announced_release` — último release anunciado no RSS: `{"version": "7.13.0", "url": ..., "published_at": ...}`, ou `null` se o feed estiver indisponível
 
-Cada instância contém:
-- `instance_type` — ex: `m5.large`
-- `vcpu`, `memory_gb`, `architecture` — especificações
-- `network_performance` — ex: `"Up to 10 Gigabit"`, `"25 Gigabit"`, `"Moderate"` (importante para shuffles em MapReduce)
-- `network_gbps` — valor numérico em Gbps extraído de `network_performance` (ex: `10.0`), ou `null` para valores qualitativos (`"Moderate"`, `"High"`); facilita ordenar/comparar por rede
-- `on_demand_usd_hour` — preço on-demand (USD/hora)
-- `spot` — `{"usd_hour": ..., "az": ...}` (menor preço entre as AZs)
-- `spot_interruption` — `{"savings_percent": ..., "interruption_rate": ...}` (do Spot Bid Advisor, onde `interruption_rate` é 1-5: <5%, 5-10%, 10-15%, 15-20%, >20%)
+Cada instância tem `instance_type` no topo e dois blocos separados **por
+mutabilidade**: `static` nunca muda para um dado tipo de instância (pode ser
+congelado, versionado e usado como constante) e `pricing` muda todo dia e vem
+datado.
+
+```json
+{
+  "instance_type": "r8gd.4xlarge",
+  "static": {
+    "vcpu": 16, "cores": 16, "threads_per_core": 1,
+    "memory_gb_emr": 122.0, "memory_gb_hardware": 128.0,
+    "architecture": "arm64",
+    "processor_manufacturer": "AWS", "processor_name": "AWS Graviton4 Processor",
+    "clock_ghz_sustained": 2.8,
+    "family_category": "Memory optimized", "family_id_emr": "HI_MEM_CURRENT_GEN",
+    "current_generation": true, "bare_metal": false, "hypervisor": "nitro",
+    "burstable_performance": false, "normalization_factor": 32,
+    "supports_spot": true,
+    "availability_zones": ["sa-east-1a", "sa-east-1b", "sa-east-1c"],
+    "storage": { "ebs_only": false, "total_gb": 950, "nvme": "required",
+                 "disks": [{ "count": 1, "size_gb": 950, "type": "ssd" }] },
+    "ebs": { "baseline_mbps": 5000, "maximum_mbps": 10000,
+             "baseline_iops": 20000, "maximum_iops": 40000,
+             "burstable": true, "optimized_by_default": true, "nvme": "required" },
+    "network": { "baseline_gbps": 7.5, "peak_gbps": 15.0, "burstable": true,
+                 "max_interfaces": 8, "ena": "required", "efa": false },
+    "gpu": null
+  },
+  "pricing": {
+    "as_of": "2026-07-27T12:15:33+00:00",
+    "on_demand_usd_hour": 1.8616,
+    "spot": { "usd_hour": 1.1793, "az": "sa-east-1c" },
+    "spot_interruption": { "savings_percent": 46, "interruption_rate": 4 }
+  }
+}
+```
+
+Alguns campos merecem explicação:
+
+- **`memory_gb_emr` e `memory_gb_hardware` são valores diferentes de propósito.**
+  O EMR reporta menos memória que o hardware em 352 dos 465 tipos (razão ~0.953);
+  um é o que a máquina tem, o outro é o que o EMR enxerga. **Nenhum dos dois é a
+  memória alocável pelo YARN**, que tem um corte bem maior — veja
+  [Fora de escopo](#fora-de-escopo).
+- **`baseline` e `maximum` (em `ebs` e `network`) são a diferença entre pico e
+  sustentado**, que é o que decide o comportamento de um job Spark longo: 159
+  tipos fazem burst de EBS e 228 de rede. As `flex` são o caso extremo —
+  `c7i-flex.xlarge` vai de 625 a 10000 Mbps de EBS, 16x. Quando o crédito acaba,
+  o job cai para o baseline. O booleano `burstable` é derivado (`maximum >
+  baseline`) para o consumidor não precisar comparar.
+- **`interruption_rate`** é 1-5, do Spot Bid Advisor: <5%, 5-10%, 10-15%, 15-20%, >20%.
+- **`nvme` e `ena`** são `"required"`, `"supported"` ou `"unsupported"`.
+- Campo ausente vem como `null` e **o bloco nunca some** — `storage` existe
+  mesmo em instância EBS-only (com `ebs_only: true` e `disks: []`), e `gpu` é
+  `null` nas 439 sem GPU. Quem consome nunca precisa checar se a chave existe.
+
+O universo é sempre o que o `ListSupportedInstanceTypes` devolve: há 22 tipos
+ofertados em `sa-east-1` (`m6in.*`, `m6idn.*`, `r7gd.*`) que o `emr-7.13.0` não
+suporta e que por isso não entram no JSON.
+
+Onde duas fontes têm o mesmo dado, a precedência é: **hardware** vem do
+`DescribeInstanceTypes` (é numérico e estruturado; a Price List só tem string —
+o campo `storage` dela chega a ter 93 formatos diferentes), **nome comercial do
+processador e categoria de família** vêm da Price List (o EC2 só informa o
+fabricante, `"AWS"`), e **o universo e o suporte do EMR** vêm sempre do EMR.
+
+#### Versões do schema
+
+| Versão | Formato |
+| --- | --- |
+| 1 | registro plano de 9 campos, sem `schema_version` |
+| 2 | `static` / `pricing`, catálogo completo de hardware |
+
+`instance_type` fica no topo do registro nas duas versões — é o que o diff da
+notificação compara, e é o que garante que a troca de schema não vire um alerta
+falso de "465 instâncias novas" no primeiro run após o deploy.
 
 ## Rodar localmente
 
@@ -101,7 +173,8 @@ uv run emr-collect        # gera instances_sa-east-1.json
 uv run emr-collect --help # opções: --release-label, --output
 ```
 
-Requer credenciais AWS com permissão de leitura para EMR, Pricing e EC2 spot.
+Requer credenciais AWS com permissão de leitura para EMR, Pricing e EC2 (spot e
+catálogo de instâncias) — a policy completa está em [Deploy inicial](#deploy-inicial-do-zero).
 
 Para testar a notificação, com `PUSHOVER_TOKEN` e `PUSHOVER_USER` no ambiente:
 
@@ -124,18 +197,35 @@ Para replicar este projeto do zero em sua própria conta AWS:
 
 1. **Criar usuário IAM dedicado** (sem acesso ao console):
    - Nome: `aws-emr-instances-sa-east-1`
-   - Criar uma policy **customer-managed** com as 4 permissões mínimas:
+   - Criar uma policy **customer-managed** com as 6 permissões mínimas:
      ```json
      {
        "Version": "2012-10-17",
        "Statement": [
          {
+           "Sid": "EmrList",
            "Effect": "Allow",
            "Action": [
              "elasticmapreduce:ListSupportedInstanceTypes",
-             "elasticmapreduce:ListReleaseLabels",
+             "elasticmapreduce:ListReleaseLabels"
+           ],
+           "Resource": "*"
+         },
+         {
+           "Sid": "Pricing",
+           "Effect": "Allow",
+           "Action": [
              "pricing:GetProducts",
              "ec2:DescribeSpotPriceHistory"
+           ],
+           "Resource": "*"
+         },
+         {
+           "Sid": "Ec2InstanceCatalog",
+           "Effect": "Allow",
+           "Action": [
+             "ec2:DescribeInstanceTypes",
+             "ec2:DescribeInstanceTypeOfferings"
            ],
            "Resource": "*"
          }
@@ -181,3 +271,13 @@ Para replicar este projeto do zero em sua própria conta AWS:
 ## Secrets necessários (GitHub Actions)
 
 `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `PUSHOVER_TOKEN`, `PUSHOVER_USER`.
+
+## Fora de escopo
+
+**A memória alocável pelo YARN por tipo de instância**
+(`yarn.nodemanager.resource.memory-mb`) não vem de API nenhuma — está nas páginas
+de *Task configuration* da documentação do EMR, uma por release. É a constante
+que falta para sair de "specs da máquina" e chegar em "quantos executores
+cabem": nem `memory_gb_hardware` nem `memory_gb_emr` substituem ela, porque o
+corte do YARN é bem maior que a diferença entre os dois. Vale uma tarefa
+própria, provavelmente com scraping da doc por release.
