@@ -7,7 +7,7 @@
     "url": "https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-7130-release.html",
     "published_at": "Tue, 28 Apr 2026 19:00:00 GMT"
   },
-  "generated_at": "2026-08-04T11:18:06.963978+00:00",
+  "generated_at": "2026-08-05T11:14:26.754987+00:00",
   "instance_count": 465,
   "instances": [
     {
@@ -66,10 +66,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.179,
         "spot": {
-          "usd_hour": 0.0271,
+          "usd_hour": 0.0286,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -134,10 +134,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.718,
         "spot": {
-          "usd_hour": 0.1363,
+          "usd_hour": 0.1336,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -202,10 +202,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.65,
         "spot": {
-          "usd_hour": 0.1465,
+          "usd_hour": 0.1462,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -270,10 +270,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.3,
         "spot": {
-          "usd_hour": 0.211,
+          "usd_hour": 0.2061,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -338,10 +338,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.6,
         "spot": {
-          "usd_hour": 0.3776,
+          "usd_hour": 0.3595,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -406,10 +406,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.325,
         "spot": {
-          "usd_hour": 0.0681,
+          "usd_hour": 0.0651,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -468,10 +468,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.618,
         "spot": {
-          "usd_hour": 0.125,
+          "usd_hour": 0.1198,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -530,10 +530,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.235,
         "spot": {
-          "usd_hour": 0.3185,
+          "usd_hour": 0.32,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -592,10 +592,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.47,
         "spot": {
-          "usd_hour": 0.3906,
+          "usd_hour": 0.3839,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -654,10 +654,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.155,
         "spot": {
-          "usd_hour": 0.0314,
+          "usd_hour": 0.0312,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -716,10 +716,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.309,
         "spot": {
-          "usd_hour": 0.0623,
+          "usd_hour": 0.0603,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -779,11 +779,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.144,
         "spot": {
           "usd_hour": 0.3144,
-          "az": "sa-east-1c"
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 78,
@@ -842,10 +842,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.716,
         "spot": {
-          "usd_hour": 0.8141,
+          "usd_hour": 0.7662,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -905,11 +905,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.288,
         "spot": {
           "usd_hour": 0.6288,
-          "az": "sa-east-1c"
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 74,
@@ -968,10 +968,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.524,
         "spot": {
-          "usd_hour": 0.0589,
+          "usd_hour": 0.0585,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -1031,7 +1031,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.048,
         "spot": {
           "usd_hour": 0.1048,
@@ -1094,7 +1094,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.358,
         "spot": {
           "usd_hour": 0.2358,
@@ -1157,10 +1157,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.262,
         "spot": {
-          "usd_hour": 0.0454,
+          "usd_hour": 0.0489,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -1220,10 +1220,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.832,
         "spot": {
-          "usd_hour": 0.8622,
+          "usd_hour": 0.8273,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -1283,10 +1283,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.776,
         "spot": {
-          "usd_hour": 0.5096,
+          "usd_hour": 0.4915,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -1346,7 +1346,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.664,
         "spot": {
           "usd_hour": 0.5664,
@@ -1409,10 +1409,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.472,
         "spot": {
-          "usd_hour": 0.1374,
+          "usd_hour": 0.1397,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -1472,10 +1472,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.944,
         "spot": {
-          "usd_hour": 0.2733,
+          "usd_hour": 0.2647,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -1535,10 +1535,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.888,
         "spot": {
-          "usd_hour": 0.2358,
+          "usd_hour": 0.2462,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -1598,10 +1598,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.236,
         "spot": {
-          "usd_hour": 0.0619,
+          "usd_hour": 0.0614,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -1666,10 +1666,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.216,
         "spot": {
-          "usd_hour": 1.3503,
+          "usd_hour": 1.3177,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -1734,10 +1734,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.288,
         "spot": {
-          "usd_hour": 1.4261,
+          "usd_hour": 1.4241,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -1802,10 +1802,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.432,
         "spot": {
-          "usd_hour": 2.214,
+          "usd_hour": 2.1767,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -1870,10 +1870,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.536,
         "spot": {
-          "usd_hour": 0.1605,
+          "usd_hour": 0.1601,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -1938,10 +1938,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.072,
         "spot": {
-          "usd_hour": 0.4886,
+          "usd_hour": 0.482,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -2006,10 +2006,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.144,
         "spot": {
-          "usd_hour": 1.1937,
+          "usd_hour": 1.1421,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -2074,10 +2074,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.268,
         "spot": {
-          "usd_hour": 0.0804,
+          "usd_hour": 0.0808,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -2143,10 +2143,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.576,
         "spot": {
-          "usd_hour": 1.2106,
+          "usd_hour": 1.2382,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2212,10 +2212,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.364,
         "spot": {
-          "usd_hour": 1.3954,
+          "usd_hour": 1.3629,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2281,10 +2281,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.152,
         "spot": {
-          "usd_hour": 1.7648,
+          "usd_hour": 1.7569,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2350,10 +2350,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.596,
         "spot": {
-          "usd_hour": 0.1506,
+          "usd_hour": 0.1465,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -2419,10 +2419,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.192,
         "spot": {
-          "usd_hour": 0.2599,
+          "usd_hour": 0.2513,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -2488,10 +2488,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.682,
         "spot": {
-          "usd_hour": 0.6136,
+          "usd_hour": 0.5844,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2557,10 +2557,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.298,
         "spot": {
-          "usd_hour": 0.0701,
+          "usd_hour": 0.0691,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -2620,10 +2620,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.976,
         "spot": {
-          "usd_hour": 0.8119,
+          "usd_hour": 0.7772,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2683,10 +2683,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.664,
         "spot": {
-          "usd_hour": 0.2021,
+          "usd_hour": 0.1995,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -2746,10 +2746,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.328,
         "spot": {
-          "usd_hour": 0.331,
+          "usd_hour": 0.3213,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2809,10 +2809,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.988,
         "spot": {
-          "usd_hour": 0.4458,
+          "usd_hour": 0.4282,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2872,10 +2872,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.332,
         "spot": {
-          "usd_hour": 0.0791,
+          "usd_hour": 0.0746,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -2935,10 +2935,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.8296,
         "spot": {
-          "usd_hour": 0.6359,
+          "usd_hour": 0.62,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -2998,10 +2998,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.7728,
         "spot": {
-          "usd_hour": 0.5919,
+          "usd_hour": 0.5949,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -3061,10 +3061,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.6592,
         "spot": {
-          "usd_hour": 0.5848,
+          "usd_hour": 0.5659,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -3124,10 +3124,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4716,
         "spot": {
-          "usd_hour": 0.138,
+          "usd_hour": 0.1362,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -3187,10 +3187,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.5456,
         "spot": {
-          "usd_hour": 0.9257,
+          "usd_hour": 0.8891,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -3250,7 +3250,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 11.3184,
         "spot": {
           "usd_hour": 1.1318,
@@ -3313,10 +3313,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.9432,
         "spot": {
-          "usd_hour": 0.2276,
+          "usd_hour": 0.2229,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -3376,10 +3376,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.8864,
         "spot": {
-          "usd_hour": 0.2305,
+          "usd_hour": 0.2219,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -3439,10 +3439,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2358,
         "spot": {
-          "usd_hour": 0.0618,
+          "usd_hour": 0.0613,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -3502,11 +3502,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.5152,
         "spot": {
           "usd_hour": 0.2515,
-          "az": "sa-east-1a"
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 76,
@@ -3565,7 +3565,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.3536,
         "spot": {
           "usd_hour": 0.3354,
@@ -3628,10 +3628,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4192,
         "spot": {
-          "usd_hour": 0.0804,
+          "usd_hour": 0.0819,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -3691,10 +3691,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.8384,
         "spot": {
-          "usd_hour": 0.0975,
+          "usd_hour": 0.1019,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -3754,7 +3754,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.6768,
         "spot": {
           "usd_hour": 0.1677,
@@ -3817,10 +3817,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2096,
         "spot": {
-          "usd_hour": 0.0489,
+          "usd_hour": 0.0485,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -3886,10 +3886,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.856,
         "spot": {
-          "usd_hour": 0.3003,
+          "usd_hour": 0.3121,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -3955,10 +3955,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.808,
         "spot": {
-          "usd_hour": 0.4415,
+          "usd_hour": 0.4554,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -4024,7 +4024,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.476,
         "spot": {
           "usd_hour": 0.0476,
@@ -4093,10 +4093,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.952,
         "spot": {
-          "usd_hour": 0.1041,
+          "usd_hour": 0.1046,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -4162,10 +4162,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.904,
         "spot": {
-          "usd_hour": 0.3969,
+          "usd_hour": 0.3836,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -4231,10 +4231,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.238,
         "spot": {
-          "usd_hour": 0.0398,
+          "usd_hour": 0.0414,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -4294,10 +4294,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.192,
         "spot": {
-          "usd_hour": 0.51,
+          "usd_hour": 0.498,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -4357,10 +4357,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.256,
         "spot": {
-          "usd_hour": 1.1034,
+          "usd_hour": 1.0359,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -4420,7 +4420,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.532,
         "spot": {
           "usd_hour": 0.1467,
@@ -4483,10 +4483,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.064,
         "spot": {
-          "usd_hour": 0.2203,
+          "usd_hour": 0.221,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -4546,10 +4546,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.128,
         "spot": {
-          "usd_hour": 0.2308,
+          "usd_hour": 0.2225,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -4609,10 +4609,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.266,
         "spot": {
-          "usd_hour": 0.063,
+          "usd_hour": 0.0623,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -4672,10 +4672,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.144,
         "spot": {
-          "usd_hour": 0.4093,
+          "usd_hour": 0.3892,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -4735,10 +4735,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.192,
         "spot": {
-          "usd_hour": 0.5909,
+          "usd_hour": 0.6355,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -4798,7 +4798,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.288,
         "spot": {
           "usd_hour": 0.6288,
@@ -4861,10 +4861,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.524,
         "spot": {
-          "usd_hour": 0.1268,
+          "usd_hour": 0.1307,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -4924,11 +4924,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.384,
         "spot": {
           "usd_hour": 0.8384,
-          "az": "sa-east-1b"
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 75,
@@ -4987,7 +4987,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.048,
         "spot": {
           "usd_hour": 0.1048,
@@ -5050,7 +5050,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.096,
         "spot": {
           "usd_hour": 0.2096,
@@ -5113,10 +5113,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.262,
         "spot": {
-          "usd_hour": 0.0703,
+          "usd_hour": 0.0698,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -5182,10 +5182,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.7548,
         "spot": {
-          "usd_hour": 1.3783,
+          "usd_hour": 1.411,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5251,10 +5251,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.0064,
         "spot": {
-          "usd_hour": 1.0459,
+          "usd_hour": 1.1098,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5320,10 +5320,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.5096,
         "spot": {
-          "usd_hour": 1.8778,
+          "usd_hour": 1.8521,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5389,10 +5389,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.6258,
         "spot": {
-          "usd_hour": 0.1094,
+          "usd_hour": 0.1171,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5458,10 +5458,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 10.0128,
         "spot": {
-          "usd_hour": 1.3564,
+          "usd_hour": 1.3296,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -5527,10 +5527,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.2516,
         "spot": {
-          "usd_hour": 0.3001,
+          "usd_hour": 0.2914,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5596,10 +5596,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.5032,
         "spot": {
-          "usd_hour": 0.4431,
+          "usd_hour": 0.431,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5665,10 +5665,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3129,
         "spot": {
-          "usd_hour": 0.0631,
+          "usd_hour": 0.0657,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5728,10 +5728,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.1832,
         "spot": {
-          "usd_hour": 0.4665,
+          "usd_hour": 0.4542,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -5791,7 +5791,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.5776,
         "spot": {
           "usd_hour": 0.5578,
@@ -5854,7 +5854,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.3664,
         "spot": {
           "usd_hour": 0.8366,
@@ -5917,10 +5917,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.6972,
         "spot": {
-          "usd_hour": 0.2402,
+          "usd_hour": 0.2378,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -5980,10 +5980,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 11.1552,
         "spot": {
-          "usd_hour": 1.7153,
+          "usd_hour": 1.6778,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -6043,10 +6043,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.3944,
         "spot": {
-          "usd_hour": 0.4519,
+          "usd_hour": 0.4315,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -6106,10 +6106,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.7888,
         "spot": {
-          "usd_hour": 0.3061,
+          "usd_hour": 0.2987,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -6169,10 +6169,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3486,
         "spot": {
-          "usd_hour": 0.0841,
+          "usd_hour": 0.0893,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -6232,10 +6232,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.6659,
         "spot": {
-          "usd_hour": 0.4149,
+          "usd_hour": 0.404,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -6295,10 +6295,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.5546,
         "spot": {
-          "usd_hour": 0.387,
+          "usd_hour": 0.3762,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -6358,10 +6358,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4443,
         "spot": {
-          "usd_hour": 0.1231,
+          "usd_hour": 0.123,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -6421,10 +6421,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.8886,
         "spot": {
-          "usd_hour": 0.1083,
+          "usd_hour": 0.1051,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -6484,10 +6484,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.7773,
         "spot": {
-          "usd_hour": 0.2209,
+          "usd_hour": 0.2243,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -6547,10 +6547,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2222,
         "spot": {
-          "usd_hour": 0.0429,
+          "usd_hour": 0.0418,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -6615,10 +6615,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.3792,
         "spot": {
-          "usd_hour": 2.465,
+          "usd_hour": 2.4582,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -6683,10 +6683,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.5056,
         "spot": {
-          "usd_hour": 2.9015,
+          "usd_hour": 2.9098,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -6751,10 +6751,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.5632,
         "spot": {
-          "usd_hour": 0.1071,
+          "usd_hour": 0.1016,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -6819,10 +6819,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.1264,
         "spot": {
-          "usd_hour": 0.5984,
+          "usd_hour": 0.5956,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -6887,10 +6887,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.2528,
         "spot": {
-          "usd_hour": 1.3574,
+          "usd_hour": 1.3471,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -6955,10 +6955,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2816,
         "spot": {
-          "usd_hour": 0.0629,
+          "usd_hour": 0.0603,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -7018,11 +7018,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.13614,
         "spot": {
-          "usd_hour": 0.5171,
-          "az": "sa-east-1a"
+          "usd_hour": 0.5088,
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 83,
@@ -7081,7 +7081,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.18152,
         "spot": {
           "usd_hour": 0.4182,
@@ -7144,10 +7144,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.52269,
         "spot": {
-          "usd_hour": 0.1515,
+          "usd_hour": 0.1434,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -7207,10 +7207,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.04538,
         "spot": {
-          "usd_hour": 0.178,
+          "usd_hour": 0.182,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -7270,10 +7270,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.09076,
         "spot": {
-          "usd_hour": 0.459,
+          "usd_hour": 0.4615,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -7333,10 +7333,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.26135,
         "spot": {
-          "usd_hour": 0.0644,
+          "usd_hour": 0.0628,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -7396,7 +7396,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.3012,
         "spot": {
           "usd_hour": 0.3301,
@@ -7459,10 +7459,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.4016,
         "spot": {
-          "usd_hour": 0.6923,
+          "usd_hour": 0.6858,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -7522,11 +7522,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.6024,
         "spot": {
-          "usd_hour": 0.7211,
-          "az": "sa-east-1c"
+          "usd_hour": 0.7296,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 66,
@@ -7585,10 +7585,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.5502,
         "spot": {
-          "usd_hour": 0.1238,
+          "usd_hour": 0.1229,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -7648,7 +7648,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.2048,
         "spot": {
           "usd_hour": 1.3205,
@@ -7711,10 +7711,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.1004,
         "spot": {
-          "usd_hour": 0.2144,
+          "usd_hour": 0.2112,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -7774,10 +7774,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.2008,
         "spot": {
-          "usd_hour": 0.2343,
+          "usd_hour": 0.2424,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -7837,10 +7837,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2751,
         "spot": {
-          "usd_hour": 0.0682,
+          "usd_hour": 0.0666,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -7900,10 +7900,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.93232,
         "spot": {
-          "usd_hour": 1.1329,
+          "usd_hour": 1.1171,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -7963,10 +7963,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.90976,
         "spot": {
-          "usd_hour": 1.4717,
+          "usd_hour": 1.4665,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -8026,11 +8026,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.86464,
         "spot": {
-          "usd_hour": 1.7985,
-          "az": "sa-east-1b"
+          "usd_hour": 1.8517,
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 61,
@@ -8089,10 +8089,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.48872,
         "spot": {
-          "usd_hour": 0.1093,
+          "usd_hour": 0.1064,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -8152,7 +8152,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 11.72928,
         "spot": {
           "usd_hour": 1.1729,
@@ -8215,10 +8215,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.97744,
         "spot": {
-          "usd_hour": 0.1763,
+          "usd_hour": 0.1748,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -8278,10 +8278,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.95488,
         "spot": {
-          "usd_hour": 0.4788,
+          "usd_hour": 0.455,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -8341,10 +8341,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.24436,
         "spot": {
-          "usd_hour": 0.0762,
+          "usd_hour": 0.0747,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -8415,10 +8415,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.649,
         "spot": {
-          "usd_hour": 1.5866,
+          "usd_hour": 1.5902,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -8489,7 +8489,7 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.397,
         "spot": {
           "usd_hour": 0.7397,
@@ -8563,10 +8563,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.278,
         "spot": {
-          "usd_hour": 0.1715,
+          "usd_hour": 0.1769,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -8637,10 +8637,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.046,
         "spot": {
-          "usd_hour": 0.2394,
+          "usd_hour": 0.2328,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -8711,10 +8711,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.698,
         "spot": {
-          "usd_hour": 0.3901,
+          "usd_hour": 0.4075,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -8785,11 +8785,11 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.894,
         "spot": {
-          "usd_hour": 0.1617,
-          "az": "sa-east-1b"
+          "usd_hour": 0.1629,
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 86,
@@ -8858,11 +8858,11 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.64127,
         "spot": {
-          "usd_hour": 8.0278,
-          "az": "sa-east-1a"
+          "usd_hour": 8.0379,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 44,
@@ -8931,11 +8931,11 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.96239,
         "spot": {
-          "usd_hour": 5.7973,
-          "az": "sa-east-1b"
+          "usd_hour": 5.798,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 81,
@@ -9004,10 +9004,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.84318,
         "spot": {
-          "usd_hour": 11.5266,
+          "usd_hour": 11.541,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -9077,10 +9077,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.06016,
         "spot": {
-          "usd_hour": 0.2698,
+          "usd_hour": 0.2842,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -9150,11 +9150,11 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 27.68636,
         "spot": {
-          "usd_hour": 23.0662,
-          "az": "sa-east-1a"
+          "usd_hour": 23.082,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 32,
@@ -9223,10 +9223,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.76048,
         "spot": {
-          "usd_hour": 2.1652,
+          "usd_hour": 2.0553,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -9296,10 +9296,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.16111,
         "spot": {
-          "usd_hour": 1.0662,
+          "usd_hour": 1.0867,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -9369,10 +9369,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.71,
         "spot": {
-          "usd_hour": 0.2891,
+          "usd_hour": 0.3046,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -9442,10 +9442,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.82181,
         "spot": {
-          "usd_hour": 2.1998,
+          "usd_hour": 2.2388,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -9515,10 +9515,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.77388,
         "spot": {
-          "usd_hour": 2.2549,
+          "usd_hour": 2.1487,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -9588,10 +9588,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 11.34651,
         "spot": {
-          "usd_hour": 4.3354,
+          "usd_hour": 4.5902,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -9661,10 +9661,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.66173,
         "spot": {
-          "usd_hour": 0.2549,
+          "usd_hour": 0.2493,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -9734,10 +9734,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 22.69303,
         "spot": {
-          "usd_hour": 12.3418,
+          "usd_hour": 11.7765,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -9807,10 +9807,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.24918,
         "spot": {
-          "usd_hour": 0.7282,
+          "usd_hour": 0.6986,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -9880,10 +9880,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.42408,
         "spot": {
-          "usd_hour": 0.3543,
+          "usd_hour": 0.3563,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -9953,10 +9953,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.368,
         "spot": {
-          "usd_hour": 0.2629,
+          "usd_hour": 0.2518,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -10026,10 +10026,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.6164,
         "spot": {
-          "usd_hour": 0.3745,
+          "usd_hour": 0.3677,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10099,10 +10099,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.1585,
         "spot": {
-          "usd_hour": 0.4626,
+          "usd_hour": 0.4513,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10168,7 +10168,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.968,
         "spot": {
           "usd_hour": 0.7968,
@@ -10237,10 +10237,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.996,
         "spot": {
-          "usd_hour": 0.2544,
+          "usd_hour": 0.2563,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -10306,10 +10306,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.992,
         "spot": {
-          "usd_hour": 0.3254,
+          "usd_hour": 0.3245,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10375,7 +10375,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.984,
         "spot": {
           "usd_hour": 0.3984,
@@ -10444,10 +10444,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.498,
         "spot": {
-          "usd_hour": 0.0877,
+          "usd_hour": 0.0851,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10513,7 +10513,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.64,
         "spot": {
           "usd_hour": 0.864,
@@ -10582,11 +10582,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 17.28,
         "spot": {
           "usd_hour": 1.728,
-          "az": "sa-east-1a"
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 85,
@@ -10651,10 +10651,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.44,
         "spot": {
-          "usd_hour": 0.1987,
+          "usd_hour": 0.1895,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10720,10 +10720,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.16,
         "spot": {
-          "usd_hour": 0.219,
+          "usd_hour": 0.2169,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10789,10 +10789,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.32,
         "spot": {
-          "usd_hour": 0.4864,
+          "usd_hour": 0.4823,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10858,10 +10858,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.72,
         "spot": {
-          "usd_hour": 0.0901,
+          "usd_hour": 0.0858,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -10927,7 +10927,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.8912,
         "spot": {
           "usd_hour": 0.7891,
@@ -10996,10 +10996,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.9864,
         "spot": {
-          "usd_hour": 0.1274,
+          "usd_hour": 0.1256,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -11065,10 +11065,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.9728,
         "spot": {
-          "usd_hour": 0.3838,
+          "usd_hour": 0.3719,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -11134,7 +11134,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.9456,
         "spot": {
           "usd_hour": 0.3946,
@@ -11203,10 +11203,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4932,
         "spot": {
-          "usd_hour": 0.0644,
+          "usd_hour": 0.0634,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -11272,10 +11272,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.574,
         "spot": {
-          "usd_hour": 0.77,
+          "usd_hour": 0.753,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -11341,7 +11341,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.765,
         "spot": {
           "usd_hour": 0.8765,
@@ -11410,11 +11410,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.1472,
         "spot": {
           "usd_hour": 1.3147,
-          "az": "sa-east-1c"
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 61,
@@ -11479,10 +11479,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.096,
         "spot": {
-          "usd_hour": 0.2193,
+          "usd_hour": 0.219,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -11548,7 +11548,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 17.5296,
         "spot": {
           "usd_hour": 1.753,
@@ -11617,10 +11617,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.191,
         "spot": {
-          "usd_hour": 0.4549,
+          "usd_hour": 0.4447,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -11686,7 +11686,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.382,
         "spot": {
           "usd_hour": 0.4382,
@@ -11755,10 +11755,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.548,
         "spot": {
-          "usd_hour": 0.0925,
+          "usd_hour": 0.0908,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -11824,10 +11824,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.231,
         "spot": {
-          "usd_hour": 1.3701,
+          "usd_hour": 1.3211,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -11893,7 +11893,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.6413,
         "spot": {
           "usd_hour": 0.9641,
@@ -11962,10 +11962,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 14.4619,
         "spot": {
-          "usd_hour": 2.7472,
+          "usd_hour": 2.6402,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -12031,10 +12031,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.2052,
         "spot": {
-          "usd_hour": 0.1928,
+          "usd_hour": 0.1949,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -12100,7 +12100,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 28.9238,
         "spot": {
           "usd_hour": 2.8924,
@@ -12169,10 +12169,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.4103,
         "spot": {
-          "usd_hour": 0.6348,
+          "usd_hour": 0.6116,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -12238,11 +12238,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.8206,
         "spot": {
-          "usd_hour": 1.5634,
-          "az": "sa-east-1c"
+          "usd_hour": 1.5717,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 78,
@@ -12307,10 +12307,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.6026,
         "spot": {
-          "usd_hour": 0.1061,
+          "usd_hour": 0.1048,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -12376,10 +12376,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.936,
         "spot": {
-          "usd_hour": 1.1014,
+          "usd_hour": 1.0749,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -12445,10 +12445,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 14.904,
         "spot": {
-          "usd_hour": 1.6793,
+          "usd_hour": 1.6493,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -12514,7 +12514,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 19.872,
         "spot": {
           "usd_hour": 1.9872,
@@ -12583,10 +12583,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.656,
         "spot": {
-          "usd_hour": 0.2585,
+          "usd_hour": 0.2545,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -12652,10 +12652,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.484,
         "spot": {
-          "usd_hour": 0.4067,
+          "usd_hour": 0.4305,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -12721,7 +12721,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 39.744,
         "spot": {
           "usd_hour": 3.9744,
@@ -12790,10 +12790,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.968,
         "spot": {
-          "usd_hour": 0.7223,
+          "usd_hour": 0.686,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -12859,10 +12859,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.828,
         "spot": {
-          "usd_hour": 0.086,
+          "usd_hour": 0.0903,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -12928,7 +12928,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.576,
         "spot": {
           "usd_hour": 0.6576,
@@ -12997,10 +12997,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.768,
         "spot": {
-          "usd_hour": 2.9971,
+          "usd_hour": 2.9298,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -13066,10 +13066,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.152,
         "spot": {
-          "usd_hour": 3.3431,
+          "usd_hour": 3.2163,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -13135,10 +13135,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.096,
         "spot": {
-          "usd_hour": 0.1472,
+          "usd_hour": 0.1412,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -13204,7 +13204,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 26.304,
         "spot": {
           "usd_hour": 2.6304,
@@ -13273,10 +13273,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.192,
         "spot": {
-          "usd_hour": 0.3952,
+          "usd_hour": 0.3931,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -13342,10 +13342,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.384,
         "spot": {
-          "usd_hour": 0.4836,
+          "usd_hour": 0.4928,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -13411,10 +13411,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.548,
         "spot": {
-          "usd_hour": 0.0743,
+          "usd_hour": 0.0739,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -13478,10 +13478,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.233,
         "spot": {
-          "usd_hour": 0.1188,
+          "usd_hour": 0.1128,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -13545,10 +13545,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.117,
         "spot": {
-          "usd_hour": 0.0974,
+          "usd_hour": 0.0975,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -13612,10 +13612,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.058,
         "spot": {
-          "usd_hour": 0.0483,
+          "usd_hour": 0.0484,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -13679,10 +13679,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.467,
         "spot": {
-          "usd_hour": 0.2586,
+          "usd_hour": 0.2465,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -13746,10 +13746,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.645,
         "spot": {
-          "usd_hour": 0.0964,
+          "usd_hour": 0.1,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -13813,10 +13813,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.291,
         "spot": {
-          "usd_hour": 1.075,
+          "usd_hour": 1.0751,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -13880,10 +13880,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.323,
         "spot": {
-          "usd_hour": 0.0369,
+          "usd_hour": 0.0344,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -13948,10 +13948,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.761,
         "spot": {
-          "usd_hour": 0.148,
+          "usd_hour": 0.1495,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -14016,11 +14016,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.381,
         "spot": {
-          "usd_hour": 0.0744,
-          "az": "sa-east-1a"
+          "usd_hour": 0.0726,
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 81,
@@ -14078,10 +14078,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.18,
         "spot": {
-          "usd_hour": 0.4898,
+          "usd_hour": 0.4944,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -14140,7 +14140,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.088,
         "spot": {
           "usd_hour": 0.5088,
@@ -14202,10 +14202,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.636,
         "spot": {
-          "usd_hour": 0.1564,
+          "usd_hour": 0.1541,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -14264,10 +14264,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.272,
         "spot": {
-          "usd_hour": 0.4039,
+          "usd_hour": 0.4038,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -14326,10 +14326,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.159,
         "spot": {
-          "usd_hour": 0.0369,
+          "usd_hour": 0.0367,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -14388,10 +14388,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.318,
         "spot": {
-          "usd_hour": 0.0902,
+          "usd_hour": 0.0898,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -14451,7 +14451,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.672,
         "spot": {
           "usd_hour": 0.3672,
@@ -14514,10 +14514,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.896,
         "spot": {
-          "usd_hour": 0.6869,
+          "usd_hour": 0.6669,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -14577,11 +14577,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.344,
         "spot": {
           "usd_hour": 0.7344,
-          "az": "sa-east-1c"
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 73,
@@ -14640,10 +14640,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.612,
         "spot": {
-          "usd_hour": 0.0647,
+          "usd_hour": 0.064,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -14703,10 +14703,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.224,
         "spot": {
-          "usd_hour": 0.1429,
+          "usd_hour": 0.1411,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -14766,10 +14766,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.448,
         "spot": {
-          "usd_hour": 0.355,
+          "usd_hour": 0.3656,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -14829,7 +14829,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.306,
         "spot": {
           "usd_hour": 0.0306,
@@ -14892,11 +14892,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.312,
         "spot": {
-          "usd_hour": 0.7106,
-          "az": "sa-east-1c"
+          "usd_hour": 0.7511,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 71,
@@ -14955,10 +14955,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.416,
         "spot": {
-          "usd_hour": 0.8394,
+          "usd_hour": 0.8851,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -15018,10 +15018,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.624,
         "spot": {
-          "usd_hour": 1.0621,
+          "usd_hour": 1.136,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -15081,10 +15081,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.552,
         "spot": {
-          "usd_hour": 0.1439,
+          "usd_hour": 0.142,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -15144,10 +15144,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.104,
         "spot": {
-          "usd_hour": 0.353,
+          "usd_hour": 0.3602,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -15207,10 +15207,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.208,
         "spot": {
-          "usd_hour": 0.7509,
+          "usd_hour": 0.7524,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -15270,10 +15270,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.276,
         "spot": {
-          "usd_hour": 0.0856,
+          "usd_hour": 0.085,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -15338,10 +15338,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.96,
         "spot": {
-          "usd_hour": 1.1366,
+          "usd_hour": 1.1483,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -15406,10 +15406,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.28,
         "spot": {
-          "usd_hour": 1.1542,
+          "usd_hour": 1.2508,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -15474,10 +15474,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.92,
         "spot": {
-          "usd_hour": 1.1372,
+          "usd_hour": 1.0994,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -15542,10 +15542,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.66,
         "spot": {
-          "usd_hour": 0.2476,
+          "usd_hour": 0.2358,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -15610,10 +15610,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.32,
         "spot": {
-          "usd_hour": 0.5257,
+          "usd_hour": 0.5136,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -15678,10 +15678,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.64,
         "spot": {
-          "usd_hour": 0.9594,
+          "usd_hour": 0.9389,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -15746,10 +15746,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.33,
         "spot": {
-          "usd_hour": 0.1098,
+          "usd_hour": 0.1072,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -15815,10 +15815,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.32,
         "spot": {
-          "usd_hour": 2.5213,
+          "usd_hour": 2.6211,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -15884,11 +15884,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.76,
         "spot": {
-          "usd_hour": 3.6437,
-          "az": "sa-east-1b"
+          "usd_hour": 3.595,
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 45,
@@ -15953,10 +15953,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.64,
         "spot": {
-          "usd_hour": 4.2422,
+          "usd_hour": 4.2313,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -16022,11 +16022,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.72,
         "spot": {
-          "usd_hour": 0.1412,
-          "az": "sa-east-1c"
+          "usd_hour": 0.1429,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 82,
@@ -16091,11 +16091,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.44,
         "spot": {
-          "usd_hour": 0.3651,
-          "az": "sa-east-1b"
+          "usd_hour": 0.363,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 67,
@@ -16160,10 +16160,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.88,
         "spot": {
-          "usd_hour": 1.09,
+          "usd_hour": 1.1021,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -16229,11 +16229,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.36,
         "spot": {
-          "usd_hour": 0.0674,
-          "az": "sa-east-1b"
+          "usd_hour": 0.0702,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 87,
@@ -16291,10 +16291,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.3178,
         "spot": {
-          "usd_hour": 0.9488,
+          "usd_hour": 0.9205,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -16353,10 +16353,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.053,
         "spot": {
-          "usd_hour": 0.3225,
+          "usd_hour": 0.3219,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -16415,11 +16415,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.5794,
         "spot": {
-          "usd_hour": 0.2654,
-          "az": "sa-east-1a"
+          "usd_hour": 0.2742,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 72,
@@ -16477,7 +16477,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.1589,
         "spot": {
           "usd_hour": 0.3159,
@@ -16539,10 +16539,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.5265,
         "spot": {
-          "usd_hour": 0.1525,
+          "usd_hour": 0.1491,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -16602,10 +16602,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.3048,
         "spot": {
-          "usd_hour": 0.9728,
+          "usd_hour": 1.0102,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -16665,10 +16665,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.4064,
         "spot": {
-          "usd_hour": 0.9122,
+          "usd_hour": 0.9148,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -16728,10 +16728,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.6096,
         "spot": {
-          "usd_hour": 1.1319,
+          "usd_hour": 1.1518,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -16791,10 +16791,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.5508,
         "spot": {
-          "usd_hour": 0.1295,
+          "usd_hour": 0.1287,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -16854,10 +16854,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.8128,
         "spot": {
-          "usd_hour": 1.774,
+          "usd_hour": 1.7048,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -16917,7 +16917,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.2192,
         "spot": {
           "usd_hour": 1.3219,
@@ -16980,10 +16980,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.1016,
         "spot": {
-          "usd_hour": 0.2788,
+          "usd_hour": 0.2611,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -17043,10 +17043,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.2032,
         "spot": {
-          "usd_hour": 0.5197,
+          "usd_hour": 0.5231,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -17106,10 +17106,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2754,
         "spot": {
-          "usd_hour": 0.0772,
+          "usd_hour": 0.0768,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17169,11 +17169,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.9376,
         "spot": {
-          "usd_hour": 0.65,
-          "az": "sa-east-1c"
+          "usd_hour": 0.6592,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 68,
@@ -17232,10 +17232,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.9168,
         "spot": {
-          "usd_hour": 0.8376,
+          "usd_hour": 0.8079,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17295,10 +17295,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4896,
         "spot": {
-          "usd_hour": 0.0925,
+          "usd_hour": 0.0921,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17358,10 +17358,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.9792,
         "spot": {
-          "usd_hour": 0.1237,
+          "usd_hour": 0.1252,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17421,10 +17421,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.9584,
         "spot": {
-          "usd_hour": 0.3127,
+          "usd_hour": 0.2983,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17484,10 +17484,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2448,
         "spot": {
-          "usd_hour": 0.0279,
+          "usd_hour": 0.0277,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17553,7 +17553,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.456,
         "spot": {
           "usd_hour": 0.3456,
@@ -17622,10 +17622,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.608,
         "spot": {
-          "usd_hour": 0.4835,
+          "usd_hour": 0.4702,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17691,10 +17691,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.576,
         "spot": {
-          "usd_hour": 0.0984,
+          "usd_hour": 0.0975,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17760,10 +17760,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.152,
         "spot": {
-          "usd_hour": 0.1469,
+          "usd_hour": 0.1471,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -17829,7 +17829,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.304,
         "spot": {
           "usd_hour": 0.2304,
@@ -17898,10 +17898,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.288,
         "spot": {
-          "usd_hour": 0.0541,
+          "usd_hour": 0.0533,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -17961,10 +17961,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.672,
         "spot": {
-          "usd_hour": 1.2156,
+          "usd_hour": 1.2125,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -18024,10 +18024,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.896,
         "spot": {
-          "usd_hour": 1.5185,
+          "usd_hour": 1.5084,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -18087,10 +18087,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.344,
         "spot": {
-          "usd_hour": 1.7272,
+          "usd_hour": 1.6823,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -18150,10 +18150,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.612,
         "spot": {
-          "usd_hour": 0.1394,
+          "usd_hour": 0.1331,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -18213,7 +18213,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.792,
         "spot": {
           "usd_hour": 0.9792,
@@ -18276,10 +18276,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.224,
         "spot": {
-          "usd_hour": 0.3094,
+          "usd_hour": 0.3089,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -18339,10 +18339,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.448,
         "spot": {
-          "usd_hour": 0.8401,
+          "usd_hour": 0.8328,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -18402,10 +18402,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.306,
         "spot": {
-          "usd_hour": 0.081,
+          "usd_hour": 0.0765,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -18470,10 +18470,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.536,
         "spot": {
-          "usd_hour": 3.5067,
+          "usd_hour": 3.5134,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -18538,10 +18538,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.048,
         "spot": {
-          "usd_hour": 4.2515,
+          "usd_hour": 4.2802,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -18606,10 +18606,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.072,
         "spot": {
-          "usd_hour": 5.7421,
+          "usd_hour": 5.8332,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -18674,10 +18674,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.756,
         "spot": {
-          "usd_hour": 0.1515,
+          "usd_hour": 0.149,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -18742,10 +18742,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 12.096,
         "spot": {
-          "usd_hour": 1.2852,
+          "usd_hour": 1.2542,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -18810,10 +18810,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.512,
         "spot": {
-          "usd_hour": 0.5552,
+          "usd_hour": 0.5578,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -18878,10 +18878,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.024,
         "spot": {
-          "usd_hour": 2.1313,
+          "usd_hour": 2.1387,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -18946,10 +18946,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.378,
         "spot": {
-          "usd_hour": 0.0773,
+          "usd_hour": 0.0766,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -19009,10 +19009,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.1212,
         "spot": {
-          "usd_hour": 1.437,
+          "usd_hour": 1.5018,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19072,10 +19072,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.1616,
         "spot": {
-          "usd_hour": 1.674,
+          "usd_hour": 1.7087,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19135,10 +19135,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.5202,
         "spot": {
-          "usd_hour": 0.1085,
+          "usd_hour": 0.1087,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19198,11 +19198,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.0404,
         "spot": {
-          "usd_hour": 0.5566,
-          "az": "sa-east-1b"
+          "usd_hour": 0.5558,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 54,
@@ -19261,10 +19261,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.0808,
         "spot": {
-          "usd_hour": 1.1178,
+          "usd_hour": 1.1161,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -19324,10 +19324,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.2601,
         "spot": {
-          "usd_hour": 0.0571,
+          "usd_hour": 0.0573,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19392,10 +19392,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.0824,
         "spot": {
-          "usd_hour": 2.7666,
+          "usd_hour": 2.7866,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -19460,10 +19460,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.4432,
         "spot": {
-          "usd_hour": 2.8367,
+          "usd_hour": 2.9347,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -19528,10 +19528,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.6804,
         "spot": {
-          "usd_hour": 0.1061,
+          "usd_hour": 0.1075,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19596,10 +19596,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.3608,
         "spot": {
-          "usd_hour": 0.7378,
+          "usd_hour": 0.746,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -19664,10 +19664,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.7216,
         "spot": {
-          "usd_hour": 1.9165,
+          "usd_hour": 1.9153,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -19732,10 +19732,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3402,
         "spot": {
-          "usd_hour": 0.0624,
+          "usd_hour": 0.0629,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19795,10 +19795,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.66288,
         "spot": {
-          "usd_hour": 0.7193,
+          "usd_hour": 0.723,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19858,10 +19858,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.88384,
         "spot": {
-          "usd_hour": 0.7152,
+          "usd_hour": 0.6873,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19921,10 +19921,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.61048,
         "spot": {
-          "usd_hour": 0.1471,
+          "usd_hour": 0.144,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -19984,10 +19984,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.22096,
         "spot": {
-          "usd_hour": 0.3409,
+          "usd_hour": 0.3434,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -20047,10 +20047,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.44192,
         "spot": {
-          "usd_hour": 0.7316,
+          "usd_hour": 0.7244,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -20110,11 +20110,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.30524,
         "spot": {
-          "usd_hour": 0.0705,
-          "az": "sa-east-1c"
+          "usd_hour": 0.0704,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 63,
@@ -20173,10 +20173,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.8556,
         "spot": {
-          "usd_hour": 1.7401,
+          "usd_hour": 1.7056,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -20236,10 +20236,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.1408,
         "spot": {
-          "usd_hour": 2.4854,
+          "usd_hour": 2.4671,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -20299,10 +20299,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.7112,
         "spot": {
-          "usd_hour": 3.3078,
+          "usd_hour": 3.1327,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -20362,10 +20362,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.6426,
         "spot": {
-          "usd_hour": 0.1431,
+          "usd_hour": 0.1444,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -20425,10 +20425,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 15.4224,
         "spot": {
-          "usd_hour": 2.6207,
+          "usd_hour": 2.5643,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -20488,10 +20488,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.2852,
         "spot": {
-          "usd_hour": 0.4503,
+          "usd_hour": 0.4497,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -20551,11 +20551,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.5704,
         "spot": {
-          "usd_hour": 1.2046,
-          "az": "sa-east-1c"
+          "usd_hour": 1.1901,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 66,
@@ -20614,10 +20614,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3213,
         "spot": {
-          "usd_hour": 0.0722,
+          "usd_hour": 0.07,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -20677,10 +20677,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.43344,
         "spot": {
-          "usd_hour": 1.9797,
+          "usd_hour": 2.0608,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -20740,10 +20740,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.57792,
         "spot": {
-          "usd_hour": 1.3852,
+          "usd_hour": 1.4063,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -20803,10 +20803,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.86688,
         "spot": {
-          "usd_hour": 1.9897,
+          "usd_hour": 2.0182,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -20866,10 +20866,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.57224,
         "spot": {
-          "usd_hour": 0.1182,
+          "usd_hour": 0.1136,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -20929,10 +20929,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.73376,
         "spot": {
-          "usd_hour": 1.3869,
+          "usd_hour": 1.4044,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -20992,10 +20992,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.14448,
         "spot": {
-          "usd_hour": 0.5343,
+          "usd_hour": 0.5353,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -21055,10 +21055,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.28896,
         "spot": {
-          "usd_hour": 1.4115,
+          "usd_hour": 1.4005,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -21118,10 +21118,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.28612,
         "spot": {
-          "usd_hour": 0.0752,
+          "usd_hour": 0.0715,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -21187,10 +21187,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.4088,
         "spot": {
-          "usd_hour": 1.5586,
+          "usd_hour": 1.5324,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -21256,10 +21256,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.8784,
         "spot": {
-          "usd_hour": 2.0007,
+          "usd_hour": 2.0434,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -21325,10 +21325,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.8176,
         "spot": {
-          "usd_hour": 2.9867,
+          "usd_hour": 2.9412,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -21394,10 +21394,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.7348,
         "spot": {
-          "usd_hour": 0.0919,
+          "usd_hour": 0.0981,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -21463,7 +21463,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 17.6352,
         "spot": {
           "usd_hour": 1.7635,
@@ -21532,10 +21532,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.4696,
         "spot": {
-          "usd_hour": 0.4001,
+          "usd_hour": 0.4092,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -21601,10 +21601,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.9392,
         "spot": {
-          "usd_hour": 1.2818,
+          "usd_hour": 1.2327,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -21670,10 +21670,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3674,
         "spot": {
-          "usd_hour": 0.0842,
+          "usd_hour": 0.0871,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -21743,10 +21743,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 35.5569,
         "spot": {
-          "usd_hour": 29.6066,
+          "usd_hour": 29.6106,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -21815,10 +21815,10 @@
         }
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 92.4672,
         "spot": {
-          "usd_hour": 76.9931,
+          "usd_hour": 77.0896,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -21883,10 +21883,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.399,
         "spot": {
-          "usd_hour": 0.1527,
+          "usd_hour": 0.1538,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -21951,10 +21951,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.799,
         "spot": {
-          "usd_hour": 0.3874,
+          "usd_hour": 0.3743,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -22019,10 +22019,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.597,
         "spot": {
-          "usd_hour": 0.6692,
+          "usd_hour": 0.6546,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -22087,10 +22087,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.7,
         "spot": {
-          "usd_hour": 0.0826,
+          "usd_hour": 0.0797,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -22149,7 +22149,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.96,
         "spot": {
           "usd_hour": 0.896,
@@ -22211,10 +22211,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.12,
         "spot": {
-          "usd_hour": 0.1588,
+          "usd_hour": 0.1637,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22273,10 +22273,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.24,
         "spot": {
-          "usd_hour": 0.3378,
+          "usd_hour": 0.336,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22335,10 +22335,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.48,
         "spot": {
-          "usd_hour": 0.5478,
+          "usd_hour": 0.5345,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22397,10 +22397,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.56,
         "spot": {
-          "usd_hour": 0.087,
+          "usd_hour": 0.0847,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22460,7 +22460,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.824,
         "spot": {
           "usd_hour": 0.4824,
@@ -22523,10 +22523,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.432,
         "spot": {
-          "usd_hour": 0.8507,
+          "usd_hour": 0.8447,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22586,7 +22586,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.648,
         "spot": {
           "usd_hour": 0.9648,
@@ -22649,10 +22649,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.804,
         "spot": {
-          "usd_hour": 0.1523,
+          "usd_hour": 0.1466,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -22712,10 +22712,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.608,
         "spot": {
-          "usd_hour": 0.2932,
+          "usd_hour": 0.2886,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22775,10 +22775,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.216,
         "spot": {
-          "usd_hour": 0.451,
+          "usd_hour": 0.4454,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22838,10 +22838,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.402,
         "spot": {
-          "usd_hour": 0.0672,
+          "usd_hour": 0.0654,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -22900,10 +22900,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.344,
         "spot": {
-          "usd_hour": 0.8205,
+          "usd_hour": 0.7924,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -22962,10 +22962,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.792,
         "spot": {
-          "usd_hour": 1.4441,
+          "usd_hour": 1.5011,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -23024,10 +23024,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.688,
         "spot": {
-          "usd_hour": 1.6796,
+          "usd_hour": 1.7368,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -23086,10 +23086,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.724,
         "spot": {
-          "usd_hour": 0.177,
+          "usd_hour": 0.179,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -23148,10 +23148,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.448,
         "spot": {
-          "usd_hour": 0.4619,
+          "usd_hour": 0.454,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -23210,10 +23210,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.896,
         "spot": {
-          "usd_hour": 0.8272,
+          "usd_hour": 0.7974,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -23272,10 +23272,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.362,
         "spot": {
-          "usd_hour": 0.09,
+          "usd_hour": 0.0886,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -23340,11 +23340,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.992,
         "spot": {
-          "usd_hour": 1.0396,
-          "az": "sa-east-1c"
+          "usd_hour": 1.0374,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 77,
@@ -23408,11 +23408,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.656,
         "spot": {
-          "usd_hour": 1.1566,
-          "az": "sa-east-1c"
+          "usd_hour": 1.1422,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 76,
@@ -23476,10 +23476,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.984,
         "spot": {
-          "usd_hour": 1.5035,
+          "usd_hour": 1.4387,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -23544,10 +23544,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.832,
         "spot": {
-          "usd_hour": 0.2209,
+          "usd_hour": 0.2157,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -23612,10 +23612,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.664,
         "spot": {
-          "usd_hour": 0.3732,
+          "usd_hour": 0.3707,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -23680,10 +23680,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.328,
         "spot": {
-          "usd_hour": 0.9285,
+          "usd_hour": 0.8855,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -23748,10 +23748,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.416,
         "spot": {
-          "usd_hour": 0.1007,
+          "usd_hour": 0.0992,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -23811,10 +23811,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.688,
         "spot": {
-          "usd_hour": 2.0417,
+          "usd_hour": 2.0259,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -23874,10 +23874,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.584,
         "spot": {
-          "usd_hour": 3.1173,
+          "usd_hour": 3.0771,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -23937,10 +23937,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 11.376,
         "spot": {
-          "usd_hour": 4.4848,
+          "usd_hour": 4.277,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -24000,11 +24000,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.948,
         "spot": {
-          "usd_hour": 0.3058,
-          "az": "sa-east-1b"
+          "usd_hour": 0.2961,
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 71,
@@ -24063,10 +24063,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.896,
         "spot": {
-          "usd_hour": 0.6962,
+          "usd_hour": 0.6976,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -24126,10 +24126,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.792,
         "spot": {
-          "usd_hour": 1.3652,
+          "usd_hour": 1.3693,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -24189,10 +24189,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.474,
         "spot": {
-          "usd_hour": 0.1108,
+          "usd_hour": 0.11,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -24258,10 +24258,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.472,
         "spot": {
-          "usd_hour": 4.0854,
+          "usd_hour": 4.0936,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -24327,10 +24327,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.296,
         "spot": {
-          "usd_hour": 4.7852,
+          "usd_hour": 4.7845,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -24396,10 +24396,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 10.944,
         "spot": {
-          "usd_hour": 4.0987,
+          "usd_hour": 4.2151,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -24465,10 +24465,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.912,
         "spot": {
-          "usd_hour": 0.1566,
+          "usd_hour": 0.1591,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -24534,10 +24534,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.824,
         "spot": {
-          "usd_hour": 0.6009,
+          "usd_hour": 0.5983,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -24603,10 +24603,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.648,
         "spot": {
-          "usd_hour": 2.2413,
+          "usd_hour": 2.2485,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -24672,11 +24672,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.456,
         "spot": {
-          "usd_hour": 0.0766,
-          "az": "sa-east-1c"
+          "usd_hour": 0.076,
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 83,
@@ -24735,10 +24735,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.664,
         "spot": {
-          "usd_hour": 1.879,
+          "usd_hour": 1.8802,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -24798,10 +24798,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.552,
         "spot": {
-          "usd_hour": 2.6951,
+          "usd_hour": 2.6375,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -24861,10 +24861,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 11.328,
         "spot": {
-          "usd_hour": 2.442,
+          "usd_hour": 2.436,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -24924,10 +24924,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.944,
         "spot": {
-          "usd_hour": 0.2789,
+          "usd_hour": 0.276,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -24987,10 +24987,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.888,
         "spot": {
-          "usd_hour": 0.5387,
+          "usd_hour": 0.54,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -25050,10 +25050,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.776,
         "spot": {
-          "usd_hour": 1.6174,
+          "usd_hour": 1.6105,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -25113,10 +25113,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.472,
         "spot": {
-          "usd_hour": 0.089,
+          "usd_hour": 0.0923,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -25176,7 +25176,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.8592,
         "spot": {
           "usd_hour": 0.3859,
@@ -25239,7 +25239,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.1456,
         "spot": {
           "usd_hour": 0.5146,
@@ -25302,10 +25302,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.6432,
         "spot": {
-          "usd_hour": 0.1003,
+          "usd_hour": 0.101,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -25365,10 +25365,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.2864,
         "spot": {
-          "usd_hour": 0.2246,
+          "usd_hour": 0.2269,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -25428,10 +25428,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.5728,
         "spot": {
-          "usd_hour": 0.3705,
+          "usd_hour": 0.3585,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -25491,10 +25491,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3216,
         "spot": {
-          "usd_hour": 0.0623,
+          "usd_hour": 0.0619,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -25560,10 +25560,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.3776,
         "spot": {
-          "usd_hour": 1.2069,
+          "usd_hour": 1.1821,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -25629,10 +25629,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.8368,
         "spot": {
-          "usd_hour": 2.055,
+          "usd_hour": 2.0545,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -25698,10 +25698,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.7296,
         "spot": {
-          "usd_hour": 0.1169,
+          "usd_hour": 0.1225,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -25767,10 +25767,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.4592,
         "spot": {
-          "usd_hour": 0.331,
+          "usd_hour": 0.3216,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -25836,10 +25836,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.9184,
         "spot": {
-          "usd_hour": 0.8618,
+          "usd_hour": 0.8631,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -25905,10 +25905,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3648,
         "spot": {
-          "usd_hour": 0.081,
+          "usd_hour": 0.0815,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -25968,10 +25968,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.824,
         "spot": {
-          "usd_hour": 1.0007,
+          "usd_hour": 0.9587,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -26031,10 +26031,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.432,
         "spot": {
-          "usd_hour": 1.3658,
+          "usd_hour": 1.3071,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -26094,10 +26094,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 9.648,
         "spot": {
-          "usd_hour": 1.2691,
+          "usd_hour": 1.2448,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -26157,10 +26157,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.804,
         "spot": {
-          "usd_hour": 0.189,
+          "usd_hour": 0.1911,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -26220,11 +26220,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 12.864,
         "spot": {
           "usd_hour": 1.2864,
-          "az": "sa-east-1a"
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 77,
@@ -26283,10 +26283,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.608,
         "spot": {
-          "usd_hour": 0.3394,
+          "usd_hour": 0.3369,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -26346,10 +26346,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.216,
         "spot": {
-          "usd_hour": 0.5214,
+          "usd_hour": 0.5292,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -26409,10 +26409,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.402,
         "spot": {
-          "usd_hour": 0.0895,
+          "usd_hour": 0.0853,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -26472,10 +26472,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.0906,
         "spot": {
-          "usd_hour": 1.0338,
+          "usd_hour": 0.9921,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -26535,11 +26535,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.4541,
         "spot": {
-          "usd_hour": 1.2173,
-          "az": "sa-east-1a"
+          "usd_hour": 1.1548,
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 68,
@@ -26598,10 +26598,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.6818,
         "spot": {
-          "usd_hour": 0.0951,
+          "usd_hour": 0.0885,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -26661,11 +26661,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.3635,
         "spot": {
-          "usd_hour": 0.3317,
-          "az": "sa-east-1c"
+          "usd_hour": 0.3417,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 72,
@@ -26724,11 +26724,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.727,
         "spot": {
-          "usd_hour": 0.7012,
-          "az": "sa-east-1c"
+          "usd_hour": 0.6797,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 73,
@@ -26787,10 +26787,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.3409,
         "spot": {
-          "usd_hour": 0.0429,
+          "usd_hour": 0.0418,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -26850,10 +26850,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.0652,
         "spot": {
-          "usd_hour": 1.8314,
+          "usd_hour": 1.8206,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -26913,10 +26913,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.7536,
         "spot": {
-          "usd_hour": 2.4704,
+          "usd_hour": 2.434,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -26976,10 +26976,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 10.1304,
         "spot": {
-          "usd_hour": 4.0982,
+          "usd_hour": 3.9915,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -27039,10 +27039,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.8442,
         "spot": {
-          "usd_hour": 0.115,
+          "usd_hour": 0.1154,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27102,10 +27102,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 20.2608,
         "spot": {
-          "usd_hour": 3.0762,
+          "usd_hour": 3.0719,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -27165,10 +27165,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.6884,
         "spot": {
-          "usd_hour": 0.4935,
+          "usd_hour": 0.4911,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -27228,10 +27228,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.3768,
         "spot": {
-          "usd_hour": 1.0598,
+          "usd_hour": 1.0778,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27291,10 +27291,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4221,
         "spot": {
-          "usd_hour": 0.0644,
+          "usd_hour": 0.0639,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27354,10 +27354,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 4.49952,
         "spot": {
-          "usd_hour": 0.8902,
+          "usd_hour": 0.8695,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27417,10 +27417,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.99936,
         "spot": {
-          "usd_hour": 1.5829,
+          "usd_hour": 1.5218,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27480,7 +27480,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 8.99904,
         "spot": {
           "usd_hour": 0.8999,
@@ -27543,10 +27543,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.74992,
         "spot": {
-          "usd_hour": 0.0957,
+          "usd_hour": 0.0969,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27606,10 +27606,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 17.99808,
         "spot": {
-          "usd_hour": 7.2488,
+          "usd_hour": 6.7746,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -27669,10 +27669,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.49984,
         "spot": {
-          "usd_hour": 0.403,
+          "usd_hour": 0.3871,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -27732,10 +27732,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 2.99968,
         "spot": {
-          "usd_hour": 0.8318,
+          "usd_hour": 0.8049,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -27795,10 +27795,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.37496,
         "spot": {
-          "usd_hour": 0.118,
+          "usd_hour": 0.1117,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27864,10 +27864,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.5848,
         "spot": {
-          "usd_hour": 3.9895,
+          "usd_hour": 3.9783,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -27933,10 +27933,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.4464,
         "spot": {
-          "usd_hour": 3.6436,
+          "usd_hour": 3.6174,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28002,10 +28002,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 11.1696,
         "spot": {
-          "usd_hour": 5.0322,
+          "usd_hour": 4.7926,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28071,10 +28071,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.9308,
         "spot": {
-          "usd_hour": 0.1245,
+          "usd_hour": 0.1228,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28140,7 +28140,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 22.3392,
         "spot": {
           "usd_hour": 2.2339,
@@ -28209,10 +28209,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.8616,
         "spot": {
-          "usd_hour": 1.222,
+          "usd_hour": 1.233,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -28278,10 +28278,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.7232,
         "spot": {
-          "usd_hour": 2.6307,
+          "usd_hour": 2.5975,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28347,10 +28347,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4654,
         "spot": {
-          "usd_hour": 0.0866,
+          "usd_hour": 0.0853,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28410,10 +28410,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.05248,
         "spot": {
-          "usd_hour": 1.8499,
+          "usd_hour": 1.8029,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -28473,10 +28473,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.73664,
         "spot": {
-          "usd_hour": 2.474,
+          "usd_hour": 2.4306,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -28536,10 +28536,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.84208,
         "spot": {
-          "usd_hour": 0.1696,
+          "usd_hour": 0.1639,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28599,10 +28599,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.68416,
         "spot": {
-          "usd_hour": 0.3494,
+          "usd_hour": 0.3467,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -28662,10 +28662,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.36832,
         "spot": {
-          "usd_hour": 0.6312,
+          "usd_hour": 0.6193,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28725,10 +28725,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.42104,
         "spot": {
-          "usd_hour": 0.0793,
+          "usd_hour": 0.0776,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -28788,10 +28788,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 5.3184,
         "spot": {
-          "usd_hour": 2.7757,
+          "usd_hour": 2.7864,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -28851,10 +28851,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 7.0912,
         "spot": {
-          "usd_hour": 2.2792,
+          "usd_hour": 2.2573,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28914,10 +28914,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 10.6368,
         "spot": {
-          "usd_hour": 3.7487,
+          "usd_hour": 3.8422,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -28977,10 +28977,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.8864,
         "spot": {
-          "usd_hour": 0.2857,
+          "usd_hour": 0.2952,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -29040,11 +29040,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 14.1824,
         "spot": {
-          "usd_hour": 1.5916,
-          "az": "sa-east-1c"
+          "usd_hour": 1.704,
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 83,
@@ -29103,10 +29103,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 21.2736,
         "spot": {
-          "usd_hour": 2.6691,
+          "usd_hour": 2.682,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -29166,10 +29166,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.7728,
         "spot": {
-          "usd_hour": 0.8901,
+          "usd_hour": 0.915,
           "az": "sa-east-1a"
         },
         "spot_interruption": {
@@ -29229,10 +29229,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.5456,
         "spot": {
-          "usd_hour": 2.5312,
+          "usd_hour": 2.5389,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -29292,7 +29292,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 42.5472,
         "spot": {
           "usd_hour": 4.2547,
@@ -29355,10 +29355,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 0.4432,
         "spot": {
-          "usd_hour": 0.0922,
+          "usd_hour": 0.0895,
           "az": "sa-east-1b"
         },
         "spot_interruption": {
@@ -29423,7 +29423,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.005,
         "spot": {
           "usd_hour": 1.3005,
@@ -29491,11 +29491,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 26.01,
         "spot": {
           "usd_hour": 2.601,
-          "az": "sa-east-1c"
+          "az": "sa-east-1a"
         },
         "spot_interruption": {
           "savings_percent": 90,
@@ -29559,7 +29559,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 26.01,
         "spot": {
           "usd_hour": 2.601,
@@ -29627,7 +29627,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.251,
         "spot": {
           "usd_hour": 0.3251,
@@ -29695,7 +29695,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 52.019,
         "spot": {
           "usd_hour": 5.2019,
@@ -29763,10 +29763,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.502,
         "spot": {
-          "usd_hour": 0.9325,
+          "usd_hour": 0.9358,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -29831,10 +29831,10 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.005,
         "spot": {
-          "usd_hour": 2.9615,
+          "usd_hour": 2.9636,
           "az": "sa-east-1c"
         },
         "spot_interruption": {
@@ -29899,7 +29899,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.626,
         "spot": {
           "usd_hour": 0.1626,
@@ -29968,7 +29968,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.005,
         "spot": {
           "usd_hour": 1.3005,
@@ -30037,7 +30037,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 19.5075,
         "spot": {
           "usd_hour": 1.9508,
@@ -30106,11 +30106,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 26.01,
         "spot": {
           "usd_hour": 2.601,
-          "az": "sa-east-1a"
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 89,
@@ -30175,11 +30175,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 26.01,
         "spot": {
           "usd_hour": 2.601,
-          "az": "sa-east-1c"
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 79,
@@ -30244,11 +30244,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 39.015,
         "spot": {
           "usd_hour": 3.9015,
-          "az": "sa-east-1b"
+          "az": "sa-east-1c"
         },
         "spot_interruption": {
           "savings_percent": 78,
@@ -30313,11 +30313,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 3.25125,
         "spot": {
           "usd_hour": 0.3251,
-          "az": "sa-east-1c"
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 89,
@@ -30382,11 +30382,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 52.02,
         "spot": {
           "usd_hour": 5.202,
-          "az": "sa-east-1c"
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 80,
@@ -30451,7 +30451,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 6.5025,
         "spot": {
           "usd_hour": 0.6503,
@@ -30520,11 +30520,11 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 13.005,
         "spot": {
           "usd_hour": 1.3005,
-          "az": "sa-east-1a"
+          "az": "sa-east-1b"
         },
         "spot_interruption": {
           "savings_percent": 79,
@@ -30589,7 +30589,7 @@
         "gpu": null
       },
       "pricing": {
-        "as_of": "2026-08-04T11:18:06.855999+00:00",
+        "as_of": "2026-08-05T11:14:26.445931+00:00",
         "on_demand_usd_hour": 1.62563,
         "spot": {
           "usd_hour": 0.1626,
