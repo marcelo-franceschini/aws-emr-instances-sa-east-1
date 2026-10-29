@@ -13,6 +13,7 @@ import re
 
 import requests
 
+from emr_instances.errors import SourceFormatError
 from emr_instances.models import YarnDefaults
 
 logger = logging.getLogger(__name__)
@@ -23,12 +24,16 @@ YARN_DOC_URL = (
 
 # Cada tabela é precedida por uma linha só com o tipo em negrito: **c5.xlarge**
 _TYPE_LINE = re.compile(r"^\*\*([a-z0-9][a-z0-9-]*\.[a-z0-9-]+)\*\*\s*$")
-# Linha de tabela com a propriedade e o valor da coluna padrão (a primeira)
-_ROW = re.compile(r"^\|\s*(yarn\.[\w.-]+)\s*\|\s*(\d+)\s*\|")
+# Cabeçalho da tabela, com o nome da primeira coluna de valor
+_HEADER = re.compile(r"^\|\s*Configuration option\s*\|\s*([^|]*?)\s*\|")
+# Linha de tabela com a propriedade e o valor da primeira coluna de valor
+_ROW = re.compile(r"^\|\s*(yarn\.[\w.-]+)\s*\|\s*([^|]*?)\s*\|")
 
+_DEFAULT_COLUMN = "Default value"
 _NODEMANAGER = "yarn.nodemanager.resource.memory-mb"
 _MAX_ALLOCATION = "yarn.scheduler.maximum-allocation-mb"
 _MIN_ALLOCATION = "yarn.scheduler.minimum-allocation-mb"
+_USED = (_NODEMANAGER, _MAX_ALLOCATION, _MIN_ALLOCATION)
 
 
 def parse_yarn_defaults(markdown: str) -> dict[str, YarnDefaults]:
@@ -36,7 +41,12 @@ def parse_yarn_defaults(markdown: str) -> dict[str, YarnDefaults]:
 
     Só a coluna de valor padrão é lida; a coluna "com HBase" é ignorada. Um tipo
     sem a linha do NodeManager é descartado, porque sem ela o registro não teria
-    o campo que justifica a coleta.
+    o campo que justifica a coleta; a falta aparece na cobertura.
+
+    O que mostra que a página não é a esperada levanta SourceFormatError, para a
+    coleta falhar em vez de publicar valor errado: cabeçalho cuja primeira coluna
+    de valor não é a padrão (lê-la traria os valores "com HBase") e valor que não
+    é número numa das três propriedades usadas.
     """
     defaults: dict[str, YarnDefaults] = {}
     current: str | None = None
@@ -56,19 +66,48 @@ def parse_yarn_defaults(markdown: str) -> dict[str, YarnDefaults]:
             close()
             current, values = type_match.group(1), {}
             continue
+        if line.startswith("#"):
+            # seção nova: tabela que vier antes do próximo tipo não é do anterior
+            close()
+            current, values = None, {}
+            continue
+        if current is None:
+            continue
+        header_match = _HEADER.match(line)
+        if header_match and header_match.group(1) != _DEFAULT_COLUMN:
+            raise SourceFormatError(
+                f"Tabela de YARN de {current} com a coluna "
+                f"{header_match.group(1)!r} no lugar de {_DEFAULT_COLUMN!r}"
+            )
         row_match = _ROW.match(line)
-        if row_match and current is not None:
-            values[row_match.group(1)] = int(row_match.group(2))
+        if row_match and row_match.group(1) in _USED:
+            name, value = row_match.groups()
+            values[name] = _megabytes(current, name, value)
     close()
     return defaults
+
+
+def _megabytes(instance_type: str, name: str, value: str) -> int:
+    """Valor da coluna padrão em MB inteiros.
+
+    A página usa inteiros e, em pelo menos um tipo (is4gen.xlarge, `17572.12`),
+    decimal; os dois valem. Qualquer outra coisa é formato novo.
+    """
+    try:
+        return round(float(value))
+    except (ValueError, OverflowError):
+        raise SourceFormatError(
+            f"{name} de {instance_type} não é número: {value!r}"
+        ) from None
 
 
 def yarn_defaults() -> dict[str, YarnDefaults]:
     """Baixa a página e devolve os padrões de YARN por tipo de instância.
 
-    Indisponibilidade da página ou mudança de formato não derruba a coleta: o
-    bloco `emr_yarn` fica None e a falta aparece no log de cobertura. Zero tipos
-    lidos com a página no ar indica que o formato mudou, e isso é logado como erro.
+    Página fora do ar devolve vazio, e a falta derruba a coleta na checagem de
+    cobertura. Página no ar sem nenhuma tabela reconhecida levanta
+    SourceFormatError, como as anomalias que o parser encontra: nos dois casos a
+    coleta falha e o workflow fica vermelho, em vez de publicar nulos.
     """
     try:
         response = requests.get(YARN_DOC_URL, timeout=30)
@@ -78,7 +117,7 @@ def yarn_defaults() -> dict[str, YarnDefaults]:
         return {}
     defaults = parse_yarn_defaults(response.text)
     if not defaults:
-        logger.error(
+        raise SourceFormatError(
             "A página Task configuration foi baixada, mas nenhuma tabela foi "
             "reconhecida: o formato da documentação provavelmente mudou."
         )

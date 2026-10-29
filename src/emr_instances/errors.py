@@ -18,3 +18,11 @@ class CoverageError(EmrInstancesError):
 
 class StorageError(EmrInstancesError):
     """Falha ao gravar o JSON em disco."""
+
+
+class SourceFormatError(EmrInstancesError):
+    """Uma fonte de fora das APIs mudou de formato e o parser não a reconhece.
+
+    Existe para a coleta falhar alto em vez de publicar valores errados ou nulos:
+    quem lê a página por regex não tem outro jeito de saber que ela mudou.
+    """

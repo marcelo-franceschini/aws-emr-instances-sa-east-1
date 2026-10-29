@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 import requests
 
+from emr_instances.errors import SourceFormatError
 from emr_instances.sources import yarn
 
 # Recorte no formato real da página Task configuration (versão em Markdown):
@@ -96,6 +97,84 @@ def test_parse_ignora_texto_fora_de_tabela() -> None:
     }
 
 
+def _tabela(tipo: str, *linhas: str, cabecalho: str | None = None) -> str:
+    """Bloco de um tipo no formato da página: linha do tipo e a tabela."""
+    cabecalho = (
+        cabecalho or "| Configuration option | Default value | With HBase installed |"
+    )
+    return "\n".join([f"**{tipo}**", "", cabecalho, "| --- | --- | --- |", *linhas])
+
+
+def test_parse_aceita_valor_decimal() -> None:
+    """A página real tem `17572.12` em is4gen.xlarge; o tipo não pode sumir."""
+    markdown = _tabela(
+        "is4gen.xlarge",
+        "| yarn.scheduler.maximum-allocation-mb | 17572.12 | 8786.06 |",
+        "| yarn.nodemanager.resource.memory-mb | 17572.12 | 8786.06 |",
+    )
+
+    result = yarn.parse_yarn_defaults(markdown)
+
+    assert result["is4gen.xlarge"]["nodemanager_memory_mb"] == 17572
+    assert result["is4gen.xlarge"]["scheduler_max_allocation_mb"] == 17572
+
+
+def test_parse_colunas_trocadas_levanta_erro() -> None:
+    """Se a coluna padrão deixar de ser a primeira, ler a primeira traria HBase."""
+    markdown = _tabela(
+        "c5.xlarge",
+        "| yarn.nodemanager.resource.memory-mb | 3072 | 6144 |",
+        cabecalho="| Configuration option | With HBase installed | Default value |",
+    )
+
+    with pytest.raises(SourceFormatError, match="c5.xlarge"):
+        yarn.parse_yarn_defaults(markdown)
+
+
+def test_parse_valor_nao_numerico_numa_propriedade_usada_levanta_erro() -> None:
+    """Valor que não é número na linha do NodeManager é formato novo, não ausência."""
+    markdown = _tabela(
+        "c5.xlarge", "| yarn.nodemanager.resource.memory-mb | 6,144 | 3,072 |"
+    )
+
+    with pytest.raises(SourceFormatError, match="yarn.nodemanager.resource.memory-mb"):
+        yarn.parse_yarn_defaults(markdown)
+
+
+def test_parse_ignora_valor_estranho_em_propriedade_que_nao_usa() -> None:
+    """Só as três propriedades lidas são conferidas; as outras não derrubam nada."""
+    markdown = _tabela(
+        "c5.xlarge",
+        "| yarn.app.mapreduce.am.command-opts | -Xmx1229m | -Xmx1229m |",
+        "| yarn.nodemanager.resource.memory-mb | 6144 | 3072 |",
+    )
+
+    assert (
+        yarn.parse_yarn_defaults(markdown)["c5.xlarge"]["nodemanager_memory_mb"] == 6144
+    )
+
+
+def test_parse_tabela_depois_de_heading_nao_contamina_o_tipo_anterior() -> None:
+    """Um heading abre seção nova: tabela solta depois dele não é do tipo anterior."""
+    markdown = "\n".join(
+        [
+            _tabela(
+                "c5.xlarge", "| yarn.nodemanager.resource.memory-mb | 6144 | 3072 |"
+            ),
+            "",
+            "### Valores gerais",
+            "",
+            "| Configuration option | Default value | With HBase installed |",
+            "| --- | --- | --- |",
+            "| yarn.nodemanager.resource.memory-mb | 999 | 999 |",
+        ]
+    )
+
+    assert (
+        yarn.parse_yarn_defaults(markdown)["c5.xlarge"]["nodemanager_memory_mb"] == 6144
+    )
+
+
 def test_parse_markdown_sem_tabelas_devolve_vazio() -> None:
     """Formato desconhecido não levanta: devolve vazio."""
     assert yarn.parse_yarn_defaults("# Outra página\n\nsem tabelas") == {}
@@ -131,18 +210,18 @@ def test_yarn_defaults_pagina_indisponivel_devolve_vazio(
     assert "Task configuration" in caplog.text
 
 
-def test_yarn_defaults_formato_mudou_loga_erro(
-    caplog: pytest.LogCaptureFixture,
-) -> None:
-    """Página no ar sem nenhuma tabela reconhecida é mudança de formato: erro."""
+def test_yarn_defaults_formato_mudou_levanta_erro() -> None:
+    """Página no ar sem nenhuma tabela reconhecida é mudança de formato.
+
+    Antes só ia para o log, que não tem leitor; agora derruba a coleta e deixa o
+    workflow vermelho.
+    """
     response = MagicMock()
     response.text = "# Task configuration\n\nA documentação foi reescrita."
     response.raise_for_status.return_value = None
 
     with (
         patch("emr_instances.sources.yarn.requests.get", return_value=response),
-        caplog.at_level(logging.ERROR),
+        pytest.raises(SourceFormatError, match="formato"),
     ):
-        assert yarn.yarn_defaults() == {}
-
-    assert "formato" in caplog.text
+        yarn.yarn_defaults()

@@ -31,8 +31,10 @@ A coleta falha (código de saída 1, workflow vermelho e o e-mail de falha que o
 GitHub já manda) quando uma fonte essencial some: mais de 5% das instâncias sem
 preço on-demand, spot, taxa do EMR, hardware, oferta por AZ ou detalhe de disco,
 ou mais de 25% sem padrões de YARN ou sem taxa de interrupção (dados públicos de
-fora das APIs; a folga cobre tipos que eles ainda não listam). Nesse caso nada é
-publicado e a branch `data` continua com o último JSON bom.
+fora das APIs; a folga cobre tipos que eles ainda não listam). Também falha se a
+página de YARN mudar de formato, mesmo em parte: tabela cuja primeira coluna de
+valor não é a padrão, valor que não é número ou nenhuma tabela reconhecida.
+Nesse caso nada é publicado e a branch `data` continua com o último JSON bom.
 
 ### Estrutura do pacote
 

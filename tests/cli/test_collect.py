@@ -11,7 +11,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from emr_instances.cli import collect
-from emr_instances.errors import CoverageError
+from emr_instances.errors import CoverageError, EmrInstancesError, SourceFormatError
 from emr_instances.sources.yarn import YARN_DOC_URL
 
 YARN_DOC = """**m5.large**
@@ -183,23 +183,31 @@ def test_main_smoke(
     assert record["derived"]["yarn_memory_gb"] == 6.0
 
 
-def test_main_cobertura_insuficiente_sai_com_codigo_1(
+@pytest.mark.parametrize(
+    "erro",
+    [
+        CoverageError("Proporção sem padrões de YARN (100.0%) excede o limite"),
+        SourceFormatError("Tabela de YARN de c5.xlarge com a coluna inesperada"),
+    ],
+)
+def test_main_erro_previsto_sai_com_codigo_1(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
+    erro: EmrInstancesError,
 ) -> None:
-    """CoverageError vira exit 1 sem gravar o JSON: deixa o workflow vermelho.
+    """Cobertura baixa ou fonte com formato novo viram exit 1 sem gravar o JSON.
 
-    O passo de publicação nem roda, e a branch data fica com o último JSON bom.
+    É o que deixa o workflow vermelho: o passo de publicação nem roda, e a
+    branch data fica com o último JSON bom.
     """
 
-    def falha(records: object) -> None:
-        raise CoverageError("Proporção sem padrões de YARN (100.0%) excede o limite")
+    def falha(*args: object) -> None:
+        raise erro
 
     monkeypatch.setattr(
         collect, "build_clients", lambda: (MagicMock(), MagicMock(), MagicMock())
     )
-    monkeypatch.setattr(collect, "collect_records", lambda *args: [])
-    monkeypatch.setattr(collect, "validate_coverage", falha)
+    monkeypatch.setattr(collect, "collect_records", falha)
     output = tmp_path / "out.json"
     monkeypatch.setattr(
         sys,
