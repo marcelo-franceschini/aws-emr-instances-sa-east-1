@@ -151,7 +151,9 @@ Alguns campos merecem explicação:
   a um valor fixo). Fica `null` se a Price List não devolver um preço único para o
   tipo. O custo real de rodar é EC2 mais essa taxa.
 - **`spot` é o menor preço vigente entre as AZs; `spot_by_az` traz cada AZ** com a
-  distribuição dos últimos 30 dias. As estatísticas são **ponderadas pelo tempo
+  distribuição dos últimos 30 dias. No empate do preço vigente (comum: um sexto
+  dos tipos empata entre AZs), `spot` fica com a AZ de menor `p95`, a mais
+  estável, e depois com a de menor nome. As estatísticas são **ponderadas pelo tempo
   em que cada preço esteve em vigor**, porque o histórico da AWS não é uma
   amostragem regular. `price_changes` conta as vezes em que o preço mudou de
   valor na janela: a AWS repete o mesmo preço em registros sucessivos (umas

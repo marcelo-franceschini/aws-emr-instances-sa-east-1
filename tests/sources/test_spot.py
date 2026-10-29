@@ -80,10 +80,42 @@ def test_cheapest_current_usa_o_ultimo_preco_de_cada_az() -> None:
         "m5.xlarge": {"sa-east-1a": [(_ago(2), 0.096)]},
     }
 
-    result = spot.cheapest_current(series)
+    result = spot.cheapest_current(spot.az_statistics(series, now=NOW))
 
     assert result["m5.large"] == {"usd_hour": 0.05, "az": "sa-east-1b"}
     assert result["m5.xlarge"] == {"usd_hour": 0.096, "az": "sa-east-1a"}
+
+
+def test_cheapest_current_empate_fica_com_a_az_de_menor_p95() -> None:
+    """No empate do vigente fica a AZ mais estável, não a que a API listou antes.
+
+    A AZ "b" chega primeiro, como viria da API, e oscilou até 0,09 na janela; a
+    "a" ficou em 0,04 o tempo todo. As duas valem 0,04 agora.
+    """
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1b": [(_ago(40), 0.05), (_ago(10), 0.09), (_ago(5), 0.04)],
+            "sa-east-1a": [(_ago(35), 0.04), (_ago(1), 0.04)],
+        }
+    }
+
+    result = spot.cheapest_current(spot.az_statistics(series, now=NOW))
+
+    assert result["m5.large"] == {"usd_hour": 0.04, "az": "sa-east-1a"}
+
+
+def test_cheapest_current_empate_total_fica_com_o_menor_nome() -> None:
+    """Mesmo vigente e mesmo P95: decide o nome da AZ, nunca a ordem da API."""
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1c": [(_ago(2), 0.05)],
+            "sa-east-1b": [(_ago(2), 0.05)],
+        }
+    }
+
+    result = spot.cheapest_current(spot.az_statistics(series, now=NOW))
+
+    assert result["m5.large"]["az"] == "sa-east-1b"
 
 
 def test_az_statistics_pondera_pelo_tempo_em_vigor() -> None:

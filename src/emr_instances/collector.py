@@ -185,8 +185,8 @@ def collect_records(
     logger.info(f"Coletando histórico spot de {SPOT_HISTORY_DAYS} dias por AZ...")
     now = datetime.now(UTC)
     series = spot_price_history(ec2, now=now)
-    spot = cheapest_current(series)
     spot_stats = az_statistics(series, now=now)
+    spot = cheapest_current(spot_stats)
     logger.info(f"  {len(spot)} preços spot, {len(spot_stats)} com estatística por AZ")
 
     logger.info("Coletando padrões de YARN (documentação do EMR)...")

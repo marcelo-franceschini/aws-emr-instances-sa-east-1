@@ -184,7 +184,8 @@ class PricingSpec(TypedDict):
 
     `emr_fee_usd_hour` é a taxa do EMR cobrada por instância-hora além do EC2. Ela
     varia por tipo e não é proporcional ao preço do EC2. `spot` é o menor preço
-    vigente entre as AZs; `spot_by_az` traz cada AZ com a distribuição na janela.
+    vigente entre as AZs (no empate, a AZ de menor P95 e depois a de menor nome);
+    `spot_by_az` traz cada AZ com a distribuição na janela.
     """
 
     as_of: str

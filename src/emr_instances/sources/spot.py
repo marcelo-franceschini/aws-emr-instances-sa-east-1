@@ -56,19 +56,26 @@ def spot_price_history(
     return series
 
 
-def cheapest_current(series: SpotSeries) -> dict[str, SpotInfo]:
+def cheapest_current(stats: dict[str, list[SpotAzStats]]) -> dict[str, SpotInfo]:
     """Mapeia {instance_type: SpotInfo} com o menor preço vigente entre as AZs.
 
-    O preço vigente de uma AZ é o do evento mais recente dela. Fica com o menor
-    entre as AZs e registra em qual AZ estava.
+    Sai das estatísticas por AZ, para `spot` e `spot_by_az` nunca discordarem.
+    No empate do vigente fica a AZ de menor P95, a mais estável na janela e onde
+    se subiria o cluster; persistindo o empate, a de menor nome. Sem esse
+    critério valeria a ordem em que a API devolveu os eventos, que muda de um dia
+    para o outro sem mudança de preço e arrasta junto o P95 do bloco `derived`.
     """
     cheapest: dict[str, SpotInfo] = {}
-    for instance_type, by_az in series.items():
-        for az, events in by_az.items():
-            price = events[-1][1]
-            current = cheapest.get(instance_type)
-            if current is None or price < current["usd_hour"]:
-                cheapest[instance_type] = {"usd_hour": round(price, 6), "az": az}
+    for instance_type, by_az in stats.items():
+        if not by_az:
+            continue
+        best = min(
+            by_az, key=lambda s: (s["current_usd_hour"], s["p95_usd_hour"], s["az"])
+        )
+        cheapest[instance_type] = {
+            "usd_hour": best["current_usd_hour"],
+            "az": best["az"],
+        }
     return cheapest
 
 
