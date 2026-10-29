@@ -174,13 +174,9 @@ No envelope:
 
 Cada instância tem `instance_type` no topo e quatro blocos: `static` nunca muda para um dado tipo de instância (pode ser congelado, versionado e usado como constante), `pricing` muda todo dia e vem datado, `emr_yarn` depende do release do EMR e `derived` é calculado a partir dos outros três.
 
-### Exemplo
+### Exemplo de uma instância
 
-Um registro real da coleta de 29/10/2026, extraído e formatado com `jq`
-(`jq '.instances[] | select(.instance_type == "r8gd.4xlarge")' instances_sa-east-1.json`), sem edição à mão.
-
-<details>
-<summary>Registro de <code>r8gd.4xlarge</code></summary>
+Registro completo de `r8gd.4xlarge` da coleta de 29/10/2026 (`emr-7.14.0`), extraído com `jq '.instances[] | select(.instance_type == "r8gd.4xlarge")'` e formatado com `prettier` 3.3.3. É dado real, sem edição à mão.
 
 ```json
 {
@@ -203,11 +199,8 @@ Um registro real da coleta de 29/10/2026, extraído e formatado com `jq`
     "burstable_performance": false,
     "normalization_factor": 32,
     "supports_spot": true,
-    "availability_zones": [
-      "sa-east-1a",
-      "sa-east-1b",
-      "sa-east-1c"
-    ],
+    "availability_zones": ["sa-east-1a", "sa-east-1b", "sa-east-1c"],
+    "availability_zone_ids": ["sae1-az1", "sae1-az2", "sae1-az3"],
     "storage": {
       "ebs_only": false,
       "total_gb": 950,
@@ -240,49 +233,53 @@ Um registro real da coleta de 29/10/2026, extraído e formatado com `jq`
     "gpu": null
   },
   "pricing": {
-    "as_of": "2026-10-29T09:59:35.377722+00:00",
+    "as_of": "2026-10-29T11:21:27.269435+00:00",
     "on_demand_usd_hour": 1.8616,
     "emr_fee_usd_hour": 0.29392,
     "spot": {
       "usd_hour": 0.7475,
-      "az": "sa-east-1c"
+      "az": "sa-east-1c",
+      "az_id": "sae1-az3"
     },
     "spot_by_az": [
       {
         "az": "sa-east-1a",
+        "az_id": "sae1-az1",
         "current_usd_hour": 1.077,
         "window_days": 30,
         "min_usd_hour": 0.9607,
-        "mean_usd_hour": 1.027151,
+        "mean_usd_hour": 1.027004,
         "median_usd_hour": 1.0266,
         "p95_usd_hour": 1.0927,
         "max_usd_hour": 1.1535,
-        "stddev_usd_hour": 0.032838,
-        "price_changes": 122
+        "stddev_usd_hour": 0.03244,
+        "price_changes": 109
       },
       {
         "az": "sa-east-1b",
+        "az_id": "sae1-az2",
         "current_usd_hour": 0.8446,
         "window_days": 30,
         "min_usd_hour": 0.71,
-        "mean_usd_hour": 0.785974,
+        "mean_usd_hour": 0.785605,
         "median_usd_hour": 0.7548,
         "p95_usd_hour": 0.97,
         "max_usd_hour": 1.0365,
-        "stddev_usd_hour": 0.080906,
-        "price_changes": 128
+        "stddev_usd_hour": 0.080196,
+        "price_changes": 117
       },
       {
         "az": "sa-east-1c",
+        "az_id": "sae1-az3",
         "current_usd_hour": 0.7475,
         "window_days": 30,
         "min_usd_hour": 0.6446,
-        "mean_usd_hour": 0.731831,
+        "mean_usd_hour": 0.731311,
         "median_usd_hour": 0.6789,
         "p95_usd_hour": 0.9506,
         "max_usd_hour": 1.0172,
-        "stddev_usd_hour": 0.098463,
-        "price_changes": 125
+        "stddev_usd_hour": 0.097664,
+        "price_changes": 117
       }
     ],
     "spot_interruption": {
@@ -308,7 +305,7 @@ Um registro real da coleta de 29/10/2026, extraído e formatado com `jq`
     "total_spot_usd_hour": 1.04142,
     "total_spot_p95_usd_hour": 1.24452,
     "spot_discount_percent": 59.8,
-    "spot_volatility_cv": 0.135,
+    "spot_volatility_cv": 0.134,
     "total_spot_usd_per_vcpu_hour": 0.065089,
     "total_spot_usd_per_yarn_gb_hour": 0.009135,
     "total_spot_usd_per_normalization_unit_hour": 0.032544,
@@ -318,216 +315,1106 @@ Um registro real da coleta de 29/10/2026, extraído e formatado com `jq`
 }
 ```
 
-</details>
+### JSON Schema
 
-### Schema
+Schema do arquivo inteiro (JSON Schema 2020-12), gerado a partir dos `TypedDict` de [`models.py`](src/emr_instances/models.py) com `pydantic.TypeAdapter(Payload).json_schema()` e formatado com `prettier` 3.3.3. As descrições são as docstrings do código. Campo com `anyOf` incluindo `null` pode vir `null`, mas a chave existe sempre (todas estão em `required`). O exemplo acima e a coleta inteira validam contra ele com `jsonschema`.
 
-As tabelas abaixo foram geradas a partir dos `TypedDict` de [`models.py`](src/emr_instances/models.py) com `pydantic.TypeAdapter(Payload).json_schema()`, e as descrições são as docstrings do código. "ou null" indica campo que pode vir `null`; a chave existe sempre. Ao mudar `models.py`, regenere as tabelas.
-
-<details>
-<summary>Campos por bloco</summary>
-
-<a id="instancerecord"></a>
-
-##### `InstanceRecord`
-
-| Campo | Tipo |
-| --- | --- |
-| `instance_type` | texto |
-| `static` | [`StaticSpec`](#staticspec) |
-| `pricing` | [`PricingSpec`](#pricingspec) |
-| `emr_yarn` | [`YarnDefaults`](#yarndefaults) ou null |
-| `derived` | [`DerivedSpec`](#derivedspec) |
-
-<a id="staticspec"></a>
-
-##### `StaticSpec`
-
-Tudo que não muda para um dado tipo de instância. Junta as quatro fontes de catálogo (EMR, EC2, ofertas por AZ e Price List) e pode ser congelado e versionado, só o bloco `pricing` precisa ser datado. Os dois campos de memória são propositalmente distintos: `memory_gb_hardware` é o que a máquina tem e `memory_gb_emr` é o que o EMR enxerga (menor em 351 dos 465 tipos). Nenhum dos dois é a memória alocável pelo YARN, que tem um corte bem maior e fica no bloco `emr_yarn`, porque depende do release do EMR. `availability_zones` traz os nomes da conta que coletou, que a AWS sorteia por conta; `availability_zone_ids` é o mesmo conjunto pelo ID da AZ, igual em toda conta, e é por ele que se cruza o catálogo com outra conta.
-
-| Campo | Tipo |
-| --- | --- |
-| `vcpu` | inteiro ou null |
-| `cores` | inteiro ou null |
-| `threads_per_core` | inteiro ou null |
-| `memory_gb_emr` | número ou null |
-| `memory_gb_hardware` | número ou null |
-| `architecture` | texto ou null |
-| `processor_manufacturer` | texto ou null |
-| `processor_name` | texto ou null |
-| `clock_ghz_sustained` | número ou null |
-| `family_category` | texto ou null |
-| `family_id_emr` | texto ou null |
-| `current_generation` | booleano ou null |
-| `bare_metal` | booleano ou null |
-| `hypervisor` | texto ou null |
-| `burstable_performance` | booleano ou null |
-| `normalization_factor` | número ou null |
-| `supports_spot` | booleano ou null |
-| `availability_zones` | lista de texto |
-| `availability_zone_ids` | lista de texto |
-| `storage` | [`StorageSpec`](#storagespec) |
-| `ebs` | [`EbsSpec`](#ebsspec) |
-| `network` | [`NetworkSpec`](#networkspec) |
-| `gpu` | [`GpuSpec`](#gpuspec) ou null |
-
-<a id="storagespec"></a>
-
-##### `StorageSpec`
-
-| Campo | Tipo |
-| --- | --- |
-| `ebs_only` | booleano ou null |
-| `total_gb` | inteiro ou null |
-| `nvme` | texto ou null |
-| `disks` | lista de [`DiskSpec`](#diskspec) |
-
-<a id="diskspec"></a>
-
-##### `DiskSpec`
-
-| Campo | Tipo |
-| --- | --- |
-| `count` | inteiro ou null |
-| `size_gb` | inteiro ou null |
-| `type` | texto ou null |
-
-<a id="ebsspec"></a>
-
-##### `EbsSpec`
-
-Bloco `ebs` completo: o hardware do EC2 mais o único campo que só o EMR tem.
-
-| Campo | Tipo |
-| --- | --- |
-| `baseline_mbps` | inteiro ou null |
-| `maximum_mbps` | inteiro ou null |
-| `baseline_iops` | inteiro ou null |
-| `maximum_iops` | inteiro ou null |
-| `burstable` | booleano ou null |
-| `nvme` | texto ou null |
-| `optimized_by_default` | booleano ou null |
-
-<a id="networkspec"></a>
-
-##### `NetworkSpec`
-
-| Campo | Tipo |
-| --- | --- |
-| `baseline_gbps` | número ou null |
-| `peak_gbps` | número ou null |
-| `burstable` | booleano ou null |
-| `max_interfaces` | inteiro ou null |
-| `ena` | texto ou null |
-| `efa` | booleano ou null |
-
-<a id="gpuspec"></a>
-
-##### `GpuSpec`
-
-| Campo | Tipo |
-| --- | --- |
-| `name` | texto ou null |
-| `manufacturer` | texto ou null |
-| `count` | inteiro ou null |
-| `memory_total_gb` | número ou null |
-
-<a id="pricingspec"></a>
-
-##### `PricingSpec`
-
-Tudo que muda de um dia para o outro, sempre datado. `emr_fee_usd_hour` é a taxa do EMR cobrada por instância-hora além do EC2. Ela varia por tipo e não é proporcional ao preço do EC2. `spot` é o menor preço vigente entre as AZs (no empate, a AZ de menor P95 e depois a de menor nome); `spot_by_az` traz cada AZ com a distribuição na janela.
-
-| Campo | Tipo |
-| --- | --- |
-| `as_of` | texto |
-| `on_demand_usd_hour` | número ou null |
-| `emr_fee_usd_hour` | número ou null |
-| `spot` | [`SpotInfo`](#spotinfo) ou null |
-| `spot_by_az` | lista de [`SpotAzStats`](#spotazstats) |
-| `spot_interruption` | [`SpotInterruption`](#spotinterruption) ou null |
-
-<a id="spotinfo"></a>
-
-##### `SpotInfo`
-
-Menor preço spot vigente e a AZ onde ele está. `az` é o nome da AZ na conta que coletou, e a AWS sorteia por conta qual AZ física recebe cada nome; `az_id` identifica a mesma AZ em qualquer conta.
-
-| Campo | Tipo |
-| --- | --- |
-| `usd_hour` | número |
-| `az` | texto |
-| `az_id` | texto ou null |
-
-<a id="spotazstats"></a>
-
-##### `SpotAzStats`
-
-Preço spot de uma AZ: o vigente agora e a distribuição na janela. As estatísticas são ponderadas pelo tempo em que cada preço esteve em vigor (o histórico da AWS não é amostragem regular), então um preço que durou dois dias pesa mais que um que durou dez minutos. `price_changes` conta só as trocas de valor, porque a AWS repete o mesmo preço em registros sucessivos.
-
-| Campo | Tipo |
-| --- | --- |
-| `az` | texto |
-| `az_id` | texto ou null |
-| `current_usd_hour` | número |
-| `window_days` | inteiro |
-| `min_usd_hour` | número |
-| `mean_usd_hour` | número |
-| `median_usd_hour` | número |
-| `p95_usd_hour` | número |
-| `max_usd_hour` | número |
-| `stddev_usd_hour` | número |
-| `price_changes` | inteiro |
-
-<a id="spotinterruption"></a>
-
-##### `SpotInterruption`
-
-| Campo | Tipo |
-| --- | --- |
-| `savings_percent` | inteiro ou null |
-| `interruption_rate` | inteiro ou null |
-
-<a id="yarndefaults"></a>
-
-##### `YarnDefaults`
-
-Padrões de YARN que o EMR aplica a um tipo de instância (coluna padrão). Vêm da página Task configuration da documentação, que segue o release mais recente do EMR. A coluna "com HBase" não entra. Um cluster que sobrescreve `yarn-site` tem outro valor efetivo.
-
-| Campo | Tipo |
-| --- | --- |
-| `nodemanager_memory_mb` | inteiro |
-| `scheduler_max_allocation_mb` | inteiro ou null |
-| `scheduler_min_allocation_mb` | inteiro ou null |
-
-<a id="derivedspec"></a>
-
-##### `DerivedSpec`
-
-Campos calculados a partir dos outros blocos, para filtrar sem aritmética. Nada aqui é dado novo: tudo é razão ou soma de campos de `static`, `pricing` e `emr_yarn`. Fica no JSON para que um consumidor (jq, pandas, um LLM) ordene e filtre sem refazer a conta. Qualquer entrada ausente deixa o resultado None. Os custos "total" somam a taxa do EMR ao preço do EC2. Para spot, a taxa é a de on-demand, na premissa de que o EMR não a desconta (confira na fatura).
-
-| Campo | Tipo |
-| --- | --- |
-| `memory_gb_per_vcpu` | número ou null |
-| `memory_gb_emr_per_vcpu` | número ou null |
-| `yarn_memory_gb` | número ou null |
-| `yarn_memory_gb_per_vcpu` | número ou null |
-| `yarn_memory_share_of_hardware` | número ou null |
-| `local_disk_gb_per_vcpu` | número ou null |
-| `ebs_baseline_mbps_per_vcpu` | número ou null |
-| `network_baseline_gbps_per_vcpu` | número ou null |
-| `total_on_demand_usd_hour` | número ou null |
-| `total_spot_usd_hour` | número ou null |
-| `total_spot_p95_usd_hour` | número ou null |
-| `spot_discount_percent` | número ou null |
-| `spot_volatility_cv` | número ou null |
-| `total_spot_usd_per_vcpu_hour` | número ou null |
-| `total_spot_usd_per_yarn_gb_hour` | número ou null |
-| `total_spot_usd_per_normalization_unit_hour` | número ou null |
-| `total_on_demand_usd_per_vcpu_hour` | número ou null |
-| `total_on_demand_usd_per_yarn_gb_hour` | número ou null |
-
-</details>
+```json
+{
+  "$defs": {
+    "DerivedSpec": {
+      "description": "Campos calculados a partir dos outros blocos, para filtrar sem aritmética.\n\nNada aqui é dado novo: tudo é razão ou soma de campos de `static`, `pricing`\ne `emr_yarn`. Fica no JSON para que um consumidor (jq, pandas, um LLM) ordene\ne filtre sem refazer a conta. Qualquer entrada ausente deixa o resultado None.\n\nOs custos \"total\" somam a taxa do EMR ao preço do EC2. Para spot, a taxa é a\nde on-demand, na premissa de que o EMR não a desconta (confira na fatura).",
+      "properties": {
+        "memory_gb_per_vcpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Memory Gb Per Vcpu"
+        },
+        "memory_gb_emr_per_vcpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Memory Gb Emr Per Vcpu"
+        },
+        "yarn_memory_gb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Yarn Memory Gb"
+        },
+        "yarn_memory_gb_per_vcpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Yarn Memory Gb Per Vcpu"
+        },
+        "yarn_memory_share_of_hardware": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Yarn Memory Share Of Hardware"
+        },
+        "local_disk_gb_per_vcpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Local Disk Gb Per Vcpu"
+        },
+        "ebs_baseline_mbps_per_vcpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ebs Baseline Mbps Per Vcpu"
+        },
+        "network_baseline_gbps_per_vcpu": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Network Baseline Gbps Per Vcpu"
+        },
+        "total_on_demand_usd_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total On Demand Usd Hour"
+        },
+        "total_spot_usd_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total Spot Usd Hour"
+        },
+        "total_spot_p95_usd_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total Spot P95 Usd Hour"
+        },
+        "spot_discount_percent": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Spot Discount Percent"
+        },
+        "spot_volatility_cv": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Spot Volatility Cv"
+        },
+        "total_spot_usd_per_vcpu_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total Spot Usd Per Vcpu Hour"
+        },
+        "total_spot_usd_per_yarn_gb_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total Spot Usd Per Yarn Gb Hour"
+        },
+        "total_spot_usd_per_normalization_unit_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total Spot Usd Per Normalization Unit Hour"
+        },
+        "total_on_demand_usd_per_vcpu_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total On Demand Usd Per Vcpu Hour"
+        },
+        "total_on_demand_usd_per_yarn_gb_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total On Demand Usd Per Yarn Gb Hour"
+        }
+      },
+      "required": [
+        "memory_gb_per_vcpu",
+        "memory_gb_emr_per_vcpu",
+        "yarn_memory_gb",
+        "yarn_memory_gb_per_vcpu",
+        "yarn_memory_share_of_hardware",
+        "local_disk_gb_per_vcpu",
+        "ebs_baseline_mbps_per_vcpu",
+        "network_baseline_gbps_per_vcpu",
+        "total_on_demand_usd_hour",
+        "total_spot_usd_hour",
+        "total_spot_p95_usd_hour",
+        "spot_discount_percent",
+        "spot_volatility_cv",
+        "total_spot_usd_per_vcpu_hour",
+        "total_spot_usd_per_yarn_gb_hour",
+        "total_spot_usd_per_normalization_unit_hour",
+        "total_on_demand_usd_per_vcpu_hour",
+        "total_on_demand_usd_per_yarn_gb_hour"
+      ],
+      "title": "DerivedSpec",
+      "type": "object"
+    },
+    "DiskSpec": {
+      "properties": {
+        "count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Count"
+        },
+        "size_gb": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Size Gb"
+        },
+        "type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Type"
+        }
+      },
+      "required": ["count", "size_gb", "type"],
+      "title": "DiskSpec",
+      "type": "object"
+    },
+    "EbsSpec": {
+      "description": "Bloco `ebs` completo: o hardware do EC2 mais o único campo que só o EMR tem.",
+      "properties": {
+        "baseline_mbps": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Baseline Mbps"
+        },
+        "maximum_mbps": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Maximum Mbps"
+        },
+        "baseline_iops": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Baseline Iops"
+        },
+        "maximum_iops": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Maximum Iops"
+        },
+        "burstable": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Burstable"
+        },
+        "nvme": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Nvme"
+        },
+        "optimized_by_default": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Optimized By Default"
+        }
+      },
+      "required": [
+        "baseline_mbps",
+        "maximum_mbps",
+        "baseline_iops",
+        "maximum_iops",
+        "burstable",
+        "nvme",
+        "optimized_by_default"
+      ],
+      "title": "EbsSpec",
+      "type": "object"
+    },
+    "GpuSpec": {
+      "properties": {
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name"
+        },
+        "manufacturer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Manufacturer"
+        },
+        "count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Count"
+        },
+        "memory_total_gb": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Memory Total Gb"
+        }
+      },
+      "required": ["name", "manufacturer", "count", "memory_total_gb"],
+      "title": "GpuSpec",
+      "type": "object"
+    },
+    "InstanceRecord": {
+      "properties": {
+        "instance_type": {
+          "title": "Instance Type",
+          "type": "string"
+        },
+        "static": {
+          "$ref": "#/$defs/StaticSpec"
+        },
+        "pricing": {
+          "$ref": "#/$defs/PricingSpec"
+        },
+        "emr_yarn": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/YarnDefaults"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "derived": {
+          "$ref": "#/$defs/DerivedSpec"
+        }
+      },
+      "required": ["instance_type", "static", "pricing", "emr_yarn", "derived"],
+      "title": "InstanceRecord",
+      "type": "object"
+    },
+    "NetworkSpec": {
+      "properties": {
+        "baseline_gbps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Baseline Gbps"
+        },
+        "peak_gbps": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Peak Gbps"
+        },
+        "burstable": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Burstable"
+        },
+        "max_interfaces": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Max Interfaces"
+        },
+        "ena": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ena"
+        },
+        "efa": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Efa"
+        }
+      },
+      "required": [
+        "baseline_gbps",
+        "peak_gbps",
+        "burstable",
+        "max_interfaces",
+        "ena",
+        "efa"
+      ],
+      "title": "NetworkSpec",
+      "type": "object"
+    },
+    "PricingSpec": {
+      "description": "Tudo que muda de um dia para o outro, sempre datado.\n\n`emr_fee_usd_hour` é a taxa do EMR cobrada por instância-hora além do EC2. Ela\nvaria por tipo e não é proporcional ao preço do EC2. `spot` é o menor preço\nvigente entre as AZs (no empate, a AZ de menor P95 e depois a de menor nome);\n`spot_by_az` traz cada AZ com a distribuição na janela.",
+      "properties": {
+        "as_of": {
+          "title": "As Of",
+          "type": "string"
+        },
+        "on_demand_usd_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "On Demand Usd Hour"
+        },
+        "emr_fee_usd_hour": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Emr Fee Usd Hour"
+        },
+        "spot": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpotInfo"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "spot_by_az": {
+          "items": {
+            "$ref": "#/$defs/SpotAzStats"
+          },
+          "title": "Spot By Az",
+          "type": "array"
+        },
+        "spot_interruption": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SpotInterruption"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "as_of",
+        "on_demand_usd_hour",
+        "emr_fee_usd_hour",
+        "spot",
+        "spot_by_az",
+        "spot_interruption"
+      ],
+      "title": "PricingSpec",
+      "type": "object"
+    },
+    "SpotAzStats": {
+      "description": "Preço spot de uma AZ: o vigente agora e a distribuição na janela.\n\nAs estatísticas são ponderadas pelo tempo em que cada preço esteve em vigor\n(o histórico da AWS não é amostragem regular), então um preço que durou dois\ndias pesa mais que um que durou dez minutos. `price_changes` conta só as\ntrocas de valor, porque a AWS repete o mesmo preço em registros sucessivos.",
+      "properties": {
+        "az": {
+          "title": "Az",
+          "type": "string"
+        },
+        "az_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Az Id"
+        },
+        "current_usd_hour": {
+          "title": "Current Usd Hour",
+          "type": "number"
+        },
+        "window_days": {
+          "title": "Window Days",
+          "type": "integer"
+        },
+        "min_usd_hour": {
+          "title": "Min Usd Hour",
+          "type": "number"
+        },
+        "mean_usd_hour": {
+          "title": "Mean Usd Hour",
+          "type": "number"
+        },
+        "median_usd_hour": {
+          "title": "Median Usd Hour",
+          "type": "number"
+        },
+        "p95_usd_hour": {
+          "title": "P95 Usd Hour",
+          "type": "number"
+        },
+        "max_usd_hour": {
+          "title": "Max Usd Hour",
+          "type": "number"
+        },
+        "stddev_usd_hour": {
+          "title": "Stddev Usd Hour",
+          "type": "number"
+        },
+        "price_changes": {
+          "title": "Price Changes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "az",
+        "az_id",
+        "current_usd_hour",
+        "window_days",
+        "min_usd_hour",
+        "mean_usd_hour",
+        "median_usd_hour",
+        "p95_usd_hour",
+        "max_usd_hour",
+        "stddev_usd_hour",
+        "price_changes"
+      ],
+      "title": "SpotAzStats",
+      "type": "object"
+    },
+    "SpotInfo": {
+      "description": "Menor preço spot vigente e a AZ onde ele está.\n\n`az` é o nome da AZ na conta que coletou, e a AWS sorteia por conta qual AZ\nfísica recebe cada nome; `az_id` identifica a mesma AZ em qualquer conta.",
+      "properties": {
+        "usd_hour": {
+          "title": "Usd Hour",
+          "type": "number"
+        },
+        "az": {
+          "title": "Az",
+          "type": "string"
+        },
+        "az_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Az Id"
+        }
+      },
+      "required": ["usd_hour", "az", "az_id"],
+      "title": "SpotInfo",
+      "type": "object"
+    },
+    "SpotInterruption": {
+      "properties": {
+        "savings_percent": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Savings Percent"
+        },
+        "interruption_rate": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Interruption Rate"
+        }
+      },
+      "required": ["savings_percent", "interruption_rate"],
+      "title": "SpotInterruption",
+      "type": "object"
+    },
+    "StaticSpec": {
+      "description": "Tudo que não muda para um dado tipo de instância.\n\nJunta as quatro fontes de catálogo (EMR, EC2, ofertas por AZ e Price List) e\npode ser congelado e versionado, só o bloco `pricing` precisa ser datado.\n\nOs dois campos de memória são propositalmente distintos: `memory_gb_hardware`\né o que a máquina tem e `memory_gb_emr` é o que o EMR enxerga (menor em 351\ndos 465 tipos). Nenhum dos dois é a memória alocável pelo YARN, que tem um\ncorte bem maior e fica no bloco `emr_yarn`, porque depende do release do EMR.\n\n`availability_zones` traz os nomes da conta que coletou, que a AWS sorteia\npor conta; `availability_zone_ids` é o mesmo conjunto pelo ID da AZ, igual\nem toda conta, e é por ele que se cruza o catálogo com outra conta.",
+      "properties": {
+        "vcpu": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vcpu"
+        },
+        "cores": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cores"
+        },
+        "threads_per_core": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Threads Per Core"
+        },
+        "memory_gb_emr": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Memory Gb Emr"
+        },
+        "memory_gb_hardware": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Memory Gb Hardware"
+        },
+        "architecture": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Architecture"
+        },
+        "processor_manufacturer": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Processor Manufacturer"
+        },
+        "processor_name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Processor Name"
+        },
+        "clock_ghz_sustained": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Clock Ghz Sustained"
+        },
+        "family_category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Family Category"
+        },
+        "family_id_emr": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Family Id Emr"
+        },
+        "current_generation": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Current Generation"
+        },
+        "bare_metal": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bare Metal"
+        },
+        "hypervisor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Hypervisor"
+        },
+        "burstable_performance": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Burstable Performance"
+        },
+        "normalization_factor": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Normalization Factor"
+        },
+        "supports_spot": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Supports Spot"
+        },
+        "availability_zones": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Availability Zones",
+          "type": "array"
+        },
+        "availability_zone_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Availability Zone Ids",
+          "type": "array"
+        },
+        "storage": {
+          "$ref": "#/$defs/StorageSpec"
+        },
+        "ebs": {
+          "$ref": "#/$defs/EbsSpec"
+        },
+        "network": {
+          "$ref": "#/$defs/NetworkSpec"
+        },
+        "gpu": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GpuSpec"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "vcpu",
+        "cores",
+        "threads_per_core",
+        "memory_gb_emr",
+        "memory_gb_hardware",
+        "architecture",
+        "processor_manufacturer",
+        "processor_name",
+        "clock_ghz_sustained",
+        "family_category",
+        "family_id_emr",
+        "current_generation",
+        "bare_metal",
+        "hypervisor",
+        "burstable_performance",
+        "normalization_factor",
+        "supports_spot",
+        "availability_zones",
+        "availability_zone_ids",
+        "storage",
+        "ebs",
+        "network",
+        "gpu"
+      ],
+      "title": "StaticSpec",
+      "type": "object"
+    },
+    "StorageSpec": {
+      "properties": {
+        "ebs_only": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ebs Only"
+        },
+        "total_gb": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Total Gb"
+        },
+        "nvme": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Nvme"
+        },
+        "disks": {
+          "items": {
+            "$ref": "#/$defs/DiskSpec"
+          },
+          "title": "Disks",
+          "type": "array"
+        }
+      },
+      "required": ["ebs_only", "total_gb", "nvme", "disks"],
+      "title": "StorageSpec",
+      "type": "object"
+    },
+    "YarnDefaults": {
+      "description": "Padrões de YARN que o EMR aplica a um tipo de instância (coluna padrão).\n\nVêm da página Task configuration da documentação, que segue o release mais\nrecente do EMR. A coluna \"com HBase\" não entra. Um cluster que sobrescreve\n`yarn-site` tem outro valor efetivo.",
+      "properties": {
+        "nodemanager_memory_mb": {
+          "title": "Nodemanager Memory Mb",
+          "type": "integer"
+        },
+        "scheduler_max_allocation_mb": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Scheduler Max Allocation Mb"
+        },
+        "scheduler_min_allocation_mb": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Scheduler Min Allocation Mb"
+        }
+      },
+      "required": [
+        "nodemanager_memory_mb",
+        "scheduler_max_allocation_mb",
+        "scheduler_min_allocation_mb"
+      ],
+      "title": "YarnDefaults",
+      "type": "object"
+    }
+  },
+  "properties": {
+    "region": {
+      "title": "Region",
+      "type": "string"
+    },
+    "release_label": {
+      "title": "Release Label",
+      "type": "string"
+    },
+    "schema_version": {
+      "title": "Schema Version",
+      "type": "integer"
+    },
+    "generated_at": {
+      "title": "Generated At",
+      "type": "string"
+    },
+    "instance_count": {
+      "title": "Instance Count",
+      "type": "integer"
+    },
+    "instances": {
+      "items": {
+        "$ref": "#/$defs/InstanceRecord"
+      },
+      "title": "Instances",
+      "type": "array"
+    }
+  },
+  "required": [
+    "region",
+    "release_label",
+    "schema_version",
+    "generated_at",
+    "instance_count",
+    "instances"
+  ],
+  "title": "Payload",
+  "type": "object"
+}
+```
 
 ### Notas sobre os campos
 
