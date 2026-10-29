@@ -7,8 +7,8 @@ from typing import TypedDict
 # Versão do formato gravado. 1 era um registro plano de 9 campos; 2 separou o
 # catálogo em `static` (imutável) e `pricing` (datado); 3 acrescentou a taxa do
 # EMR, o spot por AZ com estatísticas, os padrões de YARN e o bloco `derived`.
-# `instance_type` ficou no topo do registro em todas; é o que o diff da
-# notificação compara.
+# `instance_type` ficou no topo do registro em todas, para o consumidor
+# achar a chave do registro sem procurar.
 SCHEMA_VERSION = 3
 
 
@@ -247,38 +247,3 @@ class Payload(TypedDict):
     generated_at: str
     instance_count: int
     instances: list[InstanceRecord]
-
-
-class SnapshotInstance(TypedDict, total=False):
-    """Instância dentro de um snapshot lido de disco.
-
-    Declara só o campo que o caminho de leitura consome — o diff compara
-    conjuntos de instance_type e ignora o resto do registro.
-    """
-
-    instance_type: str
-
-
-class Snapshot(TypedDict, total=False):
-    """Payload lido de disco — todo campo é opcional.
-
-    O arquivo anterior pode ser de uma versão do schema que ainda não gravava
-    algum campo (foi o caso de `latest_announced_release`), ou não existir. Ler
-    como `Payload` seria mentira; `total=False` diz a verdade e ainda deixa o
-    mypy conferir os nomes das chaves no caminho de leitura.
-    """
-
-    region: str
-    release_label: str
-    schema_version: int
-    latest_announced_release: AnnouncedRelease | None
-    generated_at: str
-    instance_count: int
-    instances: list[SnapshotInstance]
-
-
-class ReleaseAlert(TypedDict):
-    origin: str
-    previous: str
-    current: str
-    url: str

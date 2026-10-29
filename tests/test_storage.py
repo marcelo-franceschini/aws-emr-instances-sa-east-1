@@ -12,7 +12,7 @@ from emr_instances.derived import build_derived
 from emr_instances.errors import StorageError
 from emr_instances.models import Payload, PricingSpec
 from emr_instances.sources.ec2 import empty_hardware
-from emr_instances.storage import load_snapshot, write_output
+from emr_instances.storage import write_output
 
 
 def _payload() -> Payload:
@@ -47,29 +47,15 @@ def _payload() -> Payload:
     }
 
 
-def test_load_snapshot_missing_file() -> None:
-    """Test load_snapshot com arquivo inexistente retorna dict vazio."""
-    assert load_snapshot("/nonexistent/path.json") == {}
-
-
-def test_load_snapshot_reads_json(tmp_path: Path) -> None:
-    """Test load_snapshot devolve o JSON já parseado."""
-    path = tmp_path / "snapshot.json"
-    data = {"instances": [{"instance_type": "m5.large"}]}
-    path.write_text(json.dumps(data), encoding="utf-8")
-
-    assert load_snapshot(str(path)) == data
-
-
 def test_write_output_round_trip(tmp_path: Path) -> None:
-    """O que write_output grava é exatamente o que load_snapshot lê de volta."""
+    """O que write_output grava é exatamente o payload, como JSON."""
     path = tmp_path / "out.json"
     payload = _payload()
 
     write_output(payload, str(path))
 
-    assert load_snapshot(str(path)) == payload
     content = path.read_text(encoding="utf-8")
+    assert json.loads(content) == payload
     assert content.endswith("\n")
     assert '"instance_type": "m5.large"' in content  # indentado, não compactado
 
@@ -79,21 +65,3 @@ def test_write_output_io_error(tmp_path: Path) -> None:
     path = tmp_path / "sem-esse-diretorio" / "out.json"
     with pytest.raises(StorageError):
         write_output(_payload(), str(path))
-
-
-def test_load_snapshot_json_corrompido(tmp_path: Path) -> None:
-    """JSON truncado vira StorageError em vez de JSONDecodeError cru."""
-    path = tmp_path / "corrompido.json"
-    path.write_text('{"instances": [', encoding="utf-8")
-
-    with pytest.raises(StorageError):
-        load_snapshot(str(path))
-
-
-def test_load_snapshot_json_que_nao_e_objeto(tmp_path: Path) -> None:
-    """JSON válido mas que não é objeto vira StorageError, não AttributeError."""
-    path = tmp_path / "lista.json"
-    path.write_text("[1, 2, 3]", encoding="utf-8")
-
-    with pytest.raises(StorageError):
-        load_snapshot(str(path))

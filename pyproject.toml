@@ -1,7 +1,7 @@
 [project]
 name = "aws-emr-instances-sa-east-1"
 version = "0.1.0"
-description = "Coleta diária de instâncias EMR suportadas em sa-east-1 com preços on-demand e spot, com notificação via Pushover"
+description = "Coleta diária de instâncias EMR suportadas em sa-east-1 com preços on-demand e spot"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -11,7 +11,6 @@ dependencies = [
 
 [project.scripts]
 emr-collect = "emr_instances.cli.collect:main"
-emr-notify = "emr_instances.cli.notify:main"
 
 [build-system]
 requires = ["hatchling"]

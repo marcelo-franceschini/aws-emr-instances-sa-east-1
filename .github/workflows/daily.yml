@@ -1,4 +1,4 @@
-# Coleta diária de instâncias EMR (sa-east-1) + notificação Pushover
+# Coleta diária de instâncias EMR (sa-east-1) e publicação do JSON na branch data
 name: EMR instances (sa-east-1)
 
 on:
@@ -20,16 +20,6 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Baixar o JSON anterior (branch data)
-        run: |
-          if git ls-remote --exit-code --heads origin data >/dev/null 2>&1; then
-            git fetch origin data --depth 1
-            git show origin/data:instances_sa-east-1.json > previous.json
-            echo "Baseline anterior baixado."
-          else
-            echo "Branch data ainda não existe — primeira execução, tudo será novo."
-          fi
-
       - name: Configurar credenciais AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -45,13 +35,6 @@ jobs:
 
       - name: Gerar o JSON
         run: uv run emr-collect
-
-      - name: Comparar e notificar (Pushover)
-        continue-on-error: true   # notificação é best-effort; não bloqueia a publicação
-        env:
-          PUSHOVER_TOKEN: ${{ secrets.PUSHOVER_TOKEN }}
-          PUSHOVER_USER: ${{ secrets.PUSHOVER_USER }}
-        run: uv run emr-notify --new instances_sa-east-1.json --old previous.json
 
       - name: Publicar o JSON na branch data
         run: |

@@ -11,4 +11,3 @@ wheels/
 
 # Dados gerados (moram na branch "data", não no código)
 instances_sa-east-1.json
-previous.json

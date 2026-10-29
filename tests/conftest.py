@@ -7,8 +7,6 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from emr_instances.models import AnnouncedRelease, Snapshot
-
 RSS_FIXTURE = """<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
   <title>Amazon EMR Release Notes</title>
@@ -45,24 +43,5 @@ def rss_response() -> Callable[[], MagicMock]:
         response.content = RSS_FIXTURE.encode()
         response.raise_for_status.return_value = None
         return response
-
-    return build
-
-
-@pytest.fixture
-def snapshot() -> Callable[[str, str | None], Snapshot]:
-    """Fábrica de snapshot mínimo com os dois campos de release comparados."""
-
-    def build(label: str, announced_version: str | None) -> Snapshot:
-        announced: AnnouncedRelease | None = (
-            {
-                "version": announced_version,
-                "url": f"https://docs.aws.amazon.com/x/emr-{announced_version}.html",
-                "published_at": "Tue, 28 Apr 2026 19:00:00 GMT",
-            }
-            if announced_version
-            else None
-        )
-        return {"release_label": label, "latest_announced_release": announced}
 
     return build

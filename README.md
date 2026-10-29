@@ -5,8 +5,7 @@ para cada uma das 465, o **hardware completo** (vCPU, cores, memória, disco,
 banda de EBS e de rede com baseline e pico, clock, GPU, AZs), o **preço**
 on-demand, a **taxa do EMR**, o **spot por AZ com estatísticas** de 30 dias e a
 taxa de interrupção, a **memória alocável pelo YARN** e **campos derivados**
-(razões e custo por unidade) prontos para filtrar. Salva tudo em JSON e avisa via
-**Pushover** quando surgem instâncias novas ou um **release novo do EMR**.
+(razões e custo por unidade) prontos para filtrar. Salva tudo em JSON.
 
 O JSON é rico o bastante para responder "esta carga cabe nesta máquina e quanto
 ela custa de verdade?" e não só "quanto custa o EC2". Ver
@@ -26,15 +25,12 @@ ela custa de verdade?" e não só "quanto custa o EC2". Ver
   - Spot Bid Advisor (S3 público) (frequência de interrupção + economia esperada)
   - Página [Task configuration](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hadoop-task-config.html) da documentação do EMR, em Markdown (padrões de YARN por tipo)
   - [RSS de release notes do EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/amazon-emr-release-notes.rss) (último release anunciado pela AWS)
-- `emr-notify` — compara o JSON novo com o anterior e notifica via
-  Pushover em toda execução (serve de heartbeat).
 - [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — roda tudo via
-  cron diário (09:00 UTC), publica o JSON na branch órfã **`data`** e dispara a
-  notificação.
+  cron diário (09:00 UTC) e publica o JSON na branch órfã **`data`**.
 
 ### Estrutura do pacote
 
-Os dois comandos são console scripts declarados no [`pyproject.toml`](pyproject.toml),
+O comando é um console script declarado no [`pyproject.toml`](pyproject.toml),
 apontando para o pacote em [`src/emr_instances/`](src/emr_instances/):
 
 ```
@@ -44,7 +40,7 @@ src/emr_instances/
 ├── models.py                    TypedDicts do domínio, serializados direto pro JSON
 ├── derived.py                   bloco `derived`: razões e custo por unidade
 ├── aws.py                       clients boto3 com retry adaptativo
-├── storage.py                   leitura/escrita dos snapshots JSON
+├── storage.py                   escrita do JSON gerado
 ├── collector.py                 junta as fontes, valida cobertura, monta o payload
 ├── sources/                     uma fonte de dados externa por módulo
 │   ├── emr.py                   ListSupportedInstanceTypes / ListReleaseLabels
@@ -53,44 +49,34 @@ src/emr_instances/
 │   ├── spot.py                  DescribeSpotPriceHistory (por AZ, com estatísticas) + Spot Bid Advisor
 │   ├── yarn.py                  padrões de YARN, lidos da documentação do EMR
 │   └── release_notes.py         RSS de release notes
-├── notify/
-│   ├── diff.py                  instâncias novas e mudanças de release
-│   ├── message.py               monta título, corpo e link da notificação
-│   └── pushover.py              envio (só biblioteca padrão)
 └── cli/
-    ├── collect.py               entrypoint do emr-collect
-    └── notify.py                entrypoint do emr-notify
+    └── collect.py               entrypoint do emr-collect
 ```
 
 Os testes em [`tests/`](tests/) espelham essa estrutura.
 
 O endpoint de cada serviço externo mora no módulo que fala com ele (o RSS em
-`sources/release_notes.py`, o Spot Advisor em `sources/spot.py`, a API do
-Pushover em `notify/pushover.py`) — `config.py` guarda só o que é transversal.
+`sources/release_notes.py`, o Spot Advisor em `sources/spot.py`) e `config.py`
+guarda só o que é transversal.
 
 As camadas internas levantam as exceções de [`errors.py`](src/emr_instances/errors.py)
-(`CoverageError`, `StorageError`, `NotificationError`); apenas os entrypoints em
+(`CoverageError`, `StorageError`); apenas os entrypoints em
 `cli/` as traduzem em `exit(1)`. Isso mantém os módulos reutilizáveis e testáveis
 sem precisar capturar `SystemExit`.
 
-### Aviso de release novo
+### Releases do EMR
 
-O EMR é monitorado por duas fontes independentes, que costumam mudar em datas
+O JSON registra o EMR por duas fontes independentes, que costumam mudar em datas
 diferentes:
 
-| Origem | Campo comparado | Quando dispara |
+| Campo | Origem | Muda quando |
 | --- | --- | --- |
-| `Anunciado pela AWS` | `latest_announced_release.version` | no dia do anúncio no RSS |
-| `Disponível em sa-east-1` | `release_label` | quando o release chega na região |
+| `latest_announced_release` | RSS de release notes | no dia do anúncio |
+| `release_label` | `emr:ListReleaseLabels` | o release chega em sa-east-1 |
 
-Quando qualquer uma muda (ex.: `7.13.0` → `7.14.0`), a notificação vem com o
-título **"EMR sa-east-1 — release novo"** e o link das release notes clicável
-(ex.: `https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-7130-release.html`).
-
-Só entram releases do **EMR on EC2 padrão** — o RSS também anuncia linhas
-especiais como `emr-spark-8.0.0`, que são ignoradas. Um alerta só é emitido
-quando o valor existe nos **dois** snapshots e é diferente, de modo que a
-primeira execução e uma indisponibilidade do RSS não viram falso alarme.
+Só entram releases do **EMR on EC2 padrão**: o RSS também anuncia linhas
+especiais como `emr-spark-8.0.0`, que são ignoradas. Se o RSS estiver fora do ar,
+`latest_announced_release` fica `null`.
 
 O JSON gerado **não** fica na branch de código — ele vive apenas na branch `data`.
 
@@ -259,9 +245,8 @@ jq '[.instances[]
 | 2 | `static` / `pricing`, catálogo completo de hardware |
 | 3 | acrescenta `pricing.emr_fee_usd_hour`, `pricing.spot_by_az`, `emr_yarn` e `derived` |
 
-`instance_type` fica no topo do registro em todas as versões, é o que o diff da
-notificação compara, e é o que garante que a troca de schema não vire um alerta
-falso de "465 instâncias novas" no primeiro run após o deploy.
+`instance_type` fica no topo do registro em todas as versões, para quem consome
+o JSON achar a chave do registro sem procurar.
 
 ## Rodar localmente
 
@@ -273,12 +258,6 @@ uv run emr-collect --help # opções: --release-label, --output
 
 Requer credenciais AWS com permissão de leitura para EMR, Pricing e EC2 (spot e
 catálogo de instâncias) — a policy completa está em [Deploy inicial](#deploy-inicial-do-zero).
-
-Para testar a notificação, com `PUSHOVER_TOKEN` e `PUSHOVER_USER` no ambiente:
-
-```bash
-uv run emr-notify --new instances_sa-east-1.json --old previous.json
-```
 
 ### Testes e type checking
 
@@ -340,35 +319,25 @@ Para replicar este projeto do zero em sua própria conta AWS:
    export AWS_PROFILE=sa-east-1
    ```
 
-3. **Criar app no Pushover**:
-   - Acesse https://pushover.net/apps e crie uma aplicação.
-   - Copie o **PUSHOVER_TOKEN** (começa com `a`).
-   - Confirme a **PUSHOVER_USER** key pessoal (começa com `u`).
-   - ⚠️ Cuidado: não trocar os dois.
-
-4. **Cadastrar 4 secrets no GitHub**:
+3. **Cadastrar 2 secrets no GitHub**:
    - Vá a **Settings → Secrets and variables → Actions**.
    - Adicione:
      - `AWS_ACCESS_KEY_ID`
      - `AWS_SECRET_ACCESS_KEY`
-     - `PUSHOVER_TOKEN`
-     - `PUSHOVER_USER`
 
-5. **Disparar o workflow pela primeira vez**:
+4. **Disparar o workflow pela primeira vez**:
    - Vá a **Actions → EMR instances (sa-east-1) → Run workflow → Run workflow**.
    - A coleta diária roda por agendamento (cron) ou por esse disparo manual —
      **não** por `push`. Um push para `master` aciona apenas o CI (lint/mypy/testes).
    - ⚠️ Em repositórios novos, o workflow só aparece na aba Actions depois do
      primeiro push do arquivo — se não aparecer, faça um push e recarregue a página.
 
-6. **Confirmar sucesso**:
+5. **Confirmar sucesso**:
    - Verifique que a branch **`data`** foi criada com o arquivo `instances_sa-east-1.json`.
-   - A notificação no Pushover chega em toda execução; ela destaca instâncias
-     novas e releases novos do EMR quando houver.
 
 ## Secrets necessários (GitHub Actions)
 
-`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `PUSHOVER_TOKEN`, `PUSHOVER_USER`.
+`AWS_ACCESS_KEY_ID` e `AWS_SECRET_ACCESS_KEY`.
 
 ## Fora de escopo
 
