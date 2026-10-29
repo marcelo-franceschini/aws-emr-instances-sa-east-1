@@ -169,7 +169,13 @@ def collect_records(
     pricing: PricingClient,
     release_label: str,
 ) -> list[InstanceRecord]:
-    """Coleta todas as fontes e devolve os registros já combinados."""
+    """Coleta todas as fontes e devolve os registros já combinados.
+
+    Um único instante vale para a coleta inteira: ele fecha a janela do
+    histórico spot e vira o `as_of` dos registros. Antes eram dois, e o `as_of`
+    saía minutos depois do instante a que os preços spot se referem.
+    """
+    now = datetime.now(UTC)
     logger.info(f"Coletando instâncias EMR ({release_label}) em {REGION}...")
     instances = supported_instance_types(emr, release_label)
     logger.info(f"  {len(instances)} tipos de instância")
@@ -191,7 +197,6 @@ def collect_records(
     logger.info(f"  {len(fees)} taxas do EMR")
 
     logger.info(f"Coletando histórico spot de {SPOT_HISTORY_DAYS} dias por AZ...")
-    now = datetime.now(UTC)
     series, zone_ids = spot_price_history(ec2, now=now)
     spot_stats = az_statistics(series, now=now, zone_ids=zone_ids)
     spot = cheapest_current(spot_stats)
@@ -215,7 +220,7 @@ def collect_records(
         products,
         spot,
         interruption,
-        _utc_now(),
+        now.isoformat(),
         fees=fees,
         spot_stats=spot_stats,
         yarn=yarn,

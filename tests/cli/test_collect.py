@@ -4,15 +4,27 @@ from __future__ import annotations
 
 import json
 import sys
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime, timedelta, tzinfo
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
 
+from emr_instances import collector
 from emr_instances.cli import collect
 from emr_instances.errors import CoverageError, EmrInstancesError, SourceFormatError
 from emr_instances.sources.yarn import YARN_DOC_URL
+
+NOW = datetime(2026, 10, 29, 12, 0, tzinfo=UTC)
+
+
+class _Clock:
+    """Fica no lugar do datetime do collector: o relógio parado em NOW."""
+
+    @staticmethod
+    def now(tz: tzinfo | None = None) -> datetime:
+        return NOW
+
 
 YARN_DOC = """**m5.large**
 
@@ -57,14 +69,14 @@ def test_main_smoke(
                         "SpotPrice": "0.048",
                         "AvailabilityZone": "sa-east-1a",
                         "AvailabilityZoneId": "sae1-az3",
-                        "Timestamp": datetime.now(UTC) - timedelta(days=2),
+                        "Timestamp": NOW - timedelta(days=2),
                     },
                     {
                         "InstanceType": "m5.large",
                         "SpotPrice": "0.050",
                         "AvailabilityZone": "sa-east-1b",
                         "AvailabilityZoneId": "sae1-az1",
-                        "Timestamp": datetime.now(UTC) - timedelta(days=2),
+                        "Timestamp": NOW - timedelta(days=2),
                     },
                 ]
             }
@@ -160,6 +172,7 @@ def test_main_smoke(
             return yarn_response
         return advisor_response
 
+    monkeypatch.setattr(collector, "datetime", _Clock)
     output = tmp_path / "out.json"
     # alvo global: spot e yarn chamam requests.get de módulos diferentes
     with patch("requests.get", side_effect=fake_get):
@@ -171,9 +184,12 @@ def test_main_smoke(
     assert payload["release_label"] == "emr-7.13.0"
     assert payload["schema_version"] == 3
     assert payload["instance_count"] == 1
+    assert payload["generated_at"] == NOW.isoformat()
 
     record = payload["instances"][0]
     assert record["instance_type"] == "m5.large"
+    # o preço é datado pelo mesmo instante que fecha a janela spot
+    assert record["pricing"]["as_of"] == NOW.isoformat()
     # cada campo abaixo vem de uma fonte diferente: se o encanamento de alguma
     # quebrar, o smoke test acusa
     assert record["static"]["memory_gb_emr"] == 8.0  # EMR
