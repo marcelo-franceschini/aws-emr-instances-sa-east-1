@@ -570,7 +570,7 @@ As contagens são da coleta de 29/10/2026, com `emr-7.14.0`, e mudam com o relea
   usa `maximizeResourceAllocation`) tem outro valor efetivo. É `null` para tipo
   que a página não lista.
 - **`nvme` e `ena`** são `"required"`, `"supported"` ou `"unsupported"`.
-- Campo ausente vem como `null` e **o bloco nunca some**, `storage` existe
+- Campo ausente vem como `null` e **o bloco nunca some**: `storage` existe
   mesmo em instância EBS-only (com `ebs_only: true` e `disks: []`), e `gpu` é
   `null` nas 439 sem GPU. Quem consome nunca precisa checar se a chave existe.
 
