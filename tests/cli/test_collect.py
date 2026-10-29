@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import sys
 from collections.abc import Callable
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -12,6 +13,16 @@ import pytest
 
 from emr_instances.cli import collect
 from emr_instances.sources.release_notes import RELEASE_NOTES_RSS
+from emr_instances.sources.yarn import YARN_DOC_URL
+
+YARN_DOC = """**m5.large**
+
+| Configuration option | Default value | With HBase installed |
+| --- | --- | --- |
+| yarn.scheduler.minimum-allocation-mb | 1 | 1 |
+| yarn.scheduler.maximum-allocation-mb | 6144 | 3072 |
+| yarn.nodemanager.resource.memory-mb | 6144 | 3072 |
+"""
 
 
 def test_main_smoke(
@@ -46,6 +57,7 @@ def test_main_smoke(
                         "InstanceType": "m5.large",
                         "SpotPrice": "0.048",
                         "AvailabilityZone": "sa-east-1a",
+                        "Timestamp": datetime.now(UTC) - timedelta(days=2),
                     },
                 ]
             }
@@ -85,6 +97,16 @@ def test_main_smoke(
     mock_pricing = MagicMock()
     pricing_paginator = MagicMock()
     mock_pricing.get_paginator.return_value = pricing_paginator
+    emr_product = {
+        "product": {"attributes": {"instanceType": "m5.large", "softwareType": "EMR"}},
+        "terms": {
+            "OnDemand": {
+                "sku.TERM1": {
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": "0.024"}}}
+                }
+            }
+        },
+    }
     product = {
         "product": {
             "attributes": {
@@ -102,7 +124,13 @@ def test_main_smoke(
             }
         },
     }
-    pricing_paginator.paginate.return_value = [{"PriceList": [json.dumps(product)]}]
+
+    def pricing_pages(**kwargs: object) -> list[dict[str, list[str]]]:
+        """O mesmo paginator atende o EC2 e o EMR; cada serviço tem a sua página."""
+        offer = emr_product if kwargs["ServiceCode"] == "ElasticMapReduce" else product
+        return [{"PriceList": [json.dumps(offer)]}]
+
+    pricing_paginator.paginate.side_effect = pricing_pages
 
     monkeypatch.setattr(
         collect, "build_clients", lambda: (mock_emr, mock_ec2, mock_pricing)
@@ -115,12 +143,21 @@ def test_main_smoke(
     advisor_response.json.return_value = advisor
     advisor_response.raise_for_status.return_value = None
 
+    yarn_response = MagicMock()
+    yarn_response.text = YARN_DOC
+    yarn_response.raise_for_status.return_value = None
+
     def fake_get(url: str, **kwargs: object) -> MagicMock:
-        """Roteia por URL: a coleta faz duas chamadas HTTP, em módulos distintos."""
-        return rss_response() if url == RELEASE_NOTES_RSS else advisor_response
+        """Roteia por URL: a coleta faz três chamadas HTTP, em módulos distintos."""
+        if url == RELEASE_NOTES_RSS:
+            return rss_response()
+        if url == YARN_DOC_URL:
+            return yarn_response
+        return advisor_response
 
     output = tmp_path / "out.json"
-    # alvo global: release_notes e spot chamam requests.get de módulos diferentes
+    # alvo global: release_notes, spot e yarn chamam requests.get de módulos
+    # diferentes
     with patch("requests.get", side_effect=fake_get):
         monkeypatch.setattr(sys, "argv", ["emr-collect", "--output", str(output)])
         collect.main()
@@ -128,7 +165,7 @@ def test_main_smoke(
     payload = json.loads(output.read_text(encoding="utf-8"))
     assert payload["region"] == "sa-east-1"
     assert payload["release_label"] == "emr-7.13.0"
-    assert payload["schema_version"] == 2
+    assert payload["schema_version"] == 3
     assert payload["instance_count"] == 1
     assert payload["latest_announced_release"]["version"] == "7.13.0"
     assert payload["latest_announced_release"]["url"].endswith("emr-7130-release.html")
@@ -144,3 +181,10 @@ def test_main_smoke(
     assert record["pricing"]["on_demand_usd_hour"] == 0.096
     assert record["pricing"]["spot"]["usd_hour"] == 0.048
     assert record["pricing"]["spot_interruption"]["interruption_rate"] == 2
+    assert record["pricing"]["emr_fee_usd_hour"] == 0.024  # Price List do EMR
+    assert record["pricing"]["spot_by_az"][0]["az"] == "sa-east-1a"
+    assert record["pricing"]["spot_by_az"][0]["price_changes"] == 0
+    assert record["emr_yarn"]["nodemanager_memory_mb"] == 6144  # documentação
+    # o derived junta tudo: spot 0,048 + taxa do EMR 0,024
+    assert record["derived"]["total_spot_usd_hour"] == 0.072
+    assert record["derived"]["yarn_memory_gb"] == 6.0

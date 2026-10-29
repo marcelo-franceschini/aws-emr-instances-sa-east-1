@@ -1,14 +1,16 @@
 """Gera um JSON com as instâncias EMR suportadas em São Paulo (sa-east-1),
-com o catálogo de hardware, preço on-demand, preço spot (Linux/UNIX) e taxa de
-interrupção.
+com o catálogo de hardware, preço on-demand, taxa do EMR, preço spot (Linux/UNIX)
+por AZ com estatísticas, taxa de interrupção, padrões de YARN e campos derivados.
 
 Fontes:
 - Instâncias:  emr:ListSupportedInstanceTypes (define o universo)
 - Hardware:    ec2:DescribeInstanceTypes
 - Ofertas/AZ:  ec2:DescribeInstanceTypeOfferings
 - On-demand:   pricing:GetProducts (Price List API — endpoint em us-east-1)
-- Spot:        ec2:DescribeSpotPriceHistory
+- Taxa EMR:    pricing:GetProducts (serviço ElasticMapReduce)
+- Spot:        ec2:DescribeSpotPriceHistory (janela de 30 dias, por AZ)
 - Interrupção: Spot Bid Advisor (S3 público)
+- YARN:        página Task configuration da documentação do EMR
 - Release novo: RSS de release notes do EMR (docs.aws.amazon.com)
 """
 

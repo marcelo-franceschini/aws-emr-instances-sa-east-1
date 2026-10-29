@@ -11,7 +11,9 @@ from emr_instances.config import (
     MAX_MISSING_CATALOG_RATIO,
     MAX_MISSING_PRICE_RATIO,
     REGION,
+    SPOT_HISTORY_DAYS,
 )
+from emr_instances.derived import build_derived
 from emr_instances.errors import CoverageError
 from emr_instances.models import (
     SCHEMA_VERSION,
@@ -20,9 +22,12 @@ from emr_instances.models import (
     InstanceRecord,
     Payload,
     PricingProduct,
+    PricingSpec,
+    SpotAzStats,
     SpotInfo,
     SpotInterruption,
     StaticSpec,
+    YarnDefaults,
 )
 from emr_instances.sources.ec2 import (
     availability_zones,
@@ -30,8 +35,14 @@ from emr_instances.sources.ec2 import (
     instance_hardware,
 )
 from emr_instances.sources.emr import supported_instance_types
-from emr_instances.sources.pricing import on_demand_prices
-from emr_instances.sources.spot import interruption_frequency, spot_prices
+from emr_instances.sources.pricing import emr_fees, on_demand_prices
+from emr_instances.sources.spot import (
+    az_statistics,
+    cheapest_current,
+    interruption_frequency,
+    spot_price_history,
+)
+from emr_instances.sources.yarn import yarn_defaults
 
 if TYPE_CHECKING:
     from mypy_boto3_ec2 import EC2Client
@@ -50,31 +61,48 @@ def build_records(
     spot: dict[str, SpotInfo],
     interruption: dict[str, SpotInterruption],
     as_of: str,
+    *,
+    fees: dict[str, float] | None = None,
+    spot_stats: dict[str, list[SpotAzStats]] | None = None,
+    yarn: dict[str, YarnDefaults] | None = None,
 ) -> list[InstanceRecord]:
     """Combina as fontes num registro por instância, ordenado por tipo.
 
     O universo é sempre o que o EMR devolve: as outras fontes entram por join, e
-    tipo que a região oferta mas o release do EMR não suporta fica de fora.
+    tipo que a região oferta mas o release do EMR não suporta fica de fora. As
+    três fontes por palavra-chave (taxa do EMR, spot por AZ e YARN) são
+    opcionais; sem elas, os campos correspondentes ficam None, ou lista vazia no
+    caso do spot por AZ.
     """
+    fees = fees or {}
+    spot_stats = spot_stats or {}
+    yarn = yarn or {}
     records: list[InstanceRecord] = []
     for instance in sorted(instances, key=lambda i: i["Type"]):
         instance_type = instance["Type"]
         product = products.get(instance_type)
+        static = _build_static(
+            instance,
+            hardware.get(instance_type) or empty_hardware(),
+            zones.get(instance_type, []),
+            product,
+        )
+        pricing_block: PricingSpec = {
+            "as_of": as_of,
+            "on_demand_usd_hour": product["usd_hour"] if product else None,
+            "emr_fee_usd_hour": fees.get(instance_type),
+            "spot": spot.get(instance_type),
+            "spot_by_az": spot_stats.get(instance_type, []),
+            "spot_interruption": interruption.get(instance_type),
+        }
+        yarn_block = yarn.get(instance_type)
         records.append(
             {
                 "instance_type": instance_type,
-                "static": _build_static(
-                    instance,
-                    hardware.get(instance_type) or empty_hardware(),
-                    zones.get(instance_type, []),
-                    product,
-                ),
-                "pricing": {
-                    "as_of": as_of,
-                    "on_demand_usd_hour": product["usd_hour"] if product else None,
-                    "spot": spot.get(instance_type),
-                    "spot_interruption": interruption.get(instance_type),
-                },
+                "static": static,
+                "pricing": pricing_block,
+                "emr_yarn": yarn_block,
+                "derived": build_derived(static, pricing_block, yarn_block),
             }
         )
     return records
@@ -151,16 +179,36 @@ def collect_records(
     products = on_demand_prices(pricing)
     logger.info(f"  {len(products)} preços on-demand")
 
-    logger.info("Coletando preços spot (menor entre as AZs)...")
-    spot = spot_prices(ec2)
-    logger.info(f"  {len(spot)} preços spot")
+    logger.info("Coletando a taxa do EMR por instância (Price List API)...")
+    fees = emr_fees(pricing)
+    logger.info(f"  {len(fees)} taxas do EMR")
+
+    logger.info(f"Coletando histórico spot de {SPOT_HISTORY_DAYS} dias por AZ...")
+    now = datetime.now(UTC)
+    series = spot_price_history(ec2, now=now)
+    spot = cheapest_current(series)
+    spot_stats = az_statistics(series, now=now)
+    logger.info(f"  {len(spot)} preços spot, {len(spot_stats)} com estatística por AZ")
+
+    logger.info("Coletando padrões de YARN (documentação do EMR)...")
+    yarn = yarn_defaults()
+    logger.info(f"  {len(yarn)} tipos com padrões de YARN")
 
     logger.info("Coletando frequência de interrupção spot (Spot Bid Advisor)...")
     interruption = interruption_frequency(REGION)
     logger.info(f"  {len(interruption)} taxas de interrupção")
 
     return build_records(
-        instances, hardware, zones, products, spot, interruption, _utc_now()
+        instances,
+        hardware,
+        zones,
+        products,
+        spot,
+        interruption,
+        _utc_now(),
+        fees=fees,
+        spot_stats=spot_stats,
+        yarn=yarn,
     )
 
 
@@ -260,6 +308,24 @@ _COVERAGE_CHECKS: list[_Check] = [
         "banda de rede",
         _always,
         lambda r: r["static"]["network"]["baseline_gbps"] is None,
+        None,
+    ),
+    _Check(
+        "taxa do EMR",
+        _always,
+        lambda r: r["pricing"]["emr_fee_usd_hour"] is None,
+        None,
+    ),
+    _Check(
+        "padrões de YARN",
+        _always,
+        lambda r: r["emr_yarn"] is None,
+        None,
+    ),
+    _Check(
+        "spot por AZ",
+        _always,
+        lambda r: not r["pricing"]["spot_by_az"],
         None,
     ),
     _Check(

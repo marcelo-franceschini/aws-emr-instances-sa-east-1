@@ -13,8 +13,10 @@ from emr_instances.models import (
     HardwareSpec,
     InstanceRecord,
     PricingProduct,
+    SpotAzStats,
     SpotInfo,
     SpotInterruption,
+    YarnDefaults,
 )
 from emr_instances.sources.ec2 import empty_hardware
 
@@ -168,7 +170,9 @@ def test_build_records_pricing() -> None:
     assert record["pricing"] == {
         "as_of": AS_OF,
         "on_demand_usd_hour": 1.8616,
+        "emr_fee_usd_hour": None,  # as fontes opcionais não foram passadas
         "spot": {"usd_hour": 1.1793, "az": "sa-east-1c"},
+        "spot_by_az": [],
         "spot_interruption": {"savings_percent": 46, "interruption_rate": 4},
     }
 
@@ -233,6 +237,81 @@ def test_build_records_ordena_por_tipo() -> None:
     ]
 
 
+def _build_com_fontes_novas() -> InstanceRecord:
+    """Roda build_records passando a taxa do EMR, o spot por AZ e o YARN."""
+    stats: SpotAzStats = {
+        "az": "sa-east-1c",
+        "current_usd_hour": 1.1793,
+        "window_days": 30,
+        "min_usd_hour": 1.1,
+        "mean_usd_hour": 1.2,
+        "median_usd_hour": 1.19,
+        "p95_usd_hour": 1.3,
+        "max_usd_hour": 1.4,
+        "stddev_usd_hour": 0.06,
+        "price_changes": 12,
+    }
+    yarn: YarnDefaults = {
+        "nodemanager_memory_mb": 114688,
+        "scheduler_max_allocation_mb": 114688,
+        "scheduler_min_allocation_mb": 1,
+    }
+    records = collector.build_records(
+        [_emr_instance()],
+        {"r8gd.4xlarge": _hardware()},
+        {},
+        {
+            "r8gd.4xlarge": {
+                "usd_hour": 1.8616,
+                "processor_name": None,
+                "family_category": None,
+                "normalization_factor": 32,
+            }
+        },
+        {"r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c"}},
+        {},
+        AS_OF,
+        fees={"r8gd.4xlarge": 0.4},
+        spot_stats={"r8gd.4xlarge": [stats]},
+        yarn={"r8gd.4xlarge": yarn},
+    )
+    return records[0]
+
+
+def test_build_records_com_taxa_do_emr_spot_por_az_e_yarn() -> None:
+    """As três fontes novas entram nos blocos `pricing` e `emr_yarn`."""
+    record = _build_com_fontes_novas()
+
+    assert record["pricing"]["emr_fee_usd_hour"] == 0.4
+    assert [s["az"] for s in record["pricing"]["spot_by_az"]] == ["sa-east-1c"]
+    assert record["pricing"]["spot_by_az"][0]["p95_usd_hour"] == 1.3
+    assert record["emr_yarn"] == {
+        "nodemanager_memory_mb": 114688,
+        "scheduler_max_allocation_mb": 114688,
+        "scheduler_min_allocation_mb": 1,
+    }
+
+
+def test_build_records_calcula_o_bloco_derived() -> None:
+    """O `derived` sai do mesmo registro e usa os dados das fontes novas."""
+    derived = _build_com_fontes_novas()["derived"]
+
+    assert derived["total_spot_usd_hour"] == 1.5793  # spot 1,1793 + taxa 0,40
+    assert derived["yarn_memory_gb"] == 112.0
+    assert derived["memory_gb_per_vcpu"] == 8.0
+
+
+def test_build_records_sem_fontes_novas_mantem_a_forma() -> None:
+    """Sem as fontes novas o registro mantém a forma, com None e lista vazia."""
+    record = _build_one()
+
+    assert record["emr_yarn"] is None
+    assert record["pricing"]["emr_fee_usd_hour"] is None
+    assert record["pricing"]["spot_by_az"] == []
+    assert record["derived"]["total_spot_usd_hour"] is None
+    assert record["derived"]["yarn_memory_gb"] is None
+
+
 def test_build_payload() -> None:
     """O envelope carrega região, release, contagem, versão do schema e o RSS."""
     records = [_record()]
@@ -245,7 +324,7 @@ def test_build_payload() -> None:
 
     assert payload["region"] == "sa-east-1"
     assert payload["release_label"] == "emr-7.13.0"
-    assert payload["schema_version"] == 2
+    assert payload["schema_version"] == 3
     assert payload["instance_count"] == 1
     assert payload["instances"] == records
     assert payload["latest_announced_release"] == announced
@@ -356,6 +435,20 @@ def test_validate_coverage_campos_de_diagnostico_nunca_abortam() -> None:
         record["static"]["normalization_factor"] = None
         record["static"]["ebs"]["baseline_mbps"] = None
         record["static"]["network"]["baseline_gbps"] = None
+
+    collector.validate_coverage(records)
+
+
+def test_validate_coverage_fontes_novas_nunca_abortam() -> None:
+    """Taxa do EMR, YARN e spot por AZ ausentes são só diagnóstico.
+
+    A documentação do EMR pode não cobrir tipos recém-lançados, e a Price List
+    pode mudar de formato; nenhum dos dois deve derrubar a coleta diária.
+    """
+    records = [_record() for _ in range(100)]
+    assert all(r["emr_yarn"] is None for r in records)
+    assert all(r["pricing"]["emr_fee_usd_hour"] is None for r in records)
+    assert all(r["pricing"]["spot_by_az"] == [] for r in records)
 
     collector.validate_coverage(records)
 

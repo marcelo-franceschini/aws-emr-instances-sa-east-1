@@ -1,8 +1,13 @@
-"""Preço on-demand via Price List API (pricing:GetProducts, endpoint us-east-1)."""
+"""Preços via Price List API (pricing:GetProducts, endpoint us-east-1).
+
+Duas ofertas: o EC2 on-demand (com os atributos de catálogo) e a taxa que o EMR
+cobra por instância-hora por cima do EC2.
+"""
 
 from __future__ import annotations
 
 import json
+import logging
 from typing import TYPE_CHECKING, Any
 
 from emr_instances.config import REGION
@@ -10,6 +15,8 @@ from emr_instances.models import PricingProduct
 
 if TYPE_CHECKING:
     from mypy_boto3_pricing import PricingClient
+
+logger = logging.getLogger(__name__)
 
 
 def on_demand_prices(pricing: PricingClient) -> dict[str, PricingProduct]:
@@ -49,6 +56,48 @@ def on_demand_prices(pricing: PricingClient) -> dict[str, PricingProduct]:
                     ),
                 }
     return prices
+
+
+def emr_fees(pricing: PricingClient) -> dict[str, float]:
+    """Mapeia {instance_type: taxa do EMR em USD/hora} para a região inteira.
+
+    A taxa é cobrada por instância-hora além do EC2 e varia por tipo: não é um
+    percentual fixo do preço do EC2 e, em x86 grandes, chega a um valor fixo.
+
+    Um tipo só entra quando a Price List devolve um único preço positivo para ele.
+    Só o produto com `softwareType` "EMR" conta: na Price List real há outros
+    (MapR, Hunk, Karmasphere) para o mesmo tipo, com preço próprio. Se ainda
+    sobrar mais de um preço, o tipo fica de fora e o conflito vai para o log,
+    porque escolher um deles seria chute.
+    """
+    candidates: dict[str, set[float]] = {}
+    paginator = pricing.get_paginator("get_products")
+    pages = paginator.paginate(
+        ServiceCode="ElasticMapReduce",
+        Filters=[{"Type": "TERM_MATCH", "Field": "regionCode", "Value": REGION}],
+    )
+    for page in pages:
+        for raw in page["PriceList"]:
+            product = json.loads(raw)
+            attrs = product["product"]["attributes"]
+            instance_type = attrs.get("instanceType")
+            software = attrs.get("softwareType")
+            price = _extract_on_demand_usd(product)
+            if not instance_type or price is None or price <= 0:
+                continue
+            if software != "EMR":
+                continue
+            candidates.setdefault(instance_type, set()).add(price)
+
+    fees: dict[str, float] = {}
+    for instance_type, prices in candidates.items():
+        if len(prices) == 1:
+            fees[instance_type] = next(iter(prices))
+        else:
+            logger.warning(
+                f"Taxa do EMR ambígua para {instance_type}: {sorted(prices)}; ignorada"
+            )
+    return fees
 
 
 def _extract_on_demand_usd(product: dict[str, Any]) -> float | None:

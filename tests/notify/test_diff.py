@@ -7,7 +7,7 @@ from collections.abc import Callable
 from typing import TYPE_CHECKING, Any, cast
 
 from emr_instances.collector import build_payload, build_records
-from emr_instances.models import Snapshot
+from emr_instances.models import SCHEMA_VERSION, Snapshot
 from emr_instances.notify.diff import (
     diff_new,
     instance_types,
@@ -169,8 +169,8 @@ def _snapshot_v1() -> Snapshot:
     return cast(Snapshot, raw)
 
 
-def _snapshot_v2() -> Snapshot:
-    """Snapshot no schema v2, montado pelo mesmo código que grava o arquivo.
+def _snapshot_atual() -> Snapshot:
+    """Snapshot no schema atual, montado pelo mesmo código que grava o arquivo.
 
     Passa por json para simular a ida ao disco — e para que qualquer mudança
     futura no formato gravado chegue aqui sozinha.
@@ -191,18 +191,18 @@ def test_diff_v1_para_v2_nao_acusa_instancia_nova() -> None:
     registro nas duas versões; se algum dia ele for parar dentro de `static`,
     este teste quebra antes de a notificação mentir.
     """
-    v1, v2 = _snapshot_v1(), _snapshot_v2()
-    assert instance_types(v1) == instance_types(v2) == set(TIPOS)
+    v1, atual = _snapshot_v1(), _snapshot_atual()
+    assert instance_types(v1) == instance_types(atual) == set(TIPOS)
 
-    assert diff_new(instance_types(v2), instance_types(v1)) == []
+    assert diff_new(instance_types(atual), instance_types(v1)) == []
 
 
 def test_release_alerts_v1_para_v2_nao_alerta() -> None:
     """O envelope comparado pelo alerta de release é idêntico nas duas versões."""
-    assert release_alerts(_snapshot_v2(), _snapshot_v1()) == []
+    assert release_alerts(_snapshot_atual(), _snapshot_v1()) == []
 
 
-def test_snapshot_v2_declara_a_versao_do_schema() -> None:
-    """O v2 se identifica; o v1 gravado em disco não tem o campo."""
-    assert _snapshot_v2().get("schema_version") == 2
+def test_snapshot_atual_declara_a_versao_do_schema() -> None:
+    """O schema atual se identifica; o v1 gravado em disco não tem o campo."""
+    assert _snapshot_atual().get("schema_version") == SCHEMA_VERSION == 3
     assert _snapshot_v1().get("schema_version") is None
