@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import json
+import logging
 from typing import Any
 from unittest.mock import MagicMock
+
+import pytest
 
 from emr_instances.sources import pricing
 
@@ -122,3 +125,103 @@ def test_parse_normalization_factor() -> None:
     assert pricing._parse_normalization_factor("0.25") == 0.25
     assert pricing._parse_normalization_factor("NA") is None
     assert pricing._parse_normalization_factor(None) is None
+
+
+def _emr_product(instance_type: str, usd: str, **attrs: str) -> dict[str, Any]:
+    """Produto da Price List do EMR: tipo, preço por instância-hora e software."""
+    attributes = {"instanceType": instance_type, "softwareType": "EMR", **attrs}
+    return {
+        "product": {"attributes": attributes},
+        "terms": {
+            "OnDemand": {
+                "sku.TERM1": {
+                    "priceDimensions": {"dim1": {"pricePerUnit": {"USD": usd}}}
+                }
+            }
+        },
+    }
+
+
+def _pricing_with(products: list[dict[str, Any]]) -> tuple[MagicMock, MagicMock]:
+    """Client Pricing fake cujo paginator devolve os produtos numa página só."""
+    mock_pricing = MagicMock()
+    paginator = MagicMock()
+    mock_pricing.get_paginator.return_value = paginator
+    paginator.paginate.return_value = [
+        {"PriceList": [json.dumps(product) for product in products]}
+    ]
+    return mock_pricing, paginator
+
+
+def test_emr_fees_consulta_o_servico_do_emr_na_regiao() -> None:
+    """A varredura é do serviço ElasticMapReduce, filtrada pela região."""
+    mock_pricing, paginator = _pricing_with([_emr_product("m5.xlarge", "0.048")])
+
+    pricing.emr_fees(mock_pricing)
+
+    kwargs = paginator.paginate.call_args.kwargs
+    assert kwargs["ServiceCode"] == "ElasticMapReduce"
+    assert {
+        "Type": "TERM_MATCH",
+        "Field": "regionCode",
+        "Value": "sa-east-1",
+    } in kwargs["Filters"]
+
+
+def test_emr_fees_taxa_varia_por_tipo() -> None:
+    """A taxa é por tipo de instância; não é um valor único nem proporcional."""
+    mock_pricing, _ = _pricing_with(
+        [
+            _emr_product("m5.xlarge", "0.048"),
+            _emr_product("m5.24xlarge", "0.27"),
+            _emr_product("c5.xlarge", "0.04"),
+        ]
+    )
+
+    assert pricing.emr_fees(mock_pricing) == {
+        "m5.xlarge": 0.048,
+        "m5.24xlarge": 0.27,
+        "c5.xlarge": 0.04,
+    }
+
+
+def test_emr_fees_ignora_outro_software_zero_e_produto_sem_tipo() -> None:
+    """MapR, preço zero e produto sem `instanceType` não viram taxa do EMR."""
+    mock_pricing, _ = _pricing_with(
+        [
+            _emr_product("m5.xlarge", "0.048", softwareType="EMR"),
+            _emr_product("m5.xlarge", "0.200", softwareType="MapR-M5"),
+            _emr_product("c5.xlarge", "0.0"),
+            {"product": {"attributes": {}}, "terms": {}},
+        ]
+    )
+
+    assert pricing.emr_fees(mock_pricing) == {"m5.xlarge": 0.048}
+
+
+def test_emr_fees_conflito_deixa_o_tipo_de_fora(
+    caplog: pytest.LogCaptureFixture,
+) -> None:
+    """Dois preços diferentes para o mesmo tipo: não escolhe, avisa no log."""
+    mock_pricing, _ = _pricing_with(
+        [
+            _emr_product("m5.xlarge", "0.048"),
+            _emr_product("m5.xlarge", "0.060"),
+            _emr_product("c5.xlarge", "0.04"),
+        ]
+    )
+
+    with caplog.at_level(logging.WARNING):
+        result = pricing.emr_fees(mock_pricing)
+
+    assert result == {"c5.xlarge": 0.04}
+    assert "m5.xlarge" in caplog.text
+
+
+def test_emr_fees_mesmo_preco_repetido_nao_e_conflito() -> None:
+    """O mesmo preço em dois produtos (ex.: duas SKUs iguais) conta uma vez."""
+    mock_pricing, _ = _pricing_with(
+        [_emr_product("m5.xlarge", "0.048"), _emr_product("m5.xlarge", "0.048")]
+    )
+
+    assert pricing.emr_fees(mock_pricing) == {"m5.xlarge": 0.048}

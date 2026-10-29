@@ -1,6 +1,6 @@
 """Exceções de domínio do projeto.
 
-As camadas internas (coleta, storage, notificação) levantam estes erros; só a
+As camadas internas (coleta, storage) levantam estes erros; só a
 camada `cli/` os traduz em código de saída. Isso mantém os módulos reutilizáveis
 e testáveis sem precisar capturar `SystemExit`.
 """
@@ -17,8 +17,12 @@ class CoverageError(EmrInstancesError):
 
 
 class StorageError(EmrInstancesError):
-    """Falha ao gravar ou ler um snapshot em disco."""
+    """Falha ao gravar o JSON em disco."""
 
 
-class NotificationError(EmrInstancesError):
-    """Falha ao enviar a notificação (configuração ausente ou API recusou)."""
+class SourceFormatError(EmrInstancesError):
+    """Uma fonte de fora das APIs mudou de formato e o parser não a reconhece.
+
+    Existe para a coleta falhar alto em vez de publicar valores errados ou nulos:
+    quem lê a página por regex não tem outro jeito de saber que ela mudou.
+    """

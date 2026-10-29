@@ -9,12 +9,13 @@ import pytest
 from emr_instances import collector
 from emr_instances.errors import CoverageError
 from emr_instances.models import (
-    AnnouncedRelease,
     HardwareSpec,
     InstanceRecord,
     PricingProduct,
+    SpotAzStats,
     SpotInfo,
     SpotInterruption,
+    YarnDefaults,
 )
 from emr_instances.sources.ec2 import empty_hardware
 
@@ -22,6 +23,13 @@ if TYPE_CHECKING:
     from mypy_boto3_emr.type_defs import SupportedInstanceTypeTypeDef
 
 AS_OF = "2026-07-27T09:00:00+00:00"
+
+# IDs fora da ordem dos nomes, como a AWS sorteia por conta
+ZONE_IDS = {
+    "sa-east-1a": "sae1-az3",
+    "sa-east-1b": "sae1-az1",
+    "sa-east-1c": "sae1-az2",
+}
 
 
 def _hardware() -> HardwareSpec:
@@ -92,7 +100,7 @@ def _build_one(
         {"r8gd.4xlarge": ["sa-east-1a", "sa-east-1b", "sa-east-1c"]} if zones else {}
     )
     spot: dict[str, SpotInfo] = {
-        "r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c"}
+        "r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c", "az_id": "sae1-az2"}
     }
     interruption: dict[str, SpotInterruption] = {
         "r8gd.4xlarge": {"savings_percent": 46, "interruption_rate": 4}
@@ -105,6 +113,7 @@ def _build_one(
         spot,
         interruption,
         AS_OF,
+        zone_ids=ZONE_IDS,
     )
     assert len(records) == 1
     return records[0]
@@ -133,8 +142,9 @@ def test_build_records_static() -> None:
     assert static["processor_name"] == "AWS Graviton4 Processor"
     assert static["family_category"] == "Memory optimized"
     assert static["normalization_factor"] == 32
-    # das ofertas por AZ
+    # das ofertas por AZ, com o ID de cada uma (lista ordenada pelo ID)
     assert static["availability_zones"] == ["sa-east-1a", "sa-east-1b", "sa-east-1c"]
+    assert static["availability_zone_ids"] == ["sae1-az1", "sae1-az2", "sae1-az3"]
 
 
 def test_build_records_guarda_as_duas_memorias() -> None:
@@ -168,7 +178,9 @@ def test_build_records_pricing() -> None:
     assert record["pricing"] == {
         "as_of": AS_OF,
         "on_demand_usd_hour": 1.8616,
-        "spot": {"usd_hour": 1.1793, "az": "sa-east-1c"},
+        "emr_fee_usd_hour": None,  # as fontes opcionais não foram passadas
+        "spot": {"usd_hour": 1.1793, "az": "sa-east-1c", "az_id": "sae1-az2"},
+        "spot_by_az": [],
         "spot_interruption": {"savings_percent": 46, "interruption_rate": 4},
     }
 
@@ -204,7 +216,26 @@ def test_build_records_sem_preco() -> None:
 
 def test_build_records_sem_ofertas() -> None:
     """Sem oferta por AZ, a lista fica vazia em vez de ausente."""
-    assert _build_one(zones=False)["static"]["availability_zones"] == []
+    static = _build_one(zones=False)["static"]
+
+    assert static["availability_zones"] == []
+    assert static["availability_zone_ids"] == []
+
+
+def test_build_records_az_sem_id_fica_fora_da_lista_de_ids() -> None:
+    """Nome sem ID no mapa não vira ID inventado; a cobertura é que acusa."""
+    records = collector.build_records(
+        [_emr_instance()],
+        {},
+        {"r8gd.4xlarge": ["sa-east-1a", "sa-east-1b"]},
+        {},
+        {},
+        {},
+        AS_OF,
+        zone_ids={"sa-east-1a": "sae1-az3"},
+    )
+
+    assert records[0]["static"]["availability_zone_ids"] == ["sae1-az3"]
 
 
 def test_build_records_universo_e_o_do_emr() -> None:
@@ -233,38 +264,132 @@ def test_build_records_ordena_por_tipo() -> None:
     ]
 
 
-def test_build_payload() -> None:
-    """O envelope carrega região, release, contagem, versão do schema e o RSS."""
-    records = [_record()]
-    announced: AnnouncedRelease = {
-        "version": "7.13.0",
-        "url": "https://docs.aws.amazon.com/x/emr-7130-release.html",
-        "published_at": "Tue, 28 Apr 2026 19:00:00 GMT",
+def _build_com_fontes_novas() -> InstanceRecord:
+    """Roda build_records passando a taxa do EMR, o spot por AZ e o YARN."""
+    stats: SpotAzStats = {
+        "az": "sa-east-1c",
+        "az_id": "sae1-az2",
+        "current_usd_hour": 1.1793,
+        "window_days": 30,
+        "min_usd_hour": 1.1,
+        "mean_usd_hour": 1.2,
+        "median_usd_hour": 1.19,
+        "p95_usd_hour": 1.3,
+        "max_usd_hour": 1.4,
+        "stddev_usd_hour": 0.06,
+        "price_changes": 12,
     }
-    payload = collector.build_payload("emr-7.13.0", records, announced)
+    yarn: YarnDefaults = {
+        "nodemanager_memory_mb": 114688,
+        "scheduler_max_allocation_mb": 114688,
+        "scheduler_min_allocation_mb": 1,
+    }
+    records = collector.build_records(
+        [_emr_instance()],
+        {"r8gd.4xlarge": _hardware()},
+        {},
+        {
+            "r8gd.4xlarge": {
+                "usd_hour": 1.8616,
+                "processor_name": None,
+                "family_category": None,
+                "normalization_factor": 32,
+            }
+        },
+        {"r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c", "az_id": "sae1-az2"}},
+        {},
+        AS_OF,
+        fees={"r8gd.4xlarge": 0.4},
+        spot_stats={"r8gd.4xlarge": [stats]},
+        yarn={"r8gd.4xlarge": yarn},
+        zone_ids=ZONE_IDS,
+    )
+    return records[0]
+
+
+def test_build_records_com_taxa_do_emr_spot_por_az_e_yarn() -> None:
+    """As três fontes novas entram nos blocos `pricing` e `emr_yarn`."""
+    record = _build_com_fontes_novas()
+
+    assert record["pricing"]["emr_fee_usd_hour"] == 0.4
+    assert [s["az"] for s in record["pricing"]["spot_by_az"]] == ["sa-east-1c"]
+    assert record["pricing"]["spot_by_az"][0]["p95_usd_hour"] == 1.3
+    assert record["emr_yarn"] == {
+        "nodemanager_memory_mb": 114688,
+        "scheduler_max_allocation_mb": 114688,
+        "scheduler_min_allocation_mb": 1,
+    }
+
+
+def test_build_records_calcula_o_bloco_derived() -> None:
+    """O `derived` sai do mesmo registro e usa os dados das fontes novas."""
+    derived = _build_com_fontes_novas()["derived"]
+
+    assert derived["total_spot_usd_hour"] == 1.5793  # spot 1,1793 + taxa 0,40
+    assert derived["yarn_memory_gb"] == 112.0
+    assert derived["memory_gb_per_vcpu"] == 8.0
+
+
+def test_build_records_sem_fontes_novas_mantem_a_forma() -> None:
+    """Sem as fontes novas o registro mantém a forma, com None e lista vazia."""
+    record = _build_one()
+
+    assert record["emr_yarn"] is None
+    assert record["pricing"]["emr_fee_usd_hour"] is None
+    assert record["pricing"]["spot_by_az"] == []
+    assert record["derived"]["total_spot_usd_hour"] is None
+    assert record["derived"]["yarn_memory_gb"] is None
+
+
+def test_build_payload() -> None:
+    """O envelope carrega região, release, contagem, versão do schema."""
+    records = [_record()]
+    payload = collector.build_payload("emr-7.13.0", records)
 
     assert payload["region"] == "sa-east-1"
     assert payload["release_label"] == "emr-7.13.0"
-    assert payload["schema_version"] == 2
+    assert payload["schema_version"] == 3
     assert payload["instance_count"] == 1
     assert payload["instances"] == records
-    assert payload["latest_announced_release"] == announced
     assert payload["generated_at"].endswith("+00:00")  # sempre em UTC
 
 
-def _record(*, has_od: bool = True, has_spot: bool = True) -> InstanceRecord:
-    """InstanceRecord com o catálogo completo, variando só os preços."""
-    record = _build_one()
+def _com_fontes_novas(record: InstanceRecord) -> InstanceRecord:
+    """Preenche a taxa do EMR e o YARN, cuja falta em massa aborta a coleta."""
+    record["pricing"]["emr_fee_usd_hour"] = 0.4
+    record["emr_yarn"] = {
+        "nodemanager_memory_mb": 114688,
+        "scheduler_max_allocation_mb": 114688,
+        "scheduler_min_allocation_mb": 1,
+    }
+    return record
+
+
+def _record(
+    *,
+    has_od: bool = True,
+    has_spot: bool = True,
+    has_fee: bool = True,
+    has_yarn: bool = True,
+) -> InstanceRecord:
+    """InstanceRecord completo, variando só os preços e as fontes novas."""
+    record = _com_fontes_novas(_build_one())
     record["pricing"]["on_demand_usd_hour"] = 0.1 if has_od else None
     record["pricing"]["spot"] = (
-        {"usd_hour": 0.05, "az": "sa-east-1a"} if has_spot else None
+        {"usd_hour": 0.05, "az": "sa-east-1a", "az_id": "sae1-az3"}
+        if has_spot
+        else None
     )
+    if not has_fee:
+        record["pricing"]["emr_fee_usd_hour"] = None
+    if not has_yarn:
+        record["emr_yarn"] = None
     return record
 
 
 def _record_com_disco(*, detalhado: bool) -> InstanceRecord:
     """Instância com disco local, com ou sem o detalhe dos discos."""
-    record = _build_one()
+    record = _record()
     record["static"]["storage"] = {
         "ebs_only": False,
         "total_gb": 950 if detalhado else None,
@@ -276,7 +401,7 @@ def _record_com_disco(*, detalhado: bool) -> InstanceRecord:
 
 def _record_ebs_only() -> InstanceRecord:
     """Instância EBS-only: não tem disco local nem deveria ter."""
-    record = _build_one()
+    record = _record()
     record["static"]["storage"] = {
         "ebs_only": True,
         "total_gb": None,
@@ -300,21 +425,47 @@ def test_validate_coverage_within_limit() -> None:
 def test_validate_coverage_exceeds_limit() -> None:
     """7% sem spot (> 5%) levanta CoverageError."""
     records = [_record(has_spot=i >= 7) for i in range(100)]
-    with pytest.raises(CoverageError):
+    with pytest.raises(CoverageError, match="preço spot"):
         collector.validate_coverage(records)
 
 
 def test_validate_coverage_sem_hardware_aborta() -> None:
     """Join com o EC2 falhando inteiro é quebra de coleta, não ausência legítima."""
-    records = [_build_one(hardware=False) for _ in range(100)]
-    with pytest.raises(CoverageError):
+    records = [_com_fontes_novas(_build_one(hardware=False)) for _ in range(100)]
+    with pytest.raises(CoverageError, match="hardware do EC2"):
         collector.validate_coverage(records)
 
 
 def test_validate_coverage_sem_ofertas_aborta() -> None:
     """Idem para as ofertas por AZ, que cobrem 100% do universo do EMR."""
-    records = [_build_one(zones=False) for _ in range(100)]
-    with pytest.raises(CoverageError):
+    records = [_com_fontes_novas(_build_one(zones=False)) for _ in range(100)]
+    with pytest.raises(CoverageError, match="oferta por AZ"):
+        collector.validate_coverage(records)
+
+
+def test_validate_coverage_sem_id_de_az_aborta() -> None:
+    """Sem o ID, o JSON não serve a quem roda em outra conta: é quebra de coleta.
+
+    O mapa vem do histórico spot; se a API parar de mandar o ID, todos os
+    registros perdem o campo de uma vez.
+    """
+    records = [_record() for _ in range(100)]
+    for record in records:
+        record["static"]["availability_zone_ids"] = []
+
+    with pytest.raises(CoverageError, match="ID de AZ"):
+        collector.validate_coverage(records)
+
+
+def test_validate_coverage_spot_sem_id_de_az_aborta() -> None:
+    """A AZ do spot sem ID também conta, mesmo com os IDs das ofertas completos."""
+    records = [_record() for _ in range(100)]
+    for record in records:
+        spot = record["pricing"]["spot"]
+        assert spot is not None
+        spot["az_id"] = None
+
+    with pytest.raises(CoverageError, match="ID de AZ"):
         collector.validate_coverage(records)
 
 
@@ -339,7 +490,7 @@ def test_validate_coverage_disco_conta_so_quem_tem_disco() -> None:
 def test_validate_coverage_disco_ausente_em_quem_tem_disco_aborta() -> None:
     """Instância com disco local e sem o detalhe é falha de verdade."""
     records = [_record_com_disco(detalhado=i >= 7) for i in range(100)]
-    with pytest.raises(CoverageError):
+    with pytest.raises(CoverageError, match="detalhe de disco local"):
         collector.validate_coverage(records)
 
 
@@ -358,6 +509,41 @@ def test_validate_coverage_campos_de_diagnostico_nunca_abortam() -> None:
         record["static"]["network"]["baseline_gbps"] = None
 
     collector.validate_coverage(records)
+
+
+def test_validate_coverage_sem_yarn_aborta() -> None:
+    """Página de YARN fora do ar ou com formato novo deixa a coleta vermelha.
+
+    Sem notificação, checagem que só loga não tem leitor: 465 registros com
+    `emr_yarn` nulo seriam publicados sem ninguém saber. Abortar mantém o último
+    JSON bom na branch data e faz o GitHub mandar o e-mail de falha.
+    """
+    records = [_record(has_yarn=False) for _ in range(100)]
+    with pytest.raises(CoverageError, match="padrões de YARN"):
+        collector.validate_coverage(records)
+
+
+def test_validate_coverage_yarn_que_a_documentacao_nao_cobre_nao_aborta() -> None:
+    """16 de 465 sem YARN (os r8i, ausentes da documentação) é atraso, não quebra."""
+    records = [_record(has_yarn=i >= 16) for i in range(465)]
+    collector.validate_coverage(records)
+
+
+def test_validate_coverage_sem_taxa_de_interrupcao_aborta() -> None:
+    """Spot Advisor fora do ar ou com formato novo também deixa a coleta vermelha."""
+    records = [_record() for _ in range(100)]
+    for record in records:
+        record["pricing"]["spot_interruption"] = None
+
+    with pytest.raises(CoverageError, match="taxa de interrupção"):
+        collector.validate_coverage(records)
+
+
+def test_validate_coverage_sem_taxa_do_emr_aborta() -> None:
+    """A taxa do EMR é preço: vale a mesma régua de 5% do on-demand e do spot."""
+    records = [_record(has_fee=i >= 7) for i in range(100)]
+    with pytest.raises(CoverageError, match="taxa do EMR"):
+        collector.validate_coverage(records)
 
 
 def test_validate_coverage_gpu_nunca_aborta() -> None:

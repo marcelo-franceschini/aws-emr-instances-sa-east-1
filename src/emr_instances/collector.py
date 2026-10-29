@@ -10,19 +10,24 @@ from typing import TYPE_CHECKING, NamedTuple
 from emr_instances.config import (
     MAX_MISSING_CATALOG_RATIO,
     MAX_MISSING_PRICE_RATIO,
+    MAX_MISSING_PUBLIC_DATA_RATIO,
     REGION,
+    SPOT_HISTORY_DAYS,
 )
+from emr_instances.derived import build_derived
 from emr_instances.errors import CoverageError
 from emr_instances.models import (
     SCHEMA_VERSION,
-    AnnouncedRelease,
     HardwareSpec,
     InstanceRecord,
     Payload,
     PricingProduct,
+    PricingSpec,
+    SpotAzStats,
     SpotInfo,
     SpotInterruption,
     StaticSpec,
+    YarnDefaults,
 )
 from emr_instances.sources.ec2 import (
     availability_zones,
@@ -30,8 +35,15 @@ from emr_instances.sources.ec2 import (
     instance_hardware,
 )
 from emr_instances.sources.emr import supported_instance_types
-from emr_instances.sources.pricing import on_demand_prices
-from emr_instances.sources.spot import interruption_frequency, spot_prices
+from emr_instances.sources.pricing import emr_fees, on_demand_prices
+from emr_instances.sources.spot import (
+    ZoneIds,
+    az_statistics,
+    cheapest_current,
+    interruption_frequency,
+    spot_price_history,
+)
+from emr_instances.sources.yarn import yarn_defaults
 
 if TYPE_CHECKING:
     from mypy_boto3_ec2 import EC2Client
@@ -50,31 +62,51 @@ def build_records(
     spot: dict[str, SpotInfo],
     interruption: dict[str, SpotInterruption],
     as_of: str,
+    *,
+    fees: dict[str, float] | None = None,
+    spot_stats: dict[str, list[SpotAzStats]] | None = None,
+    yarn: dict[str, YarnDefaults] | None = None,
+    zone_ids: ZoneIds | None = None,
 ) -> list[InstanceRecord]:
     """Combina as fontes num registro por instância, ordenado por tipo.
 
     O universo é sempre o que o EMR devolve: as outras fontes entram por join, e
-    tipo que a região oferta mas o release do EMR não suporta fica de fora.
+    tipo que a região oferta mas o release do EMR não suporta fica de fora. As
+    fontes por palavra-chave (taxa do EMR, spot por AZ, YARN e o ID de cada AZ)
+    são opcionais; sem elas, os campos correspondentes ficam None, ou lista
+    vazia no caso do spot por AZ e dos IDs de AZ.
     """
+    fees = fees or {}
+    spot_stats = spot_stats or {}
+    yarn = yarn or {}
+    zone_ids = zone_ids or {}
     records: list[InstanceRecord] = []
     for instance in sorted(instances, key=lambda i: i["Type"]):
         instance_type = instance["Type"]
         product = products.get(instance_type)
+        static = _build_static(
+            instance,
+            hardware.get(instance_type) or empty_hardware(),
+            zones.get(instance_type, []),
+            product,
+            zone_ids,
+        )
+        pricing_block: PricingSpec = {
+            "as_of": as_of,
+            "on_demand_usd_hour": product["usd_hour"] if product else None,
+            "emr_fee_usd_hour": fees.get(instance_type),
+            "spot": spot.get(instance_type),
+            "spot_by_az": spot_stats.get(instance_type, []),
+            "spot_interruption": interruption.get(instance_type),
+        }
+        yarn_block = yarn.get(instance_type)
         records.append(
             {
                 "instance_type": instance_type,
-                "static": _build_static(
-                    instance,
-                    hardware.get(instance_type) or empty_hardware(),
-                    zones.get(instance_type, []),
-                    product,
-                ),
-                "pricing": {
-                    "as_of": as_of,
-                    "on_demand_usd_hour": product["usd_hour"] if product else None,
-                    "spot": spot.get(instance_type),
-                    "spot_interruption": interruption.get(instance_type),
-                },
+                "static": static,
+                "pricing": pricing_block,
+                "emr_yarn": yarn_block,
+                "derived": build_derived(static, pricing_block, yarn_block),
             }
         )
     return records
@@ -85,13 +117,15 @@ def _build_static(
     hardware: HardwareSpec,
     zones: list[str],
     product: PricingProduct | None,
+    zone_ids: ZoneIds,
 ) -> StaticSpec:
     """Monta o bloco `static` juntando EMR, EC2, ofertas por AZ e Price List.
 
     Onde duas fontes têm o mesmo dado, o hardware do EC2 vence — é numérico, e a
     Price List só teria a string equivalente. Do EMR vêm os três campos que só
     ele tem: a memória que o EMR enxerga, o rótulo de família e o EBS otimizado
-    por padrão.
+    por padrão. Os IDs de AZ saem dos nomes ofertados, traduzidos pelo mapa que
+    o histórico spot traz; nome sem ID fica fora da lista, e a cobertura acusa.
     """
     memory_emr = instance.get("MemoryGB")
     return {
@@ -113,6 +147,7 @@ def _build_static(
         "normalization_factor": product["normalization_factor"] if product else None,
         "supports_spot": hardware["supports_spot"],
         "availability_zones": zones,
+        "availability_zone_ids": sorted(zone_ids[az] for az in zones if az in zone_ids),
         "storage": hardware["storage"],
         "ebs": {
             "baseline_mbps": hardware["ebs"]["baseline_mbps"],
@@ -134,7 +169,13 @@ def collect_records(
     pricing: PricingClient,
     release_label: str,
 ) -> list[InstanceRecord]:
-    """Coleta todas as fontes e devolve os registros já combinados."""
+    """Coleta todas as fontes e devolve os registros já combinados.
+
+    Um único instante vale para a coleta inteira: ele fecha a janela do
+    histórico spot e vira o `as_of` dos registros. Antes eram dois, e o `as_of`
+    saía minutos depois do instante a que os preços spot se referem.
+    """
+    now = datetime.now(UTC)
     logger.info(f"Coletando instâncias EMR ({release_label}) em {REGION}...")
     instances = supported_instance_types(emr, release_label)
     logger.info(f"  {len(instances)} tipos de instância")
@@ -151,30 +192,51 @@ def collect_records(
     products = on_demand_prices(pricing)
     logger.info(f"  {len(products)} preços on-demand")
 
-    logger.info("Coletando preços spot (menor entre as AZs)...")
-    spot = spot_prices(ec2)
-    logger.info(f"  {len(spot)} preços spot")
+    logger.info("Coletando a taxa do EMR por instância (Price List API)...")
+    fees = emr_fees(pricing)
+    logger.info(f"  {len(fees)} taxas do EMR")
+
+    logger.info(f"Coletando histórico spot de {SPOT_HISTORY_DAYS} dias por AZ...")
+    series, zone_ids = spot_price_history(ec2, now=now)
+    spot_stats = az_statistics(series, now=now, zone_ids=zone_ids)
+    spot = cheapest_current(spot_stats)
+    logger.info(
+        f"  {len(spot)} preços spot, {len(spot_stats)} com estatística por AZ, "
+        f"{len(zone_ids)} AZs com ID"
+    )
+
+    logger.info("Coletando padrões de YARN (documentação do EMR)...")
+    yarn = yarn_defaults()
+    logger.info(f"  {len(yarn)} tipos com padrões de YARN")
 
     logger.info("Coletando frequência de interrupção spot (Spot Bid Advisor)...")
     interruption = interruption_frequency(REGION)
     logger.info(f"  {len(interruption)} taxas de interrupção")
 
     return build_records(
-        instances, hardware, zones, products, spot, interruption, _utc_now()
+        instances,
+        hardware,
+        zones,
+        products,
+        spot,
+        interruption,
+        now.isoformat(),
+        fees=fees,
+        spot_stats=spot_stats,
+        yarn=yarn,
+        zone_ids=zone_ids,
     )
 
 
 def build_payload(
     release_label: str,
     records: list[InstanceRecord],
-    announced: AnnouncedRelease | None,
 ) -> Payload:
     """Monta o envelope final com metadados e a lista de registros."""
     return {
         "region": REGION,
         "release_label": release_label,
         "schema_version": SCHEMA_VERSION,
-        "latest_announced_release": announced,
         "generated_at": _utc_now(),
         "instance_count": len(records),
         "instances": records,
@@ -210,6 +272,18 @@ def _has_local_disk(record: InstanceRecord) -> bool:
     return record["static"]["storage"]["ebs_only"] is False
 
 
+def _missing_az_id(record: InstanceRecord) -> bool:
+    """Falta o ID de alguma AZ ofertada ou da AZ do spot.
+
+    Sem o ID, quem consome o JSON em outra conta não tem como achar a AZ: o nome
+    só vale para a conta que coletou.
+    """
+    static = record["static"]
+    spot = record["pricing"]["spot"]
+    some_zone = len(static["availability_zone_ids"]) < len(static["availability_zones"])
+    return some_zone or (spot is not None and spot["az_id"] is None)
+
+
 _COVERAGE_CHECKS: list[_Check] = [
     _Check(
         "preço on-demand",
@@ -235,11 +309,30 @@ _COVERAGE_CHECKS: list[_Check] = [
         lambda r: not r["static"]["availability_zones"],
         MAX_MISSING_CATALOG_RATIO,
     ),
+    _Check("ID de AZ", _always, _missing_az_id, MAX_MISSING_CATALOG_RATIO),
     _Check(
         "detalhe de disco local",
         _has_local_disk,
         lambda r: not r["static"]["storage"]["disks"],
         MAX_MISSING_CATALOG_RATIO,
+    ),
+    _Check(
+        "taxa do EMR",
+        _always,
+        lambda r: r["pricing"]["emr_fee_usd_hour"] is None,
+        MAX_MISSING_PRICE_RATIO,
+    ),
+    _Check(
+        "padrões de YARN",
+        _always,
+        lambda r: r["emr_yarn"] is None,
+        MAX_MISSING_PUBLIC_DATA_RATIO,
+    ),
+    _Check(
+        "taxa de interrupção",
+        _always,
+        lambda r: r["pricing"]["spot_interruption"] is None,
+        MAX_MISSING_PUBLIC_DATA_RATIO,
     ),
     # Daqui para baixo é só diagnóstico: a própria AWS não publica esses campos
     # para todo tipo (clock e banda de EBS faltam em algumas dezenas), então

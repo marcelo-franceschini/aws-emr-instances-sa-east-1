@@ -5,14 +5,58 @@ from __future__ import annotations
 from typing import TypedDict
 
 # Versão do formato gravado. 1 era um registro plano de 9 campos; 2 separou o
-# catálogo em `static` (imutável) e `pricing` (datado). `instance_type` ficou no
-# topo do registro nas duas — é o que o diff da notificação compara.
-SCHEMA_VERSION = 2
+# catálogo em `static` (imutável) e `pricing` (datado); 3 acrescentou a taxa do
+# EMR, o spot por AZ com estatísticas, os padrões de YARN e o bloco `derived`.
+# `instance_type` ficou no topo do registro em todas, para o consumidor
+# achar a chave do registro sem procurar.
+SCHEMA_VERSION = 3
 
 
 class SpotInfo(TypedDict):
+    """Menor preço spot vigente e a AZ onde ele está.
+
+    `az` é o nome da AZ na conta que coletou, e a AWS sorteia por conta qual AZ
+    física recebe cada nome; `az_id` identifica a mesma AZ em qualquer conta.
+    """
+
     usd_hour: float
     az: str
+    az_id: str | None
+
+
+class SpotAzStats(TypedDict):
+    """Preço spot de uma AZ: o vigente agora e a distribuição na janela.
+
+    As estatísticas são ponderadas pelo tempo em que cada preço esteve em vigor
+    (o histórico da AWS não é amostragem regular), então um preço que durou dois
+    dias pesa mais que um que durou dez minutos. `price_changes` conta só as
+    trocas de valor, porque a AWS repete o mesmo preço em registros sucessivos.
+    """
+
+    az: str
+    az_id: str | None
+    current_usd_hour: float
+    window_days: int
+    min_usd_hour: float
+    mean_usd_hour: float
+    median_usd_hour: float
+    p95_usd_hour: float
+    max_usd_hour: float
+    stddev_usd_hour: float
+    price_changes: int
+
+
+class YarnDefaults(TypedDict):
+    """Padrões de YARN que o EMR aplica a um tipo de instância (coluna padrão).
+
+    Vêm da página Task configuration da documentação, que segue o release mais
+    recente do EMR. A coluna "com HBase" não entra. Um cluster que sobrescreve
+    `yarn-site` tem outro valor efetivo.
+    """
+
+    nodemanager_memory_mb: int
+    scheduler_max_allocation_mb: int | None
+    scheduler_min_allocation_mb: int | None
 
 
 class SpotInterruption(TypedDict):
@@ -114,9 +158,13 @@ class StaticSpec(TypedDict):
     pode ser congelado e versionado — só o bloco `pricing` precisa ser datado.
 
     Os dois campos de memória são propositalmente distintos: `memory_gb_hardware`
-    é o que a máquina tem e `memory_gb_emr` é o que o EMR enxerga (menor em 352
+    é o que a máquina tem e `memory_gb_emr` é o que o EMR enxerga (menor em 351
     dos 465 tipos). Nenhum dos dois é a memória alocável pelo YARN, que tem um
-    corte bem maior e não vem de API nenhuma.
+    corte bem maior e fica no bloco `emr_yarn`, porque depende do release do EMR.
+
+    `availability_zones` traz os nomes da conta que coletou, que a AWS sorteia
+    por conta; `availability_zone_ids` é o mesmo conjunto pelo ID da AZ, igual
+    em toda conta, e é por ele que se cruza o catálogo com outra conta.
     """
 
     vcpu: int | None
@@ -137,6 +185,7 @@ class StaticSpec(TypedDict):
     normalization_factor: float | None
     supports_spot: bool | None
     availability_zones: list[str]
+    availability_zone_ids: list[str]
     storage: StorageSpec
     ebs: EbsSpec
     network: NetworkSpec
@@ -144,66 +193,65 @@ class StaticSpec(TypedDict):
 
 
 class PricingSpec(TypedDict):
-    """Tudo que muda de um dia para o outro, sempre datado."""
+    """Tudo que muda de um dia para o outro, sempre datado.
+
+    `emr_fee_usd_hour` é a taxa do EMR cobrada por instância-hora além do EC2. Ela
+    varia por tipo e não é proporcional ao preço do EC2. `spot` é o menor preço
+    vigente entre as AZs (no empate, a AZ de menor P95 e depois a de menor nome);
+    `spot_by_az` traz cada AZ com a distribuição na janela.
+    """
 
     as_of: str
     on_demand_usd_hour: float | None
+    emr_fee_usd_hour: float | None
     spot: SpotInfo | None
+    spot_by_az: list[SpotAzStats]
     spot_interruption: SpotInterruption | None
+
+
+class DerivedSpec(TypedDict):
+    """Campos calculados a partir dos outros blocos, para filtrar sem aritmética.
+
+    Nada aqui é dado novo: tudo é razão ou soma de campos de `static`, `pricing`
+    e `emr_yarn`. Fica no JSON para que um consumidor (jq, pandas, um LLM) ordene
+    e filtre sem refazer a conta. Qualquer entrada ausente deixa o resultado None.
+
+    Os custos "total" somam a taxa do EMR ao preço do EC2. Para spot, a taxa é a
+    de on-demand, na premissa de que o EMR não a desconta (confira na fatura).
+    """
+
+    memory_gb_per_vcpu: float | None
+    memory_gb_emr_per_vcpu: float | None
+    yarn_memory_gb: float | None
+    yarn_memory_gb_per_vcpu: float | None
+    yarn_memory_share_of_hardware: float | None
+    local_disk_gb_per_vcpu: float | None
+    ebs_baseline_mbps_per_vcpu: float | None
+    network_baseline_gbps_per_vcpu: float | None
+    total_on_demand_usd_hour: float | None
+    total_spot_usd_hour: float | None
+    total_spot_p95_usd_hour: float | None
+    spot_discount_percent: float | None
+    spot_volatility_cv: float | None
+    total_spot_usd_per_vcpu_hour: float | None
+    total_spot_usd_per_yarn_gb_hour: float | None
+    total_spot_usd_per_normalization_unit_hour: float | None
+    total_on_demand_usd_per_vcpu_hour: float | None
+    total_on_demand_usd_per_yarn_gb_hour: float | None
 
 
 class InstanceRecord(TypedDict):
     instance_type: str
     static: StaticSpec
     pricing: PricingSpec
-
-
-class AnnouncedRelease(TypedDict):
-    version: str
-    url: str
-    published_at: str
+    emr_yarn: YarnDefaults | None
+    derived: DerivedSpec
 
 
 class Payload(TypedDict):
     region: str
     release_label: str
     schema_version: int
-    latest_announced_release: AnnouncedRelease | None
     generated_at: str
     instance_count: int
     instances: list[InstanceRecord]
-
-
-class SnapshotInstance(TypedDict, total=False):
-    """Instância dentro de um snapshot lido de disco.
-
-    Declara só o campo que o caminho de leitura consome — o diff compara
-    conjuntos de instance_type e ignora o resto do registro.
-    """
-
-    instance_type: str
-
-
-class Snapshot(TypedDict, total=False):
-    """Payload lido de disco — todo campo é opcional.
-
-    O arquivo anterior pode ser de uma versão do schema que ainda não gravava
-    algum campo (foi o caso de `latest_announced_release`), ou não existir. Ler
-    como `Payload` seria mentira; `total=False` diz a verdade e ainda deixa o
-    mypy conferir os nomes das chaves no caminho de leitura.
-    """
-
-    region: str
-    release_label: str
-    schema_version: int
-    latest_announced_release: AnnouncedRelease | None
-    generated_at: str
-    instance_count: int
-    instances: list[SnapshotInstance]
-
-
-class ReleaseAlert(TypedDict):
-    origin: str
-    previous: str
-    current: str
-    url: str

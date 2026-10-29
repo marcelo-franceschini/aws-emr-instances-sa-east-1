@@ -2,45 +2,270 @@
 
 from __future__ import annotations
 
+from datetime import UTC, datetime, timedelta
+from typing import Any
 from unittest.mock import MagicMock, patch
 
+import pytest
 import requests
 
 from emr_instances.sources import spot
 
+NOW = datetime(2026, 10, 29, 12, 0, tzinfo=UTC)
 
-def test_spot_prices() -> None:
-    """Test obtenção de preços spot (menor entre AZs)."""
+# IDs de propósito fora da ordem dos nomes: a AWS sorteia o par por conta, então
+# o ID nunca pode ser deduzido da letra do nome
+ZONE_IDS = {
+    "sa-east-1a": "sae1-az3",
+    "sa-east-1b": "sae1-az1",
+    "sa-east-1c": "sae1-az2",
+}
+
+
+def _ago(days: float) -> datetime:
+    """Instante `days` dias antes de NOW."""
+    return NOW - timedelta(days=days)
+
+
+def _entry(
+    instance_type: str, az: str, price: str, timestamp: datetime
+) -> dict[str, Any]:
+    """Entrada do DescribeSpotPriceHistory com os campos que a coleta lê."""
+    return {
+        "InstanceType": instance_type,
+        "AvailabilityZone": az,
+        "AvailabilityZoneId": ZONE_IDS[az],
+        "SpotPrice": price,
+        "Timestamp": timestamp,
+    }
+
+
+def _ec2_with(entries: list[dict[str, Any]]) -> tuple[MagicMock, MagicMock]:
+    """Client EC2 fake cujo paginator devolve as entradas numa página só."""
     mock_ec2 = MagicMock()
-    mock_paginator = MagicMock()
-    mock_ec2.get_paginator.return_value = mock_paginator
+    paginator = MagicMock()
+    mock_ec2.get_paginator.return_value = paginator
+    paginator.paginate.return_value = [{"SpotPriceHistory": entries}]
+    return mock_ec2, paginator
 
-    mock_paginator.paginate.return_value = [
-        {
-            "SpotPriceHistory": [
-                {
-                    "InstanceType": "m5.large",
-                    "SpotPrice": "0.048",
-                    "AvailabilityZone": "sa-east-1a",
-                },
-                {
-                    "InstanceType": "m5.large",
-                    "SpotPrice": "0.050",
-                    "AvailabilityZone": "sa-east-1b",
-                },
-                {
-                    "InstanceType": "m5.xlarge",
-                    "SpotPrice": "0.096",
-                    "AvailabilityZone": "sa-east-1a",
-                },
-            ]
+
+def test_spot_price_history_agrupa_por_tipo_e_az_em_ordem_cronologica() -> None:
+    """As entradas chegam em ordem decrescente da API e saem ordenadas por tempo."""
+    mock_ec2, _ = _ec2_with(
+        [
+            _entry("m5.large", "sa-east-1a", "0.060", _ago(1)),
+            _entry("m5.large", "sa-east-1a", "0.048", _ago(3)),
+            _entry("m5.large", "sa-east-1b", "0.050", _ago(2)),
+            _entry("m5.xlarge", "sa-east-1a", "0.096", _ago(2)),
+        ]
+    )
+
+    series, _ = spot.spot_price_history(mock_ec2, now=NOW)
+
+    assert series["m5.large"]["sa-east-1a"] == [(_ago(3), 0.048), (_ago(1), 0.060)]
+    assert series["m5.large"]["sa-east-1b"] == [(_ago(2), 0.050)]
+    assert series["m5.xlarge"]["sa-east-1a"] == [(_ago(2), 0.096)]
+
+
+def test_spot_price_history_devolve_o_id_de_cada_az() -> None:
+    """O ID vem em todo registro; registro sem ele não inventa um."""
+    sem_id = _entry("m5.large", "sa-east-1c", "0.070", _ago(2))
+    del sem_id["AvailabilityZoneId"]
+    mock_ec2, _ = _ec2_with(
+        [
+            _entry("m5.large", "sa-east-1a", "0.048", _ago(3)),
+            _entry("m5.xlarge", "sa-east-1b", "0.096", _ago(2)),
+            sem_id,
+        ]
+    )
+
+    _, zone_ids = spot.spot_price_history(mock_ec2, now=NOW)
+
+    assert zone_ids == {"sa-east-1a": "sae1-az3", "sa-east-1b": "sae1-az1"}
+
+
+def test_spot_price_history_pede_a_janela_e_o_linux() -> None:
+    """A janela vai de `days` atrás até agora, só para Linux/UNIX."""
+    mock_ec2, paginator = _ec2_with([])
+
+    spot.spot_price_history(mock_ec2, now=NOW, days=30)
+
+    paginator.paginate.assert_called_once_with(
+        StartTime=_ago(30), EndTime=NOW, ProductDescriptions=["Linux/UNIX"]
+    )
+
+
+def test_cheapest_current_usa_o_ultimo_preco_de_cada_az() -> None:
+    """O vigente é o evento mais recente; fica a AZ mais barata agora."""
+    series: spot.SpotSeries = {
+        "m5.large": {
+            # a AZ "a" já foi a mais barata, mas o último preço dela subiu
+            "sa-east-1a": [(_ago(5), 0.040), (_ago(1), 0.060)],
+            "sa-east-1b": [(_ago(2), 0.050)],
+        },
+        "m5.xlarge": {"sa-east-1a": [(_ago(2), 0.096)]},
+    }
+
+    stats = spot.az_statistics(series, now=NOW, zone_ids=ZONE_IDS)
+    result = spot.cheapest_current(stats)
+
+    assert result["m5.large"] == {
+        "usd_hour": 0.05,
+        "az": "sa-east-1b",
+        "az_id": "sae1-az1",
+    }
+    assert result["m5.xlarge"] == {
+        "usd_hour": 0.096,
+        "az": "sa-east-1a",
+        "az_id": "sae1-az3",
+    }
+
+
+def test_cheapest_current_empate_fica_com_a_az_de_menor_p95() -> None:
+    """No empate do vigente fica a AZ mais estável, não a que a API listou antes.
+
+    A AZ "b" chega primeiro, como viria da API, e oscilou até 0,09 na janela; a
+    "a" ficou em 0,04 o tempo todo. As duas valem 0,04 agora.
+    """
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1b": [(_ago(40), 0.05), (_ago(10), 0.09), (_ago(5), 0.04)],
+            "sa-east-1a": [(_ago(35), 0.04), (_ago(1), 0.04)],
         }
+    }
+
+    result = spot.cheapest_current(spot.az_statistics(series, now=NOW))
+
+    assert result["m5.large"]["usd_hour"] == 0.04
+    assert result["m5.large"]["az"] == "sa-east-1a"
+
+
+def test_cheapest_current_empate_total_fica_com_o_menor_nome() -> None:
+    """Mesmo vigente e mesmo P95: decide o nome da AZ, nunca a ordem da API."""
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1c": [(_ago(2), 0.05)],
+            "sa-east-1b": [(_ago(2), 0.05)],
+        }
+    }
+
+    result = spot.cheapest_current(spot.az_statistics(series, now=NOW))
+
+    assert result["m5.large"]["az"] == "sa-east-1b"
+
+
+def test_cheapest_current_tipo_sem_az_fica_de_fora() -> None:
+    """Tipo sem nenhuma AZ não tem preço vigente: fica fora, sem derrubar o resto."""
+    stats = spot.az_statistics({"m5.large": {"sa-east-1a": [(_ago(2), 0.05)]}}, NOW)
+    stats["c5.large"] = []
+
+    assert set(spot.cheapest_current(stats)) == {"m5.large"}
+
+
+def test_az_statistics_pondera_pelo_tempo_em_vigor() -> None:
+    """Cada preço pesa pelo tempo que durou: 10 dias a 0,10, 5 a 0,30 e 5 a 0,20."""
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1a": [(_ago(20), 0.10), (_ago(10), 0.30), (_ago(5), 0.20)]
+        }
+    }
+
+    stats = spot.az_statistics(series, now=NOW)["m5.large"][0]
+
+    assert stats["az"] == "sa-east-1a"
+    assert stats["current_usd_hour"] == 0.20
+    assert stats["window_days"] == 30
+    assert stats["price_changes"] == 2
+    assert stats["min_usd_hour"] == 0.10
+    assert stats["max_usd_hour"] == 0.30
+    assert stats["mean_usd_hour"] == pytest.approx(0.175)
+    assert stats["median_usd_hour"] == 0.10
+    assert stats["p95_usd_hour"] == 0.30
+    assert stats["stddev_usd_hour"] == pytest.approx(0.082916, abs=1e-6)
+
+
+def test_az_statistics_recorta_o_evento_anterior_a_janela() -> None:
+    """O preço que já vigorava antes da janela só conta a partir do início dela."""
+    series: spot.SpotSeries = {
+        "m5.large": {"sa-east-1a": [(_ago(40), 0.50), (_ago(20), 1.00)]}
+    }
+
+    stats = spot.az_statistics(series, now=NOW)["m5.large"][0]
+
+    # 10 dias a 0,50 (de 30 a 20 dias atrás) e 20 dias a 1,00
+    assert stats["mean_usd_hour"] == pytest.approx(25 / 30, abs=1e-6)
+
+
+def test_az_statistics_evento_unico_agora_nao_divide_por_zero() -> None:
+    """Um único evento em `now` tem peso zero; o preço vale como peso 1."""
+    series: spot.SpotSeries = {"m5.large": {"sa-east-1a": [(NOW, 0.07)]}}
+
+    stats = spot.az_statistics(series, now=NOW)["m5.large"][0]
+
+    assert stats["mean_usd_hour"] == 0.07
+    assert stats["median_usd_hour"] == 0.07
+    assert stats["p95_usd_hour"] == 0.07
+    assert stats["stddev_usd_hour"] == 0.0
+    assert stats["price_changes"] == 0
+
+
+def test_az_statistics_preco_repetido_nao_conta_como_mudanca() -> None:
+    """A API repete o preço vigente em registros sucessivos; só a troca de valor conta.
+
+    Na coleta real, pares com o mesmo preço na janela inteira chegavam a 132
+    "mudanças", uma por registro.
+    """
+    constante = [(_ago(31), 0.03)] + [(_ago(d), 0.03) for d in range(29, 0, -1)]
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1a": constante,
+            "sa-east-1b": [
+                (_ago(20), 0.10),
+                (_ago(15), 0.10),
+                (_ago(10), 0.20),
+                (_ago(5), 0.10),
+            ],
+        }
+    }
+
+    stats = spot.az_statistics(series, now=NOW)["m5.large"]
+
+    assert stats[0]["price_changes"] == 0
+    assert stats[1]["price_changes"] == 2  # de 0,10 para 0,20 e de volta
+
+
+def test_az_statistics_leva_o_id_da_az() -> None:
+    """Cada AZ sai com o ID do mapa; AZ fora do mapa sai com None."""
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1a": [(_ago(2), 0.05)],
+            "sa-east-1c": [(_ago(2), 0.07)],
+        }
+    }
+
+    stats = spot.az_statistics(series, now=NOW, zone_ids={"sa-east-1a": "sae1-az3"})[
+        "m5.large"
     ]
 
-    result = spot.spot_prices(mock_ec2)
-    assert result["m5.large"]["usd_hour"] == 0.048
-    assert result["m5.large"]["az"] == "sa-east-1a"
-    assert result["m5.xlarge"]["usd_hour"] == 0.096
+    assert [(s["az"], s["az_id"]) for s in stats] == [
+        ("sa-east-1a", "sae1-az3"),
+        ("sa-east-1c", None),
+    ]
+
+
+def test_az_statistics_ordena_as_azs_por_nome() -> None:
+    """A lista sai em ordem alfabética de AZ, para o JSON ser estável entre dias."""
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1c": [(_ago(2), 0.07)],
+            "sa-east-1a": [(_ago(2), 0.05)],
+            "sa-east-1b": [(_ago(2), 0.06)],
+        }
+    }
+
+    stats = spot.az_statistics(series, now=NOW)["m5.large"]
+
+    assert [s["az"] for s in stats] == ["sa-east-1a", "sa-east-1b", "sa-east-1c"]
 
 
 def test_interruption_frequency_success() -> None:
