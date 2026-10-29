@@ -154,6 +154,14 @@ def test_cheapest_current_empate_total_fica_com_o_menor_nome() -> None:
     assert result["m5.large"]["az"] == "sa-east-1b"
 
 
+def test_cheapest_current_tipo_sem_az_fica_de_fora() -> None:
+    """Tipo sem nenhuma AZ não tem preço vigente: fica fora, sem derrubar o resto."""
+    stats = spot.az_statistics({"m5.large": {"sa-east-1a": [(_ago(2), 0.05)]}}, NOW)
+    stats["c5.large"] = []
+
+    assert set(spot.cheapest_current(stats)) == {"m5.large"}
+
+
 def test_az_statistics_pondera_pelo_tempo_em_vigor() -> None:
     """Cada preço pesa pelo tempo que durou: 10 dias a 0,10, 5 a 0,30 e 5 a 0,20."""
     series: spot.SpotSeries = {
