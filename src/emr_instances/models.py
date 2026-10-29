@@ -158,7 +158,7 @@ class StaticSpec(TypedDict):
     pode ser congelado e versionado — só o bloco `pricing` precisa ser datado.
 
     Os dois campos de memória são propositalmente distintos: `memory_gb_hardware`
-    é o que a máquina tem e `memory_gb_emr` é o que o EMR enxerga (menor em 352
+    é o que a máquina tem e `memory_gb_emr` é o que o EMR enxerga (menor em 351
     dos 465 tipos). Nenhum dos dois é a memória alocável pelo YARN, que tem um
     corte bem maior e fica no bloco `emr_yarn`, porque depende do release do EMR.
 

@@ -77,7 +77,7 @@ O JSON gerado **não** fica na branch de código — ele vive apenas na branch `
 
 No envelope:
 - `region`, `generated_at`, `instance_count`
-- `release_label` — release usado na coleta, o mais recente disponível em `sa-east-1` (ex: `"emr-7.13.0"`)
+- `release_label`: release usado na coleta, o mais recente disponível em `sa-east-1` (ex: `"emr-7.14.0"`)
 - `schema_version`: versão do formato (atual: `3`)
 
 Cada instância tem `instance_type` no topo e quatro blocos: `static` nunca muda
@@ -142,17 +142,18 @@ Os números de `emr_fee_usd_hour`, `spot_by_az`, `emr_yarn` e `derived` acima s�
 ilustrativos, para mostrar o formato. O `derived` real tem mais campos, listados
 em [Campos derivados](#campos-derivados).
 
-Alguns campos merecem explicação:
+Alguns campos merecem explicação (as contagens são da coleta de 29/10/2026, com
+`emr-7.14.0`, e mudam com o release):
 
 - **`memory_gb_emr` e `memory_gb_hardware` são valores diferentes de propósito.**
-  O EMR reporta menos memória que o hardware em 352 dos 465 tipos (razão ~0.953);
+  O EMR reporta menos memória que o hardware em 351 dos 465 tipos (razão ~0.953);
   um é o que a máquina tem, o outro é o que o EMR enxerga. **Nenhum dos dois é a
   memória alocável pelo YARN**, que tem um corte bem maior e vem no bloco
-  `emr_yarn` (nos tipos lidos da documentação, o YARN aloca entre 47% e 96% da
+  `emr_yarn` (nos tipos lidos da documentação, o YARN aloca entre 47% e 99% da
   memória do hardware).
 - **`baseline` e `maximum` (em `ebs` e `network`) são a diferença entre pico e
   sustentado**, que é o que decide o comportamento de um job Spark longo: 159
-  tipos fazem burst de EBS e 228 de rede. As `flex` são o caso extremo —
+  tipos fazem burst de EBS e 224 de rede. As `flex` são o caso extremo:
   `c7i-flex.xlarge` vai de 625 a 10000 Mbps de EBS, 16x. Quando o crédito acaba,
   o job cai para o baseline. O booleano `burstable` é derivado (`maximum >
   baseline`) para o consumidor não precisar comparar.
@@ -185,9 +186,9 @@ Alguns campos merecem explicação:
   mesmo em instância EBS-only (com `ebs_only: true` e `disks: []`), e `gpu` é
   `null` nas 439 sem GPU. Quem consome nunca precisa checar se a chave existe.
 
-O universo é sempre o que o `ListSupportedInstanceTypes` devolve: há 22 tipos
-ofertados em `sa-east-1` (`m6in.*`, `m6idn.*`, `r7gd.*`) que o `emr-7.13.0` não
-suporta e que por isso não entram no JSON.
+O universo é sempre o que o `ListSupportedInstanceTypes` devolve: tipo ofertado
+em `sa-east-1` que o release não suporta (como `m6in.*`, `m6idn.*` e `r7gd.*` no
+`emr-7.14.0`) não entra no JSON.
 
 Onde duas fontes têm o mesmo dado, a precedência é: **hardware** vem do
 `DescribeInstanceTypes` (é numérico e estruturado; a Price List só tem string —
@@ -232,10 +233,12 @@ jq '[.instances[]
      | {t: .instance_type, usd_gb: .derived.total_spot_usd_per_yarn_gb_hour}]
     | sort_by(.usd_gb) | .[:10]' instances_sa-east-1.json
 
-# Graviton com NVMe local e baixa interrupção (faixa 1 ou 2)
+# Graviton com NVMe local e baixa interrupção (faixa 1 ou 2); o != null é
+# necessário porque em jq null <= 2 é verdadeiro
 jq '[.instances[]
      | select(.static.architecture == "arm64"
               and .static.storage.nvme == "required"
+              and .pricing.spot_interruption.interruption_rate != null
               and .pricing.spot_interruption.interruption_rate <= 2)
      | .instance_type]' instances_sa-east-1.json
 ```
@@ -269,6 +272,7 @@ uv sync --dev             # inclui pytest, mypy, ruff e os stubs do boto3
 uv run pytest             # executa testes
 uv run mypy .             # verifica tipos
 uv run ruff check .       # lint
+uv run ruff format --check .  # formatação (o CI recusa código fora do formato)
 ```
 
 ## Deploy inicial (do zero)
