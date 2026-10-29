@@ -133,6 +133,31 @@ def test_az_statistics_evento_unico_agora_nao_divide_por_zero() -> None:
     assert stats["price_changes"] == 0
 
 
+def test_az_statistics_preco_repetido_nao_conta_como_mudanca() -> None:
+    """A API repete o preço vigente em registros sucessivos; só a troca de valor conta.
+
+    Na coleta real, pares com o mesmo preço na janela inteira chegavam a 132
+    "mudanças", uma por registro.
+    """
+    constante = [(_ago(31), 0.03)] + [(_ago(d), 0.03) for d in range(29, 0, -1)]
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1a": constante,
+            "sa-east-1b": [
+                (_ago(20), 0.10),
+                (_ago(15), 0.10),
+                (_ago(10), 0.20),
+                (_ago(5), 0.10),
+            ],
+        }
+    }
+
+    stats = spot.az_statistics(series, now=NOW)["m5.large"]
+
+    assert stats[0]["price_changes"] == 0
+    assert stats[1]["price_changes"] == 2  # de 0,10 para 0,20 e de volta
+
+
 def test_az_statistics_ordena_as_azs_por_nome() -> None:
     """A lista sai em ordem alfabética de AZ, para o JSON ser estável entre dias."""
     series: spot.SpotSeries = {

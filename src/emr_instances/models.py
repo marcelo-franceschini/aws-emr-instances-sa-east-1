@@ -21,8 +21,9 @@ class SpotAzStats(TypedDict):
     """Preço spot de uma AZ: o vigente agora e a distribuição na janela.
 
     As estatísticas são ponderadas pelo tempo em que cada preço esteve em vigor
-    (o histórico da AWS só registra mudanças), então um preço que durou dois dias
-    pesa mais que um que durou dez minutos.
+    (o histórico da AWS não é amostragem regular), então um preço que durou dois
+    dias pesa mais que um que durou dez minutos. `price_changes` conta só as
+    trocas de valor, porque a AWS repete o mesmo preço em registros sucessivos.
     """
 
     az: str

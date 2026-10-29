@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import math
 from datetime import UTC, datetime, timedelta
+from itertools import pairwise
 from typing import TYPE_CHECKING
 
 import requests
@@ -19,8 +20,9 @@ logger = logging.getLogger(__name__)
 
 SPOT_ADVISOR_URL = "https://spot-bid-advisor.s3.amazonaws.com/spot-advisor-data.json"
 
-# {instance_type: {az: [(instante da mudança, preço USD/h), ...]}}, em ordem
-# cronológica. A AWS só registra quando o preço muda, não amostras regulares.
+# {instance_type: {az: [(instante do registro, preço USD/h), ...]}}, em ordem
+# cronológica. Não são amostras regulares: a AWS grava o preço em intervalos
+# irregulares e muitas vezes repete o valor do registro anterior.
 SpotSeries = dict[str, dict[str, list[tuple[datetime, float]]]]
 
 
@@ -115,6 +117,10 @@ def _window_stats(
     mean = sum(price * weight for price, weight in weighted) / total
     variance = sum(weight * (price - mean) ** 2 for price, weight in weighted) / total
     prices = [price for price, _ in weighted]
+    # Só conta a troca de valor: a AWS repete o preço vigente em registros
+    # sucessivos, e contar registros daria umas quatro "mudanças" por dia mesmo
+    # com o preço parado. O primeiro evento é a base, não uma mudança.
+    changes = sum(1 for (_, before), (_, after) in pairwise(events) if after != before)
     return {
         "az": az,
         "current_usd_hour": round(events[-1][1], 6),
@@ -125,7 +131,7 @@ def _window_stats(
         "p95_usd_hour": round(_weighted_quantile(weighted, 0.95), 6),
         "max_usd_hour": round(max(prices), 6),
         "stddev_usd_hour": round(math.sqrt(variance), 6),
-        "price_changes": len(events) - 1,  # o primeiro evento é o preço-base
+        "price_changes": changes,
     }
 
 

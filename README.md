@@ -152,10 +152,11 @@ Alguns campos merecem explicação:
   tipo. O custo real de rodar é EC2 mais essa taxa.
 - **`spot` é o menor preço vigente entre as AZs; `spot_by_az` traz cada AZ** com a
   distribuição dos últimos 30 dias. As estatísticas são **ponderadas pelo tempo
-  em que cada preço esteve em vigor**, porque o histórico da AWS só registra
-  mudanças. `price_changes` conta as mudanças de preço na janela (o primeiro evento é o
-  preço vigente na abertura dela, não uma mudança). `stddev` sobre `mean` mede
-  quanto o preço oscila, e `p95` é o preço que só é superado em 5% do tempo.
+  em que cada preço esteve em vigor**, porque o histórico da AWS não é uma
+  amostragem regular. `price_changes` conta as vezes em que o preço mudou de
+  valor na janela: a AWS repete o mesmo preço em registros sucessivos (umas
+  quatro vezes por dia), e esses registros não contam. `stddev` sobre `mean`
+  mede quanto o preço oscila, e `p95` é o preço que só é superado em 5% do tempo.
 - **`emr_yarn`** vem da coluna de valor padrão da página Task configuration, que
   segue o release mais recente do EMR. Um cluster que sobrescreve `yarn-site` (ou
   usa `maximizeResourceAllocation`) tem outro valor efetivo. É `null` para tipo
