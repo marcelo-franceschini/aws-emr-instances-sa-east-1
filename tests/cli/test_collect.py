@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import sys
-from collections.abc import Callable
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -12,7 +11,6 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from emr_instances.cli import collect
-from emr_instances.sources.release_notes import RELEASE_NOTES_RSS
 from emr_instances.sources.yarn import YARN_DOC_URL
 
 YARN_DOC = """**m5.large**
@@ -28,7 +26,6 @@ YARN_DOC = """**m5.large**
 def test_main_smoke(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
-    rss_response: Callable[[], MagicMock],
 ) -> None:
     """Smoke test do fio inteiro: main() com clients boto3 e HTTP mockados.
 
@@ -148,16 +145,13 @@ def test_main_smoke(
     yarn_response.raise_for_status.return_value = None
 
     def fake_get(url: str, **kwargs: object) -> MagicMock:
-        """Roteia por URL: a coleta faz três chamadas HTTP, em módulos distintos."""
-        if url == RELEASE_NOTES_RSS:
-            return rss_response()
+        """Roteia por URL: a coleta faz duas chamadas HTTP, em módulos distintos."""
         if url == YARN_DOC_URL:
             return yarn_response
         return advisor_response
 
     output = tmp_path / "out.json"
-    # alvo global: release_notes, spot e yarn chamam requests.get de módulos
-    # diferentes
+    # alvo global: spot e yarn chamam requests.get de módulos diferentes
     with patch("requests.get", side_effect=fake_get):
         monkeypatch.setattr(sys, "argv", ["emr-collect", "--output", str(output)])
         collect.main()
@@ -167,8 +161,6 @@ def test_main_smoke(
     assert payload["release_label"] == "emr-7.13.0"
     assert payload["schema_version"] == 3
     assert payload["instance_count"] == 1
-    assert payload["latest_announced_release"]["version"] == "7.13.0"
-    assert payload["latest_announced_release"]["url"].endswith("emr-7130-release.html")
 
     record = payload["instances"][0]
     assert record["instance_type"] == "m5.large"

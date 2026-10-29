@@ -17,7 +17,6 @@ from emr_instances.derived import build_derived
 from emr_instances.errors import CoverageError
 from emr_instances.models import (
     SCHEMA_VERSION,
-    AnnouncedRelease,
     HardwareSpec,
     InstanceRecord,
     Payload,
@@ -215,14 +214,12 @@ def collect_records(
 def build_payload(
     release_label: str,
     records: list[InstanceRecord],
-    announced: AnnouncedRelease | None,
 ) -> Payload:
     """Monta o envelope final com metadados e a lista de registros."""
     return {
         "region": REGION,
         "release_label": release_label,
         "schema_version": SCHEMA_VERSION,
-        "latest_announced_release": announced,
         "generated_at": _utc_now(),
         "instance_count": len(records),
         "instances": records,

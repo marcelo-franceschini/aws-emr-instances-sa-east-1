@@ -9,7 +9,6 @@ import pytest
 from emr_instances import collector
 from emr_instances.errors import CoverageError
 from emr_instances.models import (
-    AnnouncedRelease,
     HardwareSpec,
     InstanceRecord,
     PricingProduct,
@@ -313,21 +312,15 @@ def test_build_records_sem_fontes_novas_mantem_a_forma() -> None:
 
 
 def test_build_payload() -> None:
-    """O envelope carrega região, release, contagem, versão do schema e o RSS."""
+    """O envelope carrega região, release, contagem, versão do schema."""
     records = [_record()]
-    announced: AnnouncedRelease = {
-        "version": "7.13.0",
-        "url": "https://docs.aws.amazon.com/x/emr-7130-release.html",
-        "published_at": "Tue, 28 Apr 2026 19:00:00 GMT",
-    }
-    payload = collector.build_payload("emr-7.13.0", records, announced)
+    payload = collector.build_payload("emr-7.13.0", records)
 
     assert payload["region"] == "sa-east-1"
     assert payload["release_label"] == "emr-7.13.0"
     assert payload["schema_version"] == 3
     assert payload["instance_count"] == 1
     assert payload["instances"] == records
-    assert payload["latest_announced_release"] == announced
     assert payload["generated_at"].endswith("+00:00")  # sempre em UTC
 
 

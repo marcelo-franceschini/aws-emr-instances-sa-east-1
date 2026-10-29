@@ -32,7 +32,6 @@ def _payload() -> Payload:
         "region": "sa-east-1",
         "release_label": "emr-7.13.0",
         "schema_version": 3,
-        "latest_announced_release": None,
         "generated_at": "2026-07-27T09:00:00+00:00",
         "instance_count": 1,
         "instances": [

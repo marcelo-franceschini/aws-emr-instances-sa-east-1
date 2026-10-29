@@ -11,7 +11,6 @@ Fontes:
 - Spot:        ec2:DescribeSpotPriceHistory (janela de 30 dias, por AZ)
 - Interrupção: Spot Bid Advisor (S3 público)
 - YARN:        página Task configuration da documentação do EMR
-- Release novo: RSS de release notes do EMR (docs.aws.amazon.com)
 """
 
 from __future__ import annotations
@@ -27,7 +26,6 @@ from emr_instances.collector import build_payload, collect_records, validate_cov
 from emr_instances.config import OUTPUT_FILE
 from emr_instances.errors import EmrInstancesError
 from emr_instances.sources.emr import latest_release_label
-from emr_instances.sources.release_notes import latest_announced_release
 from emr_instances.storage import write_output
 
 logger = logging.getLogger(__name__)
@@ -54,10 +52,7 @@ def main() -> None:
         release_label = args.release_label or latest_release_label(emr)
         records = collect_records(emr, ec2, pricing, release_label)
         validate_coverage(records)
-        logger.info("Consultando o RSS de release notes do EMR...")
-        announced = latest_announced_release()
-        logger.info(f"  último release anunciado: {announced or 'indisponível'}")
-        write_output(build_payload(release_label, records, announced), args.output)
+        write_output(build_payload(release_label, records), args.output)
     except EmrInstancesError as e:
         logger.error(f"{e}")
         sys.exit(1)

@@ -24,7 +24,6 @@ ela custa de verdade?" e não só "quanto custa o EC2". Ver
   - `ec2:DescribeSpotPriceHistory` (30 dias por AZ: preço vigente e estatísticas ponderadas pelo tempo)
   - Spot Bid Advisor (S3 público) (frequência de interrupção + economia esperada)
   - Página [Task configuration](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-hadoop-task-config.html) da documentação do EMR, em Markdown (padrões de YARN por tipo)
-  - [RSS de release notes do EMR](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/amazon-emr-release-notes.rss) (último release anunciado pela AWS)
 - [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — roda tudo via
   cron diário (09:00 UTC) e publica o JSON na branch órfã **`data`**.
 
@@ -47,36 +46,21 @@ src/emr_instances/
 │   ├── ec2.py                   DescribeInstanceTypes / DescribeInstanceTypeOfferings
 │   ├── pricing.py               Price List API (preço EC2, 3 campos de catálogo, taxa do EMR)
 │   ├── spot.py                  DescribeSpotPriceHistory (por AZ, com estatísticas) + Spot Bid Advisor
-│   ├── yarn.py                  padrões de YARN, lidos da documentação do EMR
-│   └── release_notes.py         RSS de release notes
+│   └── yarn.py                  padrões de YARN, lidos da documentação do EMR
 └── cli/
     └── collect.py               entrypoint do emr-collect
 ```
 
 Os testes em [`tests/`](tests/) espelham essa estrutura.
 
-O endpoint de cada serviço externo mora no módulo que fala com ele (o RSS em
-`sources/release_notes.py`, o Spot Advisor em `sources/spot.py`) e `config.py`
+O endpoint de cada serviço externo mora no módulo que fala com ele (o Spot Advisor em
+`sources/spot.py`, a documentação de YARN em `sources/yarn.py`) e `config.py`
 guarda só o que é transversal.
 
 As camadas internas levantam as exceções de [`errors.py`](src/emr_instances/errors.py)
 (`CoverageError`, `StorageError`); apenas os entrypoints em
 `cli/` as traduzem em `exit(1)`. Isso mantém os módulos reutilizáveis e testáveis
 sem precisar capturar `SystemExit`.
-
-### Releases do EMR
-
-O JSON registra o EMR por duas fontes independentes, que costumam mudar em datas
-diferentes:
-
-| Campo | Origem | Muda quando |
-| --- | --- | --- |
-| `latest_announced_release` | RSS de release notes | no dia do anúncio |
-| `release_label` | `emr:ListReleaseLabels` | o release chega em sa-east-1 |
-
-Só entram releases do **EMR on EC2 padrão**: o RSS também anuncia linhas
-especiais como `emr-spark-8.0.0`, que são ignoradas. Se o RSS estiver fora do ar,
-`latest_announced_release` fica `null`.
 
 O JSON gerado **não** fica na branch de código — ele vive apenas na branch `data`.
 
@@ -86,7 +70,6 @@ No envelope:
 - `region`, `generated_at`, `instance_count`
 - `release_label` — release usado na coleta, o mais recente disponível em `sa-east-1` (ex: `"emr-7.13.0"`)
 - `schema_version`: versão do formato (atual: `3`)
-- `latest_announced_release` — último release anunciado no RSS: `{"version": "7.13.0", "url": ..., "published_at": ...}`, ou `null` se o feed estiver indisponível
 
 Cada instância tem `instance_type` no topo e quatro blocos: `static` nunca muda
 para um dado tipo de instância (pode ser congelado, versionado e usado como

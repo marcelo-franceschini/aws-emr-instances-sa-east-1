@@ -233,17 +233,10 @@ class InstanceRecord(TypedDict):
     derived: DerivedSpec
 
 
-class AnnouncedRelease(TypedDict):
-    version: str
-    url: str
-    published_at: str
-
-
 class Payload(TypedDict):
     region: str
     release_label: str
     schema_version: int
-    latest_announced_release: AnnouncedRelease | None
     generated_at: str
     instance_count: int
     instances: list[InstanceRecord]
