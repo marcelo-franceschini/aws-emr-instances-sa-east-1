@@ -37,6 +37,7 @@ from emr_instances.sources.ec2 import (
 from emr_instances.sources.emr import supported_instance_types
 from emr_instances.sources.pricing import emr_fees, on_demand_prices
 from emr_instances.sources.spot import (
+    ZoneIds,
     az_statistics,
     cheapest_current,
     interruption_frequency,
@@ -65,18 +66,20 @@ def build_records(
     fees: dict[str, float] | None = None,
     spot_stats: dict[str, list[SpotAzStats]] | None = None,
     yarn: dict[str, YarnDefaults] | None = None,
+    zone_ids: ZoneIds | None = None,
 ) -> list[InstanceRecord]:
     """Combina as fontes num registro por instância, ordenado por tipo.
 
     O universo é sempre o que o EMR devolve: as outras fontes entram por join, e
     tipo que a região oferta mas o release do EMR não suporta fica de fora. As
-    três fontes por palavra-chave (taxa do EMR, spot por AZ e YARN) são
-    opcionais; sem elas, os campos correspondentes ficam None, ou lista vazia no
-    caso do spot por AZ.
+    fontes por palavra-chave (taxa do EMR, spot por AZ, YARN e o ID de cada AZ)
+    são opcionais; sem elas, os campos correspondentes ficam None, ou lista
+    vazia no caso do spot por AZ e dos IDs de AZ.
     """
     fees = fees or {}
     spot_stats = spot_stats or {}
     yarn = yarn or {}
+    zone_ids = zone_ids or {}
     records: list[InstanceRecord] = []
     for instance in sorted(instances, key=lambda i: i["Type"]):
         instance_type = instance["Type"]
@@ -86,6 +89,7 @@ def build_records(
             hardware.get(instance_type) or empty_hardware(),
             zones.get(instance_type, []),
             product,
+            zone_ids,
         )
         pricing_block: PricingSpec = {
             "as_of": as_of,
@@ -113,13 +117,15 @@ def _build_static(
     hardware: HardwareSpec,
     zones: list[str],
     product: PricingProduct | None,
+    zone_ids: ZoneIds,
 ) -> StaticSpec:
     """Monta o bloco `static` juntando EMR, EC2, ofertas por AZ e Price List.
 
     Onde duas fontes têm o mesmo dado, o hardware do EC2 vence — é numérico, e a
     Price List só teria a string equivalente. Do EMR vêm os três campos que só
     ele tem: a memória que o EMR enxerga, o rótulo de família e o EBS otimizado
-    por padrão.
+    por padrão. Os IDs de AZ saem dos nomes ofertados, traduzidos pelo mapa que
+    o histórico spot traz; nome sem ID fica fora da lista, e a cobertura acusa.
     """
     memory_emr = instance.get("MemoryGB")
     return {
@@ -141,6 +147,7 @@ def _build_static(
         "normalization_factor": product["normalization_factor"] if product else None,
         "supports_spot": hardware["supports_spot"],
         "availability_zones": zones,
+        "availability_zone_ids": sorted(zone_ids[az] for az in zones if az in zone_ids),
         "storage": hardware["storage"],
         "ebs": {
             "baseline_mbps": hardware["ebs"]["baseline_mbps"],
@@ -185,10 +192,13 @@ def collect_records(
 
     logger.info(f"Coletando histórico spot de {SPOT_HISTORY_DAYS} dias por AZ...")
     now = datetime.now(UTC)
-    series = spot_price_history(ec2, now=now)
-    spot_stats = az_statistics(series, now=now)
+    series, zone_ids = spot_price_history(ec2, now=now)
+    spot_stats = az_statistics(series, now=now, zone_ids=zone_ids)
     spot = cheapest_current(spot_stats)
-    logger.info(f"  {len(spot)} preços spot, {len(spot_stats)} com estatística por AZ")
+    logger.info(
+        f"  {len(spot)} preços spot, {len(spot_stats)} com estatística por AZ, "
+        f"{len(zone_ids)} AZs com ID"
+    )
 
     logger.info("Coletando padrões de YARN (documentação do EMR)...")
     yarn = yarn_defaults()
@@ -209,6 +219,7 @@ def collect_records(
         fees=fees,
         spot_stats=spot_stats,
         yarn=yarn,
+        zone_ids=zone_ids,
     )
 
 
@@ -256,6 +267,18 @@ def _has_local_disk(record: InstanceRecord) -> bool:
     return record["static"]["storage"]["ebs_only"] is False
 
 
+def _missing_az_id(record: InstanceRecord) -> bool:
+    """Falta o ID de alguma AZ ofertada ou da AZ do spot.
+
+    Sem o ID, quem consome o JSON em outra conta não tem como achar a AZ: o nome
+    só vale para a conta que coletou.
+    """
+    static = record["static"]
+    spot = record["pricing"]["spot"]
+    some_zone = len(static["availability_zone_ids"]) < len(static["availability_zones"])
+    return some_zone or (spot is not None and spot["az_id"] is None)
+
+
 _COVERAGE_CHECKS: list[_Check] = [
     _Check(
         "preço on-demand",
@@ -281,6 +304,7 @@ _COVERAGE_CHECKS: list[_Check] = [
         lambda r: not r["static"]["availability_zones"],
         MAX_MISSING_CATALOG_RATIO,
     ),
+    _Check("ID de AZ", _always, _missing_az_id, MAX_MISSING_CATALOG_RATIO),
     _Check(
         "detalhe de disco local",
         _has_local_disk,

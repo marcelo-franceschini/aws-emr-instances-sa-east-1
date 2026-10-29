@@ -13,8 +13,15 @@ SCHEMA_VERSION = 3
 
 
 class SpotInfo(TypedDict):
+    """Menor preço spot vigente e a AZ onde ele está.
+
+    `az` é o nome da AZ na conta que coletou, e a AWS sorteia por conta qual AZ
+    física recebe cada nome; `az_id` identifica a mesma AZ em qualquer conta.
+    """
+
     usd_hour: float
     az: str
+    az_id: str | None
 
 
 class SpotAzStats(TypedDict):
@@ -27,6 +34,7 @@ class SpotAzStats(TypedDict):
     """
 
     az: str
+    az_id: str | None
     current_usd_hour: float
     window_days: int
     min_usd_hour: float
@@ -153,6 +161,10 @@ class StaticSpec(TypedDict):
     é o que a máquina tem e `memory_gb_emr` é o que o EMR enxerga (menor em 352
     dos 465 tipos). Nenhum dos dois é a memória alocável pelo YARN, que tem um
     corte bem maior e fica no bloco `emr_yarn`, porque depende do release do EMR.
+
+    `availability_zones` traz os nomes da conta que coletou, que a AWS sorteia
+    por conta; `availability_zone_ids` é o mesmo conjunto pelo ID da AZ, igual
+    em toda conta, e é por ele que se cruza o catálogo com outra conta.
     """
 
     vcpu: int | None
@@ -173,6 +185,7 @@ class StaticSpec(TypedDict):
     normalization_factor: float | None
     supports_spot: bool | None
     availability_zones: list[str]
+    availability_zone_ids: list[str]
     storage: StorageSpec
     ebs: EbsSpec
     network: NetworkSpec

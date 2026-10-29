@@ -25,19 +25,27 @@ SPOT_ADVISOR_URL = "https://spot-bid-advisor.s3.amazonaws.com/spot-advisor-data.
 # irregulares e muitas vezes repete o valor do registro anterior.
 SpotSeries = dict[str, dict[str, list[tuple[datetime, float]]]]
 
+# {nome da AZ: ID da AZ}, por exemplo {"sa-east-1a": "sae1-az1"}. A AWS sorteia
+# por conta qual AZ física recebe cada nome; o ID é o mesmo em toda conta, e é
+# por ele que quem consome o JSON em outra conta acha a AZ.
+ZoneIds = dict[str, str]
+
 
 def spot_price_history(
     ec2: EC2Client,
     now: datetime | None = None,
     days: int = SPOT_HISTORY_DAYS,
-) -> SpotSeries:
+) -> tuple[SpotSeries, ZoneIds]:
     """Baixa o histórico spot de todas as instâncias e AZs na janela.
 
     Uma única varredura paginada serve às duas saídas: o preço vigente (último
-    evento de cada AZ) e as estatísticas da janela.
+    evento de cada AZ) e as estatísticas da janela. Devolve também o ID de cada
+    AZ, que vem em todo registro, para traduzir os nomes do resto da coleta sem
+    outra chamada nem outra permissão IAM.
     """
     now = now or datetime.now(UTC)
     series: SpotSeries = {}
+    zone_ids: ZoneIds = {}
     paginator = ec2.get_paginator("describe_spot_price_history")
     pages = paginator.paginate(
         StartTime=now - timedelta(days=days),
@@ -46,14 +54,17 @@ def spot_price_history(
     )
     for page in pages:
         for entry in page["SpotPriceHistory"]:
+            zone = entry["AvailabilityZone"]
             by_az = series.setdefault(entry["InstanceType"], {})
-            by_az.setdefault(entry["AvailabilityZone"], []).append(
+            by_az.setdefault(zone, []).append(
                 (entry["Timestamp"], float(entry["SpotPrice"]))
             )
+            if zone_id := entry.get("AvailabilityZoneId"):
+                zone_ids[zone] = zone_id
     for by_az in series.values():
         for events in by_az.values():
             events.sort(key=lambda event: event[0])
-    return series
+    return series, zone_ids
 
 
 def cheapest_current(stats: dict[str, list[SpotAzStats]]) -> dict[str, SpotInfo]:
@@ -75,6 +86,7 @@ def cheapest_current(stats: dict[str, list[SpotAzStats]]) -> dict[str, SpotInfo]
         cheapest[instance_type] = {
             "usd_hour": best["current_usd_hour"],
             "az": best["az"],
+            "az_id": best["az_id"],
         }
     return cheapest
 
@@ -83,14 +95,20 @@ def az_statistics(
     series: SpotSeries,
     now: datetime | None = None,
     days: int = SPOT_HISTORY_DAYS,
+    *,
+    zone_ids: ZoneIds | None = None,
 ) -> dict[str, list[SpotAzStats]]:
-    """Mapeia {instance_type: [SpotAzStats por AZ]}, AZs em ordem alfabética."""
+    """Mapeia {instance_type: [SpotAzStats por AZ]}, AZs em ordem alfabética.
+
+    Sem `zone_ids`, o `az_id` de cada AZ fica None.
+    """
     now = now or datetime.now(UTC)
+    zone_ids = zone_ids or {}
     window_start = now - timedelta(days=days)
     result: dict[str, list[SpotAzStats]] = {}
     for instance_type, by_az in series.items():
         result[instance_type] = [
-            _window_stats(az, events, window_start, now, days)
+            _window_stats(az, zone_ids.get(az), events, window_start, now, days)
             for az, events in sorted(by_az.items())
         ]
     return result
@@ -98,6 +116,7 @@ def az_statistics(
 
 def _window_stats(
     az: str,
+    az_id: str | None,
     events: list[tuple[datetime, float]],
     window_start: datetime,
     now: datetime,
@@ -130,6 +149,7 @@ def _window_stats(
     changes = sum(1 for (_, before), (_, after) in pairwise(events) if after != before)
     return {
         "az": az,
+        "az_id": az_id,
         "current_usd_hour": round(events[-1][1], 6),
         "window_days": days,
         "min_usd_hour": round(min(prices), 6),

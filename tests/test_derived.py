@@ -56,6 +56,7 @@ def _stats(az: str = "sa-east-1c") -> SpotAzStats:
     """Estatística de spot de uma AZ: média 1,20, desvio 0,06 e P95 1,30."""
     return {
         "az": az,
+        "az_id": None,  # o derived não usa o ID
         "current_usd_hour": 1.1793,
         "window_days": 30,
         "min_usd_hour": 1.1,
@@ -102,7 +103,9 @@ def _record(
         {INSTANCE: hardware or _hardware()},
         {},
         products,
-        {INSTANCE: {"usd_hour": 1.1793, "az": "sa-east-1c"}} if spot else {},
+        {INSTANCE: {"usd_hour": 1.1793, "az": "sa-east-1c", "az_id": None}}
+        if spot
+        else {},
         {},
         AS_OF,
         fees={INSTANCE: fee} if fee is not None else {},

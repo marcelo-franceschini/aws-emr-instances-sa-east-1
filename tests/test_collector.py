@@ -24,6 +24,13 @@ if TYPE_CHECKING:
 
 AS_OF = "2026-07-27T09:00:00+00:00"
 
+# IDs fora da ordem dos nomes, como a AWS sorteia por conta
+ZONE_IDS = {
+    "sa-east-1a": "sae1-az3",
+    "sa-east-1b": "sae1-az1",
+    "sa-east-1c": "sae1-az2",
+}
+
 
 def _hardware() -> HardwareSpec:
     """HardwareSpec preenchido, como o EC2 devolveria para r8gd.4xlarge."""
@@ -93,7 +100,7 @@ def _build_one(
         {"r8gd.4xlarge": ["sa-east-1a", "sa-east-1b", "sa-east-1c"]} if zones else {}
     )
     spot: dict[str, SpotInfo] = {
-        "r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c"}
+        "r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c", "az_id": "sae1-az2"}
     }
     interruption: dict[str, SpotInterruption] = {
         "r8gd.4xlarge": {"savings_percent": 46, "interruption_rate": 4}
@@ -106,6 +113,7 @@ def _build_one(
         spot,
         interruption,
         AS_OF,
+        zone_ids=ZONE_IDS,
     )
     assert len(records) == 1
     return records[0]
@@ -134,8 +142,9 @@ def test_build_records_static() -> None:
     assert static["processor_name"] == "AWS Graviton4 Processor"
     assert static["family_category"] == "Memory optimized"
     assert static["normalization_factor"] == 32
-    # das ofertas por AZ
+    # das ofertas por AZ, com o ID de cada uma (lista ordenada pelo ID)
     assert static["availability_zones"] == ["sa-east-1a", "sa-east-1b", "sa-east-1c"]
+    assert static["availability_zone_ids"] == ["sae1-az1", "sae1-az2", "sae1-az3"]
 
 
 def test_build_records_guarda_as_duas_memorias() -> None:
@@ -170,7 +179,7 @@ def test_build_records_pricing() -> None:
         "as_of": AS_OF,
         "on_demand_usd_hour": 1.8616,
         "emr_fee_usd_hour": None,  # as fontes opcionais não foram passadas
-        "spot": {"usd_hour": 1.1793, "az": "sa-east-1c"},
+        "spot": {"usd_hour": 1.1793, "az": "sa-east-1c", "az_id": "sae1-az2"},
         "spot_by_az": [],
         "spot_interruption": {"savings_percent": 46, "interruption_rate": 4},
     }
@@ -207,7 +216,26 @@ def test_build_records_sem_preco() -> None:
 
 def test_build_records_sem_ofertas() -> None:
     """Sem oferta por AZ, a lista fica vazia em vez de ausente."""
-    assert _build_one(zones=False)["static"]["availability_zones"] == []
+    static = _build_one(zones=False)["static"]
+
+    assert static["availability_zones"] == []
+    assert static["availability_zone_ids"] == []
+
+
+def test_build_records_az_sem_id_fica_fora_da_lista_de_ids() -> None:
+    """Nome sem ID no mapa não vira ID inventado; a cobertura é que acusa."""
+    records = collector.build_records(
+        [_emr_instance()],
+        {},
+        {"r8gd.4xlarge": ["sa-east-1a", "sa-east-1b"]},
+        {},
+        {},
+        {},
+        AS_OF,
+        zone_ids={"sa-east-1a": "sae1-az3"},
+    )
+
+    assert records[0]["static"]["availability_zone_ids"] == ["sae1-az3"]
 
 
 def test_build_records_universo_e_o_do_emr() -> None:
@@ -240,6 +268,7 @@ def _build_com_fontes_novas() -> InstanceRecord:
     """Roda build_records passando a taxa do EMR, o spot por AZ e o YARN."""
     stats: SpotAzStats = {
         "az": "sa-east-1c",
+        "az_id": "sae1-az2",
         "current_usd_hour": 1.1793,
         "window_days": 30,
         "min_usd_hour": 1.1,
@@ -267,12 +296,13 @@ def _build_com_fontes_novas() -> InstanceRecord:
                 "normalization_factor": 32,
             }
         },
-        {"r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c"}},
+        {"r8gd.4xlarge": {"usd_hour": 1.1793, "az": "sa-east-1c", "az_id": "sae1-az2"}},
         {},
         AS_OF,
         fees={"r8gd.4xlarge": 0.4},
         spot_stats={"r8gd.4xlarge": [stats]},
         yarn={"r8gd.4xlarge": yarn},
+        zone_ids=ZONE_IDS,
     )
     return records[0]
 
@@ -346,7 +376,9 @@ def _record(
     record = _com_fontes_novas(_build_one())
     record["pricing"]["on_demand_usd_hour"] = 0.1 if has_od else None
     record["pricing"]["spot"] = (
-        {"usd_hour": 0.05, "az": "sa-east-1a"} if has_spot else None
+        {"usd_hour": 0.05, "az": "sa-east-1a", "az_id": "sae1-az3"}
+        if has_spot
+        else None
     )
     if not has_fee:
         record["pricing"]["emr_fee_usd_hour"] = None
@@ -408,6 +440,32 @@ def test_validate_coverage_sem_ofertas_aborta() -> None:
     """Idem para as ofertas por AZ, que cobrem 100% do universo do EMR."""
     records = [_com_fontes_novas(_build_one(zones=False)) for _ in range(100)]
     with pytest.raises(CoverageError, match="oferta por AZ"):
+        collector.validate_coverage(records)
+
+
+def test_validate_coverage_sem_id_de_az_aborta() -> None:
+    """Sem o ID, o JSON não serve a quem roda em outra conta: é quebra de coleta.
+
+    O mapa vem do histórico spot; se a API parar de mandar o ID, todos os
+    registros perdem o campo de uma vez.
+    """
+    records = [_record() for _ in range(100)]
+    for record in records:
+        record["static"]["availability_zone_ids"] = []
+
+    with pytest.raises(CoverageError, match="ID de AZ"):
+        collector.validate_coverage(records)
+
+
+def test_validate_coverage_spot_sem_id_de_az_aborta() -> None:
+    """A AZ do spot sem ID também conta, mesmo com os IDs das ofertas completos."""
+    records = [_record() for _ in range(100)]
+    for record in records:
+        spot = record["pricing"]["spot"]
+        assert spot is not None
+        spot["az_id"] = None
+
+    with pytest.raises(CoverageError, match="ID de AZ"):
         collector.validate_coverage(records)
 
 

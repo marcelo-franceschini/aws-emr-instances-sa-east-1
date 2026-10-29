@@ -13,6 +13,14 @@ from emr_instances.sources import spot
 
 NOW = datetime(2026, 10, 29, 12, 0, tzinfo=UTC)
 
+# IDs de propósito fora da ordem dos nomes: a AWS sorteia o par por conta, então
+# o ID nunca pode ser deduzido da letra do nome
+ZONE_IDS = {
+    "sa-east-1a": "sae1-az3",
+    "sa-east-1b": "sae1-az1",
+    "sa-east-1c": "sae1-az2",
+}
+
 
 def _ago(days: float) -> datetime:
     """Instante `days` dias antes de NOW."""
@@ -26,6 +34,7 @@ def _entry(
     return {
         "InstanceType": instance_type,
         "AvailabilityZone": az,
+        "AvailabilityZoneId": ZONE_IDS[az],
         "SpotPrice": price,
         "Timestamp": timestamp,
     }
@@ -51,11 +60,28 @@ def test_spot_price_history_agrupa_por_tipo_e_az_em_ordem_cronologica() -> None:
         ]
     )
 
-    series = spot.spot_price_history(mock_ec2, now=NOW)
+    series, _ = spot.spot_price_history(mock_ec2, now=NOW)
 
     assert series["m5.large"]["sa-east-1a"] == [(_ago(3), 0.048), (_ago(1), 0.060)]
     assert series["m5.large"]["sa-east-1b"] == [(_ago(2), 0.050)]
     assert series["m5.xlarge"]["sa-east-1a"] == [(_ago(2), 0.096)]
+
+
+def test_spot_price_history_devolve_o_id_de_cada_az() -> None:
+    """O ID vem em todo registro; registro sem ele não inventa um."""
+    sem_id = _entry("m5.large", "sa-east-1c", "0.070", _ago(2))
+    del sem_id["AvailabilityZoneId"]
+    mock_ec2, _ = _ec2_with(
+        [
+            _entry("m5.large", "sa-east-1a", "0.048", _ago(3)),
+            _entry("m5.xlarge", "sa-east-1b", "0.096", _ago(2)),
+            sem_id,
+        ]
+    )
+
+    _, zone_ids = spot.spot_price_history(mock_ec2, now=NOW)
+
+    assert zone_ids == {"sa-east-1a": "sae1-az3", "sa-east-1b": "sae1-az1"}
 
 
 def test_spot_price_history_pede_a_janela_e_o_linux() -> None:
@@ -80,10 +106,19 @@ def test_cheapest_current_usa_o_ultimo_preco_de_cada_az() -> None:
         "m5.xlarge": {"sa-east-1a": [(_ago(2), 0.096)]},
     }
 
-    result = spot.cheapest_current(spot.az_statistics(series, now=NOW))
+    stats = spot.az_statistics(series, now=NOW, zone_ids=ZONE_IDS)
+    result = spot.cheapest_current(stats)
 
-    assert result["m5.large"] == {"usd_hour": 0.05, "az": "sa-east-1b"}
-    assert result["m5.xlarge"] == {"usd_hour": 0.096, "az": "sa-east-1a"}
+    assert result["m5.large"] == {
+        "usd_hour": 0.05,
+        "az": "sa-east-1b",
+        "az_id": "sae1-az1",
+    }
+    assert result["m5.xlarge"] == {
+        "usd_hour": 0.096,
+        "az": "sa-east-1a",
+        "az_id": "sae1-az3",
+    }
 
 
 def test_cheapest_current_empate_fica_com_a_az_de_menor_p95() -> None:
@@ -101,7 +136,8 @@ def test_cheapest_current_empate_fica_com_a_az_de_menor_p95() -> None:
 
     result = spot.cheapest_current(spot.az_statistics(series, now=NOW))
 
-    assert result["m5.large"] == {"usd_hour": 0.04, "az": "sa-east-1a"}
+    assert result["m5.large"]["usd_hour"] == 0.04
+    assert result["m5.large"]["az"] == "sa-east-1a"
 
 
 def test_cheapest_current_empate_total_fica_com_o_menor_nome() -> None:
@@ -188,6 +224,25 @@ def test_az_statistics_preco_repetido_nao_conta_como_mudanca() -> None:
 
     assert stats[0]["price_changes"] == 0
     assert stats[1]["price_changes"] == 2  # de 0,10 para 0,20 e de volta
+
+
+def test_az_statistics_leva_o_id_da_az() -> None:
+    """Cada AZ sai com o ID do mapa; AZ fora do mapa sai com None."""
+    series: spot.SpotSeries = {
+        "m5.large": {
+            "sa-east-1a": [(_ago(2), 0.05)],
+            "sa-east-1c": [(_ago(2), 0.07)],
+        }
+    }
+
+    stats = spot.az_statistics(series, now=NOW, zone_ids={"sa-east-1a": "sae1-az3"})[
+        "m5.large"
+    ]
+
+    assert [(s["az"], s["az_id"]) for s in stats] == [
+        ("sa-east-1a", "sae1-az3"),
+        ("sa-east-1c", None),
+    ]
 
 
 def test_az_statistics_ordena_as_azs_por_nome() -> None:

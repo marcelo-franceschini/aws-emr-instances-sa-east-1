@@ -99,6 +99,7 @@ do EMR e `derived` é calculado a partir dos outros três.
     "burstable_performance": false, "normalization_factor": 32,
     "supports_spot": true,
     "availability_zones": ["sa-east-1a", "sa-east-1b", "sa-east-1c"],
+    "availability_zone_ids": ["sae1-az1", "sae1-az2", "sae1-az3"],
     "storage": { "ebs_only": false, "total_gb": 950, "nvme": "required",
                  "disks": [{ "count": 1, "size_gb": 950, "type": "ssd" }] },
     "ebs": { "baseline_mbps": 5000, "maximum_mbps": 10000,
@@ -112,9 +113,10 @@ do EMR e `derived` é calculado a partir dos outros três.
     "as_of": "2026-07-27T12:15:33+00:00",
     "on_demand_usd_hour": 1.8616,
     "emr_fee_usd_hour": 0.4,
-    "spot": { "usd_hour": 1.1793, "az": "sa-east-1c" },
+    "spot": { "usd_hour": 1.1793, "az": "sa-east-1c", "az_id": "sae1-az3" },
     "spot_by_az": [
-      { "az": "sa-east-1c", "current_usd_hour": 1.1793, "window_days": 30,
+      { "az": "sa-east-1c", "az_id": "sae1-az3",
+        "current_usd_hour": 1.1793, "window_days": 30,
         "min_usd_hour": 1.1, "mean_usd_hour": 1.2, "median_usd_hour": 1.19,
         "p95_usd_hour": 1.3, "max_usd_hour": 1.4, "stddev_usd_hour": 0.06,
         "price_changes": 12 }
@@ -168,6 +170,12 @@ Alguns campos merecem explicação:
   valor na janela: a AWS repete o mesmo preço em registros sucessivos (umas
   quatro vezes por dia), e esses registros não contam. `stddev` sobre `mean`
   mede quanto o preço oscila, e `p95` é o preço que só é superado em 5% do tempo.
+- **`az` é o nome da AZ na conta que coletou; `az_id` é o ID, igual em toda
+  conta.** A AWS sorteia por conta qual AZ física recebe cada nome, então
+  `sa-east-1c` aqui pode ser outra AZ na sua conta. Para cruzar com a sua
+  conta, use o ID: `aws ec2 describe-availability-zones --region sa-east-1`
+  mostra o par nome e ID dela. `availability_zone_ids` é o mesmo conjunto de
+  `availability_zones`, pelo ID e em ordem de ID (não alinhado aos nomes).
 - **`emr_yarn`** vem da coluna de valor padrão da página Task configuration, que
   segue o release mais recente do EMR. Um cluster que sobrescreve `yarn-site` (ou
   usa `maximizeResourceAllocation`) tem outro valor efetivo. É `null` para tipo
@@ -238,7 +246,7 @@ jq '[.instances[]
 | --- | --- |
 | 1 | registro plano de 9 campos, sem `schema_version` |
 | 2 | `static` / `pricing`, catálogo completo de hardware |
-| 3 | acrescenta `pricing.emr_fee_usd_hour`, `pricing.spot_by_az`, `emr_yarn` e `derived` |
+| 3 | acrescenta `pricing.emr_fee_usd_hour`, `pricing.spot_by_az`, `emr_yarn`, `derived` e o ID de cada AZ (`az_id`, `availability_zone_ids`) |
 
 `instance_type` fica no topo do registro em todas as versões, para quem consome
 o JSON achar a chave do registro sem procurar.

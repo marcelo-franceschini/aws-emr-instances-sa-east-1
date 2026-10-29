@@ -18,13 +18,13 @@ from emr_instances.storage import write_output
 def _payload() -> Payload:
     """Payload mínimo, com acento para provar que a escrita é UTF-8 sem escape."""
     static = _build_static(
-        {"Type": "m5.large", "MemoryGB": 8.0}, empty_hardware(), [], None
+        {"Type": "m5.large", "MemoryGB": 8.0}, empty_hardware(), [], None, {}
     )
     pricing: PricingSpec = {
         "as_of": "2026-07-27T09:00:00+00:00",
         "on_demand_usd_hour": 0.1,
         "emr_fee_usd_hour": 0.024,
-        "spot": {"usd_hour": 0.05, "az": "sa-east-1a"},
+        "spot": {"usd_hour": 0.05, "az": "sa-east-1a", "az_id": "sae1-az1"},
         "spot_by_az": [],
         "spot_interruption": None,
     }

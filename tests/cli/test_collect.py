@@ -50,11 +50,20 @@ def test_main_smoke(
     ec2_pages: dict[str, list[dict[str, object]]] = {
         "describe_spot_price_history": [
             {
+                # o ID não segue a letra do nome: a AWS sorteia o par por conta
                 "SpotPriceHistory": [
                     {
                         "InstanceType": "m5.large",
                         "SpotPrice": "0.048",
                         "AvailabilityZone": "sa-east-1a",
+                        "AvailabilityZoneId": "sae1-az3",
+                        "Timestamp": datetime.now(UTC) - timedelta(days=2),
+                    },
+                    {
+                        "InstanceType": "m5.large",
+                        "SpotPrice": "0.050",
+                        "AvailabilityZone": "sa-east-1b",
+                        "AvailabilityZoneId": "sae1-az1",
                         "Timestamp": datetime.now(UTC) - timedelta(days=2),
                     },
                 ]
@@ -170,12 +179,16 @@ def test_main_smoke(
     assert record["static"]["memory_gb_emr"] == 8.0  # EMR
     assert record["static"]["vcpu"] == 2  # EC2
     assert record["static"]["availability_zones"] == ["sa-east-1a", "sa-east-1b"]
+    # o ID de cada AZ vem do histórico spot, não da letra do nome
+    assert record["static"]["availability_zone_ids"] == ["sae1-az1", "sae1-az3"]
     assert record["static"]["family_category"] == "General purpose"  # Price List
     assert record["pricing"]["on_demand_usd_hour"] == 0.096
     assert record["pricing"]["spot"]["usd_hour"] == 0.048
+    assert record["pricing"]["spot"]["az_id"] == "sae1-az3"
     assert record["pricing"]["spot_interruption"]["interruption_rate"] == 2
     assert record["pricing"]["emr_fee_usd_hour"] == 0.024  # Price List do EMR
     assert record["pricing"]["spot_by_az"][0]["az"] == "sa-east-1a"
+    assert record["pricing"]["spot_by_az"][0]["az_id"] == "sae1-az3"
     assert record["pricing"]["spot_by_az"][0]["price_changes"] == 0
     assert record["emr_yarn"]["nodemanager_memory_mb"] == 6144  # documentação
     # o derived junta tudo: spot 0,048 + taxa do EMR 0,024
