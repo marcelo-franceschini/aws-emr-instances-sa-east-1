@@ -299,6 +299,12 @@ _COVERAGE_CHECKS: list[_Check] = [
         lambda r: r["emr_yarn"] is None,
         MAX_MISSING_PUBLIC_DATA_RATIO,
     ),
+    _Check(
+        "taxa de interrupção",
+        _always,
+        lambda r: r["pricing"]["spot_interruption"] is None,
+        MAX_MISSING_PUBLIC_DATA_RATIO,
+    ),
     # Daqui para baixo é só diagnóstico: a própria AWS não publica esses campos
     # para todo tipo (clock e banda de EBS faltam em algumas dezenas), então
     # ausência aqui não é sinal de coleta quebrada.

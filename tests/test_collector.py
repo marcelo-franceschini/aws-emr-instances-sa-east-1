@@ -471,6 +471,16 @@ def test_validate_coverage_yarn_que_a_documentacao_nao_cobre_nao_aborta() -> Non
     collector.validate_coverage(records)
 
 
+def test_validate_coverage_sem_taxa_de_interrupcao_aborta() -> None:
+    """Spot Advisor fora do ar ou com formato novo também deixa a coleta vermelha."""
+    records = [_record() for _ in range(100)]
+    for record in records:
+        record["pricing"]["spot_interruption"] = None
+
+    with pytest.raises(CoverageError, match="taxa de interrupção"):
+        collector.validate_coverage(records)
+
+
 def test_validate_coverage_sem_taxa_do_emr_aborta() -> None:
     """A taxa do EMR é preço: vale a mesma régua de 5% do on-demand e do spot."""
     records = [_record(has_fee=i >= 7) for i in range(100)]

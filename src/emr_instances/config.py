@@ -23,9 +23,9 @@ SPOT_HISTORY_DAYS = 30
 # não pode passar batido é a fonte inteira cair.
 MAX_MISSING_CATALOG_RATIO = 0.05
 
-# Dados públicos de fora das APIs (a página de YARN da documentação) atrasam em
-# relação ao EMR: a família r8i, já suportada, ainda não aparece na documentação
-# (16 de 465 tipos). A folga absorve esse atraso; página fora do ar ou com
-# formato novo deixa perto de 100% sem dado e aborta, para o workflow ficar
-# vermelho em vez de publicar nulos que ninguém veria.
+# Dados públicos de fora das APIs (a página de YARN da documentação e o Spot
+# Advisor) atrasam em relação ao EMR: a família r8i, já suportada, ainda não
+# aparece na documentação (16 de 465 tipos). A folga absorve esse atraso; fonte
+# fora do ar ou com formato novo deixa perto de 100% sem dado e aborta, para o
+# workflow ficar vermelho em vez de publicar nulos que ninguém veria.
 MAX_MISSING_PUBLIC_DATA_RATIO = 0.25
