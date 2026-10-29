@@ -177,7 +177,7 @@ def interruption_frequency(region: str) -> dict[str, SpotInterruption]:
     """Mapeia {instance_type: SpotInterruption} com savings e taxa de interrupção.
 
     Busca dados do Spot Bid Advisor (S3 público) que inclui taxa de interrupção
-    (1 = <5%, 2 = 5-10%, 3 = 10-15%, 4 = 15-20%, 5 = >20%) e economia esperada.
+    (0 = <5%, 1 = 5-10%, 2 = 10-15%, 3 = 15-20%, 4 = >20%) e economia esperada.
     """
     data: dict[str, SpotInterruption] = {}
     try:
