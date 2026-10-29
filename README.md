@@ -27,6 +27,13 @@ ela custa de verdade?" e não só "quanto custa o EC2". Ver
 - [`.github/workflows/daily.yml`](.github/workflows/daily.yml) — roda tudo via
   cron diário (09:00 UTC) e publica o JSON na branch órfã **`data`**.
 
+A coleta falha (código de saída 1, workflow vermelho e o e-mail de falha que o
+GitHub já manda) quando uma fonte essencial some: mais de 5% das instâncias sem
+preço on-demand, spot, taxa do EMR, hardware, oferta por AZ ou detalhe de disco,
+ou mais de 25% sem padrões de YARN (a folga cobre tipos que a documentação ainda
+não lista). Nesse caso nada é publicado e a branch `data` continua com o último
+JSON bom.
+
 ### Estrutura do pacote
 
 O comando é um console script declarado no [`pyproject.toml`](pyproject.toml),

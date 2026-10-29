@@ -11,6 +11,7 @@ from unittest.mock import MagicMock, patch
 import pytest
 
 from emr_instances.cli import collect
+from emr_instances.errors import CoverageError
 from emr_instances.sources.yarn import YARN_DOC_URL
 
 YARN_DOC = """**m5.large**
@@ -180,3 +181,34 @@ def test_main_smoke(
     # o derived junta tudo: spot 0,048 + taxa do EMR 0,024
     assert record["derived"]["total_spot_usd_hour"] == 0.072
     assert record["derived"]["yarn_memory_gb"] == 6.0
+
+
+def test_main_cobertura_insuficiente_sai_com_codigo_1(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """CoverageError vira exit 1 sem gravar o JSON: deixa o workflow vermelho.
+
+    O passo de publicação nem roda, e a branch data fica com o último JSON bom.
+    """
+
+    def falha(records: object) -> None:
+        raise CoverageError("Proporção sem padrões de YARN (100.0%) excede o limite")
+
+    monkeypatch.setattr(
+        collect, "build_clients", lambda: (MagicMock(), MagicMock(), MagicMock())
+    )
+    monkeypatch.setattr(collect, "collect_records", lambda *args: [])
+    monkeypatch.setattr(collect, "validate_coverage", falha)
+    output = tmp_path / "out.json"
+    monkeypatch.setattr(
+        sys,
+        "argv",
+        ["emr-collect", "--release-label", "emr-7.14.0", "--output", str(output)],
+    )
+
+    with pytest.raises(SystemExit) as exit_info:
+        collect.main()
+
+    assert exit_info.value.code == 1
+    assert not output.exists()

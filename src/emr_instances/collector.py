@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING, NamedTuple
 from emr_instances.config import (
     MAX_MISSING_CATALOG_RATIO,
     MAX_MISSING_PRICE_RATIO,
+    MAX_MISSING_PUBLIC_DATA_RATIO,
     REGION,
     SPOT_HISTORY_DAYS,
 )
@@ -286,6 +287,18 @@ _COVERAGE_CHECKS: list[_Check] = [
         lambda r: not r["static"]["storage"]["disks"],
         MAX_MISSING_CATALOG_RATIO,
     ),
+    _Check(
+        "taxa do EMR",
+        _always,
+        lambda r: r["pricing"]["emr_fee_usd_hour"] is None,
+        MAX_MISSING_PRICE_RATIO,
+    ),
+    _Check(
+        "padrões de YARN",
+        _always,
+        lambda r: r["emr_yarn"] is None,
+        MAX_MISSING_PUBLIC_DATA_RATIO,
+    ),
     # Daqui para baixo é só diagnóstico: a própria AWS não publica esses campos
     # para todo tipo (clock e banda de EBS faltam em algumas dezenas), então
     # ausência aqui não é sinal de coleta quebrada.
@@ -305,24 +318,6 @@ _COVERAGE_CHECKS: list[_Check] = [
         "banda de rede",
         _always,
         lambda r: r["static"]["network"]["baseline_gbps"] is None,
-        None,
-    ),
-    _Check(
-        "taxa do EMR",
-        _always,
-        lambda r: r["pricing"]["emr_fee_usd_hour"] is None,
-        None,
-    ),
-    _Check(
-        "padrões de YARN",
-        _always,
-        lambda r: r["emr_yarn"] is None,
-        None,
-    ),
-    _Check(
-        "spot por AZ",
-        _always,
-        lambda r: not r["pricing"]["spot_by_az"],
         None,
     ),
     _Check(

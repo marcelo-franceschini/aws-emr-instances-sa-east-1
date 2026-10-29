@@ -324,19 +324,40 @@ def test_build_payload() -> None:
     assert payload["generated_at"].endswith("+00:00")  # sempre em UTC
 
 
-def _record(*, has_od: bool = True, has_spot: bool = True) -> InstanceRecord:
-    """InstanceRecord com o catálogo completo, variando só os preços."""
-    record = _build_one()
+def _com_fontes_novas(record: InstanceRecord) -> InstanceRecord:
+    """Preenche a taxa do EMR e o YARN, cuja falta em massa aborta a coleta."""
+    record["pricing"]["emr_fee_usd_hour"] = 0.4
+    record["emr_yarn"] = {
+        "nodemanager_memory_mb": 114688,
+        "scheduler_max_allocation_mb": 114688,
+        "scheduler_min_allocation_mb": 1,
+    }
+    return record
+
+
+def _record(
+    *,
+    has_od: bool = True,
+    has_spot: bool = True,
+    has_fee: bool = True,
+    has_yarn: bool = True,
+) -> InstanceRecord:
+    """InstanceRecord completo, variando só os preços e as fontes novas."""
+    record = _com_fontes_novas(_build_one())
     record["pricing"]["on_demand_usd_hour"] = 0.1 if has_od else None
     record["pricing"]["spot"] = (
         {"usd_hour": 0.05, "az": "sa-east-1a"} if has_spot else None
     )
+    if not has_fee:
+        record["pricing"]["emr_fee_usd_hour"] = None
+    if not has_yarn:
+        record["emr_yarn"] = None
     return record
 
 
 def _record_com_disco(*, detalhado: bool) -> InstanceRecord:
     """Instância com disco local, com ou sem o detalhe dos discos."""
-    record = _build_one()
+    record = _record()
     record["static"]["storage"] = {
         "ebs_only": False,
         "total_gb": 950 if detalhado else None,
@@ -348,7 +369,7 @@ def _record_com_disco(*, detalhado: bool) -> InstanceRecord:
 
 def _record_ebs_only() -> InstanceRecord:
     """Instância EBS-only: não tem disco local nem deveria ter."""
-    record = _build_one()
+    record = _record()
     record["static"]["storage"] = {
         "ebs_only": True,
         "total_gb": None,
@@ -372,21 +393,21 @@ def test_validate_coverage_within_limit() -> None:
 def test_validate_coverage_exceeds_limit() -> None:
     """7% sem spot (> 5%) levanta CoverageError."""
     records = [_record(has_spot=i >= 7) for i in range(100)]
-    with pytest.raises(CoverageError):
+    with pytest.raises(CoverageError, match="preço spot"):
         collector.validate_coverage(records)
 
 
 def test_validate_coverage_sem_hardware_aborta() -> None:
     """Join com o EC2 falhando inteiro é quebra de coleta, não ausência legítima."""
-    records = [_build_one(hardware=False) for _ in range(100)]
-    with pytest.raises(CoverageError):
+    records = [_com_fontes_novas(_build_one(hardware=False)) for _ in range(100)]
+    with pytest.raises(CoverageError, match="hardware do EC2"):
         collector.validate_coverage(records)
 
 
 def test_validate_coverage_sem_ofertas_aborta() -> None:
     """Idem para as ofertas por AZ, que cobrem 100% do universo do EMR."""
-    records = [_build_one(zones=False) for _ in range(100)]
-    with pytest.raises(CoverageError):
+    records = [_com_fontes_novas(_build_one(zones=False)) for _ in range(100)]
+    with pytest.raises(CoverageError, match="oferta por AZ"):
         collector.validate_coverage(records)
 
 
@@ -411,7 +432,7 @@ def test_validate_coverage_disco_conta_so_quem_tem_disco() -> None:
 def test_validate_coverage_disco_ausente_em_quem_tem_disco_aborta() -> None:
     """Instância com disco local e sem o detalhe é falha de verdade."""
     records = [_record_com_disco(detalhado=i >= 7) for i in range(100)]
-    with pytest.raises(CoverageError):
+    with pytest.raises(CoverageError, match="detalhe de disco local"):
         collector.validate_coverage(records)
 
 
@@ -432,18 +453,29 @@ def test_validate_coverage_campos_de_diagnostico_nunca_abortam() -> None:
     collector.validate_coverage(records)
 
 
-def test_validate_coverage_fontes_novas_nunca_abortam() -> None:
-    """Taxa do EMR, YARN e spot por AZ ausentes são só diagnóstico.
+def test_validate_coverage_sem_yarn_aborta() -> None:
+    """Página de YARN fora do ar ou com formato novo deixa a coleta vermelha.
 
-    A documentação do EMR pode não cobrir tipos recém-lançados, e a Price List
-    pode mudar de formato; nenhum dos dois deve derrubar a coleta diária.
+    Sem notificação, checagem que só loga não tem leitor: 465 registros com
+    `emr_yarn` nulo seriam publicados sem ninguém saber. Abortar mantém o último
+    JSON bom na branch data e faz o GitHub mandar o e-mail de falha.
     """
-    records = [_record() for _ in range(100)]
-    assert all(r["emr_yarn"] is None for r in records)
-    assert all(r["pricing"]["emr_fee_usd_hour"] is None for r in records)
-    assert all(r["pricing"]["spot_by_az"] == [] for r in records)
+    records = [_record(has_yarn=False) for _ in range(100)]
+    with pytest.raises(CoverageError, match="padrões de YARN"):
+        collector.validate_coverage(records)
 
+
+def test_validate_coverage_yarn_que_a_documentacao_nao_cobre_nao_aborta() -> None:
+    """16 de 465 sem YARN (os r8i, ausentes da documentação) é atraso, não quebra."""
+    records = [_record(has_yarn=i >= 16) for i in range(465)]
     collector.validate_coverage(records)
+
+
+def test_validate_coverage_sem_taxa_do_emr_aborta() -> None:
+    """A taxa do EMR é preço: vale a mesma régua de 5% do on-demand e do spot."""
+    records = [_record(has_fee=i >= 7) for i in range(100)]
+    with pytest.raises(CoverageError, match="taxa do EMR"):
+        collector.validate_coverage(records)
 
 
 def test_validate_coverage_gpu_nunca_aborta() -> None:
